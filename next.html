@@ -125,6 +125,17 @@
     <h3>Model details</h3>
     <div class="detail-grid"><div><small>3D source</small><strong>Sketchfab viewer</strong></div><div><small>Download status</small><strong id="detailDownload">—</strong></div><div><small>Licence</small><strong id="detailLicense">—</strong></div><div><small>Popularity</small><strong id="detailViews">—</strong></div></div>
     <div class="detail-rule"></div>
+    <div class="material-lab">
+      <div class="material-lab-title"><span>◈</span><div><strong>Live material lab</strong><small>Visual colour experiment · Original asset untouched</small></div></div>
+      <button id="enableMaterialLab" class="lab-start">✳ &nbsp; Enable 3D recolouring</button>
+      <div id="labControls" hidden>
+        <label for="materialSelect">Choose a material</label><select id="materialSelect" aria-label="3D material selection"></select>
+        <label for="materialColor">Test a brand colour</label><div class="lab-palette"><input type="color" id="materialColor" value="#49b89b"><span id="labHex">#49B89B</span></div>
+        <div class="lab-actions"><button id="applyMaterialColor">Apply to 3D preview</button><button id="resetMaterialLab">Reset model</button></div>
+      </div>
+      <p class="lab-status" id="materialStatus">Viewer editing is experimental. Available materials depend on the creator's 3D scene.</p>
+    </div>
+    <div class="detail-rule"></div>
     <div class="original-notice"><div>◈</div><p><strong>Explore here, source protected.</strong> The live model is embedded in ExpoVault through Sketchfab. This does not grant a right to copy or modify its original mesh. Download and creator credit remain subject to its licence.</p></div>
     <a id="originalLink" class="original-link" target="_blank" rel="noopener noreferrer">Creator's original page ↗</a>
     <button id="findConcept" class="concept-cta">Find an editable booth concept <span>↗</span></button>
@@ -132,4 +143,5 @@
 </section>
 <div class="toast" id="toast" aria-live="polite"></div>
 <script type="module" src="ui/v3.mjs"></script>
+<script type="module" src="ui/material-lab.mjs"></script>
 </body></html>
