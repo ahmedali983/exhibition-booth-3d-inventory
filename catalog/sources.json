@@ -248,5 +248,105 @@
     "format": "GLB / OBJ / DXF",
     "notes": "External generator; not model library",
     "status": "Follow original site; no file mirrored"
+  },
+  {
+    "id": "VENDOR-026",
+    "title": "beMatrix beCAD web — panel plans, DXF, parts lists",
+    "site": "beMatrix",
+    "url": "https://connect.bematrix.com/knowledge/find-all-details-and-files-of-a-project",
+    "license": "Supplier CAD",
+    "format": "DXF / 3D / Excel",
+    "notes": "Real modular construction system with native part lists; customer login required",
+    "status": "External source, original site controls licence and access"
+  },
+  {
+    "id": "VENDOR-027",
+    "title": "beMatrix beCAD Inventor — production assembly",
+    "site": "beMatrix",
+    "url": "https://connect.bematrix.com/knowledge-becad/knowledge/how-to-use-the-becad-inventor-plugin",
+    "license": "Supplier CAD",
+    "format": "Inventor / 3D / parts list",
+    "notes": "Manufacturer-specific building plan and connectors; external workflow",
+    "status": "External source, original site controls licence and access"
+  },
+  {
+    "id": "VENDOR-028",
+    "title": "OCTAcad 27 — OCTANORM profile DWG",
+    "site": "OCTANORM / Stöhr+Sauer",
+    "url": "https://www.stoehr-sauer.de/download/octacad/",
+    "license": "Supplier CAD",
+    "format": "DWG / installation",
+    "notes": "Official CAD profile settings and installers; manufacturer-specific technical drawings",
+    "status": "External source, original site controls licence and access"
+  },
+  {
+    "id": "VENDOR-029",
+    "title": "Octanorm modular systems catalogue",
+    "site": "OCTANORM Adria",
+    "url": "https://sajamskaoprema.com/en/catalog",
+    "license": "Supplier docs",
+    "format": "DWG / design sources vary",
+    "notes": "Manufacturer modular catalogue; not an individual standalone editable model",
+    "status": "External source, original site controls licence and access"
+  },
+  {
+    "id": "VENDOR-030",
+    "title": "6 × 3 m exhibition stand SketchUp",
+    "site": "3D Warehouse",
+    "url": "https://3dwarehouse.sketchup.com/model/68b5a10270cda42848963e611561e6db/Exhibition-stand?hl=en",
+    "license": "Warehouse terms",
+    "format": "SKP",
+    "notes": "Original SketchUp creator model, 6 m x 3 m; check units and file rights",
+    "status": "External source, original site controls licence and access"
+  },
+  {
+    "id": "VENDOR-031",
+    "title": "Exhibition Stand — designer Vijayan S",
+    "site": "3D Warehouse",
+    "url": "https://3dwarehouse.sketchup.com/model/41dd5977-c308-408f-9265-282edbae99c4/Exhibition-Stand",
+    "license": "Warehouse terms",
+    "format": "SKP",
+    "notes": "Editable original SketchUp model; published 2024",
+    "status": "External source, original site controls licence and access"
+  },
+  {
+    "id": "VENDOR-032",
+    "title": "Framework based exhibition stand",
+    "site": "3D Warehouse",
+    "url": "https://embed-3dwarehouse-classic.sketchup.com/model/e9037260-0a2e-43ba-8849-2a5907871822/Framework-based-exhibition-stand",
+    "license": "Warehouse terms",
+    "format": "SKP / 3D",
+    "notes": "Steel display frame model, 2022; high-poly",
+    "status": "External source, original site controls licence and access"
+  },
+  {
+    "id": "VENDOR-033",
+    "title": "Trade Booth — touch displays and graphics",
+    "site": "3D Warehouse",
+    "url": "https://embed-3dwarehouse-classic.sketchup.com/model/621fb41f-7ee9-489a-9806-54add45538c6/Trade-Booth-Exhibition-Stand",
+    "license": "Warehouse terms",
+    "format": "SKP / 3D",
+    "notes": "Real exhibition stand with signage, counter and digital display, 2025",
+    "status": "External source, original site controls licence and access"
+  },
+  {
+    "id": "VENDOR-034",
+    "title": "Exhibition stand complete editable 3D",
+    "site": "ArtStation",
+    "url": "https://www.artstation.com/marketplace/p/NX5d2/exhibition-stand-3d-model",
+    "license": "Paid standard licence",
+    "format": "3ds Max / FBX / OBJ",
+    "notes": "Paid original source containing textures, VIP/storage/counters; view product terms",
+    "status": "External source, original site controls licence and access"
+  },
+  {
+    "id": "VENDOR-035",
+    "title": "beMatrix CAD catalog and support",
+    "site": "beMatrix",
+    "url": "https://dev.dev.bematrix.92-procent.be/us/en-us/support/becad",
+    "license": "Supplier CAD",
+    "format": "3D files / product catalog",
+    "notes": "Official manufacturer CAD catalogue entry (development mirror URL), account may be required",
+    "status": "External source, original site controls licence and access"
   }
 ]

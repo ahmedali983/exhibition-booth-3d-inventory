@@ -12,7 +12,7 @@ const state={
   page:'discover',sort:'curated',search:'',sourceSearch:'',pageSize:FIRST_LOAD,
   sourcePageSize:36,current:null,favorites:new Set(),brand:{name:'PAW CLUB',primary:'#ed714b',secondary:'#53d5b3',base:'light',logo:null}
 };
-let renderer,camera,scene,orbit,modelRoot,baseMaterials,logoMesh,animationId,activeLoad=0,toastTimer;
+let renderer,camera,scene,orbit,modelRoot,baseMaterials,logoMesh,animationId,activeLoad=0,toastTimer,viewerObserver;
 try{
  const saved=JSON.parse(localStorage.getItem('expovault-v2-favorites')||'[]');
  if(Array.isArray(saved))state.favorites=new Set(saved);
@@ -158,6 +158,10 @@ function renderSources(append=false){
  $('sourceMore').hidden=grid.children.length>=state.sourceVisible.length;
  $('sourceProgress').textContent='Showing '+grid.children.length.toLocaleString()+' of '+state.sourceVisible.length.toLocaleString()+' original-source leads';
 }
+function renderSpotlight(){
+ const grid=$('sourceSpotlight');if(!grid)return;
+ grid.replaceChildren(...state.sources.filter(x=>x.thumbnail&&x.is_downloadable!==false).slice(0,8).map(makeSourceCard));
+}
 function fillBrandUI(){
  const b=state.brand;$('brandName').value=b.name;$('brandPrimary').value=b.primary;$('brandSecondary').value=b.secondary;$('brandBase').value=b.base;updateBrandPreview();
 }
@@ -191,6 +195,7 @@ function viewButton(view){
 function cancelViewer(){
  activeLoad++;
  if(animationId)cancelAnimationFrame(animationId);animationId=0;
+ if(viewerObserver){viewerObserver.disconnect();viewerObserver=null}
  if(renderer){renderer.dispose();renderer.domElement.remove();renderer=null}
  if(orbit){orbit.dispose();orbit=null}
  modelRoot=null;scene=null;camera=null;logoMesh=null;
@@ -225,18 +230,18 @@ async function setupViewer(v){
  host.prepend(gl.domElement);
  orbit=new OrbitControls(camera,gl.domElement);orbit.enableDamping=true;orbit.maxPolarAngle=Math.PI/2.07;
  scene.add(new THREE.HemisphereLight(0xffffff,0x617580,2.1));
- const lamp=new THREE.DirectionalLight(0xffffff,3.0);lamp.position.set(8,12,9);lamp.castShadow=true;lamp.shadow.mapSize.set(1024,1024);scene.add(lamp);
+ const lamp=new THREE.DirectionalLight(0xffffff,3.0);lamp.position.set(8,12,9);lamp.castShadow=true;lamp.shadow.mapSize.set(1024,1024);lamp.shadow.bias=-0.0003;lamp.shadow.normalBias=0.05;scene.add(lamp);
  const grid=new THREE.GridHelper(32,32,0xc6d0d1,0xd4dadb);grid.position.y=-.065;scene.add(grid);
  const floor=new THREE.Mesh(new THREE.PlaneGeometry(100,100),new THREE.ShadowMaterial({opacity:.13}));floor.rotation.x=-Math.PI/2;floor.position.y=-.03;floor.receiveShadow=true;scene.add(floor);
  function resize(){if(!renderer||!camera||host.clientHeight===0)return;const w=host.clientWidth,h=host.clientHeight;camera.aspect=w/h;camera.updateProjectionMatrix();gl.setSize(w,h,false)}
- const obs=new ResizeObserver(resize);obs.observe(host);
+ const obs=new ResizeObserver(resize);viewerObserver=obs;obs.observe(host);
  function animate(){if(!renderer||token!==activeLoad){obs.disconnect();return}animationId=requestAnimationFrame(animate);orbit.update();gl.render(scene,camera)}
  resize();viewButton('perspective');animate();
  try{
   const result=await new GLTFLoader().loadAsync(v.glb);
   if(token!==activeLoad){obs.disconnect();return}
   modelRoot=result.scene;modelRoot.name=v.id+' booth';scene.add(modelRoot);
-  modelRoot.traverse(node=>{if(node.isMesh){node.castShadow=true;node.receiveShadow=true;node.material=node.material.clone()}});
+  modelRoot.traverse(node=>{if(node.isMesh){node.castShadow=true;node.receiveShadow=false;node.material=node.material.clone()}});
   applyMaterials();makeBrandSign();applyBrandSign();viewButton('perspective');
   $('viewerLoading').hidden=true;$('downloadStatus').textContent='GLB mesh loaded · customize and export';
  }catch(err){$('viewerLoading').textContent='Could not load 3D: '+err.message;$('downloadStatus').textContent='Model unavailable';console.error(err)}
@@ -259,8 +264,8 @@ function makeBrandSign(){
  const v=state.current;
  logoMesh=new THREE.Mesh(new THREE.PlaneGeometry(Math.min(v.width_m*.79,3.7),.6),new THREE.MeshBasicMaterial({color:0xffffff,side:THREE.DoubleSide}));
  logoMesh.name='Editable brand artwork';
- const z=v.booth_type==='Island'?.32:-v.depth_m/2+.19;
- logoMesh.position.set(0,v.booth_type==='Island'?1.8:2.47,z);
+ const z=v.booth_type==='Island'?.33:-v.depth_m/2+(v.style==='Feature Wall'?.78:.30);
+ logoMesh.position.set(0,v.booth_type==='Island'?1.75:2.86,z);
  modelRoot.add(logoMesh);
 }
 async function applyBrandSign(){
@@ -420,11 +425,11 @@ async function initialize(){
   state.all=data.items||[];applyFilters();
  }catch(err){console.error(err);$('resultCount').textContent='Unavailable';notify('Could not load catalogue: '+err.message)}
  try{
-  const [a,b]=await Promise.all([fetch('catalog/sources.json'),fetch('catalog/sketchfab_index.json')]);
-  const manual=a.ok?await a.json():[],automated=b.ok?(await b.json()).items||[]:[];
-  const seen=new Set();for(const row of [...manual,...automated]){const v=normalizeSource(row);const key=v.site==='Sketchfab'&&v.id&&v.id.startsWith('SKFB-')?v.id:v.url;if(seen.has(key))continue;seen.add(key);state.sources.push(v)}
+  const [a,b,c]=await Promise.all([fetch('catalog/sources.json'),fetch('catalog/sketchfab_index.json'),fetch('catalog/creator_discovery.json')]);
+  const manual=a.ok?await a.json():[],automated=b.ok?(await b.json()).items||[]:[],extra=c.ok?(await c.json()).items||[]:[];
+  const seen=new Set();for(const row of [...manual,...automated,...extra]){const v=normalizeSource(row);const key=v.site==='Sketchfab'&&v.id&&v.id.startsWith('SKFB-')?v.id:v.url;if(seen.has(key))continue;seen.add(key);state.sources.push(v)}
   state.sources.sort((a,b)=>Number(b.view_count||0)-Number(a.view_count||0));
-  applySourceFilters();
+  applySourceFilters();renderSpotlight();
  }catch(err){console.warn('Sources not loaded',err);notify('External sources temporarily unavailable')}
  const route=location.hash.replace('#','');
  switchPage(['discover','sources','saved','brand'].includes(route)?route:'discover',false);
