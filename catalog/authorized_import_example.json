@@ -1,0 +1,18 @@
+{
+  "assets": [
+    {
+      "id": "CreatorBooth001",
+      "title": "Creator-approved 6x3 exhibition booth",
+      "creator": "Replace with the creator's verified name",
+      "kind": "booth",
+      "is_full_booth": true,
+      "description": "Example only: do not remove dry-run until you supply an authorized GLB and evidence.",
+      "license": "RIGHTS-HOLDER-PERMISSION",
+      "source_page": "https://example.org/creator-model-page",
+      "license_evidence_url": "https://example.org/written-redistribution-permission",
+      "reviewer": "Example reviewer",
+      "redistribution_checked": true,
+      "local_file": "assets/authorized-inputs/approved-booth.glb"
+    }
+  ]
+}
