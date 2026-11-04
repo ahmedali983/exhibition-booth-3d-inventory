@@ -18,9 +18,9 @@
   <a class="identity" href="#models" aria-label="ExpoVault home"><span class="identity-mark">E<span>.</span></span><span class="identity-text">ex<span>po</span>vault<small>THE EXHIBIT ARCHIVE</small></span></a>
   <p class="side-caption">YOUR WORKSPACE</p>
   <nav class="side-nav" aria-label="Explore library">
-    <button class="side-link selected" data-section="models"><span class="nav-icon">⌗</span><span>3D discoveries</span><span class="side-amount" id="sideSources">1K+</span></button>
-    <button class="side-link" data-section="concepts"><span class="nav-icon">▦</span><span>Editable concepts</span><span class="side-amount">4.2K</span></button>
-    <button class="side-link" data-section="technical"><span class="nav-icon">⌁</span><span>Production library</span></button>
+    <button class="side-link selected" data-section="models"><span class="nav-icon">⌗</span><span>3D designs</span><span class="side-amount" id="sideSources">1K+</span></button>
+    <button class="side-link" data-section="concepts"><span class="nav-icon">▦</span><span>Booth studio</span><span class="side-amount">4.2K</span></button>
+    <button class="side-link" data-section="technical"><span class="nav-icon">⌁</span><span>Production toolkit</span></button>
     <button class="side-link" data-section="saved"><span class="nav-icon">♡</span><span>My collection</span><span class="side-amount" id="sideSaved">0</span></button>
     <a class="side-link" href="library.html"><span class="nav-icon">⬡</span><span>My 3D files</span><span class="side-amount">LOCAL</span></a>
   </nav>
@@ -41,7 +41,7 @@
 </aside>
 <div class="content-frame">
   <header class="topbar">
-    <div class="topbar-left"><button class="mobile-menu" id="mobileMenu" aria-label="Toggle navigation">☰</button><div class="topbar-crumb"><span>Explore</span><b>/</b><strong id="breadcrumb">3D discoveries</strong></div></div>
+    <div class="topbar-left"><button class="mobile-menu" id="mobileMenu" aria-label="Toggle navigation">☰</button><div class="topbar-crumb"><span>Explore</span><b>/</b><strong id="breadcrumb">3D designs</strong></div></div>
     <div class="global-search"><span aria-hidden="true" class="search-symbol">⌕</span><input id="query" type="search" placeholder="Search exhibitions, stands, creators..." aria-label="Search catalogue" autocomplete="off"><kbd>⌘ K</kbd></div>
     <div class="topbar-right"><div class="live-marker"><i></i> PUBLIC ARCHIVE</div><div class="avatar" title="Your brand">E</div></div>
   </header>
@@ -49,9 +49,9 @@
     <section class="page active" id="section-models" data-page="models">
       <div class="inner">
         <div class="hero">
-          <div class="hero-copy"><div class="overline light-overline"><span class="green-dot"></span> THE EXHIBITION DESIGN ARCHIVE · VOL. 03</div>
+          <div class="hero-copy"><div class="overline light-overline"><span class="green-dot"></span> EXPOVAULT · DESIGN WORKSPACE</div>
             <h1>Every great space<br>starts with <em>inspiration.</em></h1>
-            <p>One library for real 3D models, independent creators and production-minded ideas. Discover the work. Explore the details. Never leave the studio.</p>
+            <p>Discover 3D booth ideas, explore them interactively, try brand colours, and download editable design files where permitted. Everything starts in your workspace.</p>
             <div class="hero-buttons"><button id="jumpCollection" class="button-yellow">Explore 3D models <span>↗</span></button><button class="button-outline" data-section="concepts">Create your own booth ↗</button></div>
             <div class="hero-bottom"><span class="hero-line"></span> CURATED FOR DESIGNERS, CREATORS & BUILDERS</div>
           </div>
@@ -62,12 +62,12 @@
           </div>
         </div>
         <div class="metrics">
-          <div><span class="metric-icon">◈</span><strong id="metricModels">1,009</strong><small>independent 3D listings</small></div>
+          <div><span class="metric-icon">◈</span><strong id="metricModels">1,009</strong><small>3D model listings</small></div>
           <div><span class="metric-icon">▧</span><strong>4,200</strong><small>editable booth concepts</small></div>
           <div><span class="metric-icon">⌘</span><strong>8,400</strong><small>GLB & DXF concept files</small></div>
           <div><span class="metric-icon">◉</span><strong>In-site</strong><small>interactive model previews</small></div>
         </div>
-        <div class="collection-title" id="collectionAnchor"><div><div class="overline accent-overline">REAL DESIGNS. REAL CREATORS.</div><h2>The 3D <em>collection.</em></h2><p>Original 3D scenes from Sketchfab, explored directly in ExpoVault.</p></div><div class="collection-view"><span class="view-dot"></span> ALL MODELS EXPLORE IN THIS SITE</div></div>
+        <div class="collection-title" id="collectionAnchor"><div><div class="overline accent-overline">EXPLORE · CUSTOMIZE · EXPORT</div><h2>The booth <em>library.</em></h2><p>Discover exhibition environments and 3D stand designs in one visual workspace.</p></div><div class="collection-view"><span class="view-dot"></span> ALL MODELS EXPLORE IN THIS SITE</div></div>
         <div class="discover-chips" id="chips" aria-label="Asset categories">
           <button class="chip active" data-kind="all">✳ &nbsp; Everything</button>
           <button class="chip" data-kind="booth">▣ &nbsp; Exhibition booths</button>
@@ -88,7 +88,7 @@
         <div class="model-grid" id="modelGrid" aria-live="polite"><div class="grid-loading">Loading the 3D collection…</div></div>
         <div class="empty" id="modelEmpty" hidden><div>⌕</div><h3>No models match this search.</h3><p>Try removing a filter or searching for a broader term.</p><button id="resetEmpty">Reset search</button></div>
         <div class="pagination"><button id="moreModels" class="load-button">Explore more designs <span>↓</span></button><small id="modelProgress"></small></div>
-        <div class="notice"><b>What is this collection?</b> We host an indexed metadata catalogue. Original 3D scenes remain on Sketchfab and load in its official viewer here in ExpoVault. Some listings are view-only, paid, or not suitable for fabrication. Creators retain their rights; no restricted mesh is mirrored.</div>
+        <div class="notice"><b>Design files & licences:</b> ExpoVault's generated stands can be downloaded directly as GLB and DXF. Creator-uploaded models can only be downloaded when their licence and account permissions allow it; interactive previews alone do not grant file rights.</div>
       </div>
     </section>
     <section class="page" id="section-concepts" data-page="concepts"><div class="inner">
@@ -120,12 +120,17 @@
     <div class="iframe-wrap"><div class="iframe-loader" id="iframeLoader"><div class="spin"></div><strong>Opening the 3D viewer</strong><small>Powered by Sketchfab · The original scene stays with the creator</small></div><iframe id="sketchfabFrame" title="Original creator 3D model preview" loading="eager" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
     <div class="stage-bottom"><div><button id="modelPrev">← Previous model</button><button id="modelNext">Next model →</button></div><span id="modelPosition">—</span></div>
   </div><aside class="viewer-info">
-    <div class="viewer-tag"><span>ORIGINAL CREATOR MODEL</span><b id="detailKind">3D</b></div>
+    <div class="viewer-tag"><span>3D DESIGN PREVIEW</span><b id="detailKind">3D</b></div>
     <h2 id="viewerTitle">3D Exhibition Stand</h2><div class="credit-line">Created by <a id="viewerAuthor" target="_blank" rel="noopener noreferrer">Original creator</a></div>
     <div class="detail-cover" id="detailCover"></div>
     <div class="detail-rule"></div>
     <h3>Model details</h3>
     <div class="detail-grid"><div><small>3D source</small><strong>Sketchfab viewer</strong></div><div><small>Download status</small><strong id="detailDownload">—</strong></div><div><small>Licence</small><strong id="detailLicense">—</strong></div><div><small>Popularity</small><strong id="detailViews">—</strong></div></div>
+    <div class="download-action-panel">
+      <div class="download-action-top"><span>⬡ &nbsp; DESIGN FILES</span><strong id="downloadAvailability">Checking permissions</strong></div>
+      <button id="downloadExternal" class="download-3d-btn">↓ &nbsp; Download 3D model</button>
+      <small id="downloadExternalHint">For eligible models, use the official Sketchfab sign-in and download permissions.</small>
+    </div>
     <div class="detail-rule"></div>
     <div class="material-lab">
       <div class="material-lab-title"><span>◈</span><div><strong>Live material lab</strong><small>Visual colour experiment · Original asset untouched</small></div></div>
@@ -138,12 +143,35 @@
       <p class="lab-status" id="materialStatus">Viewer editing is experimental. Available materials depend on the creator's 3D scene.</p>
     </div>
     <div class="detail-rule"></div>
-    <div class="original-notice"><div>◈</div><p><strong>Explore here, source protected.</strong> The live model is embedded in ExpoVault through Sketchfab. This does not grant a right to copy or modify its original mesh. Download and creator credit remain subject to its licence.</p></div>
-    <a id="originalLink" class="original-link" target="_blank" rel="noopener noreferrer">Creator's original page ↗</a>
+    <div class="original-notice"><div>◈</div><p><strong>Original creator credit.</strong> Preview and temporary material colours do not change the model file. Downloads and reuse require the creator's licence; Sketchfab provides this live viewer.</p></div>
+    <a id="originalLink" class="original-link" target="_blank" rel="noopener noreferrer">Model licence & creator ↗</a>
     <button id="findConcept" class="concept-cta">Find an editable booth concept <span>↗</span></button>
   </aside></div>
+</section>
+<div class="download-backdrop" id="authorizedBackdrop" hidden></div>
+<section class="authorized-modal" id="authorizedModal" role="dialog" aria-modal="true" aria-labelledby="authorizedTitle" hidden>
+  <div class="authorized-head">
+    <div><span class="overline accent-overline">DOWNLOAD CENTRE · AUTHORISED MODELS</span><h2 id="authorizedTitle">Get your 3D design files</h2><p id="authorizedModelTitle">Choose a 3D model</p></div>
+    <button id="authorizedClose" class="authorized-close" aria-label="Close download centre">✕</button>
+  </div>
+  <div class="authorized-content">
+    <div class="authorized-main">
+      <div class="authorized-banner">ⓘ &nbsp; Sign in using the official embedded Sketchfab importer below, then select an available 3D model. Only files enabled by the creator can be downloaded.</div>
+      <div class="authorized-embed" id="authorizedImporter"><div class="authorized-waiting">Loading official 3D importer…</div></div>
+    </div>
+    <aside class="authorized-aside">
+      <span class="panel-overline">YOUR DESIGN DOWNLOAD</span>
+      <h3 id="selectedAssetTitle">No authorized file selected yet</h3>
+      <p id="authorizedStatus">Connect your Sketchfab account in the importer, then choose a downloadable model.</p>
+      <button id="requestCurrentModel" class="authorized-request" disabled>↓ Request currently viewed 3D model</button>
+      <button id="saveAuthorizedArchive" class="authorized-save" disabled>↓ Save glTF + textures ZIP</button>
+      <button id="saveAuthorCredits" class="authorized-credit" disabled>↓ Save creator attribution</button>
+      <div class="authorized-license"><b>Usage rights follow the file.</b> The original model is authored by its creator. A free download does not mean unrestricted redistribution or production certification. Some models are view-only; their meshes are never extracted from the preview.</div>
+    </aside>
+  </div>
 </section>
 <div class="toast" id="toast" aria-live="polite"></div>
 <script type="module" src="ui/v3.mjs"></script>
 <script type="module" src="ui/material-lab.mjs"></script>
+<script type="module" src="ui/authorized-download.mjs"></script>
 </body></html>
