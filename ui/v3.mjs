@@ -171,10 +171,12 @@ function openOriginal(v,{hash=true,fromSaved=false}={}){
  // Official Sketchfab embedding: the source platform remains the 3D host.
  iframe.onload=()=>{$('iframeLoader').hidden=true};
  iframe.src='https://sketchfab.com/models/'+uidFor(v)+'/embed?autostart=1&preload=1&ui_controls=1&ui_infos=1&ui_watermark=1&ui_hint=2';
+ window.dispatchEvent(new CustomEvent('expovault:model-open',{detail:{uid:uidFor(v),title:v.title}}));
  if(hash)history.replaceState(null,'','#model='+uidFor(v));
 }
 function closeViewer({restoreHash=true}={}){
  $('viewer').hidden=true;$('viewerOverlay').hidden=true;document.body.style.overflow='';
+ window.dispatchEvent(new CustomEvent('expovault:model-close'));
  const iframe=$('sketchfabFrame');iframe.src='about:blank';iframe.onload=null;
  STATE.active=null;
  if(restoreHash)history.replaceState(null,'','#'+STATE.section);
