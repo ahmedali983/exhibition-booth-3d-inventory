@@ -164,6 +164,20 @@ def main():
                 "glb":"assets/authorized-booths/"+metadata["id"]+".glb",
                 "file_size":len(payload),"sha256":hashlib.sha256(payload).hexdigest(),
             })
+            if raw.get("thumbnail_file"):
+                thumb=(ROOT/raw["thumbnail_file"]).resolve()
+                if not thumb.is_relative_to(ROOT):
+                    raise ValueError("thumbnail_file must stay inside the repository")
+                if thumb.suffix.lower()!=".webp":
+                    raise ValueError("thumbnail_file must be a WebP image")
+                image=thumb.read_bytes()
+                if len(image)>3_000_000 or image[:4]!=b"RIFF" or image[8:12]!=b"WEBP":
+                    raise ValueError("Invalid WebP thumbnail, max 3 MB")
+                target=OUTPUT/(metadata["id"]+".webp")
+                target.write_bytes(image)
+                metadata["thumbnail"]="assets/authorized-booths/"+metadata["id"]+".webp"
+            else:
+                metadata["thumbnail"]=None
             staged.append(metadata)
             print("IMPORTED",metadata["id"],len(payload),"bytes",flush=True)
         except Exception as exc:
