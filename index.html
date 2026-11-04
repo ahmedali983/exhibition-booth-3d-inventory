@@ -20,7 +20,7 @@
   <nav class="side-nav" aria-label="Explore library">
     <button class="side-link selected" data-section="models"><span class="nav-icon">⌗</span><span>3D designs</span><span class="side-amount" id="sideSources">1K+</span></button>
     <button class="side-link" data-section="concepts"><span class="nav-icon">▦</span><span>Booth studio</span><span class="side-amount">4.2K</span></button>
-    <button class="side-link" data-section="technical"><span class="nav-icon">⌁</span><span>Production toolkit</span></button>
+    <button class="side-link" data-section="technical"><span class="nav-icon">⌁</span><span>Production files</span></button>
     <button class="side-link" data-section="saved"><span class="nav-icon">♡</span><span>My collection</span><span class="side-amount" id="sideSaved">0</span></button>
     <a class="side-link" href="library.html"><span class="nav-icon">⬡</span><span>My 3D files</span><span class="side-amount">LOCAL</span></a>
   </nav>
@@ -99,9 +99,30 @@
       <div class="notice"><b>Fabrication status:</b> Editable 3D concepts and DXF schematics are not verified shop drawings, structural plans, rigging specifications, or print-ready production files. A fabricator must confirm the real building system.</div>
     </div></section>
     <section class="page" id="section-technical" data-page="technical"><div class="inner">
-      <div class="page-hero technical-hero"><span class="overline accent-overline">BEYOND PRETTY RENDERS</span><h1>The production <em>reference shelf.</em></h1><p>Manufacturer CAD systems, independent artists, SketchUp collections and licensed libraries, all indexed in one place. Source documents and licensing belong to each publisher.</p></div>
-      <div class="toolbar"><span class="counter"><b id="technicalCount">—</b> source references</span><input id="technicalQuery" class="technical-search" placeholder="Search CAD, SketchUp, source files..."></div>
-      <div class="reference-grid" id="referenceGrid"></div>
+      <div class="page-hero technical-hero">
+        <span class="overline accent-overline">YOUR DESIGN FILE WORKSPACE · 8,400 FILES</span>
+        <h1>Production <em>concept files.</em></h1>
+        <p>Every generated booth has a downloadable 3D GLB mesh and a DXF floor plan. Choose a design below or open it in the studio for a branded 3D and preliminary production pack.</p>
+        <div class="production-hero-actions">
+          <a class="button-yellow" href="https://github.com/ahmedali983/exhibition-booth-3d-inventory/releases/download/v0.1.0/expovault_4200_glb_dxf.zip">↓ Download all 8,400 files</a>
+          <a class="outline-production" href="studio.html#discover">Open custom 3D studio ↗</a>
+        </div>
+      </div>
+      <div class="production-stats">
+        <div><span>◈</span><strong>4,200</strong><small>Editable GLB geometry</small></div>
+        <div><span>⌘</span><strong>4,200</strong><small>Preliminary DXF plans</small></div>
+        <div><span>▧</span><strong>Per-design</strong><small>Custom concept pack via Studio</small></div>
+      </div>
+      <div class="production-heading"><div><span class="overline accent-overline">DESIGN ASSET INVENTORY</span><h2>Find your design <em>files.</em></h2><p>Search by design ID, style, footprint, or fitting.</p></div><div class="production-count"><strong id="technicalCount">4,200</strong> designs</div></div>
+      <div class="production-filters">
+        <label>Width<select id="productionWidth"><option value="">All widths</option></select></label>
+        <label>Depth<select id="productionDepth"><option value="">All depths</option></select></label>
+        <label>Style<select id="productionStyle"><option value="">All structures</option></select></label>
+        <input id="technicalQuery" class="technical-search" placeholder="Search EV-0001, truss, reception, 6x3..." aria-label="Search production files">
+      </div>
+      <div id="referenceGrid" class="production-grid" aria-live="polite"></div>
+      <div class="pagination"><button id="moreTechnical" class="load-button">Show more design files ↓</button><small id="technicalProgress"></small></div>
+      <div class="notice"><b>Concept stage only:</b> GLB meshes and DXF plans are editable references, not manufacturer-approved shop drawings or precise cut schedules. Get qualified engineering verification for structure, rigging, safety, joinery, tolerances and print artwork before production.</div>
     </div></section>
     <section class="page" id="section-saved" data-page="saved"><div class="inner">
       <div class="page-hero saved-hero"><span class="overline accent-overline">YOUR OWN DESIGN BOARD</span><h1>Your <em>shortlist.</em></h1><p>Keep inspiration in one place. Saved models are remembered in this browser, including original 3D assets.</p></div>
