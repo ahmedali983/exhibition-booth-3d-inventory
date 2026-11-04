@@ -248,7 +248,7 @@ async function loadSources(){
   const manual=await r.json();let indexed=[];
   try{const v=await fetch("catalog/sketchfab_index.json");if(v.ok){const index=await v.json();indexed=index.items||[]}}catch(_){}
   const ids=new Set();sourceRows=[];
-  for(const item of [...manual,...indexed]){const k=item.id||item.url;if(ids.has(k))continue;ids.add(k);sourceRows.push(item)}
+  for(const item of [...manual,...indexed]){const k=item.url||item.id;if(ids.has(k))continue;ids.add(k);sourceRows.push(item)}
   renderSources();
  }catch(e){byId("sourceCount").textContent="Source index unavailable: "+e.message}
 }
