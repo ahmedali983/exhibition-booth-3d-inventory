@@ -1,0 +1,273 @@
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {GLTFExporter} from 'three/addons/exporters/GLTFExporter.js';
+
+const $=id=>document.getElementById(id);
+const el=(tag,className,text)=>{
+ const node=document.createElement(tag);
+ if(className)node.className=className;
+ if(text!==undefined)node.textContent=String(text);
+ return node;
+};
+const state={assets:[],visible:[],packs:[],filter:'all',query:'',sort:'featured',count:32,active:null,activeIndex:-1,originalMaterials:[],scene:null,camera:null,renderer:null,controls:null,object:null,resetView:null,observer:null,frame:0,loadId:0};
+let toastTimer=0;
+const fmt=num=>Number(num||0).toLocaleString('en-US');
+const size=bytes=>bytes>=1048576?(bytes/1048576).toFixed(2)+' MB':(bytes/1024).toFixed(0)+' KB';
+const validPath=str=>typeof str==='string'&&/^assets\/open-3d\/CC0-\d+\.(glb|webp)$/.test(str);
+function notice(message){$('toast').textContent=message;$('toast').classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('visible'),3200)}
+function downloadBlob(fileName,result,type='model/gltf-binary'){
+ const blob=result instanceof Blob?result:new Blob([result],{type});
+ const url=URL.createObjectURL(blob),link=document.createElement('a');
+ link.href=url;link.download=fileName;document.body.append(link);link.click();link.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),8000);
+}
+function loadLibrary(){
+ return fetch('catalog/open_3d_cc0.json').then(response=>{
+  if(!response.ok)throw Error('3D asset catalogue is unavailable (HTTP '+response.status+')');
+  return response.json();
+ });
+}
+function card(asset){
+ const item=el('article','open-card');
+ const picture=el('div','open-card-image');
+ const image=el('img');image.src=asset.thumbnail;image.alt=asset.name+' — 3D model preview';image.loading='lazy';image.decoding='async';
+ image.onerror=()=>{image.remove();picture.style.background='#e1eae3';picture.append(el('div','model-thumb-fallback','◈'))};
+ picture.append(image,el('span','label','◈ REAL GLB'));
+ const look=el('button','','✳ Inspect 3D and recolour');look.onclick=()=>open(asset);
+ picture.onclick=e=>{if(e.target!==look)open(asset)};
+ picture.append(look);
+ const body=el('div','open-card-body');
+ body.append(el('div','open-card-kicker',asset.pack),el('h3','',asset.name),el('p','',asset.description||asset.kind));
+ const facts=el('div','open-card-facts');
+ facts.append(el('span','','GLB · '+size(asset.file_size)),el('span','','CC0'));
+ const actions=el('div','open-card-actions');
+ const direct=el('a','','↓ Download 3D');direct.href=asset.glb;direct.download=asset.id+'.glb';direct.setAttribute('aria-label','Download original GLB for '+asset.name);
+ const customise=el('button','','✳ Recolour');customise.onclick=()=>open(asset);
+ actions.append(direct,customise);body.append(facts,actions);item.append(picture,body);
+ return item;
+}
+function sortedAssets(){
+ const q=state.query.trim().toLowerCase();
+ let list=state.assets.filter(a=>(state.filter==='all'||a.pack_slug===state.filter)&&
+  (!q||[a.name,a.pack,a.description,a.kind,a.id].some(s=>String(s||'').toLowerCase().includes(q))));
+ switch(state.sort){
+  case 'name':list.sort((a,b)=>a.name.localeCompare(b.name));break;
+  case 'size':list.sort((a,b)=>a.file_size-b.file_size);break;
+  case 'triangles':list.sort((a,b)=>b.triangles-a.triangles);break;
+  default:list.sort((a,b)=>((/gallery|retail|indoor-market/.test(a.pack_slug)?0:1)-(/gallery|retail|indoor-market/.test(b.pack_slug)?0:1))||a.name.localeCompare(b.name));
+ }
+ return list;
+}
+function runFilters(){
+ state.visible=sortedAssets();state.count=32;render();
+}
+function render(more=false){
+ const grid=$('assetGrid');if(!more)grid.replaceChildren();
+ const fragment=document.createDocumentFragment();
+ for(const asset of state.visible.slice(grid.children.length,state.count))fragment.append(card(asset));
+ grid.append(fragment);
+ $('emptyAssets').hidden=state.visible.length>0;
+ $('visibleCount').textContent=fmt(state.visible.length);
+ $('resultsLabel').textContent=fmt(state.visible.length)+' files';
+ $('showMoreAssets').hidden=grid.children.length>=state.visible.length;
+ $('assetProgress').textContent='Showing '+fmt(grid.children.length)+' of '+fmt(state.visible.length)+' self-hosted GLB files';
+}
+function filters(){
+ const host=$('packFilters');
+ for(const item of state.packs){
+  const b=el('button','pack-tab',item.title+' · '+item.count);
+  b.dataset.pack=item.slug;
+  host.append(b);
+ }
+ host.querySelectorAll('[data-pack]').forEach(b=>b.onclick=()=>{
+  state.filter=b.dataset.pack;
+  host.querySelectorAll('[data-pack]').forEach(c=>c.classList.toggle('selected',c===b));
+  runFilters();
+ });
+}
+function resizeViewer(){
+ if(!state.renderer||!state.camera)return;
+ const host=$('openCanvas'),w=host.clientWidth,h=host.clientHeight;
+ if(w<1||h<1)return;
+ state.camera.aspect=w/h;state.camera.updateProjectionMatrix();state.renderer.setSize(w,h,false);
+}
+function setupViewer(){
+ if(state.renderer)return;
+ const canvasHost=$('openCanvas');
+ state.scene=new THREE.Scene();
+ state.scene.background=new THREE.Color('#d9e8dc');
+ state.camera=new THREE.PerspectiveCamera(42,1,.01,20000);
+ const renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});
+ renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+ renderer.outputColorSpace=THREE.SRGBColorSpace;
+ state.renderer=renderer;
+ canvasHost.prepend(renderer.domElement);
+ state.controls=new OrbitControls(state.camera,renderer.domElement);
+ state.controls.enableDamping=true;
+ state.controls.maxPolarAngle=Math.PI-.015;
+ state.scene.add(new THREE.HemisphereLight('#ffffff','#6f9881',2.3));
+ const l=new THREE.DirectionalLight('#ffffff',3.2);l.position.set(9,13,7);state.scene.add(l);
+ const fill=new THREE.DirectionalLight('#c4e8ff',1.4);fill.position.set(-7,3,-9);state.scene.add(fill);
+ state.observer=new ResizeObserver(resizeViewer);state.observer.observe(canvasHost);
+ resizeViewer();
+ function animate(){
+  state.frame=requestAnimationFrame(animate);
+  if(!state.renderer||document.hidden||$('openViewer').hidden)return;
+  state.controls.update();state.renderer.render(state.scene,state.camera);
+ }
+ animate();
+}
+function disposeObject(root){
+ if(!root)return;
+ root.traverse(n=>{
+  if(n.geometry)n.geometry.dispose();
+  const mats=Array.isArray(n.material)?n.material:n.material?[n.material]:[];
+  for(const m of mats){if(m.map)m.map.dispose();m.dispose()}
+ });
+}
+function clearObject(){
+ if(state.object){state.scene.remove(state.object);disposeObject(state.object)}
+ state.object=null;state.originalMaterials=[];state.resetView=null;
+ $('editableMaterial').replaceChildren();
+ $('exportCustomized').disabled=true;
+}
+function fitModel(root){
+ const bb=new THREE.Box3().setFromObject(root);
+ if(bb.isEmpty())throw Error('This model has no visible geometry');
+ const d=bb.getSize(new THREE.Vector3()),center=bb.getCenter(new THREE.Vector3());
+ const max=Math.max(d.x,d.y,d.z,.001),rad=Math.max(max*2.2,(max*.62)/Math.tan(THREE.MathUtils.degToRad(state.camera.fov)*.5)*1.4);
+ const offset=new THREE.Vector3(.8,.48,1).normalize().multiplyScalar(rad);
+ state.camera.position.copy(center).add(offset);
+ state.camera.near=Math.max(.0001,rad/10000);
+ state.camera.far=rad*100;
+ state.camera.updateProjectionMatrix();
+ state.controls.target.copy(center);
+ state.controls.minDistance=max*.05;
+ state.controls.maxDistance=max*20;
+ state.controls.update();
+ state.resetView={cam:state.camera.position.clone(),target:center.clone()};
+ $('meshDetail').textContent='Bounding box · '+[d.x,d.y,d.z].map(x=>x.toFixed(2)).join(' × ')+' model units';
+}
+function materials(root){
+ const entries=[];
+ root.traverse(n=>{
+  if(!n.isMesh||!n.material)return;
+  const list=Array.isArray(n.material)?n.material:[n.material];
+  const clones=list.map(m=>m.clone());
+  n.material=Array.isArray(n.material)?clones:clones[0];
+  for(const m of clones){
+   if(entries.length<200)entries.push({mesh:n,material:m,original:m.clone(),label:(n.name||'Mesh')+' · '+(m.name||'Material')});
+  }
+ });
+ state.originalMaterials=entries;
+ const sel=$('editableMaterial');sel.replaceChildren();
+ for(const [i,m] of entries.entries()){
+  const opt=el('option','',m.label);opt.value=i;sel.append(opt);
+ }
+ $('applyAssetColor').disabled=entries.length===0;$('resetAssetColor').disabled=entries.length===0;
+}
+async function open(asset){
+ state.active=asset;
+ state.activeIndex=state.visible.findIndex(v=>v.id===asset.id);
+ $('openOverlay').hidden=false;$('openViewer').hidden=false;
+ document.body.style.overflow='hidden';
+ $('openTitle').textContent=asset.name;$('inspectorTitle').textContent=asset.name;
+ $('inspectorDescription').textContent=asset.description||'Editable 3D scene component';
+ $('inspectorSize').textContent=size(asset.file_size);
+ $('inspectorTris').textContent=fmt(asset.triangles);
+ $('originName').textContent=asset.source_creator||asset.pack;
+ $('licenseStatus').textContent='CC0 · model is hosted in ExpoVault · '+asset.pack;
+ $('downloadRealGLB').href=asset.glb;
+ $('downloadRealGLB').download=asset.id+'.glb';
+ $('nextAsset').disabled=state.activeIndex>=state.visible.length-1;
+ $('loading3d').hidden=false;$('loading3d').textContent='Loading the original 3D geometry…';
+ setupViewer();clearObject();
+ const id=++state.loadId;
+ try{
+  const response=await fetch(asset.glb,{cache:'force-cache'});
+  if(!response.ok)throw Error('GLB unavailable: HTTP '+response.status);
+  const data=await response.arrayBuffer();
+  const model=await new GLTFLoader().parseAsync(data,'');
+  if(id!==state.loadId)return;
+  const object=model.scene;
+  if(!object)throw Error('3D scene is empty');
+  state.object=object;state.scene.add(object);
+  fitModel(object);materials(object);
+  $('loading3d').hidden=true;$('exportCustomized').disabled=false;
+ }catch(e){
+  if(id!==state.loadId)return;
+  $('loading3d').textContent='Preview unavailable: '+e.message;
+  notice('Preview could not load. You can still download the original GLB.');
+ }
+}
+function close(){
+ ++state.loadId;
+ $('openOverlay').hidden=true;$('openViewer').hidden=true;
+ document.body.style.overflow='';
+ clearObject();state.active=null;
+}
+function paint(){
+ const slot=state.originalMaterials[Number($('editableMaterial').value)];
+ if(!slot){notice('Select a material first');return}
+ if(!slot.material.color){notice('Selected material cannot be recoloured');return}
+ slot.material.color.set($('editableColor').value);
+ slot.material.needsUpdate=true;
+ notice('Colour applied to preview · export a new GLB to save it');
+}
+function resetMaterial(){
+ const slot=state.originalMaterials[Number($('editableMaterial').value)];
+ if(!slot)return;
+ slot.material.copy(slot.original);
+ slot.material.needsUpdate=true;
+ notice('Original material restored');
+}
+function downloadBranded(){
+ if(!state.object||!state.active)return;
+ const button=$('exportCustomized');
+ button.disabled=true;button.textContent='Exporting…';
+ new GLTFExporter().parse(
+  state.object,
+  data=>{downloadBlob(state.active.id+'-custom-colours.glb',data);button.disabled=false;button.textContent='↓ Download coloured GLB';notice('Customized GLB is saved to downloads')},
+  error=>{button.disabled=false;button.textContent='↓ Download coloured GLB';notice('3D export failed: '+error.message)},
+  {binary:true,onlyVisible:true,maxTextureSize:1024}
+ );
+}
+function wire(){
+ $('scrollArchive').onclick=()=>$('assetCollection').scrollIntoView({behavior:'smooth'});
+ $('searchAssets').oninput=e=>{state.query=e.target.value;runFilters()};
+ $('sortAssets').onchange=e=>{state.sort=e.target.value;runFilters()};
+ $('clearAssetSearch').onclick=()=>{
+  state.query='';state.filter='all';$('searchAssets').value='';
+  $('packFilters').querySelectorAll('.pack-tab').forEach(b=>b.classList.toggle('selected',b.dataset.pack==='all'));runFilters();
+ };
+ $('showMoreAssets').onclick=()=>{state.count+=40;render(true)};
+ $('closeAsset').onclick=close;$('openOverlay').onclick=close;
+ $('nextAsset').onclick=()=>{const next=state.visible[state.activeIndex+1];if(next)open(next)};
+ $('resetView').onclick=()=>{
+  if(!state.resetView)return;
+  state.camera.position.copy(state.resetView.cam);state.controls.target.copy(state.resetView.target);state.controls.update();
+ };
+ $('editableColor').oninput=e=>$('editableHex').textContent=e.target.value.toUpperCase();
+ $('applyAssetColor').onclick=paint;$('resetAssetColor').onclick=resetMaterial;
+ $('exportCustomized').onclick=downloadBranded;
+ document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&!$('openViewer').hidden)close();
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();$('searchAssets').focus()}
+ });
+}
+async function init(){
+ wire();
+ try{
+  const data=await loadLibrary();
+  state.assets=(data.assets||[]).filter(a=>a.license==='CC0-1.0'&&validPath(a.glb)&&validPath(a.thumbnail));
+  const countByPack=new Map();
+  for(const asset of state.assets)countByPack.set(asset.pack_slug,(countByPack.get(asset.pack_slug)||0)+1);
+  state.packs=(data.packs||[]).filter(p=>countByPack.has(p.slug)).map(p=>({...p,count:countByPack.get(p.slug)}));
+  $('totalAssets').textContent=fmt(state.assets.length);
+  $('totalPacks').textContent=fmt(state.packs.length);
+  $('sideAssetCount').textContent=fmt(state.assets.length);
+  filters();runFilters();
+ }catch(error){$('assetGrid').textContent='Catalogue failed to load: '+error.message;notice(error.message)}
+}
+init();
