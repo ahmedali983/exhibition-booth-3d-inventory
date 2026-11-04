@@ -25,6 +25,19 @@ The 4,200 layouts combine 7 widths, 6 depths, 4 booth exposure types, 5 structur
 - **Editable Concepts:** browse 4,200 original procedural GLB/DXF designs. Open any design in the brand studio with a direct URL to change its colours/logo and download a concept production ZIP.
 - **Production Library:** supplier and CAD documentation indexed alongside general 3D references. These are references, not a transfer of third-party file licences.
 
+## Download and edit 3D files inside ExpoVault
+
+The gallery has two separate workflows, each with explicit rights:
+
+- **ExpoVault's 4,200 generated concepts:** download GLB (editable 3D mesh) or DXF (preliminary schematic) directly from the card. Open the model in the brand studio to download a per-booth *concept production ZIP* with OBJ, SVG panel guides, indicative BOM and specification data. These are not supplier-approved cut sheets.
+- **Creator-uploaded Sketchfab models marked as downloadable:** the *Download 3D* button opens the official Sketchfab Importer **inside ExpoVault**. Users must sign in with their own Sketchfab account, and each download must be permitted by the provider and creator. Once approved, the official API returns a short-lived signed glTF ZIP URL, which ExpoVault tries to save without navigation (with a direct-link fallback if CORS prevents it). A separate creator attribution file is offered. The original 3D mesh is never mirrored to this repository.
+- **View-only creator models:** 3D orbit/inspection and session-only material recolouring, but no original-mesh download button. Use an independently created editable concept instead.
+- **Your own licensed files:** import GLB, OBJ, STL or FBX into [My 3D Library](library.html), save local browser copies, recolour, and export GLB or mesh-only OBJ.
+
+The [Sketchfab Download API](https://sketchfab.com/developers/download-api/downloading-models) requires user authentication and model-specific permission. The [official web importer](https://sketchfab.com/developers/download-api/libraries) is used; no bypasses or scraping of view-only scenes occur. Author and provider attribution remains visible in model details and must accompany downloaded files as the licence requires.
+
+**Important verification limit:** the importer iframe and login UI are tested in a browser, but an end-to-end third-party archive download after an authorized Sketchfab login requires a real signed-in account and was not claimed as fully validated in anonymous tests.
+
 ## My 3D Files — local asset library
 
 **[Open the local asset library](https://ahmedali983.github.io/exhibition-booth-3d-inventory/library.html)** to import a model that you own or are authorized to use. This is separate from Sketchfab's embedded models and is designed for *your own legitimately obtained files*.
