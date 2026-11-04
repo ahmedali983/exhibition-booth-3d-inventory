@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="ExpoVault — explore 1,000+ independent 3D exhibition models directly inside our gallery and 4,200 editable booth concepts.">
+<meta name="theme-color" content="#10161c">
+<title>ExpoVault | Exhibition Design Archive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ui/v3.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='13' fill='%23101720'/%3E%3Cpath d='M17 16h30v8H25v9h20v8H25v-2h22v9H17z' fill='%23b9f2cd'/%3E%3C/svg%3E">
+</head>
+<body>
+<div class="layout">
+<aside class="side" id="side">
+  <a class="identity" href="#models" aria-label="ExpoVault home"><span class="identity-mark">E<span>.</span></span><span class="identity-text">ex<span>po</span>vault<small>THE EXHIBIT ARCHIVE</small></span></a>
+  <p class="side-caption">YOUR WORKSPACE</p>
+  <nav class="side-nav" aria-label="Explore library">
+    <button class="side-link selected" data-section="models"><span class="nav-icon">⌗</span><span>3D discoveries</span><span class="side-amount" id="sideSources">1K+</span></button>
+    <button class="side-link" data-section="concepts"><span class="nav-icon">▦</span><span>Editable concepts</span><span class="side-amount">4.2K</span></button>
+    <button class="side-link" data-section="technical"><span class="nav-icon">⌁</span><span>Production library</span></button>
+    <button class="side-link" data-section="saved"><span class="nav-icon">♡</span><span>My collection</span><span class="side-amount" id="sideSaved">0</span></button>
+  </nav>
+  <p class="side-caption tool-caption">QUICK ACCESS</p>
+  <div class="quick-access">
+    <div class="tool-glyph">✳</div>
+    <strong>Make it yours.</strong>
+    <p>Brand an editable 3D stand. Change colours, inspect dimensions and export the files.</p>
+    <a href="studio.html#brand" class="quick-link">Open brand studio <span>↗</span></a>
+  </div>
+  <div class="side-bottom">
+    <div class="available"><i></i> All libraries available</div>
+    <a href="https://github.com/ahmedali983/exhibition-booth-3d-inventory" target="_blank" rel="noopener noreferrer">GitHub repository ↗</a>
+    <a href="https://github.com/ahmedali983/exhibition-booth-3d-inventory/releases/tag/v0.1.0" target="_blank" rel="noopener noreferrer">Download 3D archive ↗</a>
+    <small>Creator models run in their official embedded viewers. Ownership and licensing remain with their creators.</small>
+  </div>
+</aside>
+<div class="content-frame">
+  <header class="topbar">
+    <div class="topbar-left"><button class="mobile-menu" id="mobileMenu" aria-label="Toggle navigation">☰</button><div class="topbar-crumb"><span>Explore</span><b>/</b><strong id="breadcrumb">3D discoveries</strong></div></div>
+    <div class="global-search"><span aria-hidden="true" class="search-symbol">⌕</span><input id="query" type="search" placeholder="Search exhibitions, stands, creators..." aria-label="Search catalogue" autocomplete="off"><kbd>⌘ K</kbd></div>
+    <div class="topbar-right"><div class="live-marker"><i></i> PUBLIC ARCHIVE</div><div class="avatar" title="Your brand">E</div></div>
+  </header>
+  <main>
+    <section class="page active" id="section-models" data-page="models">
+      <div class="inner">
+        <div class="hero">
+          <div class="hero-copy"><div class="overline light-overline"><span class="green-dot"></span> THE EXHIBITION DESIGN ARCHIVE · VOL. 03</div>
+            <h1>Every great space<br>starts with <em>inspiration.</em></h1>
+            <p>One library for real 3D models, independent creators and production-minded ideas. Discover the work. Explore the details. Never leave the studio.</p>
+            <div class="hero-buttons"><button id="jumpCollection" class="button-yellow">Explore 3D models <span>↗</span></button><button class="button-outline" data-section="concepts">Create your own booth ↗</button></div>
+            <div class="hero-bottom"><span class="hero-line"></span> CURATED FOR DESIGNERS, CREATORS & BUILDERS</div>
+          </div>
+          <div class="hero-composition">
+            <div class="hero-pic hero-pic-one"><img id="heroImageOne" src="assets/thumbs/EV-1691.webp" alt="3D architectural booth model"></div>
+            <div class="hero-pic hero-pic-two"><img id="heroImageTwo" src="assets/thumbs/EV-0302.webp" alt="3D booth visualization"></div>
+            <div class="hero-float"><span>✳</span><strong>360°</strong><small>IN-SITE VIEWER</small></div>
+          </div>
+        </div>
+        <div class="metrics">
+          <div><span class="metric-icon">◈</span><strong id="metricModels">1,009</strong><small>independent 3D listings</small></div>
+          <div><span class="metric-icon">▧</span><strong>4,200</strong><small>editable booth concepts</small></div>
+          <div><span class="metric-icon">⌘</span><strong>8,400</strong><small>GLB & DXF concept files</small></div>
+          <div><span class="metric-icon">◉</span><strong>In-site</strong><small>interactive model previews</small></div>
+        </div>
+        <div class="collection-title" id="collectionAnchor"><div><div class="overline accent-overline">REAL DESIGNS. REAL CREATORS.</div><h2>The 3D <em>collection.</em></h2><p>Original 3D scenes from Sketchfab, explored directly in ExpoVault.</p></div><div class="collection-view"><span class="view-dot"></span> ALL MODELS EXPLORE IN THIS SITE</div></div>
+        <div class="discover-chips" id="chips" aria-label="Asset categories">
+          <button class="chip active" data-kind="all">✳ &nbsp; Everything</button>
+          <button class="chip" data-kind="booth">▣ &nbsp; Exhibition booths</button>
+          <button class="chip" data-kind="pavilion">◇ &nbsp; Pavilions & halls</button>
+          <button class="chip" data-kind="display">◫ &nbsp; Display systems</button>
+          <button class="chip" data-kind="event">◈ &nbsp; Event spaces</button>
+          <button class="chip" data-kind="other">⌗ &nbsp; Other related models</button>
+        </div>
+        <div class="toolbar">
+          <div class="toolbar-start"><button class="filters-button" id="toggleFilters">☷ &nbsp; Filters <span id="filterDot"></span></button><span class="counter"><strong id="modelCount">—</strong> models found</span></div>
+          <div class="toolbar-end"><select id="modelSort" aria-label="Sort models"><option value="relevant">Most relevant</option><option value="views">Most viewed</option><option value="new">Newest first</option><option value="az">Name A–Z</option></select><span class="grid-indicator">▦ GRID VIEW</span></div>
+        </div>
+        <div class="drawer" id="filterDrawer" hidden>
+          <label>Availability<select id="availability"><option value="any">All listings</option><option value="download">Creator allows download</option><option value="preview">Preview only</option></select></label>
+          <label>Licence<select id="modelLicence"><option value="any">All licences</option><option value="cc">Creative Commons</option><option value="noncommercial">Noncommercial</option><option value="unspecified">Unspecified / other</option></select></label>
+          <button id="clearFilters" class="drawer-clear">Reset filters ✕</button>
+        </div>
+        <div class="model-grid" id="modelGrid" aria-live="polite"><div class="grid-loading">Loading the 3D collection…</div></div>
+        <div class="empty" id="modelEmpty" hidden><div>⌕</div><h3>No models match this search.</h3><p>Try removing a filter or searching for a broader term.</p><button id="resetEmpty">Reset search</button></div>
+        <div class="pagination"><button id="moreModels" class="load-button">Explore more designs <span>↓</span></button><small id="modelProgress"></small></div>
+        <div class="notice"><b>What is this collection?</b> We host an indexed metadata catalogue. Original 3D scenes remain on Sketchfab and load in its official viewer here in ExpoVault. Some listings are view-only, paid, or not suitable for fabrication. Creators retain their rights; no restricted mesh is mirrored.</div>
+      </div>
+    </section>
+    <section class="page" id="section-concepts" data-page="concepts"><div class="inner">
+      <div class="page-hero concept-hero"><span class="overline accent-overline">EDITABLE / DOWNLOADABLE / PARAMETRIC</span><h1>Concepts you can <em>make your own.</em></h1><p>4,200 layout combinations with actual GLB meshes and DXF concept plans. Recolour, add your brand and export your files.</p><a class="button-yellow" href="studio.html#brand">Open the full brand studio ↗</a></div>
+      <div class="concept-filter"><label>Width<select id="conceptWidth"><option value="">All widths</option></select></label><label>Depth<select id="conceptDepth"><option value="">All depths</option></select></label><label>Structure<select id="conceptStyle"><option value="">All structures</option></select></label><label>Type<select id="conceptType"><option value="">All types</option></select></label><span class="counter"><b id="conceptCount">4,200</b> concepts</span></div>
+      <div class="model-grid concept-grid" id="conceptGrid"></div>
+      <div class="pagination"><button id="moreConcepts" class="load-button">Show more editable concepts <span>↓</span></button><small id="conceptProgress"></small></div>
+      <div class="notice"><b>Fabrication status:</b> Editable 3D concepts and DXF schematics are not verified shop drawings, structural plans, rigging specifications, or print-ready production files. A fabricator must confirm the real building system.</div>
+    </div></section>
+    <section class="page" id="section-technical" data-page="technical"><div class="inner">
+      <div class="page-hero technical-hero"><span class="overline accent-overline">BEYOND PRETTY RENDERS</span><h1>The production <em>reference shelf.</em></h1><p>Manufacturer CAD systems, independent artists, SketchUp collections and licensed libraries, all indexed in one place. Source documents and licensing belong to each publisher.</p></div>
+      <div class="toolbar"><span class="counter"><b id="technicalCount">—</b> source references</span><input id="technicalQuery" class="technical-search" placeholder="Search CAD, SketchUp, source files..."></div>
+      <div class="reference-grid" id="referenceGrid"></div>
+    </div></section>
+    <section class="page" id="section-saved" data-page="saved"><div class="inner">
+      <div class="page-hero saved-hero"><span class="overline accent-overline">YOUR OWN DESIGN BOARD</span><h1>Your <em>shortlist.</em></h1><p>Keep inspiration in one place. Saved models are remembered in this browser, including original 3D assets.</p></div>
+      <div class="model-grid" id="savedGrid"></div>
+      <div class="empty" id="savedEmpty" hidden><div>♡</div><h3>No models saved yet.</h3><p>Tap a heart anywhere to build your design board.</p><button data-section="models">Discover models ↗</button></div>
+    </div></section>
+  </main>
+  <footer class="footer"><div>EXPOVAULT <span>© 2026 · A CREATIVE RESEARCH LIBRARY</span></div><p>Sketchfab creator models are embedded from their source. This is not a redistribution of the original files.</p><a href="https://github.com/ahmedali983/exhibition-booth-3d-inventory" target="_blank" rel="noopener noreferrer">SOURCE CODE ↗</a></footer>
+</div>
+</div>
+<div class="overlay" id="viewerOverlay" hidden></div>
+<section class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-labelledby="viewerTitle">
+  <div class="viewer-header"><div class="viewer-brand"><span class="viewer-brand-icon">E.</span><span>EXPOVAULT <small>/ 3D INSPECTION</small></span></div><div class="viewer-header-actions"><button id="viewerSave" title="Save model">♡ Save</button><button id="viewerShare" title="Copy link">↗ Share</button><button class="viewer-close" id="viewerClose" aria-label="Close viewer">✕</button></div></div>
+  <div class="viewer-layout"><div class="viewer-stage">
+    <div class="stage-top"><span class="stage-live"><i></i> INTERACTIVE 3D · LIVE</span><span>Left drag to rotate · Scroll to zoom</span></div>
+    <div class="iframe-wrap"><div class="iframe-loader" id="iframeLoader"><div class="spin"></div><strong>Opening the 3D viewer</strong><small>Powered by Sketchfab · The original scene stays with the creator</small></div><iframe id="sketchfabFrame" title="Original creator 3D model preview" loading="eager" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+    <div class="stage-bottom"><div><button id="modelPrev">← Previous model</button><button id="modelNext">Next model →</button></div><span id="modelPosition">—</span></div>
+  </div><aside class="viewer-info">
+    <div class="viewer-tag"><span>ORIGINAL CREATOR MODEL</span><b id="detailKind">3D</b></div>
+    <h2 id="viewerTitle">3D Exhibition Stand</h2><div class="credit-line">Created by <a id="viewerAuthor" target="_blank" rel="noopener noreferrer">Original creator</a></div>
+    <div class="detail-cover" id="detailCover"></div>
+    <div class="detail-rule"></div>
+    <h3>Model details</h3>
+    <div class="detail-grid"><div><small>3D source</small><strong>Sketchfab viewer</strong></div><div><small>Download status</small><strong id="detailDownload">—</strong></div><div><small>Licence</small><strong id="detailLicense">—</strong></div><div><small>Popularity</small><strong id="detailViews">—</strong></div></div>
+    <div class="detail-rule"></div>
+    <div class="original-notice"><div>◈</div><p><strong>Explore here, source protected.</strong> The live model is embedded in ExpoVault through Sketchfab. This does not grant a right to copy or modify its original mesh. Download and creator credit remain subject to its licence.</p></div>
+    <a id="originalLink" class="original-link" target="_blank" rel="noopener noreferrer">Creator's original page ↗</a>
+    <button id="findConcept" class="concept-cta">Find an editable booth concept <span>↗</span></button>
+  </aside></div>
+</section>
+<div class="toast" id="toast" aria-live="polite"></div>
+<script type="module" src="ui/v3.mjs"></script>
+</body></html>
