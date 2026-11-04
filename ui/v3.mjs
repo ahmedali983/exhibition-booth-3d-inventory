@@ -236,9 +236,9 @@ async function fetchJSON(url){
 async function init(){
  bindControls();
  let fileResults;
- try{fileResults=await Promise.all([fetchJSON('catalog/sketchfab_index.json'),fetchJSON('catalog/creator_discovery.json'),fetchJSON('catalog/generated_manifest.json'),fetchJSON('catalog/sources.json')])}
+ try{fileResults=await Promise.all([fetchJSON('catalog/sketchfab_index.json'),fetchJSON('catalog/creator_discovery.json'),fetchJSON('catalog/concept_cards.json'),fetchJSON('catalog/sources.json'),fetchJSON('catalog/oembed_thumbnails.json')])}
  catch(error){console.error(error);$('modelGrid').textContent='Catalogue load failed — refresh this page to retry';toast('Catalogue could not load');return}
- const [original,discovery,concepts,sources]=fileResults;
+ const [original,discovery,concepts,sources,highRes]=fileResults;
  const seen=new Set();
  for(const v of [...(original.items||[]),...(discovery.items||[])]){
   if(!uidFor(v)||seen.has(v.id))continue;seen.add(v.id);
@@ -246,8 +246,8 @@ async function init(){
   item.category=category(item);item.relevance=score(item);
   STATE.models.push(item);
  }
- STATE.concepts=concepts.items||[];STATE.technical=sources||[];
- try{const hd=await fetchJSON('catalog/oembed_thumbnails.json');const thumbnails=hd.thumbnails||{};for(const item of STATE.models){const value=thumbnails[item.id];if(value&&validHttp(value.thumbnail,['sketchfab.com','cloudfront.net']))item.thumbnail=value.thumbnail}}catch(error){console.info('Using standard source thumbnails',error.message)}
+ STATE.concepts=(concepts.items||[]).map(c=>({id:c[0],width_m:c[1],depth_m:c[2],booth_type:c[3],style:c[4],fitout:c[5],area_m2:c[6]}));STATE.technical=sources||[];
+ const thumbnails=highRes.thumbnails||{};for(const item of STATE.models){const value=thumbnails[item.id];if(value&&validHttp(value.thumbnail,['sketchfab.com','cloudfront.net']))item.thumbnail=value.thumbnail}
  STATE.models.sort((a,b)=>b.relevance-a.relevance);
  $('metricModels').textContent=number(STATE.models.length);
  $('sideSources').textContent=number(STATE.models.length);
