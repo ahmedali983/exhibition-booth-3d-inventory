@@ -211,7 +211,47 @@ byId("whiteMode").onclick=()=>mode("white");byId("blackMode").onclick=()=>mode("
 byId("clear").onclick=()=>{for(const key of Object.keys(labels))byId(key).value="all";page=0;selected=designs[0];rebuild();renderCards()};
 function tabs(show){for(const x of ["studio","sources","about"])byId(x).style.display=x===show?(x==="studio"?"grid":"block"):"none";for(const x of [["tabStudio","studio"],["tabSources","sources"],["tabAbout","about"]])byId(x[0]).classList.toggle("active",x[1]===show)}
 byId("tabStudio").onclick=()=>tabs("studio");byId("tabSources").onclick=()=>tabs("sources");byId("tabAbout").onclick=()=>tabs("about");
-async function loadSources(){try{const r=await fetch("catalog/sources.json");if(!r.ok)throw Error("HTTP "+r.status);const data=await r.json();byId("sourceCount").textContent=data.length+" manually verified entries";for(const v of data){const card=document.createElement("div");card.className="sourcecard";const title=document.createElement("h3");title.textContent=v.title;const desc=document.createElement("p");desc.textContent=v.notes;const meta=document.createElement("div");for(const item of [v.site,v.format||"format varies",v.license||"check terms",v.status]){const badge=document.createElement("span");badge.className="tag";badge.textContent=item;meta.appendChild(badge)}const a=document.createElement("a");a.href=v.url;a.target="_blank";a.rel="noopener noreferrer";a.textContent="View original source";card.append(title,desc,meta,a);byId("sourceList").append(card)}}catch(e){byId("sourceCount").textContent="Source index unavailable: "+e.message}}
+let sourceRows=[],sourcePage=0;
+const sourceToolbar=document.createElement("div");sourceToolbar.style.cssText="display:flex;gap:9px;flex-wrap:wrap;margin:16px 0";
+const sourceSearch=document.createElement("input");sourceSearch.placeholder="Search real models, authors, formats or licences…";
+sourceSearch.style.cssText="background:#142132;border:1px solid #415467;border-radius:8px;padding:11px 12px;color:#f3f8ff;flex:1;min-width:240px";
+const sourcePrev=document.createElement("button"),sourceNext=document.createElement("button"),sourcePageLabel=document.createElement("span");
+sourcePrev.className="btn";sourceNext.className="btn";sourcePrev.textContent="←";sourceNext.textContent="→";
+sourcePageLabel.style.cssText="align-self:center;color:#b8cadd";
+sourceToolbar.append(sourceSearch,sourcePrev,sourcePageLabel,sourceNext);
+byId("sourceList").before(sourceToolbar);
+function renderSources(){
+ const q=sourceSearch.value.toLowerCase().trim();
+ const subset=sourceRows.filter(v=>(v.title+" "+(v.author||"")+" "+v.site+" "+v.license+" "+v.format).toLowerCase().includes(q));
+ const maxPage=Math.max(0,Math.ceil(subset.length/36)-1);sourcePage=Math.max(0,Math.min(sourcePage,maxPage));
+ sourcePageLabel.textContent=(sourcePage+1)+" / "+(maxPage+1);byId("sourceCount").textContent=subset.length.toLocaleString()+" matching original-source records";
+ sourcePrev.disabled=sourcePage===0;sourceNext.disabled=sourcePage>=maxPage;
+ const host=byId("sourceList");host.innerHTML="";
+ subset.slice(sourcePage*36,(sourcePage+1)*36).forEach(v=>{
+  const card=document.createElement("article");card.className="sourcecard";
+  if(v.thumbnail&&String(v.thumbnail).startsWith("https://")){const img=document.createElement("img");img.src=v.thumbnail;img.alt=v.title;img.loading="lazy";img.style.cssText="width:100%;height:158px;object-fit:cover;border-radius:7px;margin-bottom:12px";card.append(img)}
+  const title=document.createElement("h3");title.textContent=v.title;const desc=document.createElement("p");desc.textContent=v.notes||"Original 3D model; check source and production suitability";desc.style.minHeight="35px";
+  const metadata=document.createElement("div");
+  for(const item of [v.site,v.format||"format varies",v.license||"check licence"]){const badge=document.createElement("span");badge.className="tag";badge.textContent=item;metadata.appendChild(badge)}
+  const author=document.createElement("div");author.style.cssText="font-size:11px;color:#8fa8bc;margin:7px 0";
+  author.textContent=v.author?"Original creator: "+v.author:"Source rights: "+(v.status||"verify terms");
+  const a=document.createElement("a");a.href=v.url;a.target="_blank";a.rel="noopener noreferrer";a.textContent="Open original model / CAD source";
+  card.append(title,desc,metadata,author,a);host.append(card);
+ });
+}
+sourceSearch.oninput=()=>{sourcePage=0;renderSources()};
+sourcePrev.onclick=()=>{sourcePage--;renderSources()};
+sourceNext.onclick=()=>{sourcePage++;renderSources()};
+async function loadSources(){
+ try{
+  const r=await fetch("catalog/sources.json");if(!r.ok)throw Error("HTTP "+r.status);
+  const manual=await r.json();let indexed=[];
+  try{const v=await fetch("catalog/sketchfab_index.json");if(v.ok){const index=await v.json();indexed=index.items||[]}}catch(_){}
+  const ids=new Set();sourceRows=[];
+  for(const item of [...manual,...indexed]){const k=item.id||item.url;if(ids.has(k))continue;ids.add(k);sourceRows.push(item)}
+  renderSources();
+ }catch(e){byId("sourceCount").textContent="Source index unavailable: "+e.message}
+}
 window.addEventListener("resize",()=>{const h=canvasHost.clientHeight,w=canvasHost.clientWidth;camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h)});
 function animate(){requestAnimationFrame(animate);controls.update();renderer.render(scene,camera)}selected=designs[0];rebuild();renderCards();loadSources();animate();
 </script>
