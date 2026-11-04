@@ -245,6 +245,7 @@ async function init(){
   STATE.models.push(item);
  }
  STATE.concepts=concepts.items||[];STATE.technical=sources||[];
+ try{const hd=await fetchJSON('catalog/oembed_thumbnails.json');const thumbnails=hd.thumbnails||{};for(const item of STATE.models){const value=thumbnails[item.id];if(value&&validHttp(value.thumbnail,['sketchfab.com','cloudfront.net']))item.thumbnail=value.thumbnail}}catch(error){console.info('Using standard source thumbnails',error.message)}
  STATE.models.sort((a,b)=>b.relevance-a.relevance);
  $('metricModels').textContent=number(STATE.models.length);
  $('sideSources').textContent=number(STATE.models.length);
