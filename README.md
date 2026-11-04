@@ -25,6 +25,22 @@ The 4,200 layouts combine 7 widths, 6 depths, 4 booth exposure types, 5 structur
 - **Editable Concepts:** browse 4,200 original procedural GLB/DXF designs. Open any design in the brand studio with a direct URL to change its colours/logo and download a concept production ZIP.
 - **Production Library:** supplier and CAD documentation indexed alongside general 3D references. These are references, not a transfer of third-party file licences.
 
+## Items vs creator-licensed booth designs
+
+- **Items** now contains the 559 hosted CC0 GLB components such as signs, display walls, counters and retail fixtures. This is not the same thing as a complete exhibition booth.
+- **3D inspiration** retains the existing third-party Sketchfab metadata and official previews. Those are not mirrored GLB files and may need provider login to download; there is no unsupported claim that 1,009 creator meshes are stored in our repository.
+- **Creator-approved booth ingestion** is available through `scripts/ingest_authorized_booths.py`. A curator supplies a directly available GLB (or a previously acquired local GLB) plus the creator name, verified licence/redistribution evidence, source and reviewer. The script rejects unsupported licences and corrupt GLBs, stores approved models under `assets/authorized-booths/`, and writes `catalog/authorized_booths.json`. These assets are then automatically included in the Items viewer, with a separate creator-licensed booth or item filter. The initial authorised booth library has **zero** imported Sketchfab files because there has been no creator permission or verified rehosting grant for them.
+- Optional `thumbnail_file` attaches an authorised WebP design thumbnail. Otherwise the gallery shows a neutral placeholder rather than a fabricated preview.
+
+```bash
+python scripts/ingest_authorized_booths.py --manifest catalog/authorized_import_example.json --dry-run
+# Replace the example placeholders with real creator consent / licensed direct files.
+python scripts/ingest_authorized_booths.py --manifest catalog/approved_models.json
+git add catalog/authorized_booths.json assets/authorized-booths
+```
+
+For Sketchfab models, the standard Download API requires user authentication; application-level access without per-user login requires a separate agreement with Sketchfab. `sketchrip` (a dated viewer-extraction project) is not used; reverse engineering the public embedded viewer to mirror restricted models is not part of this ingest pipeline. Creator licence credits and evidence remain recorded per asset.
+
 ## No-login, self-hosted, editable CC0 3D assets (new)
 
 [**Open the direct-download 3D library**](https://ahmedali983.github.io/exhibition-booth-3d-inventory/open-3d.html) · [**Download the entire 559-model CC0 collection ZIP (20.2 MB)**](https://github.com/ahmedali983/exhibition-booth-3d-inventory/releases/download/v0.3.0/expovault-559-cc0-3d-models.zip)
