@@ -10,7 +10,7 @@ function number(x){return(Number(x||0)).toLocaleString('en-US')}
 function validHttp(url,allowed=[]){
  try{const p=new URL(url);if(p.protocol!=='https:')return null;if(allowed.length&&!allowed.some(d=>p.hostname===d||p.hostname.endsWith('.'+d)))return null;return p.href}catch(_){return null}
 }
-function uidFor(v){const m=/^SKFB-([0-9a-f]{32})$/i.exec(v?.id||'');return m?m[1]:null}
+function uidFor(v){const m=/^SKFB-([0-9A-Za-z]{20,40})$/.exec(v?.id||'');return m?m[1]:null}
 function category(v){
  const t=(v.title||'').toLowerCase();
  if(/\b(exhibition booth|exhibition stand|exhibition stall|expo booth|expo stand|trade.?show booth|tradeshow stand|trade fair stand|stand design|booth design|exhibit booth|exhib.?stand|exhibition design|event booth)\b/.test(t))return'booth';
@@ -84,7 +84,7 @@ function toggleSave(id){
 }
 function thumbnail(src,alt){
  const img=create('img');img.alt=alt;img.loading='lazy';img.decoding='async';img.referrerPolicy='strict-origin-when-cross-origin';img.src=src;
- img.onerror=()=>{img.remove();const parent=img.parentElement;if(parent)parent.insertBefore(create('div','model-thumb-fallback','◇'),parent.firstChild)};
+ img.onerror=()=>{const parent=img.parentElement;if(parent)parent.insertBefore(create('div','model-thumb-fallback','◇'),img);img.remove()};
  return img;
 }
 function makeOriginalCard(v){
