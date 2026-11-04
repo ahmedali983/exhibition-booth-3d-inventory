@@ -189,7 +189,7 @@ function viewButton(view){
  const v=state.current;const reach=Math.max(v.width_m,v.depth_m)*1.7;
  if(view==='front')camera.position.set(0,2.4,reach*1.5);
  else if(view==='top')camera.position.set(0,reach*1.5,.001);
- else camera.position.set(reach*.88,reach*.68,reach);
+ else { const offset=v.booth_type==='Inline'?.15:v.booth_type==='Corner'?.45:.68; camera.position.set(reach*offset,reach*.59,reach*1.18); }
  orbit.target.set(0,1.5,0);orbit.update();
 }
 function cancelViewer(){
