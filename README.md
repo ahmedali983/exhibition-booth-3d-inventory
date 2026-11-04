@@ -25,11 +25,23 @@ The 4,200 layouts combine 7 widths, 6 depths, 4 booth exposure types, 5 structur
 - **Editable Concepts:** browse 4,200 original procedural GLB/DXF designs. Open any design in the brand studio with a direct URL to change its colours/logo and download a concept production ZIP.
 - **Production Library:** supplier and CAD documentation indexed alongside general 3D references. These are references, not a transfer of third-party file licences.
 
+## My 3D Files — local asset library
+
+**[Open the local asset library](https://ahmedali983.github.io/exhibition-booth-3d-inventory/library.html)** to import a model that you own or are authorized to use. This is separate from Sketchfab's embedded models and is designed for *your own legitimately obtained files*.
+
+- Drag and drop a **GLB, OBJ, STL or FBX** file (up to 150 MB per import; FBX compatibility varies with authoring format).
+- Inspect mesh/triangle counts, bounding-box dimensions in explicitly assumed units, and orbit a real WebGL model.
+- Select a material and try a brand colour; optionally preview without the base texture, reset the material, or export a modified **GLB** or **OBJ mesh**.
+- Save the **original** input file in browser IndexedDB and reopen it after a page reload. Original bytes are stored separately from a light-weight metadata/thumbnail index, so listing many items doesn't read all model binaries. Older local version 1 stores are migrated automatically.
+- Importing and saving are **browser-only actions**; the site does not send uploaded models to an ExpoVault backend. Local records are *not synced* across devices, may be evicted by the browser, and are deleted if the user clears site storage. Keep independent backups.
+- OBJ export does not guarantee a matching MTL or textures; imported models and exports are not certified production geometry. **Do not import or redistribute third-party files you lack rights to use.**
+
 ## Important repo paths
 
 - index.html, ui/v3.mjs, ui/v3.css — current user interface
 - ui/material-lab.mjs — opt-in Sketchfab 3D material editing, browser session only
 - studio.html and ui/app.mjs — parametric brand/customization studio
+- library.html, ui/library.mjs and ui/library.css — local file browser, WebGL viewer, editable materials and IndexedDB asset library
 - catalog/sketchfab_index.json — 203 original source records
 - catalog/creator_discovery.json — 806 additional model records
 - catalog/oembed_thumbnails.json — 1,009 high-resolution oEmbed thumbnail URLs
