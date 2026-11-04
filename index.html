@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ExpoVault — 3D Booth Inventory</title>
+<meta name="description" content="Search 4,200 editable exhibition-booth concepts; export real 3D GLB/OBJ and preliminary DXF floor plans. Curated external asset sources.">
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial;background:#0b1018;color:#eaf0f7;font-size:14px}
+*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}a{color:#75c9ff}button{cursor:pointer}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 3.4vw;border-bottom:1px solid #263242;background:#0d1420;position:sticky;top:0;z-index:20}
+.wordmark{font-weight:900;font-size:22px;letter-spacing:-1px;color:white}.wordmark span{color:#42dfc0}.sub{color:#8ea2b5;font-size:12px}.topright{display:flex;align-items:center;gap:10px}
+.pill{border:1px solid #354558;border-radius:30px;padding:6px 12px;color:#a1c6c4;font-size:11px;letter-spacing:.08em}
+.wrap{max-width:1600px;margin:auto;padding:26px 3.4vw 70px}.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+h1{font-size:clamp(27px,3.1vw,43px);line-height:1.07;margin:0 0 12px;letter-spacing:-1.5px}
+.hero p{color:#9eafc4;margin:0;max-width:740px;line-height:1.6}
+.metrics{display:flex;gap:22px}.metric strong{display:block;font-size:27px;letter-spacing:-1px}.metric small{color:#8ea2b5}
+.tabs{display:flex;border-bottom:1px solid #273646;gap:8px;margin-bottom:18px}.tab{border:0;border-radius:7px 7px 0 0;background:transparent;color:#9aadc0;padding:13px 18px;font-weight:700}
+.tab.active{background:#172538;color:#6be5c8;border-bottom:2px solid #66dec0}
+.workspace{display:grid;grid-template-columns:265px minmax(320px,1fr) 325px;gap:16px;align-items:start}
+.panel{border:1px solid #283748;background:#121c29;border-radius:13px;overflow:hidden}.pad{padding:17px}.panel h2{font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 18px;color:#cce0f4}.field{margin-bottom:14px}
+.field label{font-size:12px;color:#aabed1;display:block;margin-bottom:6px}
+.field input,.field select{width:100%;background:#0b1521;border:1px solid #35475a;border-radius:7px;padding:10px 11px;color:#eff7ff;outline:none}
+.field input:focus,.field select:focus{border-color:#55d4b6}.hint{color:#8fa2b7;font-size:11px;line-height:1.5}
+.sep{height:1px;background:#29394a;margin:17px 0}
+.colorline{display:flex;gap:9px;align-items:center}.colorline input[type=color]{padding:2px;width:47px;height:37px}.colorline span{color:#b6c8d9}
+.modes{display:flex;gap:7px}.mode{flex:1;border:1px solid #3d4f62;border-radius:7px;background:#182536;color:#cbd9e6;padding:9px}.mode.active{background:#24534c;color:#93ffdb;border-color:#65c7ae}
+.viewer-head{display:flex;justify-content:space-between;padding:15px 18px;background:#162335;border-bottom:1px solid #324357;align-items:center;gap:10px}.viewer-head strong{font-size:15px}.viewer-head span{font-size:11px;color:#94b2c7}
+#scene{height:435px;width:100%;position:relative;background:radial-gradient(ellipse at center,#273648,#111722 75%)}#scene canvas{display:block;width:100%;height:100%}
+.viewhint{position:absolute;bottom:10px;left:12px;color:#a2b2c2;background:#101924b9;padding:7px 9px;border-radius:7px;font-size:11px;pointer-events:none}
+.downloads{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;padding:15px}.btn{border:1px solid #3a5066;border-radius:8px;color:#f0f8ff;background:#1d3043;padding:11px 9px;font-weight:700}
+.btn.primary{color:#081d20;background:#68e1c0;border-color:#68e1c0}.btn:hover{filter:brightness(1.15)}.btn:disabled{opacity:.5}
+.spec{padding:0 17px 17px}.specrow{display:flex;justify-content:space-between;border-bottom:1px solid #2a394a;padding:9px 0;color:#a4b7c9}.specrow b{color:#e9f4fe}
+.notice{background:#18283a;border-left:3px solid #6e9bff;border-radius:4px;padding:10px 12px;margin-top:14px;font-size:11px;color:#afc5d8;line-height:1.55}
+.catalogline{display:flex;justify-content:space-between;align-items:center;margin:0 0 11px;gap:10px}.catalogline h2{font-size:15px;letter-spacing:0;text-transform:none;margin:0}.catalogline small{color:#8fabbb}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.design{background:#152231;border:1px solid #2b3b4f;border-radius:10px;overflow:hidden;cursor:pointer;transition:border-color .15s}
+.design:hover,.design.selected{border-color:#72e9cd}.thumb{height:110px;background:linear-gradient(145deg,#edf3f6,#a5b6c5);display:block;width:100%}
+.cardbody{padding:10px}.cardbody strong{font-size:12px;display:block;color:#f3f7fb}.cardbody span{display:block;font-size:11px;color:#8ba2b8;margin-top:4px}
+.pager{display:flex;justify-content:center;gap:11px;align-items:center;margin-top:16px;color:#9db2c6}.pager button{padding:7px 14px;background:#1c2c3d;border:1px solid #344a5a;border-radius:6px;color:white}
+#sources{display:none}.sourcelist{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.sourcecard{background:#152131;border:1px solid #304253;border-radius:11px;padding:17px}.sourcecard h3{font-size:15px;margin:0 0 7px}.sourcecard p{font-size:12px;color:#a4b7c8;line-height:1.5;min-height:54px}.tag{display:inline-block;margin:0 4px 4px 0;border:1px solid #40576b;padding:3px 7px;border-radius:5px;color:#b4c7d8;font-size:10px}
+#about{display:none;max-width:950px;line-height:1.8;color:#bfd0e2}#about h2{color:#fff}
+.footer{color:#7f93a9;font-size:11px;padding-top:35px;line-height:1.6}
+@media(max-width:1180px){.workspace{grid-template-columns:220px minmax(0,1fr)}.inspector{grid-column:1/-1}.cards{grid-template-columns:repeat(3,1fr)}}@media(max-width:740px){.workspace{display:block}.workspace>.panel{margin-bottom:13px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.sourcelist{grid-template-columns:1fr}.metrics{display:none}#scene{height:350px}.top{position:static}}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"}}</script>
+</head>
+<body>
+<header class="top"><div><div class="wordmark">EXPO<span>VAULT</span><small style="font-size:11px;font-weight:500;letter-spacing:0;color:#91a9bd"> / 3D INVENTORY</small></div><div class="sub">Exhibition booths · Editable 3D concepts · Source research</div></div><div class="topright"><span class="pill">OPEN RESEARCH / V1</span><a href="https://github.com/ahmedali983/exhibition-booth-3d-inventory" target="_blank" rel="noopener">GitHub repository</a></div></header>
+<div class="wrap">
+<section class="hero"><div><h1>A booth for every footprint.</h1><p>Explore 4,200 parametrically generated booth concepts, change their footprint, layout and brand palette, and download genuine editable 3D geometry. A separate source library links to independently created assets, with licensing and availability recorded.</p></div><div class="metrics"><div class="metric"><strong>4,200</strong><small>parametric variants</small></div><div class="metric"><strong>3D</strong><small>GLB / OBJ files</small></div><div class="metric"><strong>DXF</strong><small>concept floor plans</small></div></div></section>
+<nav class="tabs"><button id="tabStudio" class="tab active">3D Booth Studio</button><button id="tabSources" class="tab">External 3D sources</button><button id="tabAbout" class="tab">How it works</button></nav>
+<main id="studio" class="workspace">
+<aside class="panel pad">
+<h2>Filter catalogue</h2>
+<div class="field"><label>Booth width</label><select id="widthFilter"><option value="all">Any width</option></select></div>
+<div class="field"><label>Booth depth</label><select id="depthFilter"><option value="all">Any depth</option></select></div>
+<div class="field"><label>Open sides</label><select id="typeFilter"><option value="all">All booth types</option></select></div>
+<div class="field"><label>Architectural style</label><select id="styleFilter"><option value="all">All styles</option></select></div>
+<div class="field"><label>Fit-out</label><select id="fitFilter"><option value="all">All layouts</option></select></div>
+<div class="sep"></div>
+<h2>Brand & materials</h2>
+<div class="field"><label>Accent colour</label><div class="colorline"><input id="brand" type="color" value="#10b99c"><span id="colorText">#10B99C</span></div></div>
+<div class="field"><label>Base palette</label><div class="modes"><button class="mode active" id="whiteMode">White</button><button class="mode" id="blackMode">Black</button></div></div>
+<div class="field"><label>Brand label</label><input id="brandName" value="YOUR BRAND" maxlength="22"></div>
+<div class="hint">Select any card to load its real 3D model. Use the controls above to narrow 4,200 geometry combinations.</div>
+<div class="sep"></div><button id="clear" class="btn" style="width:100%">Reset filters</button>
+</aside>
+<section>
+<div class="panel"><div class="viewer-head"><strong id="designName">Loading 3D booth…</strong><span id="designID">—</span></div><div id="scene"><div class="viewhint">Drag to orbit · Scroll to zoom</div></div><div class="downloads"><button id="glb" class="btn primary">Download 3D · GLB</button><button id="obj" class="btn">Download 3D · OBJ</button><button id="dxf" class="btn">Floor plan · DXF</button><button id="specfile" class="btn">Design spec · JSON</button></div></div>
+<div class="catalogline" style="margin-top:17px"><h2>Design catalogue</h2><small id="count">Calculating…</small></div>
+<div id="cards" class="cards"></div><div class="pager"><button id="previous">Previous</button><span id="pageInfo">1 / 1</span><button id="next">Next</button></div>
+</section>
+<aside class="panel pad inspector"><h2>Selected design</h2><div id="spec"></div><div class="notice">PRODUCTION STATUS — Downloaded GLB/OBJ is real 3D geometry. DXF is a dimensioned <b>concept floor plan only</b>. This is not approved CNC cutting, structural, rigging, fire, electrical, accessibility or print-ready artwork. Fabrication requires an engineer and supplier verification.</div><div class="notice">The 4,200 items are mathematical layout variations from reusable geometric rules, <b>not 4,200 independently sourced construction projects</b>. External models are catalogued separately and never silently repackaged.</div></aside>
+</main>
+<section id="sources"><div class="catalogline"><h2>Source inventory · independently created 3D models and CAD leads</h2><small id="sourceCount">Loading source entries</small></div><p style="color:#a4b7c8;line-height:1.6">These are research links, not files bundled into this repo. Download access, actual 3D formats, dimensions, paid/free status, and rehosting permission vary by source. Follow each original creator's terms.</p><div id="sourceList" class="sourcelist"></div></section>
+<section id="about"><h2>What is in this repository?</h2><p>This open catalogue combines two deliberately separate things: a functioning parametric booth engine that generates editable 3D geometry on demand, and a research index of third-party 3D models for booths, exhibition components, staging and CAD drawings.</p><h2>What can I customize?</h2><p>Width, depth, booth exposure, structural style, fit-out type, white/black base, accent colour and an optional brand sign. Your geometry is regenerated, rather than a screenshot being recoloured.</p><h2>Exports</h2><p><b>GLB</b> is a binary glTF mesh that opens in Blender and most 3D viewers. <b>OBJ</b> is basic editable mesh geometry. <b>DXF</b> contains a dimensioned two-dimensional concept plan and is not a complete manufacturing package. <b>JSON</b> contains the exact input parameters. An independent Python asset generator is provided under <code>scripts/</code> to prepare sample GLB and DXF files from the same parametric concept.</p><h2>Third-party inventory</h2><p>Images and models from creator websites, marketplaces and GitHub are <em>not copied</em> without an explicit compatible licence. Sketchfab's public search API can index model metadata, but downloadable files require an authenticated user session; its original creators and licences must remain attributed.</p><h2>How to run</h2><p>Use GitHub Pages (<code>Settings → Pages → Deploy from branch → main / root</code>) or run <code>python -m http.server 8000</code> from the repository root. The viewer uses Three.js 0.164.1 from jsDelivr, so the first load requires an internet connection.</p></section>
+<footer class="footer">ExpoVault research edition · No claim of ownership over linked models · Explicit source/author/license metadata required · Preview geometry is conceptual and not build-certified.</footer>
+</div>
+<script type="module">
+import * as THREE from "three";
+import {OrbitControls} from "three/addons/controls/OrbitControls.js";
+import {GLTFExporter} from "three/addons/exporters/GLTFExporter.js";
+import {OBJExporter} from "three/addons/exporters/OBJExporter.js";
+const widths=[3,4,5,6,8,10,12],depths=[2,3,4,5,6,8];
+const types=["Inline","Corner","Peninsula","Island"];
+const styles=["Minimal","Portal","Truss","Feature Wall","Canopy"];
+const fits=["Reception","Meeting","Retail","Digital","Storage"];
+const byId=(id)=>document.getElementById(id);
+const designs=[];let selected=null,page=0,palette="white",sceneGroup=null;
+for (const w of widths)for(const d of depths)for(const type of types)for(const style of styles)for(const fit of fits){
+ const id="EV-"+String(designs.length+1).padStart(4,"0");
+ designs.push({id,w,d,type,style,fit,height:3.2});
+}
+const labels={widthFilter:widths.map(v=>[v,v+" m"]),depthFilter:depths.map(v=>[v,v+" m"]),typeFilter:types.map(v=>[v,v]),styleFilter:styles.map(v=>[v,v]),fitFilter:fits.map(v=>[v,v])};
+for(const [name,pairs] of Object.entries(labels))for(const [val,label] of pairs){const opt=document.createElement("option");opt.value=val;opt.textContent=label;byId(name).appendChild(opt)}
+const canvasHost=byId("scene");const renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));renderer.setSize(canvasHost.clientWidth,435);renderer.shadowMap.enabled=true;renderer.outputColorSpace=THREE.SRGBColorSpace;
+canvasHost.prepend(renderer.domElement);
+const scene=new THREE.Scene();scene.background=new THREE.Color("#253341");scene.add(new THREE.HemisphereLight(0xffffff,0x586579,2));
+const light=new THREE.DirectionalLight(0xffffff,3.1);light.position.set(7,11,10);light.castShadow=true;light.shadow.mapSize.set(1024,1024);scene.add(light);
+const camera=new THREE.PerspectiveCamera(42,1,.1,140);camera.position.set(8,7.5,11);
+const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.maxPolarAngle=Math.PI/2.04;controls.target.set(0,1,0);
+const grid=new THREE.GridHelper(30,30,0x506b78,0x3d5364);grid.position.y=-.04;scene.add(grid);
+function box(group,x,y,z,w,h,d,material,name){
+ const item=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material);item.position.set(x,y,z);item.name=name;item.castShadow=true;item.receiveShadow=true;group.add(item);return item;
+}
+function sign(group,label,w,z,h){
+ const c=document.createElement("canvas");c.width=1024;c.height=180;const cx=c.getContext("2d");
+ cx.fillStyle="#15212e";cx.fillRect(0,0,1024,180);cx.fillStyle="#ffffff";cx.font="bold 95px Arial";cx.textAlign="center";cx.fillText(label||"YOUR BRAND",512,122,920);
+ const tx=new THREE.CanvasTexture(c);tx.colorSpace=THREE.SRGBColorSpace;
+ const mesh=new THREE.Mesh(new THREE.PlaneGeometry(Math.min(w*.78,4),.55),new THREE.MeshBasicMaterial({map:tx,side:THREE.DoubleSide}));
+ mesh.position.set(0,h,z);group.add(mesh);
+}
+function rebuild(){
+ if(sceneGroup){scene.remove(sceneGroup);sceneGroup.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material&&o.material.dispose)o.material.dispose()})}
+ const v=selected;const g=new THREE.Group();sceneGroup=g;scene.add(g);
+ const white=palette==="white";const main=new THREE.MeshStandardMaterial({color:white?"#f1f4f4":"#202b37",roughness:.64,metalness:.1});
+ const trim=new THREE.MeshStandardMaterial({color:white?"#ffffff":"#111822",roughness:.45,metalness:.1});
+ const accent=new THREE.MeshStandardMaterial({color:byId("brand").value,roughness:.38,metalness:.12});
+ const metal=new THREE.MeshStandardMaterial({color:"#8795a3",metalness:.66,roughness:.32});
+ const floor=new THREE.MeshStandardMaterial({color:white?"#dce4e8":"#283543",roughness:.9});
+ const w=v.w,d=v.d,h=v.height,T=.13,back=-d/2+.07;
+ box(g,0,.06,0,w,.12,d,floor,"Floor platform");
+ if(v.type!=="Island")box(g,0,h/2,back,w,h,T,main,"Back wall");
+ if(v.type==="Inline") {box(g,-w/2+.07,h/2,0,T,h,d,main,"Left wall");box(g,w/2-.07,h/2,0,T,h,d,main,"Right wall")}
+ if(v.type==="Corner")box(g,-w/2+.07,h/2,0,T,h,d,main,"Corner side wall");
+ if(v.type==="Peninsula")box(g,0,h/2,back,w,h,T,main,"Peninsula back wall");
+ if(v.style==="Portal"||v.style==="Canopy"){
+  box(g,-w/2+.14,h/2,d/2-.16,.28,h,.3,accent,"Front portal left");
+  box(g,w/2-.14,h/2,d/2-.16,.28,h,.3,accent,"Front portal right");
+  box(g,0,h-.17,d/2-.16,w,.35,.35,accent,"Front portal beam");
+ }
+ if(v.style==="Truss"){
+  const ys=h+.25;for(const x of [-w/2+.18,w/2-.18])for(const z of [-d/2+.18,d/2-.18])box(g,x,ys/2,z,.09,ys,.09,metal,"Truss upright");
+  for(const z of [-d/2+.18,d/2-.18])box(g,0,ys,z,w,.09,.09,metal,"Truss span");
+  for(const x of [-w/2+.18,w/2-.18])box(g,x,ys,0,.09,.09,d,metal,"Truss depth");
+ }
+ if(v.style==="Feature Wall"){box(g,0,1.75,-d/2+.3,Math.min(w*.55,4),2.3,.22,accent,"Feature centre wall");box(g,0,.5,-d/2+.48,Math.min(w*.45,3),.2,.45,trim,"Feature shelf")}
+ if(v.style==="Canopy"){box(g,0,h+.06,0,w*.9,.15,d*.65,trim,"Lightweight canopy concept")}
+ if(v.type==="Island"){box(g,0,1.1,0,Math.min(w*.42,3),2.2,.45,accent,"Island totem")}
+ if(v.fit==="Reception"){
+  box(g,0,.53,d/2-.65,Math.min(1.7,w*.5),1.06,.66,accent,"Reception counter");
+  box(g,0,1.07,d/2-.65,Math.min(1.75,w*.5),.07,.72,trim,"Reception top");
+ }
+ if(v.fit==="Meeting"){
+  const z=Math.max(-d*.08,0);box(g,0,.79,z,Math.min(1.65,w*.45),.08,.9,trim,"Meeting tabletop");
+  for(const x of [-.55,.55])for(const zz of [z-.35,z+.35])box(g,x,.38,zz,.07,.75,.07,metal,"Table leg");
+  for(const x of [-1.2,1.2])box(g,x,.42,z,.5,.8,.5,accent,"Meeting stool");
+ }
+ if(v.fit==="Retail"){
+  for(const x of [-w*.23,0,w*.23]){box(g,x,.55,0,.75,1.05,.63,trim,"Retail plinth");box(g,x,1.1,0,.8,.08,.68,accent,"Display top")}
+ }
+ if(v.fit==="Digital"){
+  box(g,0,1.85,-d/2+.28,Math.min(w*.57,3.4),1.6,.1,accent,"LED frame");
+  box(g,0,1.85,-d/2+.21,Math.min(w*.55,3.28),1.43,.07,new THREE.MeshStandardMaterial({color:"#152f38",emissive:byId("brand").value,emissiveIntensity:.16}),"LED screen");
+  box(g,0,.52,d/2-.7,1.5,1,.7,trim,"Digital counter");
+ }
+ if(v.fit==="Storage"){
+  const cx=w/2-.8,cz=-d/2+.82;
+  box(g,cx,1.2,cz,1.35,2.4,.11,accent,"Storage partition A");
+  box(g,cx-.7,1.2,cz-.65,.11,2.4,1.35,main,"Storage partition B");
+  box(g,0,.54,d/2-.65,1.2,1.05,.6,trim,"Utility counter");
+ }
+ if(v.type!=="Island"&&v.style!=="Feature Wall")sign(g,byId("brandName").value,w,back+.09,h-.52);
+ if(v.type==="Island")sign(g,byId("brandName").value,w,.28,1.8);
+ const radius=Math.max(w,d)*1.37;camera.position.set(radius*.85,Math.max(4,radius*.55),radius);controls.target.set(0,1.5,0);camera.near=.1;camera.far=220;camera.updateProjectionMatrix();controls.update();
+ byId("designName").textContent=v.w+" × "+v.d+" m · "+v.style+" "+v.type+" booth";
+ byId("designID").textContent=v.id;
+ byId("spec").innerHTML=[
+ ["ID",v.id],["Footprint",v.w+" × "+v.d+" m"],["Area",v.w*v.d+" m²"],["Nominal height",v.height+" m"],["Configuration",v.type],["Structure",v.style],["Fit-out",v.fit],["Base palette",palette],["Accent",byId("brand").value.toUpperCase()]
+ ].map(x=>'<div class="specrow"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>').join("");
+}
+function filtered(){return designs.filter(v=>(byId("widthFilter").value==="all"||String(v.w)===byId("widthFilter").value)&&(byId("depthFilter").value==="all"||String(v.d)===byId("depthFilter").value)&&(byId("typeFilter").value==="all"||v.type===byId("typeFilter").value)&&(byId("styleFilter").value==="all"||v.style===byId("styleFilter").value)&&(byId("fitFilter").value==="all"||v.fit===byId("fitFilter").value))}
+function thumbnail(c,v){const ctx=c.getContext("2d"),W=c.width=320,H=c.height=195;
+ ctx.fillStyle="#dae5eb";ctx.fillRect(0,0,W,H);const px=(x,z,y)=>[W/2+(x-z)*8.3,H*.64+(x+z)*3.5-y*13];const poly=(p,color)=>{ctx.beginPath();ctx.moveTo(...p[0]);for(let i=1;i<p.length;i++)ctx.lineTo(...p[i]);ctx.closePath();ctx.fillStyle=color;ctx.fill();};
+ const rect=(x1,z1,x2,z2,y,col)=>poly([px(x1,z1,y),px(x2,z1,y),px(x2,z2,y),px(x1,z2,y)],col);
+ rect(-v.w/2,-v.d/2,v.w/2,v.d/2,0,"#a7bac7");
+ if(v.type!=="Island")poly([px(-v.w/2,-v.d/2,0),px(v.w/2,-v.d/2,0),px(v.w/2,-v.d/2,3),px(-v.w/2,-v.d/2,3)],"#f9fbfc");
+ if(v.type==="Inline"||v.type==="Corner")poly([px(-v.w/2,-v.d/2,0),px(-v.w/2,v.d/2,0),px(-v.w/2,v.d/2,3),px(-v.w/2,-v.d/2,3)],"#cfdce2");
+ if(v.style==="Portal")poly([px(-v.w/2,v.d/2,3),px(v.w/2,v.d/2,3),px(v.w/2,v.d/2,3.25),px(-v.w/2,v.d/2,3.25)],"#119a87");
+ if(v.style==="Canopy")rect(-v.w*.45,-v.d*.35,v.w*.45,v.d*.35,3.25,"#f7fafb");
+ rect(-.55,v.d*.18,.55,v.d*.38,.7,"#0ea68e");ctx.fillStyle="#3a586a";ctx.font="bold 17px Arial";ctx.fillText(v.w+" × "+v.d+" m",12,25);
+}
+function renderCards(){
+ const f=filtered(),total=Math.ceil(f.length/12)||1;page=Math.max(0,Math.min(page,total-1));byId("count").textContent=f.length.toLocaleString()+" of 4,200 variants";
+ byId("pageInfo").textContent=(page+1)+" / "+total;const host=byId("cards");host.innerHTML="";
+ f.slice(page*12,page*12+12).forEach(v=>{const card=document.createElement("div");card.className="design"+(selected&&selected.id===v.id?" selected":"");const cv=document.createElement("canvas");cv.className="thumb";thumbnail(cv,v);card.append(cv);
+ const info=document.createElement("div");info.className="cardbody";const s=document.createElement("strong");s.textContent=v.style+" "+v.type;const t=document.createElement("span");t.textContent=v.w+" × "+v.d+" m • "+v.fit+" • "+v.id;info.append(s,t);card.append(info);card.addEventListener("click",()=>{selected=v;rebuild();renderCards();window.scrollTo({top:0,behavior:"smooth"})});host.append(card)})
+}
+function download(name,blob){const u=URL.createObjectURL(blob);const a=document.createElement("a");a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),4000)}
+function base(){return selected.id.toLowerCase()+"_"+selected.w+"x"+selected.d+"m"}
+byId("glb").onclick=()=>{byId("glb").disabled=true;const ex=new GLTFExporter();ex.parse(sceneGroup,data=>{download(base()+".glb",new Blob([data],{type:"model/gltf-binary"}));byId("glb").disabled=false},err=>{alert("GLB export failed: "+err.message);byId("glb").disabled=false},{binary:true,onlyVisible:true})};
+byId("obj").onclick=()=>{const obj=new OBJExporter().parse(sceneGroup);download(base()+".obj",new Blob([obj],{type:"text/plain"}))};
+function dxf(){
+ const v=selected;let out="0\nSECTION\n2\nHEADER\n9\n$INSUNITS\n70\n4\n0\nENDSEC\n0\nSECTION\n2\nENTITIES\n";
+ const line=(x1,y1,x2,y2,layer)=>{out+="0\nLINE\n8\n"+layer+"\n10\n"+x1+"\n20\n"+y1+"\n30\n0\n11\n"+x2+"\n21\n"+y2+"\n31\n0\n"};
+ const text=(x,y,s)=>{out+="0\nTEXT\n8\nLABELS\n10\n"+x+"\n20\n"+y+"\n30\n0\n40\n150\n1\n"+s.replace(/[^ -~]/g,"")+"\n"};
+ const w=v.w*1000,d=v.d*1000;line(0,0,w,0,"FOOTPRINT");line(w,0,w,d,"FOOTPRINT");line(w,d,0,d,"FOOTPRINT");line(0,d,0,0,"FOOTPRINT");
+ if(v.type!=="Island")line(0,0,w,0,"WALLS");if(v.type==="Inline"||v.type==="Corner")line(0,0,0,d,"WALLS");if(v.type==="Inline")line(w,0,w,d,"WALLS");
+ if(v.fit==="Reception"||v.fit==="Digital"){const x=w/2;line(x-700,d-850,x+700,d-850,"FURNITURE");line(x+700,d-850,x+700,d-300,"FURNITURE");line(x+700,d-300,x-700,d-300,"FURNITURE");line(x-700,d-300,x-700,d-850,"FURNITURE")}
+ line(0,-350,w,-350,"DIMENSIONS");line(-350,0,-350,d,"DIMENSIONS");text(w*.35,-750,"WIDTH "+w+" MM");text(-350,d+250,"DEPTH "+d+" MM");text(200,d+600,v.id+" "+v.type+" "+v.style);text(200,d+850,"CONCEPT DRAWING ONLY - VERIFY BEFORE FABRICATION");
+ return out+"0\nENDSEC\n0\nEOF\n";
+}
+byId("dxf").onclick=()=>download(base()+"_concept.dxf",new Blob([dxf()],{type:"application/dxf"}));
+byId("specfile").onclick=()=>download(base()+"_spec.json",new Blob([JSON.stringify({...selected,brand:byId("brand").value,basePalette:palette,brandName:byId("brandName").value,productionStatus:"concept only"},null,2)],{type:"application/json"}));
+for(const key of Object.keys(labels))byId(key).addEventListener("change",()=>{page=0;renderCards();const f=filtered();if(f.length){selected=f[0];rebuild();renderCards()}});
+byId("previous").onclick=()=>{page--;renderCards()};byId("next").onclick=()=>{page++;renderCards()};
+byId("brand").oninput=()=>{byId("colorText").textContent=byId("brand").value.toUpperCase();rebuild()};
+byId("brandName").onchange=rebuild;
+function mode(x){palette=x;byId("whiteMode").classList.toggle("active",x==="white");byId("blackMode").classList.toggle("active",x==="black");rebuild()}
+byId("whiteMode").onclick=()=>mode("white");byId("blackMode").onclick=()=>mode("black");
+byId("clear").onclick=()=>{for(const key of Object.keys(labels))byId(key).value="all";page=0;selected=designs[0];rebuild();renderCards()};
+function tabs(show){for(const x of ["studio","sources","about"])byId(x).style.display=x===show?(x==="studio"?"grid":"block"):"none";for(const x of [["tabStudio","studio"],["tabSources","sources"],["tabAbout","about"]])byId(x[0]).classList.toggle("active",x[1]===show)}
+byId("tabStudio").onclick=()=>tabs("studio");byId("tabSources").onclick=()=>tabs("sources");byId("tabAbout").onclick=()=>tabs("about");
+async function loadSources(){try{const r=await fetch("catalog/sources.json");if(!r.ok)throw Error("HTTP "+r.status);const data=await r.json();byId("sourceCount").textContent=data.length+" manually verified entries";for(const v of data){const card=document.createElement("div");card.className="sourcecard";const title=document.createElement("h3");title.textContent=v.title;const desc=document.createElement("p");desc.textContent=v.notes;const meta=document.createElement("div");for(const item of [v.site,v.format||"format varies",v.license||"check terms",v.status]){const badge=document.createElement("span");badge.className="tag";badge.textContent=item;meta.appendChild(badge)}const a=document.createElement("a");a.href=v.url;a.target="_blank";a.rel="noopener noreferrer";a.textContent="View original source";card.append(title,desc,meta,a);byId("sourceList").append(card)}}catch(e){byId("sourceCount").textContent="Source index unavailable: "+e.message}}
+window.addEventListener("resize",()=>{const h=canvasHost.clientHeight,w=canvasHost.clientWidth;camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h)});
+function animate(){requestAnimationFrame(animate);controls.update();renderer.render(scene,camera)}selected=designs[0];rebuild();renderCards();loadSources();animate();
+</script>
+</body></html>
