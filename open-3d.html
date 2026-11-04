@@ -51,7 +51,7 @@
       <div><span>◈</span><strong id="totalAssets">—</strong><small>Real downloadable GLB files</small></div>
       <div><span>▣</span><strong id="totalPacks">—</strong><small>Coordinated display kits</small></div>
       <div><span>↓</span><strong>No login</strong><small>Direct ExpoVault downloads</small></div>
-      <div><span>✳</span><strong>CC0</strong><small>Clear model licences</small></div>
+      <div><span>✳</span><strong id="libraryLicenses">CC0</strong><small>Clear model licences</small></div>
     </div>
     <section class="archive-section" id="assetCollection">
       <div class="archive-title"><div><span class="overline accent-overline">ITEMS · EXHIBITION COMPONENTS & FIXTURES</span><h2>Explore the <em>items.</em></h2>
@@ -83,14 +83,14 @@
       <span class="panel-overline">DIRECT DOWNLOAD · NO ACCOUNT</span>
       <h3 id="inspectorTitle">3D design asset</h3>
       <p id="inspectorDescription">Inspectable editable GLB model.</p>
-      <div class="inspector-facts"><div><small>Format</small><strong>GLB · glTF 2.0</strong></div><div><small>Licence</small><strong>CC0 1.0</strong></div><div><small>Size</small><strong id="inspectorSize">—</strong></div><div><small>Triangles</small><strong id="inspectorTris">—</strong></div></div>
+      <div class="inspector-facts"><div><small>Format</small><strong>GLB · glTF 2.0</strong></div><div><small>Licence</small><strong id="inspectorLicense">CC0 1.0</strong></div><div><small>Size</small><strong id="inspectorSize">—</strong></div><div><small>Triangles</small><strong id="inspectorTris">—</strong></div></div>
       <a id="downloadRealGLB" class="real-download" download>↓ &nbsp; Download original GLB file</a>
       <div class="color-lab"><strong>✳ &nbsp; Try brand colours</strong><p>Change a material in the 3D preview. The original model remains intact.</p><label for="editableMaterial">Select material</label><select id="editableMaterial"></select>
         <div class="color-controls"><input type="color" id="editableColor" value="#ee7653"><span id="editableHex">#EE7653</span></div>
         <div class="color-actions"><button id="applyAssetColor">Apply colour</button><button id="resetAssetColor">Reset</button></div>
       </div>
       <button id="exportCustomized" class="branded-export" disabled>↓ Download coloured GLB</button>
-      <div class="origin-credit">Model provenance: <strong id="originName">—</strong><br><span id="licenseStatus">CC0 — no login or attribution required</span></div>
+      <div class="origin-credit">Model provenance: <a id="originName" target="_blank" rel="noopener noreferrer">—</a><br><span id="licenseStatus">CC0 — no login or attribution required</span></div>
       <p class="build-note">3D geometry for design and visualization. Dimensions are not independently certified; do not use directly as structural shop drawings.</p>
     </aside>
   </div>
