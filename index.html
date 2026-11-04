@@ -47,6 +47,7 @@ h1{font-size:clamp(27px,3.1vw,43px);line-height:1.07;margin:0 0 12px;letter-spac
 <header class="top"><div><div class="wordmark">EXPO<span>VAULT</span><small style="font-size:11px;font-weight:500;letter-spacing:0;color:#91a9bd"> / 3D INVENTORY</small></div><div class="sub">Exhibition booths · Editable 3D concepts · Source research</div></div><div class="topright"><span class="pill">OPEN RESEARCH / V1</span><a href="https://github.com/ahmedali983/exhibition-booth-3d-inventory" target="_blank" rel="noopener">GitHub repository</a></div></header>
 <div class="wrap">
 <section class="hero"><div><h1>A booth for every footprint.</h1><p>Explore 4,200 parametrically generated booth concepts, change their footprint, layout and brand palette, and download genuine editable 3D geometry. A separate source library links to independently created assets, with licensing and availability recorded.</p></div><div class="metrics"><div class="metric"><strong>4,200</strong><small>parametric variants</small></div><div class="metric"><strong>3D</strong><small>GLB / OBJ files</small></div><div class="metric"><strong>DXF</strong><small>concept floor plans</small></div></div></section>
+<div style="margin:-6px 0 20px"><a href="https://github.com/ahmedali983/exhibition-booth-3d-inventory/releases/download/v0.1.0/expovault_4200_glb_dxf.zip" target="_blank" rel="noopener">Download complete 8,400-file GLB + DXF pack (ZIP)</a></div>
 <nav class="tabs"><button id="tabStudio" class="tab active">3D Booth Studio</button><button id="tabSources" class="tab">External 3D sources</button><button id="tabAbout" class="tab">How it works</button></nav>
 <main id="studio" class="workspace">
 <aside class="panel pad">
@@ -65,7 +66,7 @@ h1{font-size:clamp(27px,3.1vw,43px);line-height:1.07;margin:0 0 12px;letter-spac
 <div class="sep"></div><button id="clear" class="btn" style="width:100%">Reset filters</button>
 </aside>
 <section>
-<div class="panel"><div class="viewer-head"><strong id="designName">Loading 3D booth…</strong><span id="designID">—</span></div><div id="scene"><div class="viewhint">Drag to orbit · Scroll to zoom</div></div><div class="downloads"><button id="glb" class="btn primary">Download 3D · GLB</button><button id="obj" class="btn">Download 3D · OBJ</button><button id="dxf" class="btn">Floor plan · DXF</button><button id="specfile" class="btn">Design spec · JSON</button></div></div>
+<div class="panel"><div class="viewer-head"><strong id="designName">Loading 3D booth…</strong><span id="designID">—</span></div><div id="scene"><div class="viewhint">Drag to orbit · Scroll to zoom</div></div><div class="downloads"><button id="glb" class="btn primary">Download 3D · GLB</button><button id="obj" class="btn">Download 3D · OBJ</button><button id="dxf" class="btn">Floor plan · DXF</button><button id="specfile" class="btn">Design spec · JSON</button><button id="archived" class="btn" style="grid-column:1/-1">Download prebuilt white/teal 3D file · GLB</button></div></div>
 <div class="catalogline" style="margin-top:17px"><h2>Design catalogue</h2><small id="count">Calculating…</small></div>
 <div id="cards" class="cards"></div><div class="pager"><button id="previous">Previous</button><span id="pageInfo">1 / 1</span><button id="next">Next</button></div>
 </section>
@@ -202,6 +203,7 @@ function dxf(){
 }
 byId("dxf").onclick=()=>download(base()+"_concept.dxf",new Blob([dxf()],{type:"application/dxf"}));
 byId("specfile").onclick=()=>download(base()+"_spec.json",new Blob([JSON.stringify({...selected,brand:byId("brand").value,basePalette:palette,brandName:byId("brandName").value,productionStatus:"concept only"},null,2)],{type:"application/json"}));
+byId("archived").onclick=()=>{const v=selected;const a=document.createElement("a");a.href="assets/generated/"+v.w+"x"+v.d+"/"+v.id+".glb";a.download=v.id+".glb";document.body.append(a);a.click();a.remove()};
 for(const key of Object.keys(labels))byId(key).addEventListener("change",()=>{page=0;renderCards();const f=filtered();if(f.length){selected=f[0];rebuild();renderCards()}});
 byId("previous").onclick=()=>{page--;renderCards()};byId("next").onclick=()=>{page++;renderCards()};
 byId("brand").oninput=()=>{byId("colorText").textContent=byId("brand").value.toUpperCase();rebuild()};
