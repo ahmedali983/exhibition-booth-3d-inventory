@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="ExpoVault — browse 4,200 real 3D exhibition stand models with production concept packs, brand colours and more than 200 external creator models.">
+<title>ExpoVault Studio — discover, customize, build</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ui/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231c1d20'/%3E%3Cpath d='M17 16h30v8H25v9h20v8H25v-2h22v9H17z' fill='%23ffcf56'/%3E%3C/svg%3E">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"}}</script>
+</head>
+<body>
+<div class="shell">
+ <aside class="sidebar">
+  <a class="logo" href="#discover"><span class="logo-icon"><svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M8 7h20v7H15v7h12v7H8V7Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="m21 14 7-7" stroke="currentColor" stroke-width="3"/></svg></span><span>expo<span class="logo-bold">vault</span><i>studio</i></span></a>
+  <div class="side-label">WORKSPACE</div>
+  <nav class="side-nav" aria-label="Main navigation">
+   <button class="nav-link is-active" data-page="discover"><span class="nav-icon">◫</span><span>Discover</span><span class="nav-count">4.2k</span></button>
+   <button class="nav-link" data-page="sources"><span class="nav-icon">◎</span><span>Real-world models</span></button>
+   <button class="nav-link" data-page="saved"><span class="nav-icon">♡</span><span>Saved boards</span><span class="nav-count" id="savedCount">0</span></button>
+   <button class="nav-link" data-page="brand"><span class="nav-icon">◈</span><span>Brand studio</span></button>
+  </nav>
+  <div class="side-label tools-head">YOUR TOOLKIT</div>
+  <div class="tool-panel">
+   <div class="tiny-icon">✦</div>
+   <div><strong>Make it yours</strong><p>Upload your logo, pick your palette, and preview any stand in 3D.</p></div>
+   <button class="mini-cta" data-page="brand">Open brand kit ↗</button>
+  </div>
+  <div class="side-bottom"><span class="side-status"><i></i> All systems ready</span><a href="https://github.com/ahmedali983/exhibition-booth-3d-inventory" target="_blank" rel="noopener">GitHub ↗</a><a href="legacy.html">Classic 3D editor ↗</a><small>Open catalogue · Concept geometry<br>Independent creators keep their rights.</small></div>
+ </aside>
+ <main class="main" id="appMain">
+  <div class="mobile-top"><a class="logo" href="#discover">✳ <strong>expovault</strong></a><button id="mobileMenu" aria-label="Open menu">☰</button></div>
+  <header class="topbar">
+   <div class="breadcrumb">Studio <span>/</span> <b id="breadcrumb">Discover</b></div>
+   <div class="top-search"><span aria-hidden="true">⌕</span><input id="searchInput" placeholder="Search by style, size, layout, or ID..." aria-label="Search designs"><kbd>⌘ K</kbd></div>
+   <div class="top-actions"><span class="live-pill"><i></i> LIVE COLLECTION</span><button class="avatar" data-page="brand" aria-label="Brand settings">P</button></div>
+  </header>
+  <section id="pageDiscover" class="page is-active">
+   <div class="content">
+    <div class="hero">
+     <div class="hero-copy"><div class="eyebrow"><span class="eyebrow-dot"></span> YOUR NEXT BIG IDEA STARTS HERE</div>
+      <h1>Make space for<br><em>something extraordinary.</em></h1>
+      <p>Thousands of booth concepts. One playground. Find your space, make it your brand, and turn the idea into real editable 3D files.</p>
+      <div class="hero-actions"><button class="primary-btn" id="exploreBtn">Explore the collection <span>↗</span></button><button class="outline-light-btn" data-page="brand">Set my brand <span>✧</span></button></div>
+      <div class="hero-proof"><div class="face-stack"><span>A</span><span>R</span><span>V</span></div><span>Designed to experiment. <b>Made to explore.</b></span></div>
+     </div>
+     <div class="hero-art" aria-hidden="true">
+       <div class="art-card art-one"><img src="assets/thumbs/EV-0302.webp" alt=""></div>
+       <div class="art-card art-two"><img src="assets/thumbs/EV-1691.webp" alt=""></div>
+       <div class="art-sticker"><span>✳</span><strong>4,200+</strong><small>DESIGN VARIATIONS</small></div>
+       <div class="art-orbit">3D • CAD • PRINT</div>
+     </div>
+    </div>
+    <div class="stats-bar">
+     <div><span class="stat-icon">✳</span><strong>4,200</strong><small>editable 3D concepts</small></div>
+     <div><span class="stat-icon">⌘</span><strong>8,400</strong><small>GLB + DXF files</small></div>
+     <div><span class="stat-icon">◎</span><strong id="sourceStat">203+</strong><small>creator model leads</small></div>
+     <div><span class="stat-icon">↗</span><strong>1 click</strong><small>concept production pack</small></div>
+    </div>
+    <div class="section-intro" id="collection"><div><div class="eyebrow dark">THE DESIGN FEED</div><h2>Find your <em>perfect fit.</em></h2><p>Scroll like Instagram. Customize like a designer.</p></div><div class="view-switch"><button id="sortTrending" class="small-switch active">✦ Curated</button><button id="sortNewest" class="small-switch">By ID ↓</button><button id="sortArea" class="small-switch">By area ↑</button></div></div>
+    <div class="category-strip" role="group" aria-label="Booth types">
+     <button class="category active" data-category="all">✳ All designs</button>
+     <button class="category" data-category="Island">◇ Island</button>
+     <button class="category" data-category="Corner">◩ Corner</button>
+     <button class="category" data-category="Inline">▣ Inline</button>
+     <button class="category" data-category="Peninsula">◧ Peninsula</button>
+     <button class="category" data-category="Truss">⌗ Truss</button>
+     <button class="category" data-category="Canopy">⌒ Canopy</button>
+     <button class="category" data-category="Portal">∩ Portal</button>
+    </div>
+    <div class="filter-toolbar"><div class="toolbar-left"><button id="filtersToggle" class="filter-button">☷ &nbsp; Filters <span class="filter-indicator" id="filterBadge"></span></button><span class="result-number"><b id="resultCount">4,200</b> designs to explore</span></div><div class="toolbar-right"><span class="teal-point"></span> INTERACTIVE 3D <span class="toolbar-sep"></span> GLB / OBJ / DXF</div></div>
+    <div class="filters-drawer" id="filtersDrawer" hidden>
+     <label>Width <select id="filterWidth"><option value="">Any width</option></select></label>
+     <label>Depth <select id="filterDepth"><option value="">Any depth</option></select></label>
+     <label>Style <select id="filterStyle"><option value="">Any style</option></select></label>
+     <label>Use <select id="filterFitout"><option value="">Any use</option></select></label>
+     <button id="resetFilters" class="reset-btn">Clear filters ✕</button>
+    </div>
+    <div id="galleryGrid" class="gallery-grid" aria-live="polite"></div>
+    <div id="galleryEmpty" class="empty-state" hidden><div>⌕</div><h3>No matching stands</h3><p>Try a different size or less specific search.</p><button id="emptyReset">Reset filters</button></div>
+    <div class="load-more"><button id="loadMore" class="load-btn">Load more inspiration <span>↓</span></button><div id="feedProgress">Showing 0 of 4,200 concepts</div></div>
+    <div class="license-note"><strong>About the collection:</strong> 4,200 items are distinct parameter combinations generated from five design families, not 4,200 independently created architect files. They're real editable 3D meshes and concept drawings; physical production needs supplier-specific engineering approval. <a href="#sources" data-page="sources">Find independent 3D creators ↗</a></div>
+   </div>
+  </section>
+  <section id="pageSources" class="page"><div class="content">
+   <div class="subhero source-hero"><div><div class="eyebrow dark">THE CREATOR EDIT</div><h1>Great ideas.<br><em>Real creators.</em></h1><p>Original booth models, SketchUp stands, CAD suppliers and technical libraries from across the web. Explore at the source and respect each author's licence.</p></div><div class="source-hero-art">◎<span>DESIGN DISCOVERY</span></div></div>
+   <div class="source-tabs"><button class="source-tab active" data-source-filter="all">All source leads</button><button class="source-tab" data-source-filter="Sketchfab">Sketchfab</button><button class="source-tab" data-source-filter="3D Warehouse">SketchUp</button><button class="source-tab" data-source-filter="CAD">Production CAD</button><button class="source-tab" data-source-filter="paid">Paid assets</button></div>
+   <div class="filter-toolbar"><span class="result-number"><b id="externalCount">—</b> external source records</span><input id="sourcesSearch" placeholder="Search creators, formats, model name..." class="source-search"></div>
+   <div id="sourceGrid" class="gallery-grid source-grid"></div><div class="load-more"><button id="sourceMore" class="load-btn">Load more creator models ↓</button><div id="sourceProgress"></div></div>
+   <div class="license-note">Marketplace links are references, not copied assets. Some are paid or require sign-in. A downloadable preview is not necessarily a printable or build-ready drawing.</div>
+  </div></section>
+  <section id="pageSaved" class="page"><div class="content"><div class="subhero slim"><div class="eyebrow dark">YOUR PERSONAL SHORTLIST</div><h1>Saved <em>inspiration.</em></h1><p>Collect the designs you love. Saved locally in this browser.</p></div><div id="savedGrid" class="gallery-grid"></div><div id="savedEmpty" class="empty-state">♡<h3>Your moodboard is waiting.</h3><p>Tap the heart on any booth to save it here.</p><button data-page="discover">Explore designs ↗</button></div></div></section>
+  <section id="pageBrand" class="page"><div class="content"><div class="subhero slim"><div class="eyebrow dark">BRAND YOUR WORLD</div><h1>Your space.<br><em>Your signature.</em></h1><p>Try any brand's colours. Here's a playful pet-brand example to get you started.</p></div><div class="brand-layout">
+   <div class="brand-controls"><div class="brand-panel"><div class="panel-icon">◈</div><h3>Brand identity</h3><p>Branding gets applied to your 3D previews and custom export files.</p><label>Brand name<input id="brandName" maxlength="24" placeholder="Your brand" value="PAW CLUB"></label><label>Primary colour<div class="input-color"><input type="color" id="brandPrimary" value="#ed714b"><span id="brandPrimaryLabel">#ED714B</span></div></label><label>Secondary colour<div class="input-color"><input type="color" id="brandSecondary" value="#53d5b3"><span id="brandSecondaryLabel">#53D5B3</span></div></label><label>Base material<select id="brandBase"><option value="light">Warm white</option><option value="dark">Midnight black</option></select></label><label>Upload logo (PNG/JPEG)<input type="file" id="brandLogo" accept="image/png,image/jpeg"></label><div class="preset-row"><button class="preset paw" data-preset="paw">PAW CLUB</button><button class="preset tech" data-preset="tech">TECH LAB</button><button class="preset luxe" data-preset="luxe">NOIR</button></div><button id="brandApply" class="primary-btn full-btn">Explore with this brand ↗</button></div></div>
+   <div class="brand-showcase"><div class="brand-preview"><span class="brand-preview-tag">LIVE BRAND PALETTE</span><div class="showcase-mark" id="brandBigMark">PAW<br>CLUB<span>✳</span></div><div class="showcase-caption"><span id="brandPaletteName">PAW CLUB</span><span>Your brand. Your booth.</span></div></div><h3>Start with an exhibition-ready idea</h3><p>Choose any design in Discover, click <b>Open in 3D Studio</b>, recolour the geometry and download your files. The logo upload stays in your browser and can be applied to the preview.</p><button class="outline-dark-btn" data-open-id="EV-1081">Preview a branded booth ↗</button></div></div>
+   </div></section>
+  <footer class="footer"><span>© ExpoVault Studio · Open research & 3D concepts</span><div><a href="https://github.com/ahmedali983/exhibition-booth-3d-inventory" target="_blank" rel="noopener">GitHub</a><a href="https://github.com/ahmedali983/exhibition-booth-3d-inventory/releases/tag/v0.1.0" target="_blank" rel="noopener">Full 3D pack</a><a href="legacy.html">Classic editor</a></div></footer>
+ </main>
+</div>
+<div class="modal-backdrop" id="modalBackdrop" hidden></div>
+<section class="studio-modal" id="studioModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+ <div class="modal-header"><div class="modal-eyebrow">EXPOVAULT / DESIGN STUDIO <span class="modal-verified">● EDITABLE 3D</span></div><div><h2 id="modalTitle">Booth preview</h2><span id="modalSubtitle">Dimensions, structure and styling</span></div><button class="modal-close" id="closeModal" aria-label="Close 3D studio">✕</button></div>
+ <div class="modal-body"><div class="viewer-zone"><div id="threeViewport"><div class="viewer-loading" id="viewerLoading">Loading 3D geometry…</div></div><div class="viewer-instructions">↻ Orbit / zoom / inspect <span>True GLB geometry · metres</span></div><div class="viewer-looks"><button class="view-preset active" data-view="perspective">3D view</button><button class="view-preset" data-view="front">Front</button><button class="view-preset" data-view="top">Top</button></div></div>
+  <div class="editor-zone"><div class="editor-scroll"><div class="editor-top"><span id="designCode">EV-0000</span><span class="editable-pill">✧ Recolour in 3D</span></div><h3>Your own brand,<br>your own booth.</h3><p class="editor-intro">Edit the look, take it to Blender or download a preliminary production pack.</p><div class="design-details" id="designDetails"></div><div class="editor-divider"></div><label>Brand name<input id="modalBrand" maxlength="24" value="PAW CLUB"></label><label>Accent colour<div class="input-color"><input type="color" id="modalColor" value="#ed714b"><span id="modalHex">#ED714B</span></div></label><div class="modal-base"><span>Base colour</span><button class="base-swatch active" data-base="light">◯ &nbsp; White</button><button class="base-swatch" data-base="dark">● &nbsp; Black</button></div><div class="production-info"><span>⌘</span><div><b>What's in the production pack?</b><p>3D GLB, OBJ, 2D DXF, panel artwork template SVG, component estimate CSV, and concept spec. Supplier approval is still required.</p></div></div></div>
+  <div class="editor-cta"><button id="downloadProduction" class="primary-btn full-btn">↓ Download concept production ZIP</button><div class="download-buttons"><button id="downloadGLB">↧ GLB</button><button id="downloadOBJ">↧ OBJ</button><button id="downloadDXF">↧ DXF</button></div><small id="downloadStatus">Editable files · No account required</small></div></div>
+ </div>
+</section>
+<div id="toast" class="toast" aria-live="polite"></div>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" defer></script>
+<script type="module" src="ui/app.mjs"></script>
+</body></html>
