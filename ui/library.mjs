@@ -8,31 +8,65 @@ import {GLTFExporter} from 'three/addons/exporters/GLTFExporter.js';
 import {OBJExporter} from 'three/addons/exporters/OBJExporter.js';
 
 const $=id=>document.getElementById(id);
-const DB='expovault-local-models',STORE='assets',MAX_BYTES=150*1024*1024;
+const DB='expovault-local-models',STORE='assets',INDEX='asset_index',MAX_BYTES=150*1024*1024;
 let current=null,root=null,scene=null,camera=null,renderer=null,controls=null,grid=null,entries=[],box=null,resetPose=null,openToken=0,toastTimeout=null,dbPromise=null;
 let resizeObserver=null;
 const fileExt=name=>name.toLowerCase().split('.').pop();
 const pretty=(bytes)=>bytes>=1024**2?(bytes/(1024**2)).toFixed(1)+' MB':bytes>=1024?(bytes/1024).toFixed(0)+' KB':bytes+' B';
 const fileSafe=name=>name.replace(/[^a-zA-Z0-9_-]+/g,'_').slice(0,80);
 function toast(t){const el=$('toast');el.textContent=t;el.classList.add('visible');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>el.classList.remove('visible'),4200)}
+/* Large original model bytes and light-weight gallery metadata live in separate
+   IndexedDB stores. Browsing 100 saved files never reads 100 full GLB binaries. */
 function db(){
  if(dbPromise)return dbPromise;
  dbPromise=new Promise((resolve,reject)=>{
   if(!('indexedDB' in window))return reject(new Error('This browser does not support local IndexedDB storage'));
-  const req=indexedDB.open(DB,1);
-  req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains(STORE))req.result.createObjectStore(STORE,{keyPath:'id'})};
+  const req=indexedDB.open(DB,2);
+  req.onupgradeneeded=event=>{
+   const database=req.result,tx=req.transaction;
+   if(!database.objectStoreNames.contains(STORE))database.createObjectStore(STORE,{keyPath:'id'});
+   if(!database.objectStoreNames.contains(INDEX))database.createObjectStore(INDEX,{keyPath:'id'});
+   if(event.oldVersion<2){
+    const data=tx.objectStore(STORE),metadata=tx.objectStore(INDEX),cursor=data.openCursor();
+    cursor.onsuccess=e=>{
+     const item=e.target.result;
+     if(item){
+      const {bytes,...details}=item.value;
+      metadata.put(details);
+      item.continue();
+     }
+    };
+   }
+  };
   req.onsuccess=()=>resolve(req.result);
   req.onerror=()=>reject(req.error||new Error('Local storage unavailable'));
+  req.onblocked=()=>reject(new Error('Close other open tabs of the local 3D library and try again'));
  });
  return dbPromise;
 }
 async function transact(method,mode='readonly',value){
  const database=await db();
  return new Promise((resolve,reject)=>{
-  const tx=database.transaction(STORE,mode),store=tx.objectStore(STORE);
-  const req=method==='getAll'?store.getAll():method==='get'?store.get(value):method==='put'?store.put(value):store.delete(value);
-  req.onsuccess=()=>resolve(req.result);
-  req.onerror=()=>reject(req.error||new Error('Local storage operation failed'));
+  const mutation=method==='put'||method==='delete';
+  const tx=database.transaction(mutation?[STORE,INDEX]:[method==='getAll'?INDEX:STORE],mode);
+  let result;
+  tx.oncomplete=()=>resolve(result);
+  tx.onerror=()=>reject(tx.error||new Error('Local storage operation failed'));
+  tx.onabort=()=>reject(tx.error||new Error('Local storage operation was cancelled'));
+  try{
+   if(method==='getAll'){
+    const req=tx.objectStore(INDEX).getAll();req.onsuccess=()=>{result=req.result};
+   }else if(method==='get'){
+    const req=tx.objectStore(STORE).get(value);req.onsuccess=()=>{result=req.result};
+   }else if(method==='put'){
+    const {bytes,...metadata}=value;
+    tx.objectStore(STORE).put(value);
+    tx.objectStore(INDEX).put(metadata);
+   }else if(method==='delete'){
+    tx.objectStore(STORE).delete(value);
+    tx.objectStore(INDEX).delete(value);
+   }else throw new Error('Unsupported local storage action');
+  }catch(error){try{tx.abort()}catch(_){}reject(error)}
  });
 }
 function enable(name,yes){$(name).disabled=!yes}
