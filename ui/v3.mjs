@@ -30,7 +30,7 @@ function score(v){
  score+=Math.min(17,Math.log10(1+(v.view_count||0))*3);
  return score;
 }
-function sectionTitle(s){return({models:'3D discoveries',concepts:'Editable concepts',technical:'Production library',saved:'My collection'})[s]}
+function sectionTitle(s){return({models:'3D designs',concepts:'Booth studio',technical:'Production toolkit',saved:'My collection'})[s]}
 function setSection(name,{changeHash=true,scroll=true}={}){
  if(!['models','concepts','technical','saved'].includes(name))name='models';
  STATE.section=name;
@@ -77,6 +77,13 @@ function favoriteButton(v){
  heart.onclick=e=>{e.stopPropagation();toggleSave(v.id);heart.textContent=STATE.saved.has(v.id)?'♥':'♡';heart.classList.toggle('saved',STATE.saved.has(v.id));heart.setAttribute('aria-pressed',String(STATE.saved.has(v.id)))};
  return heart;
 }
+function openDownloadCenter(v){
+ if(!v?.is_downloadable)return toast('Creator does not offer the original model for download.');
+ window.dispatchEvent(new CustomEvent('expovault:download-open',{detail:{
+  uid:uidFor(v),id:v.id,title:v.title,author:v.author||'Original creator',
+  license:v.license||'Unspecified',source:'https://sketchfab.com/models/'+uidFor(v)
+ }}));
+}
 function toggleSave(id){
  if(STATE.saved.has(id))STATE.saved.delete(id);else STATE.saved.add(id);
  persistSaved();toast(STATE.saved.has(id)?'Added to your design collection':'Removed from your collection');
@@ -96,7 +103,14 @@ function makeOriginalCard(v){
  top.append(create('span','mini-label'+(downloadable?' download':''),downloadable?'3D + DOWNLOAD':'LIVE 3D'),favoriteButton(v));visual.append(top,create('div','thumb-overlay','◈ Explore interactive 3D ↗'));
  const body=create('div','card-text');body.append(create('h3','',v.title),create('div','card-author','by '+(v.author||'Original creator')));
  const bottom=create('div','card-bottom');bottom.append(create('span','',number(v.view_count)+' views'),create('b',v.category==='other'?'muted-badge':'',v.category==='booth'?'EXHIBITION':v.category==='pavilion'?'PAVILION':v.category==='display'?'DISPLAY':v.category==='event'?'EVENT':'RELATED'));
- body.append(bottom);card.append(visual,body);
+ body.append(bottom);
+ if(v.is_downloadable){
+  const control=create('button','inline-download','↓ Download 3D');
+  control.setAttribute('aria-label','Download authorized 3D files for '+v.title);
+  control.onclick=e=>{e.stopPropagation();openDownloadCenter(v)};
+  body.append(control);
+ }
+ card.append(visual,body);
  card.onclick=()=>openOriginal(v);
  card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openOriginal(v)}};
  return card;
@@ -116,7 +130,15 @@ function makeConceptCard(v){
  const head=create('div','thumb-top');head.append(create('span','mini-label',v.width_m+' × '+v.depth_m+' M'),favoriteButton(v));
  visual.append(head,create('div','thumb-overlay','✧ Open branded 3D studio ↗'));
  const body=create('div','card-text');body.append(create('h3','',v.style+' '+v.booth_type),create('div','card-author',v.fitout+' · '+v.area_m2+' m² · '+v.id));
- const bottom=create('div','card-bottom');bottom.append(create('span','','GLB + DXF'),create('b','','CUSTOMIZABLE'));body.append(bottom);card.append(visual,body);
+ const bottom=create('div','card-bottom');bottom.append(create('span','','GLB + DXF'),create('b','','CUSTOMIZABLE'));body.append(bottom);
+ const direct=create('div','concept-downloads');
+ for(const [format,ext] of [['Download GLB','glb'],['Download DXF','dxf']]){
+  const a=create('a','',format);a.href='assets/generated/'+v.width_m+'x'+v.depth_m+'/'+v.id+'.'+ext;
+  a.download=v.id+'.'+ext;
+  a.onclick=e=>e.stopPropagation();
+  direct.append(a);
+ }
+ body.append(direct);card.append(visual,body);
  const open=()=>{window.location.href='studio.html?design='+encodeURIComponent(v.id)};
  card.onclick=open;card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}};
  return card;
@@ -158,7 +180,11 @@ function openOriginal(v,{hash=true,fromSaved=false}={}){
  $('viewer').hidden=false;$('viewerOverlay').hidden=false;document.body.style.overflow='hidden';
  $('viewerTitle').textContent=v.title;$('viewerAuthor').textContent=v.author||'Original creator';
  $('viewerAuthor').href=validHttp(v.author_url,['sketchfab.com'])||PROFILE+encodeURIComponent(v.author||'');
- $('detailDownload').textContent=v.is_downloadable?'At source (account)':'Preview only';
+ $('detailDownload').textContent=v.is_downloadable?'With creator permission':'Preview only';
+ $('downloadExternal').disabled=!v.is_downloadable;
+ $('downloadExternal').textContent=v.is_downloadable?'↓ Download licensed 3D':'View-only model · no file';
+ $('downloadAvailability').textContent=v.is_downloadable?'Eligible for sign-in':'No public download';
+ $('downloadExternalHint').textContent=v.is_downloadable?'Use the official embedded sign-in to request this model’s glTF ZIP and textures. Current access is checked at download time.':'This model’s original mesh is not offered for public download. Create a separate editable concept in Booth Studio.';
  $('detailKind').textContent=v.category.toUpperCase();
  $('detailLicense').textContent=v.license||'Not specified';
  $('detailViews').textContent=number(v.view_count)+' views';
@@ -213,6 +239,7 @@ function bindControls(){
  $('viewerShare').onclick=async()=>{const u=new URL(location.href);u.hash='model='+uidFor(STATE.active);try{await navigator.clipboard.writeText(u.href);toast('Shareable model link copied')}catch(_){toast('Share this link: '+u.href)}};
  $('modelPrev').onclick=()=>moveModel(-1);$('modelNext').onclick=()=>moveModel(1);
  $('findConcept').onclick=()=>{closeViewer({restoreHash:false});setSection('concepts')};
+ $('downloadExternal').onclick=()=>{if(STATE.active?.is_downloadable)openDownloadCenter(STATE.active)};
  document.addEventListener('keydown',e=>{
   if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();$('query').focus()}
   if(e.key==='Escape'){if(STATE.active)closeViewer();else $('side').classList.remove('mobile-show')}
