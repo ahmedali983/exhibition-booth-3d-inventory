@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101820">
+<meta name="description" content="ExpoVault Local 3D Library — open, inspect, recolour, save in this browser and export your own licensed 3D exhibition model files.">
+<title>My 3D Library | ExpoVault</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ui/v3.css">
+<link rel="stylesheet" href="ui/library.css">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"}}</script>
+</head>
+<body>
+<div class="layout">
+  <aside class="side">
+    <a class="identity" href="./#models"><span class="identity-mark">E<span>.</span></span><span class="identity-text">ex<span>po</span>vault<small>THE EXHIBIT ARCHIVE</small></span></a>
+    <p class="side-caption">YOUR WORKSPACE</p>
+    <nav class="side-nav">
+      <a href="./#models" class="side-link"><span class="nav-icon">⌗</span><span>3D discoveries</span></a>
+      <a href="./#concepts" class="side-link"><span class="nav-icon">▦</span><span>Editable concepts</span></a>
+      <a href="./#technical" class="side-link"><span class="nav-icon">⌁</span><span>Production library</span></a>
+      <a href="library.html" class="side-link selected"><span class="nav-icon">⬡</span><span>My 3D files</span></a>
+    </nav>
+    <p class="side-caption tool-caption">LOCAL WORKSPACE</p>
+    <div class="quick-access">
+      <div class="tool-glyph">✳</div>
+      <strong>Your own model vault.</strong>
+      <p>Preview licensed model files without uploading them to a remote server. Save an original copy in this browser.</p>
+      <a class="quick-link" href="studio.html">Parametric brand studio <span>↗</span></a>
+    </div>
+    <div class="side-bottom"><div class="available"><i></i> Local-first workspace</div><a href="./#models">Back to the gallery ↗</a><small>Stored models stay in your browser's IndexedDB. Clearing browser data may permanently delete them. Keep external backups.</small></div>
+  </aside>
+  <div class="content-frame">
+    <header class="topbar">
+      <div class="topbar-left"><a class="topbar-crumb" href="./#models">Gallery <b>/</b> <strong>My 3D library</strong></a></div>
+      <div class="local-top-caption"><span class="live-marker"><i></i> LOCAL FILES · NOT UPLOADED</span></div>
+      <a class="back-link" href="./#models">Explore designs ↗</a>
+    </header>
+    <main class="library-main">
+      <div class="local-hero">
+        <div class="overline accent-overline">YOUR PERSONAL 3D WORKSPACE</div>
+        <h1>Your files. <em>Your creative space.</em></h1>
+        <p>Open your own licensed 3D models, see them in a real interactive viewer, try brand colours, and export a modified copy. Files stay on this device unless you explicitly export them.</p>
+        <div class="hero-chips"><span>⬡ GLB</span><span>⌁ OBJ</span><span>✳ FBX</span><span>◇ STL</span><span>IN-BROWSER LIBRARY</span></div>
+      </div>
+
+      <div class="workspace-grid">
+        <div class="workspace-left">
+          <div class="upload-zone" id="dropZone" role="button" tabindex="0" aria-label="Choose a local 3D model file">
+            <input id="assetFile" type="file" accept=".glb,.obj,.stl,.fbx" hidden>
+            <span class="upload-mark">⬡</span>
+            <strong>Drop a 3D file here</strong>
+            <p>or click to browse your computer or phone</p>
+            <span class="upload-hint">Supported: GLB, OBJ, FBX, STL · Up to 150 MB · No server upload</span>
+          </div>
+          <div class="model-viewport" id="viewport">
+            <div class="viewport-empty" id="viewportEmpty">
+              <span>◈</span><strong>Your model appears here</strong>
+              <p>Drag a file in or select one from your saved browser library.</p>
+            </div>
+            <div class="viewer-tools"><button id="resetCamera" disabled>↻ Reset view</button><button id="frameModel" disabled>⌖ Fit model</button></div>
+            <div class="viewer-footer"><span id="viewerMessage">Waiting for a local 3D file</span><span>Drag to orbit · Scroll to zoom</span></div>
+          </div>
+        </div>
+        <aside class="workspace-right">
+          <section class="workspace-panel">
+            <div class="panel-overline">ASSET INSPECTOR</div>
+            <h2 id="assetTitle">No model selected</h2>
+            <p id="assetSubline">Choose a GLB, OBJ, FBX or STL model to see its geometry and materials.</p>
+            <div class="asset-facts">
+              <div><small>File type</small><strong id="assetFormat">—</strong></div>
+              <div><small>Mesh objects</small><strong id="meshCount">—</strong></div>
+              <div><small>Triangles</small><strong id="triangles">—</strong></div>
+              <div><small>File size</small><strong id="fileSize">—</strong></div>
+            </div>
+            <label class="inspector-label" for="units">Dimension units <span>(assumed, not verified)</span></label>
+            <select id="units"><option value="unspecified">Model units (unspecified)</option><option value="m">Metres</option><option value="cm">Centimetres</option><option value="mm">Millimetres</option><option value="in">Inches</option></select>
+            <div class="dimension-readout" id="dimensions">Bounding size: —</div>
+          </section>
+          <section class="workspace-panel">
+            <div class="panel-overline">VISUAL BRAND LAB</div>
+            <h3>Try a new colour.</h3>
+            <p class="panel-description">Pick a material and recolour it in your private preview. Your original file stays unchanged until you export a new copy.</p>
+            <label class="inspector-label" for="materials">Material</label>
+            <select id="materials" disabled><option>No materials loaded</option></select>
+            <label class="inspector-label" for="color">Brand accent</label>
+            <div class="color-row"><input type="color" id="color" value="#61cf9c"><span id="colorLabel">#61CF9C</span></div>
+            <label class="check-row"><input type="checkbox" id="solidColor"> Replace base texture on this material for solid colour</label>
+            <div class="tool-actions"><button id="applyColor" disabled>Apply colour</button><button id="resetColors" disabled>Reset material</button></div>
+            <p class="panel-disclaimer" id="colourStatus">Appearance depends on each model's material setup.</p>
+          </section>
+          <section class="workspace-panel">
+            <div class="panel-overline">YOUR LOCAL EXPORTS</div>
+            <h3>Save or export.</h3>
+            <button class="save-local" id="saveLocal" disabled>⬡ &nbsp; Save original to my browser library</button>
+            <div class="export-actions"><button id="exportGLB" disabled>↓ Export GLB</button><button id="exportOBJ" disabled>↓ Export OBJ</button></div>
+            <button class="download-source" id="downloadOriginal" disabled>↓ Download my original file</button>
+            <p class="panel-disclaimer">GLB export preserves supported materials; OBJ exports mesh geometry without a guaranteed texture/MTL package. Nothing here is a certified production drawing.</p>
+          </section>
+        </aside>
+      </div>
+
+      <section class="local-saved">
+        <div class="saved-heading"><div><div class="overline accent-overline">YOUR OWN PRIVATE COLLECTION</div><h2>Saved in <em>this browser.</em></h2><p>Open a model again without choosing its file. Your collection is local to this browser and device.</p></div><div id="libraryCount" class="saved-amount">0 assets</div></div>
+        <div id="localGrid" class="local-grid"></div>
+        <div id="localEmpty" class="local-empty">No models saved here yet. Open a model above and choose <strong>Save original to my browser library</strong>.</div>
+      </section>
+      <div class="library-legal"><strong>Important:</strong> Import files you own or are authorized to use. Previewing a Sketchfab model in ExpoVault does not grant rights to download it. The official creator's download is subject to their licence. Local browser storage is not a secure archive or cloud backup; keep another copy of important files.</div>
+    </main>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script type="module" src="ui/library.mjs"></script>
+</body></html>
