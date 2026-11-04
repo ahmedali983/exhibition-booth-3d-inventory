@@ -1,6 +1,6 @@
 const $=id=>document.getElementById(id);
 const create=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=String(text);return el};
-const STATE={models:[],concepts:[],technical:[],section:'models',search:{models:'',concepts:'',technical:''},kind:'all',availability:'any',licence:'any',sort:'relevant',modelsFiltered:[],conceptsFiltered:[],modelsShow:28,conceptsShow:28,active:null,position:0,fromSaved:false,saved:new Set()};
+const STATE={models:[],concepts:[],technical:[],section:'models',search:{models:'',concepts:'',technical:''},kind:'all',availability:'any',licence:'any',sort:'relevant',modelsFiltered:[],conceptsFiltered:[],modelsShow:28,conceptsShow:28,technicalShow:32,technicalFiltered:[],active:null,position:0,fromSaved:false,saved:new Set()};
 const PROFILE='https://sketchfab.com/';
 let noticeTimer=0;
 try{const entries=JSON.parse(localStorage.getItem('expovault-v3-saved')||'[]');if(Array.isArray(entries))STATE.saved=new Set(entries)}catch(_){}
@@ -30,7 +30,7 @@ function score(v){
  score+=Math.min(17,Math.log10(1+(v.view_count||0))*3);
  return score;
 }
-function sectionTitle(s){return({models:'3D designs',concepts:'Booth studio',technical:'Production toolkit',saved:'My collection'})[s]}
+function sectionTitle(s){return({models:'3D designs',concepts:'Booth studio',technical:'Production files',saved:'My collection'})[s]}
 function setSection(name,{changeHash=true,scroll=true}={}){
  if(!['models','concepts','technical','saved'].includes(name))name='models';
  STATE.section=name;
@@ -40,7 +40,7 @@ function setSection(name,{changeHash=true,scroll=true}={}){
  $('query').placeholder=name==='models'?'Search exhibition stands or creators...':name==='concepts'?'Search by size, structure or ID...':name==='technical'?'Search DWG, CAD or 3D sources...':'Search your saved assets...';
  $('query').value=STATE.search[name]||'';
  if(name==='saved')renderSaved();
- if(name==='technical')renderTechnical();
+ if(name==='technical')runProductionFilters();
  if(changeHash)history.replaceState(null,'','#'+name);
  $('side').classList.remove('mobile-show');
  if(scroll)window.scrollTo({top:0,behavior:'instant'});
@@ -155,14 +155,49 @@ function renderConcepts(append=false){
  host.append(frag);$('moreConcepts').hidden=host.children.length>=STATE.conceptsFiltered.length;
  $('conceptProgress').textContent='Showing '+number(host.children.length)+' of '+number(STATE.conceptsFiltered.length)+' editable 3D files';
 }
-function renderTechnical(){
- const term=($('technicalQuery').value||STATE.search.technical||'').toLowerCase().trim();const items=STATE.technical.filter(x=>!term||(x.title+' '+x.notes+' '+x.format+' '+x.site).toLowerCase().includes(term));
- const host=$('referenceGrid');host.replaceChildren();$('technicalCount').textContent=number(items.length);
- for(const v of items){
-  const link=create('a','reference-card');link.href=validHttp(v.url)||'#';link.target='_blank';link.rel='noopener noreferrer';
-  link.append(create('div','reference-label',v.site.toUpperCase()),create('h3','',v.title),create('p','',v.notes||'Original external production reference'));
-  const foot=create('div','reference-foot');foot.append(create('span','',v.format||v.license||'Original source'),create('strong','','Open source ↗'));link.append(foot);host.append(link);
+function runProductionFilters(){
+ const query=(STATE.search.technical||'').toLowerCase().replace(/\s+/g,'');
+ const width=$('productionWidth').value,depth=$('productionDepth').value,style=$('productionStyle').value;
+ STATE.technicalFiltered=STATE.concepts.filter(v=>{
+  if(width&&v.width_m!==Number(width))return false;
+  if(depth&&v.depth_m!==Number(depth))return false;
+  if(style&&v.style!==style)return false;
+  if(!query)return true;
+  const searchable=(v.id+' '+v.style+' '+v.booth_type+' '+v.fitout+' '+v.width_m+'x'+v.depth_m+' '+v.area_m2+'sqm').toLowerCase().replace(/\s+/g,'');
+  return searchable.includes(query);
+ });
+ STATE.technicalShow=32;
+ renderTechnical();
+}
+function makeProductionCard(v){
+ const card=create('article','production-card');
+ const img=create('img');img.src='assets/thumbs/'+v.id+'.webp';img.alt=v.style+' '+v.booth_type;img.loading='lazy';img.decoding='async';
+ img.onerror=()=>{img.remove()};
+ const image=create('div','production-thumb');image.append(img);
+ const body=create('div','production-card-body'),label=create('div','production-label',v.id+' · '+v.width_m+' × '+v.depth_m+' M');
+ const title=create('h3','',v.style+' '+v.booth_type);
+ const sub=create('p','',v.fitout+' layout · '+v.area_m2+' m²');
+ const info=create('div','production-files-present');
+ info.append(create('span','','◈ GLB 3D'),create('span','','⌘ DXF plan'));
+ const actions=create('div','production-card-actions');
+ for(const [text,ext] of [['↓ GLB','glb'],['↓ DXF','dxf']]){
+  const a=create('a','',text);a.href='assets/generated/'+v.width_m+'x'+v.depth_m+'/'+v.id+'.'+ext;
+  a.download=v.id+'.'+ext;a.setAttribute('aria-label','Download '+v.id+' '+ext.toUpperCase());
+  actions.append(a);
  }
+ const pack=create('a','production-pack-link','✧ Customize and export full concept pack ↗');
+ pack.href='studio.html?design='+encodeURIComponent(v.id);
+ body.append(label,title,sub,info,actions,pack);card.append(image,body);
+ return card;
+}
+function renderTechnical(append=false){
+ const host=$('referenceGrid');if(!append)host.replaceChildren();
+ const fragment=document.createDocumentFragment();
+ for(const v of STATE.technicalFiltered.slice(host.children.length,STATE.technicalShow))fragment.append(makeProductionCard(v));
+ host.append(fragment);
+ $('technicalCount').textContent=number(STATE.technicalFiltered.length);
+ $('moreTechnical').hidden=host.children.length>=STATE.technicalFiltered.length;
+ $('technicalProgress').textContent='Showing '+number(host.children.length)+' of '+number(STATE.technicalFiltered.length)+' production concept file sets';
 }
 function renderSaved(){
  const host=$('savedGrid');host.replaceChildren();const modelMap=new Map(STATE.models.map(x=>[x.id,x])),conceptMap=new Map(STATE.concepts.map(x=>[x.id,x]));
@@ -218,7 +253,7 @@ function bindControls(){
  $('query').oninput=e=>{
   if(STATE.section==='models'){STATE.search.models=e.target.value;runModelFilters()}
   else if(STATE.section==='concepts'){STATE.search.concepts=e.target.value;runConceptFilters()}
-  else if(STATE.section==='technical'){STATE.search.technical=e.target.value;$('technicalQuery').value=e.target.value;renderTechnical()}
+  else if(STATE.section==='technical'){STATE.search.technical=e.target.value;$('technicalQuery').value=e.target.value;runProductionFilters()}
   else if(STATE.section==='saved'){const q=e.target.value.toLowerCase();for(const card of $('savedGrid').children)card.style.display=card.textContent.toLowerCase().includes(q)?'':'none'}
  };
  for(const button of document.querySelectorAll('.chip'))button.onclick=()=>{STATE.kind=button.dataset.kind;document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active',c===button));runModelFilters()};
@@ -229,11 +264,12 @@ function bindControls(){
  $('clearFilters').onclick=resetModelFilters;$('resetEmpty').onclick=resetModelFilters;
  $('moreModels').onclick=()=>{STATE.modelsShow+=32;renderModels(true)};
  $('moreConcepts').onclick=()=>{STATE.conceptsShow+=32;renderConcepts(true)};
- for(const [id,data] of [['conceptWidth',[3,4,5,6,8,10,12]],['conceptDepth',[2,3,4,5,6,8]],['conceptStyle',['Minimal','Portal','Truss','Feature Wall','Canopy']],['conceptType',['Inline','Corner','Peninsula','Island']]]){
+ $('moreTechnical').onclick=()=>{STATE.technicalShow+=32;renderTechnical(true)};
+ for(const [id,data] of [['conceptWidth',[3,4,5,6,8,10,12]],['conceptDepth',[2,3,4,5,6,8]],['conceptStyle',['Minimal','Portal','Truss','Feature Wall','Canopy']],['conceptType',['Inline','Corner','Peninsula','Island']],['productionWidth',[3,4,5,6,8,10,12]],['productionDepth',[2,3,4,5,6,8]],['productionStyle',['Minimal','Portal','Truss','Feature Wall','Canopy']]]){
   const el=$(id);for(const val of data){const o=create('option','',val+(typeof val==='number'?' m':''));o.value=val;el.append(o)}
-  el.onchange=runConceptFilters;
+  el.onchange=id.startsWith('production')?runProductionFilters:runConceptFilters;
  }
- $('technicalQuery').oninput=e=>{STATE.search.technical=e.target.value;$('query').value=e.target.value;renderTechnical()};
+ $('technicalQuery').oninput=e=>{STATE.search.technical=e.target.value;$('query').value=e.target.value;runProductionFilters()};
  $('viewerClose').onclick=()=>closeViewer();$('viewerOverlay').onclick=()=>closeViewer();
  $('viewerSave').onclick=()=>{if(STATE.active){toggleSave(STATE.active.id);$('viewerSave').textContent=STATE.saved.has(STATE.active.id)?'♥ Saved':'♡ Save'}};
  $('viewerShare').onclick=async()=>{const u=new URL(location.href);u.hash='model='+uidFor(STATE.active);try{await navigator.clipboard.writeText(u.href);toast('Shareable model link copied')}catch(_){toast('Share this link: '+u.href)}};
@@ -263,9 +299,9 @@ async function fetchJSON(url){
 async function init(){
  bindControls();
  let fileResults;
- try{fileResults=await Promise.all([fetchJSON('catalog/sketchfab_index.json'),fetchJSON('catalog/creator_discovery.json'),fetchJSON('catalog/concept_cards.json'),fetchJSON('catalog/sources.json'),fetchJSON('catalog/oembed_thumbnails.json')])}
+ try{fileResults=await Promise.all([fetchJSON('catalog/sketchfab_index.json'),fetchJSON('catalog/creator_discovery.json'),fetchJSON('catalog/concept_cards.json'),fetchJSON('catalog/oembed_thumbnails.json')])}
  catch(error){console.error(error);$('modelGrid').textContent='Catalogue load failed — refresh this page to retry';toast('Catalogue could not load');return}
- const [original,discovery,concepts,sources,highRes]=fileResults;
+ const [original,discovery,concepts,highRes]=fileResults;
  const seen=new Set();
  for(const v of [...(original.items||[]),...(discovery.items||[])]){
   if(!uidFor(v)||seen.has(v.id))continue;seen.add(v.id);
@@ -273,12 +309,12 @@ async function init(){
   item.category=category(item);item.relevance=score(item);
   STATE.models.push(item);
  }
- STATE.concepts=(concepts.items||[]).map(c=>({id:c[0],width_m:c[1],depth_m:c[2],booth_type:c[3],style:c[4],fitout:c[5],area_m2:c[6]}));STATE.technical=sources||[];
+ STATE.concepts=(concepts.items||[]).map(c=>({id:c[0],width_m:c[1],depth_m:c[2],booth_type:c[3],style:c[4],fitout:c[5],area_m2:c[6]}));STATE.technical=[];
  const thumbnails=highRes.thumbnails||{};for(const item of STATE.models){const value=thumbnails[item.id];if(value&&validHttp(value.thumbnail,['sketchfab.com','cloudfront.net']))item.thumbnail=value.thumbnail}
  STATE.models.sort((a,b)=>b.relevance-a.relevance);
  $('metricModels').textContent=number(STATE.models.length);
  $('sideSources').textContent=number(STATE.models.length);
- persistSaved();runModelFilters();runConceptFilters();renderTechnical();
+ persistSaved();runModelFilters();runConceptFilters();runProductionFilters();
  // Surface genuine source content in hero, without copying or rehosting protected meshes.
  const featured=STATE.models.filter(x=>x.category==='booth'&&validHttp(x.thumbnail,['sketchfab.com','cloudfront.net']));
  if(featured.length>1){$('heroImageOne').src=featured[3]?.thumbnail||featured[0].thumbnail;$('heroImageTwo').src=featured[10]?.thumbnail||featured[1].thumbnail}
