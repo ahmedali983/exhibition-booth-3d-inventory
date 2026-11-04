@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="ExpoVault 3D Booth Composer — build your custom exhibition booth from hosted editable 3D layouts and items, recolour, add a brand logo and export a complete 3D design pack without signing in.">
+<meta name="theme-color" content="#111a20">
+<title>Booth Composer | ExpoVault Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ui/composer.css">
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"}}
+</script>
+</head>
+<body>
+<div class="app">
+  <aside class="rail">
+    <a class="brand" href="./"><span class="brand-symbol">E<span>.</span></span><span class="brand-name">expovault<small>3D DESIGN WORKSPACE</small></span></a>
+    <div class="rail-small">WORKSPACE</div>
+    <nav class="rail-links">
+      <a href="./#models"><span>⌗</span> Explore designs</a>
+      <a href="open-3d.html"><span>◈</span> Items collection</a>
+      <a href="composer.html" class="active"><span>▣</span> Booth composer</a>
+      <a href="./#technical"><span>⌁</span> Production files</a>
+      <a href="library.html"><span>⬡</span> My local files</a>
+    </nav>
+    <div class="rail-card">
+      <span class="rail-card-icon">✳</span>
+      <strong>Compose your space.</strong>
+      <p>Choose a floor plan, add real 3D items, move & recolour them, then download the whole booth as GLB.</p>
+      <span>NO LOGIN · LOCAL EXPORT</span>
+    </div>
+    <div class="rail-bottom"><span><i></i> Working on this device</span><small>3D booth layouts and modular items are hosted on ExpoVault. Changes stay in your browser until exported.</small></div>
+  </aside>
+  <div class="main">
+    <header class="toolbar">
+      <div class="crumb"><a href="./">ExpoVault</a><span>/</span><strong>Booth Composer</strong></div>
+      <div class="toolbar-actions"><span class="saved-state" id="saveState">◉ Unsaved session</span><button id="saveProject" class="button-soft">↓ Save project JSON</button><button id="exportGlb" class="button-main">↓ Export complete GLB</button></div>
+    </header>
+    <main class="workspace">
+      <div class="intro">
+        <div><div class="eyebrow"><span></span> BUILD YOUR EXHIBITION SPACE</div><h1>From inspiration to <em>your own 3D booth.</em></h1><p>Choose the structure. Add fixtures. Apply brand colours. Download one assembled 3D file — no third-party account required.</p></div>
+        <div class="steps"><span class="current">01 &nbsp; BASE</span><span>02 &nbsp; ITEMS</span><span>03 &nbsp; BRAND</span><span>04 &nbsp; EXPORT</span></div>
+      </div>
+      <div class="studio-grid">
+        <section class="scene-panel">
+          <div class="scene-head"><div><span class="mini-eyebrow">LIVE 3D WORKSPACE</span><h2 id="currentBoothTitle">Select your booth</h2></div><div class="scene-label"><i></i> INTERACTIVE EDITOR</div></div>
+          <div class="viewport" id="viewport">
+            <div class="viewer-overlay-text"><span id="viewportState">Loading 3D booth design…</span><span>Drag to rotate · Scroll to zoom</span></div>
+            <div id="loadingScene" class="loading-scene"><span>◈</span><strong>Preparing your 3D canvas</strong><p>Models are served directly from your ExpoVault inventory.</p></div>
+            <div class="viewport-tools"><button id="resetCamera" title="Reset camera">↻ Reset camera</button><button id="snapFloor" title="Snap selected item to floor">⌖ Snap to floor</button></div>
+            <div class="selection-tag" id="selectionTag" hidden>SELECTED ITEM</div>
+          </div>
+          <div class="scene-bottom"><div><span class="status-dot"></span> <span id="sceneStatus">Ready to start</span></div><span id="dimensions">Footprint —</span></div>
+          <div class="bottom-tools">
+            <div class="bottom-tool-title">YOUR CURRENT SCENE</div>
+            <div class="scene-metrics">
+              <div><strong id="partsCount">0</strong><small>3D items placed</small></div>
+              <div><strong id="boothArea">—</strong><small>Footprint</small></div>
+              <div><strong id="assetCount">559</strong><small>Available components</small></div>
+              <div><strong>GLB</strong><small>One-file export</small></div>
+            </div>
+            <div class="shortcuts"><strong>Fast controls</strong><span>Click an item to select · Drag the green positioning target to place it · Use controls to move/rotate · Delete to remove</span></div>
+          </div>
+        </section>
+        <aside class="inspector">
+          <div class="panel-tabs"><button class="tab selected" data-tab="base">01 &nbsp; Structure</button><button class="tab" data-tab="items">02 &nbsp; Items</button><button class="tab" data-tab="brand">03 &nbsp; Brand</button><button class="tab" data-tab="export">04 &nbsp; Export</button></div>
+          <div class="tab-pane selected" id="tab-base">
+            <div class="panel-head"><div class="panel-eyebrow">CHOOSE YOUR BASE</div><h3>Build your foundation.</h3><p>Every preset below is an actual hosted GLB booth. Choose dimensions and exposure, then switch to Items.</p></div>
+            <div class="form-grid">
+              <label>Width<select id="widthSelect"></select></label>
+              <label>Depth<select id="depthSelect"></select></label>
+              <label>Exposure<select id="exposureSelect"></select></label>
+              <label>Structure style<select id="styleSelect"></select></label>
+              <label class="span-2">Interior setup<select id="fitoutSelect"></select></label>
+            </div>
+            <div class="base-preview"><img id="basePreview" src="assets/thumbs/EV-0001.webp" alt="Current 3D booth preset"><div><strong id="baseName">Booth layout</strong><small id="baseId">EV-0001</small></div></div>
+            <button id="applyBase" class="panel-action">Apply 3D booth structure <span>↗</span></button>
+            <div class="panel-note">Changing the base preserves added items but changes the footprint. Verify that fixtures still fit the new dimensions.</div>
+          </div>
+          <div class="tab-pane" id="tab-items">
+            <div class="panel-head"><div class="panel-eyebrow">MODULAR 3D COMPONENTS</div><h3>Make the space yours.</h3><p>Pick from our hosted CC0 items. Add and position as many as needed in the booth.</p></div>
+            <input id="itemSearch" class="search-box" type="search" placeholder="Search stands, displays, counters, furniture…" aria-label="Search 3D items">
+            <div class="item-tools"><select id="itemPack"><option value="all">All categories</option></select><span id="itemResults">559 items</span></div>
+            <div class="item-browser" id="itemBrowser"><div class="blank-loader">Loading items…</div></div>
+            <div class="items-help">Every added item is part of the exported GLB. You can change colours, size and position later.</div>
+          </div>
+          <div class="tab-pane" id="tab-brand">
+            <div class="panel-head"><div class="panel-eyebrow">BRAND APPEARANCE</div><h3>Give it your identity.</h3><p>Change the core structure’s colours, add a brand name or image and recolour individual items.</p></div>
+            <label class="field">Brand name<input id="brandName" value="YOUR BRAND" maxlength="32" placeholder="Your brand name"></label>
+            <label class="field">Primary colour<div class="color-group"><input type="color" id="primaryColor" value="#0d614e"><span id="primaryHex">#0D614E</span></div></label>
+            <label class="field">Accent colour<div class="color-group"><input type="color" id="accentColor" value="#ebc486"><span id="accentHex">#EBC486</span></div></label>
+            <label class="field">Display panels colour<div class="color-group"><input type="color" id="panelColor" value="#f3f7f4"><span id="panelHex">#F3F7F4</span></div></label>
+            <button id="applyBrand" class="panel-action">Apply brand to booth <span>✳</span></button>
+            <label class="field">Or add a logo (PNG/JPG)<input type="file" id="logoFile" accept="image/png,image/jpeg,image/webp"><span class="sub-note">Logo will be embedded in your final GLB as a texture on a front-facing plane.</span></label>
+          </div>
+          <div class="tab-pane" id="tab-export">
+            <div class="panel-head"><div class="panel-eyebrow">YOUR FINAL FILES</div><h3>Take the booth with you.</h3><p>Download the assembled 3D scene and a concept handoff pack, directly from this workspace.</p></div>
+            <div class="export-list">
+              <div><span class="export-icon">◈</span><div><strong>Full assembled 3D model</strong><small>GLB, includes booth + positioned items + brand</small></div><span class="format">GLB</span></div>
+              <div><span class="export-icon">⌁</span><div><strong>Concept floor plan</strong><small>Original 2D schematic for the selected base</small></div><span class="format">DXF</span></div>
+              <div><span class="export-icon">▤</span><div><strong>Placed item schedule</strong><small>Provenance, dimensions, colours and placement</small></div><span class="format">JSON</span></div>
+              <div><span class="export-icon">▦</span><div><strong>Shareable project file</strong><small>Reopen your scene in the composer</small></div><span class="format">JSON</span></div>
+            </div>
+            <button id="exportZip" class="panel-action">↓ Download complete concept ZIP</button>
+            <button id="exportGlbPanel" class="secondary-action">↓ Download assembled GLB only</button>
+            <button id="exportDxf" class="secondary-action">↓ Download base DXF plan</button>
+            <button id="saveProjectPanel" class="secondary-action">↓ Save editable project JSON</button>
+            <label class="import-project">↥ Import a saved ExpoVault project<input type="file" id="importProject" accept="application/json,.json"></label>
+            <div class="panel-note warning"><strong>Concept-stage files:</strong> The GLB is editable 3D geometry. DXF is an initial layout only. Before fabrication, a contractor must verify material systems, cut dimensions, loads, electrical and safety.</div>
+          </div>
+          <div class="transform-panel">
+            <div class="transform-title"><span>POSITION & EDIT</span><button id="removeItem" disabled>Remove ✕</button></div>
+            <strong id="selectedName">Select a placed item to edit</strong>
+            <div class="transform-fields">
+              <label>X (m)<input id="itemX" type="number" step=".1" value="0" disabled></label>
+              <label>Z (m)<input id="itemZ" type="number" step=".1" value="0" disabled></label>
+              <label>Rotation (°)<input id="itemRot" type="number" step="5" value="0" disabled></label>
+              <label>Scale<input id="itemScale" type="number" min=".05" max="6" step=".1" value="1" disabled></label>
+            </div>
+            <div class="position-buttons"><button id="moveLeft" disabled>←</button><button id="moveBack" disabled>↑</button><button id="moveFront" disabled>↓</button><button id="moveRight" disabled>→</button></div>
+            <div class="field-stack"><label>Selected material<select id="selectedMaterial" disabled><option>None</option></select></label><div class="color-group"><input id="selectedItemColor" type="color" value="#1f9272" disabled><button id="applyItemColor" disabled>Apply item colour</button></div></div>
+          </div>
+        </aside>
+      </div>
+      <div class="workspace-bottom"><span>EXPOVAULT STUDIO · YOUR MODEL IS NOT SENT TO SKETCHFAB</span><a href="open-3d.html">Browse all 3D items ↗</a><a href="./#technical">Browse production plans ↗</a></div>
+    </main>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script type="module" src="ui/composer.mjs"></script>
+</body></html>
