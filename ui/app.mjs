@@ -433,5 +433,7 @@ async function initialize(){
  }catch(err){console.warn('Sources not loaded',err);notify('External sources temporarily unavailable')}
  const route=location.hash.replace('#','');
  switchPage(['discover','sources','saved','brand'].includes(route)?route:'discover',false);
+ const requested=new URLSearchParams(location.search).get('design');
+ if(requested&&/^EV-\d{4}$/.test(requested)){const found=state.all.find(v=>v.id===requested);if(found)openStudio(found)}
 }
 initialize();
