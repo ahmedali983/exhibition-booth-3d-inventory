@@ -14,7 +14,7 @@ const state={assets:[],visible:[],packs:[],filter:'all',query:'',sort:'featured'
 let toastTimer=0;
 const fmt=num=>Number(num||0).toLocaleString('en-US');
 const size=bytes=>bytes>=1048576?(bytes/1048576).toFixed(2)+' MB':(bytes/1024).toFixed(0)+' KB';
-const validPath=str=>typeof str==='string'&&/^assets\/open-3d\/CC0-\d+\.(glb|webp)$/.test(str);
+const validPath=str=>typeof str==='string'&&(/^assets\/open-3d\/CC0-\d+\.(glb|webp)$/.test(str)||/^assets\/authorized-booths\/[A-Za-z][A-Za-z0-9_-]{2,64}\.(glb|webp)$/.test(str));
 function notice(message){$('toast').textContent=message;$('toast').classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('visible'),3200)}
 function downloadBlob(fileName,result,type='model/gltf-binary'){
  const blob=result instanceof Blob?result:new Blob([result],{type});
@@ -22,25 +22,46 @@ function downloadBlob(fileName,result,type='model/gltf-binary'){
  link.href=url;link.download=fileName;document.body.append(link);link.click();link.remove();
  setTimeout(()=>URL.revokeObjectURL(url),8000);
 }
-function loadLibrary(){
- return fetch('catalog/open_3d_cc0.json').then(response=>{
-  if(!response.ok)throw Error('3D asset catalogue is unavailable (HTTP '+response.status+')');
-  return response.json();
- });
+async function loadLibrary(){
+ const [original,approved]=await Promise.all([
+  fetch('catalog/open_3d_cc0.json').then(r=>{if(!r.ok)throw Error('3D asset catalogue unavailable (HTTP '+r.status+')');return r.json()}),
+  fetch('catalog/authorized_booths.json').then(r=>r.ok?r.json():{assets:[]})
+ ]);
+ const licensed=(approved.assets||[]).filter(v=>v?.glb&&validPath(v.glb)).map(v=>({
+  ...v,
+  name:v.name||v.title,
+  pack:v.is_full_booth?'Creator-licensed booth designs':'Creator-licensed 3D items',
+  pack_slug:v.is_full_booth?'licensed-booths':'licensed-items',
+  thumbnail:validPath(v.thumbnail)?v.thumbnail:null,
+  source_creator:v.creator||'Original creator',
+  triangles:Number(v.triangles||0),
+  file_size:Number(v.file_size||0)
+ }));
+ const groups=[...(original.packs||[])];
+ for(const [slug,title] of [['licensed-booths','Creator-licensed booths'],['licensed-items','Creator-licensed items']]){
+  const count=licensed.filter(v=>v.pack_slug===slug).length;
+  if(count)groups.unshift({slug,title,available:count});
+ }
+ return {assets:[...licensed,...(original.assets||[])],packs:groups,licensedCount:licensed.length};
 }
 function card(asset){
  const item=el('article','open-card');
  const picture=el('div','open-card-image');
- const image=el('img');image.src=asset.thumbnail;image.alt=asset.name+' — 3D model preview';image.loading='lazy';image.decoding='async';
- image.onerror=()=>{image.remove();picture.style.background='#e1eae3';picture.append(el('div','model-thumb-fallback','◈'))};
- picture.append(image,el('span','label','◈ REAL GLB'));
+ if(asset.thumbnail){
+  const image=el('img');image.src=asset.thumbnail;image.alt=asset.name+' — 3D model preview';image.loading='lazy';image.decoding='async';
+  image.onerror=()=>{image.remove();picture.style.background='#e1eae3';picture.append(el('div','model-thumb-fallback','◈'))};
+  picture.append(image);
+ }else{
+  picture.append(el('div','model-thumb-fallback','◈'));
+ }
+ picture.append(el('span','label',asset.is_full_booth?'◈ FULL BOOTH':'◈ REAL GLB'));
  const look=el('button','','✳ Inspect 3D and recolour');look.onclick=()=>open(asset);
  picture.onclick=e=>{if(e.target!==look)open(asset)};
  picture.append(look);
  const body=el('div','open-card-body');
  body.append(el('div','open-card-kicker',asset.pack),el('h3','',asset.name),el('p','',asset.description||asset.kind));
  const facts=el('div','open-card-facts');
- facts.append(el('span','','GLB · '+size(asset.file_size)),el('span','','CC0'));
+ facts.append(el('span','','GLB · '+size(asset.file_size)),el('span','',asset.license==='CC0-1.0'?'CC0':asset.license==='CC-BY-4.0'?'CC BY':'Licensed'));
  const actions=el('div','open-card-actions');
  const direct=el('a','','↓ Download 3D');direct.href=asset.glb;direct.download=asset.id+'.glb';direct.setAttribute('aria-label','Download original GLB for '+asset.name);
  const customise=el('button','','✳ Recolour');customise.onclick=()=>open(asset);
@@ -177,7 +198,9 @@ async function open(asset){
  $('inspectorSize').textContent=size(asset.file_size);
  $('inspectorTris').textContent=fmt(asset.triangles);
  $('originName').textContent=asset.source_creator||asset.pack;
- $('licenseStatus').textContent='CC0 · model is hosted in ExpoVault · '+asset.pack;
+ $('originName').href=asset.source_url&&asset.source_url.startsWith('https://')?asset.source_url:'#';
+ $('inspectorLicense').textContent=asset.license==='CC0-1.0'?'CC0 1.0':asset.license==='CC-BY-4.0'?'CC BY 4.0':'Creator-approved';
+ $('licenseStatus').textContent=asset.license==='CC0-1.0'?'CC0: no attribution required':asset.license==='CC-BY-4.0'?'CC BY: credit creator and source with any reuse':'Usage limited to the creator’s specific written permission';
  $('downloadRealGLB').href=asset.glb;
  $('downloadRealGLB').download=asset.id+'.glb';
  $('nextAsset').disabled=state.activeIndex>=state.visible.length-1;
@@ -260,13 +283,14 @@ async function init(){
  wire();
  try{
   const data=await loadLibrary();
-  state.assets=(data.assets||[]).filter(a=>a.license==='CC0-1.0'&&validPath(a.glb)&&validPath(a.thumbnail));
+  state.assets=(data.assets||[]).filter(a=>['CC0-1.0','CC-BY-4.0','RIGHTS-HOLDER-PERMISSION'].includes(a.license)&&validPath(a.glb)&&(!a.thumbnail||validPath(a.thumbnail)));
   const countByPack=new Map();
   for(const asset of state.assets)countByPack.set(asset.pack_slug,(countByPack.get(asset.pack_slug)||0)+1);
   state.packs=(data.packs||[]).filter(p=>countByPack.has(p.slug)).map(p=>({...p,count:countByPack.get(p.slug)}));
   $('totalAssets').textContent=fmt(state.assets.length);
   $('totalPacks').textContent=fmt(state.packs.length);
   $('sideAssetCount').textContent=fmt(state.assets.length);
+ $('libraryLicenses').textContent=data.licensedCount?'Open + approved':'CC0';
   filters();runFilters();
  }catch(error){$('assetGrid').textContent='Catalogue failed to load: '+error.message;notice(error.message)}
 }
