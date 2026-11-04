@@ -27,7 +27,7 @@ The 4,200 layouts combine 7 widths, 6 depths, 4 booth exposure types, 5 structur
 
 ## No-login, self-hosted, editable CC0 3D assets (new)
 
-[**Open the direct-download 3D library**](https://ahmedali983.github.io/exhibition-booth-3d-inventory/open-3d.html)
+[**Open the direct-download 3D library**](https://ahmedali983.github.io/exhibition-booth-3d-inventory/open-3d.html) · [**Download the entire 559-model CC0 collection ZIP (20.2 MB)**](https://github.com/ahmedali983/exhibition-booth-3d-inventory/releases/download/v0.3.0/expovault-559-cc0-3d-models.zip)
 
 The no-login source model collection holds **559 independent GLB objects and scene components** from **7 CC0 design packs** (about **60.9 MB** of original geometry) self-hosted in `assets/open-3d/` with matching WebP thumbnails and a JSON catalog at `catalog/open_3d_cc0.json`. The original, unmodified GLB files were downloaded through 3DAssets.dev's documented anonymous REST API. All asset records had a verified **CC0-1.0** licence and all files passed GLB v2 header/length checks at ingestion time. They can be previewed, recoloured and downloaded from the ExpoVault site itself without a separate account or third-party download step.
 
