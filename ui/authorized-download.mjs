@@ -48,7 +48,7 @@ function extractDownload(payload){
   if(!item||typeof item!=='object')continue;
   for(const type of ['gltf','glb','usdz']){
    const location=item[type];
-   if(location?.url&&isTrustedUrl(location.url))return{url:location.url,type,expires:Number(location.expires)||300};
+   if(location?.url&&isTrustedUrl(location.url))return{url:location.url,type,expires:Number(location.expires)||300,size:Number(location.size)||0};
   }
  }
  return null;
@@ -59,6 +59,7 @@ function archiveReady(record,model){
  chosen={model:model||{uid:requested?.uid,name:requested?.title},download:record};
  $('selectedAssetTitle').textContent=model?.name||requested?.title||'Authorized 3D asset';
  $('saveAuthorizedArchive').disabled=false;
+ $('authorizedFallback').hidden=true;
  $('saveAuthorCredits').disabled=false;
  $('saveAuthorizedArchive').textContent=record.type==='usdz'?'↓ Download USDZ 3D model':'↓ Download glTF + textures ZIP';
  info('Creator permission confirmed by Sketchfab. The temporary download is ready. Save the archive and keep the attribution.');
@@ -108,7 +109,7 @@ function show(data){
  $('authorizedTitle').textContent='Download a licensed 3D design';
  $('authorizedModelTitle').textContent=data.title||'Selected 3D model';
  $('selectedAssetTitle').textContent=data.title||'3D design';
- $('saveAuthorizedArchive').disabled=true;$('saveAuthorCredits').disabled=true;
+ $('saveAuthorizedArchive').disabled=true;$('saveAuthorCredits').disabled=true;$('authorizedFallback').hidden=true;
  $('saveAuthorizedArchive').textContent='↓ Download glTF + textures ZIP';
  info('Loading the official download importer. Sign in with your Sketchfab account.');
  startImporter().catch(console.warn);
@@ -119,9 +120,12 @@ window.addEventListener('expovault:download-open',e=>show(e.detail));
 $('requestCurrentModel').onclick=()=>{
  if(!importer||!requested?.uid){info('The official importer is not ready yet');return}
  $('requestCurrentModel').disabled=true;
+ let settled=false;
+ const timeout=setTimeout(()=>{if(!settled&&active){$('requestCurrentModel').disabled=false;info('No response yet. Sign in with Sketchfab in the importer and retry.')}},18000);
  info('Requesting authorization for '+(requested.title||'the selected model')+'… If not signed in, log in using the embedded importer first.');
  try{
   importer.download(requested.uid,(...values)=>{
+   settled=true;clearTimeout(timeout);
    $('requestCurrentModel').disabled=false;
    if(!active)return;
    let record=null,model=null;
@@ -132,19 +136,40 @@ $('requestCurrentModel').onclick=()=>{
    if(record)archiveReady(record,model||{uid:requested.uid,name:requested.title});
    else info('No downloadable archive returned. Confirm your Sketchfab login and creator permission, or select the model inside the importer.');
   });
- }catch(err){$('requestCurrentModel').disabled=false;info('Provider request failed: '+err.message)}
+ }catch(err){settled=true;clearTimeout(timeout);$('requestCurrentModel').disabled=false;info('Provider request failed: '+err.message)}
 };
-$('saveAuthorizedArchive').onclick=()=>{
+$('saveAuthorizedArchive').onclick=async()=>{
  if(!archive?.url){info('Select a permitted downloadable model first');return}
  if(Date.now()>expiry){
   archive=null;$('saveAuthorizedArchive').disabled=true;
   info('The short-lived link expired. Request the model again after authentication.');return;
  }
  if(!isTrustedUrl(archive.url)){info('Untrusted file host rejected');return}
- // Only provider-approved signed URL, never cached or mirrored.
- const a=document.createElement('a');a.href=archive.url;a.download=safeName(chosen?.model?.name||requested?.title)+'.'+(archive.type==='usdz'?'usdz':'zip');
- a.target='_blank';a.rel='noopener noreferrer';document.body.append(a);a.click();a.remove();
- info('Authorized download started. Keep the attribution text with the archive.');
+ const filename=safeName(chosen?.model?.name||requested?.title)+'.'+(archive.type==='usdz'?'usdz':'zip');
+ const button=$('saveAuthorizedArchive');
+ const fallback=$('authorizedFallback');
+ // Prefer direct browser download without navigation. Large files and providers
+ // without CORS remain accessible by explicitly clicking their signed link.
+ const fallbackUrl=archive.url;
+ fallback.href=fallbackUrl;fallback.download=filename;fallback.hidden=true;
+ if(archive.size>100*1024*1024){
+  fallback.hidden=false;
+  info('Large archive ('+Math.round(archive.size/1048576)+' MB). Use the direct authenticated download link below to avoid browser memory pressure.');return;
+ }
+ button.disabled=true;button.textContent='Fetching authorized 3D file…';
+ try{
+  const res=await fetch(fallbackUrl,{mode:'cors',cache:'no-store'});
+  if(!res.ok)throw Error('Archive host returned HTTP '+res.status);
+  const bin=await res.blob();
+  if(bin.size>160*1024*1024)throw Error('Archive exceeds safe in-browser transfer size');
+  saveBlob(filename,bin,'application/octet-stream');
+  info('3D archive saved in your downloads. Use “Save creator attribution” to keep licence credits with the model.');
+ }catch(error){
+  fallback.hidden=false;
+  info('This browser could not save the archive inside ExpoVault: '+error.message+'. Use the authorised direct link below instead.');
+ }finally{
+  button.disabled=false;button.textContent=archive.type==='usdz'?'↓ Download USDZ 3D model':'↓ Download glTF + textures ZIP';
+ }
 };
 $('saveAuthorCredits').onclick=()=>{
  if(!chosen)return;
