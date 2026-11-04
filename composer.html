@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="ui/composer.css">
 <script type="importmap">
-{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"}}
+{"imports":{"three":"./vendor/three/build/three.module.js","three/addons/":"./vendor/three/examples/jsm/"}}
 </script>
 </head>
 <body>
@@ -62,7 +62,7 @@
               <div><strong id="assetCount">559</strong><small>Available components</small></div>
               <div><strong>GLB</strong><small>One-file export</small></div>
             </div>
-            <div class="shortcuts"><strong>Fast controls</strong><span>Click an item to select · Drag the green positioning target to place it · Use controls to move/rotate · Delete to remove</span></div>
+            <div class="shortcuts"><strong>Fast controls</strong><span>Click an item to select · Shift+drag a selected item to position it · Use controls to move/rotate · Delete to remove</span></div>
           </div>
         </section>
         <aside class="inspector">
@@ -130,5 +130,6 @@
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="vendor/jszip/jszip.min.js"></script>
 <script type="module" src="ui/composer.mjs"></script>
 </body></html>

@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {GLTFExporter} from 'three/addons/exporters/GLTFExporter.js';
-import JSZip from 'https://cdn.jsdelivr.net/npm/jszip@3.10.1/+esm';
+const JSZip=window.JSZip;
 
 const $=id=>document.getElementById(id);
 const UI={
@@ -190,7 +190,7 @@ async function updateBrandBoard(){
  const artwork=new THREE.Mesh(new THREE.PlaneGeometry(width,height),new THREE.MeshStandardMaterial({map:logoTexture,roughness:.7,metalness:0,side:THREE.DoubleSide}));
  artwork.position.z=.01;group.add(artwork);
  const bbox=state.baseBox;
- group.position.set((bbox.min.x+bbox.max.x)/2,Math.max(bbox.min.y+1.3,bbox.max.y-.47),bbox.min.z+.13);
+ group.position.set((bbox.min.x+bbox.max.x)/2,Math.max(bbox.min.y+1.3,bbox.max.y-.47),bbox.min.z+Math.min(.42,size.z*.17));
  logoBoard=group;exportRoot.add(logoBoard);
 }
 function updateBrand(){
