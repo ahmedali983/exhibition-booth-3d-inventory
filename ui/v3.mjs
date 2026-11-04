@@ -37,7 +37,7 @@ function setSection(name,{changeHash=true,scroll=true}={}){
  for(const s of ['models','concepts','technical','saved'])$('section-'+s).classList.toggle('active',s===name);
  document.querySelectorAll('[data-section]').forEach(btn=>btn.classList.toggle('selected',btn.dataset.section===name&&btn.classList.contains('side-link')));
  $('breadcrumb').textContent=sectionTitle(name);
- $('query').placeholder=name==='models'?'Search exhibition stands or creators...':name==='concepts'?'Search by size, structure or ID...':name==='technical'?'Search DWG, CAD or 3D sources...':'Search your saved assets...';
+ $('query').placeholder=name==='models'?'Search exhibition stands or creators...':name==='concepts'?'Search by size, structure or ID...':name==='technical'?'Search EV IDs, footprints and styles...':'Search your saved assets...';
  $('query').value=STATE.search[name]||'';
  if(name==='saved')renderSaved();
  if(name==='technical')runProductionFilters();
