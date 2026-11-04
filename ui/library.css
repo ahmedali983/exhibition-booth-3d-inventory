@@ -6,3 +6,9 @@
 @media(max-width:1150px){.workspace-grid{grid-template-columns:minmax(0,1.3fr) minmax(280px,1fr)}.local-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:830px){.workspace-grid{grid-template-columns:1fr}.workspace-right{grid-template-columns:repeat(2,minmax(0,1fr))}.workspace-right .workspace-panel:last-child{grid-column:1/-1}.local-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.local-top-caption{display:none}}
 @media(max-width:600px){.library-main{padding:17px 14px}.local-hero{padding:27px 23px}.local-hero h1{font-size:32px}.workspace-right{grid-template-columns:1fr}.workspace-right .workspace-panel:last-child{grid-column:auto}.model-viewport{height:360px}.viewer-footer{font-size:9px}.viewer-tools{top:8px;left:8px}.saved-heading{display:block}.saved-amount{display:inline-block;margin-top:8px}.local-grid{gap:10px}.local-card img,.local-card-image-fallback{height:120px}.local-card-body{padding:10px}.local-card-buttons button{font-size:9px}.topbar-left{flex:1}.back-link{font-size:10px;padding:9px}}
+
+/* Keep the 3D viewer visible while inspecting longer sets of material controls. */
+.workspace-left{position:sticky;top:94px}
+.local-mobile-brand{display:none;color:#2d6a47;font:800 14px var(--head);letter-spacing:-.5px}
+@media(max-height:860px){.workspace-left{position:static}}
+@media(max-width:830px){.workspace-left{position:static}.local-mobile-brand{display:inline-flex;align-items:center;gap:7px}}
