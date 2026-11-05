@@ -33,7 +33,7 @@ jobs:
                   for item in p.glob('*.json'):z.write(item,item.name)
           PY
       - run: python -m pip install -q requests pillow
-      - run: python -u scripts/qa_new_archive_booths.py
+      - run: python -u scripts/qa_new_archive_booths_b.py
       - uses: actions/upload-artifact@v4
         with:
           name: expovault-mirror-wave10-new-originals-visual-QA
