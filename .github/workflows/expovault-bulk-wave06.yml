@@ -1,0 +1,64 @@
+name: ExpoVault CC Original Booth Bulk Wave 06
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/expovault-bulk-wave06.yml]
+permissions:
+  contents: read
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        uid:
+          - 9efeeff019a44bd493e028fc69c8ddf6
+          - 79ea4a52911e443baf14647e02927591
+          - a9c25cf22b2c4dd29b07efb7a46e7644
+          - 31ebac036f0b4b039060b1fd80b0446e
+          - d9b5b27d9fde40cab9db8fcd62a96551
+          - 73d0804aa30f40f7a010be09ecee2eb2
+          - 7efc36bd9ba642168658e3ed94995f71
+          - 9a6e15b9f6f548ce86e564ae8dc5fc93
+          - 079b7f407ac94b2fbe7ddb49e3241d7b
+          - 1c6522188163417cbf383d722c1752f0
+          - fef68558ad624367bf8f2b599f1af422
+          - fefdb0c8ef0a4a50a79c065ee32a2a3b
+          - bab2948c20f146e8864865bfa4cbddf3
+          - 3915658dbd344dcfa4e47cf6eafad254
+          - b5883663a607419dad2de38df9bd5f91
+          - c08633a2dfe74a9ea524bd32ddb2e42e
+          - 94eb1014c31a47eab7716df6259f416b
+          - c545517664f54743ace49c424b31e734
+          - 9b39df3e97bc4f108f80c2a1c1d52610
+          - cabc1d2b994248078ba705c9ee60ac4d
+          - 6d66086b43674e30982edb6edfb8c106
+          - 584ddb08ab164bfdbc51ba208f1f6468
+          - cbe0c59e8f104add94afcb3b413860b1
+          - 6960d19b40494aadb9ac02e863d54952
+          - c0b3e79f6c1547fe9d1cd105005e12f7
+          - 026040814ae54f43a14a06cef0fa022e
+          - b05e6da004224ff88e353b65d867f620
+          - be4f65cf68f148919d7854e11ce68795
+          - 7300164fed4e49a9ae7e7384af986553
+          - fb4b69e1eb004069b128d94795bc0185
+          - 5e2a9a0387b349d7b11dda5ab0940692
+          - 31e2c9405576421bb6c813aea0d0dbe4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/collect_licensed_bulk_creator_booth.py
+      - run: python -m pip install -q requests pillow
+      - run: npm install -g @gltf-transform/cli@4
+      - name: Fetch verified creator originals and build GLB + native source package
+        run: python scripts/collect_licensed_bulk_creator_booth.py ${{ matrix.uid }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-wave06-${{ matrix.uid }}
+          path: bulk-booth-${{ matrix.uid }}/*.zip
+          if-no-files-found: warn
+          compression-level: 0
+          retention-days: 7
