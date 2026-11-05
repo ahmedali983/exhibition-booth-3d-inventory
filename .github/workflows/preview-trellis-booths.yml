@@ -1,0 +1,81 @@
+name: ExpoVault Review High-Aesthetic Booth Models
+on:
+  push:
+    branches: [research/expovault-trellis-aesthetic-20261105]
+    paths: [.github/workflows/preview-trellis-booths.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  previews:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: expovault-trellis-high-aesthetic-booth-shortlist
+          run-id: 42066595014
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: input/
+      - run: python -m pip install -q requests pillow
+      - name: Preview original authored booth models and check source availability
+        run: |
+          python - <<'PY'
+          import pathlib,json,re,requests,io,concurrent.futures,time
+          from PIL import Image,ImageDraw
+          rows=json.loads(pathlib.Path('input/trellis_booth_matches.json').read_text())['strong']
+          out=pathlib.Path('trellis-preview');out.mkdir(exist_ok=True)
+          base='https://mirror.traines.eu/sketchfab-backup/'
+          headers={'User-Agent':'ExpoVault-CC-Booth-Visual-Quality-Research/1.0'}
+          def fetch(n,row):
+            uid=row['file_identifier'].split('/')[-1]
+            link=base+uid[:2]+'/'+uid
+            d={'i':n,'uid':uid,'aesthetic_score':float(row['aesthetic_score']),'caption':json.loads(row['captions'])[0][:280],
+                'source_url':row['file_identifier'],'snapshot_sha256':row['sha256']}
+            thumb=None
+            try:
+              r=requests.get(link+'.thumb.jpeg',timeout=18,headers=headers)
+              r.raise_for_status();im=Image.open(io.BytesIO(r.content)).convert('RGB')
+              if im.width<160:raise ValueError('Tiny preview')
+              thumb=im
+              d['preview_ok']=True
+            except Exception as e:d['preview_error']=str(e)[:120]
+            try:
+              r=requests.head(link+'.zip',timeout=14,headers=headers)
+              d['original_zip_http']=r.status_code
+              d['original_zip_bytes']=int(r.headers.get('content-length') or 0)
+            except Exception as e:d['original_zip_error']=str(e)[:110]
+            try:
+              r=requests.head(link+'.source.zip',timeout=14,headers=headers)
+              d['creator_source_http']=r.status_code
+              d['creator_source_bytes']=int(r.headers.get('content-length') or 0)
+            except Exception as e:d['creator_source_error']=str(e)[:110]
+            return d,thumb
+          with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
+            data=list(pool.map(lambda args:fetch(*args),enumerate(rows)))
+          results=[a for a,b in data]
+          for page in range(2):
+            page_data=data[page*25:(page+1)*25]
+            board=Image.new('RGB',(5*298,5*227),'white')
+            dr=ImageDraw.Draw(board)
+            for i,(info,im) in enumerate(page_data):
+              x=(i%5)*298;y=(i//5)*227
+              if im is not None:
+                im.thumbnail((289,172))
+                board.paste(im,(x+(298-im.width)//2,y+(172-im.height)//2))
+              dr.text((x+4,y+177),str(info['i']+1)+' '+info['uid'][:12]+' / '+str(round(info['aesthetic_score'],2)),fill='black')
+              dr.text((x+4,y+194),info['caption'][:43],fill='black')
+              dr.text((x+4,y+211),'download '+str(info.get('original_zip_bytes',0)//1048576)+' MB',fill='black')
+            board.save(out/('quality_page_'+str(page+1)+'.jpg'),quality=84)
+          (out/'provisional_aesthetic_source_rights_check.json').write_text(json.dumps(results,indent=2))
+          print('PROVISIONAL_CANDIDATES',len(results),'FILE_EXISTS',sum(x.get('original_zip_http')==200 for x in results),'WITH_SOURCE',sum(x.get('creator_source_http')==200 for x in results),flush=True)
+          for x in results:
+            if x.get('original_zip_http')==200: print('CANDIDATE',x['i']+1,x['uid'],round(x['aesthetic_score'],2),x['caption'][:80],flush=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-trellis-original-booth-quality-contact-sheets
+          path: trellis-preview/
+          retention-days: 14
+          compression-level: 0
+          if-no-files-found: error
