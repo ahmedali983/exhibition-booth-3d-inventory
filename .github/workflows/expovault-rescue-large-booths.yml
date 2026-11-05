@@ -1,0 +1,45 @@
+name: ExpoVault Rescue Two Large Original Booth Sources
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/expovault-rescue-large-booths.yml]
+permissions: {contents: read}
+jobs:
+  rescue:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    strategy:
+      fail-fast: false
+      matrix:
+        uid: [afefb075173d449ba2b679cd4f6bad78, 47f26d0f04c547dba87da1891e178f59]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/rescue_large_creator_booth_sources.py
+      - run: python -m pip install -q requests pillow
+      - run: npm install --global @gltf-transform/cli@4
+      - run: python -u scripts/rescue_large_creator_booth_sources.py ${{ matrix.uid }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-rescue-${{ matrix.uid }}-GLB
+          path: rescue-booth-${{ matrix.uid }}/*-GLB-ONLY.zip
+          compression-level: 0
+          retention-days: 7
+          if-no-files-found: warn
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-rescue-${{ matrix.uid }}-native
+          path: rescue-booth-${{ matrix.uid }}/*-CREATOR-SOURCE-ONLY.zip
+          compression-level: 0
+          retention-days: 7
+          if-no-files-found: warn
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-rescue-${{ matrix.uid }}-full
+          path: rescue-booth-${{ matrix.uid }}/*-REAL-GLB-AND-CREATOR-SOURCE.zip
+          compression-level: 0
+          retention-days: 7
+          if-no-files-found: warn
