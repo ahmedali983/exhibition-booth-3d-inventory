@@ -1,0 +1,46 @@
+name: Check ExpoVault Alternative Original Model Archives
+on:
+  push:
+    branches: [feature/expovault-professional-booths-batch1]
+    paths: [.github/workflows/probe-sketchfab-open-mirror.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Check openly licensed archives without downloading restricted content
+        shell: bash
+        run: |
+          python - <<'PY'
+          import requests,json,time
+          targets={
+            'mirror-root':'https://mirror.traines.eu/sketchfab-backup/',
+            'mirror-original':'https://mirror.traines.eu/sketchfab-backup/61/61be25e36a0645df93f3deb66b5f699c.zip',
+            'trellis-high-quality-metadata':'https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K/resolve/main/ObjaverseXL_sketchfab.csv',
+            'sketchfab-model-metadata':'https://api.sketchfab.com/v3/models/61be25e36a0645df93f3deb66b5f699c',
+            'objaverse-open-original':'https://huggingface.co/datasets/allenai/objaverse/resolve/main/glbs/000-060/61be25e36a0645df93f3deb66b5f699c.glb',
+          }
+          out={}
+          for label,url in targets.items():
+            try:
+              r=requests.head(url,timeout=(5,10),allow_redirects=True,headers={'User-Agent':'ExpoVault-Open-Source-Access-Test/1.0'})
+              out[label]={'status':r.status_code,'size':r.headers.get('Content-Length'),'type':r.headers.get('Content-Type'),'final_host':r.url.split('/')[2]}
+              if r.status_code!=200 and label=='mirror-root':
+                try:
+                  g=requests.get(url,timeout=(5,8),stream=True)
+                  out[label]['get_status']=g.status_code
+                  g.close()
+                except Exception as e:out[label]['get_error']=str(e)[:140]
+            except Exception as e:
+              out[label]={'error':str(e)[:170]}
+            print('PROBE',label,json.dumps(out[label]),flush=True)
+          with open('open_archive_probe.json','w') as f:json.dump(out,f,indent=2)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-open-source-probe
+          path: open_archive_probe.json
+          retention-days: 5
