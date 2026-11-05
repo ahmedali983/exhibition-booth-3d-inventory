@@ -8,7 +8,7 @@ shard_id=sys.argv[1]
 assert re.fullmatch(r"glbs-\d{4}",shard_id),shard_id
 shard_name="shards/glbs/"+shard_id+".tar"
 out=pathlib.Path("output-"+shard_id);out.mkdir(exist_ok=True)
-q=json.loads(pathlib.Path("psv-candidates/candidate_queue.json").read_text())["candidates"]
+q=json.loads(pathlib.Path("psv-bulk-candidates/candidate_queue.json").read_text())["candidates"]
 already=set(json.loads(pathlib.Path("catalog/bulk_import_existing_uids.json").read_text())["current_verified_drive_uids"])
 bad=re.compile(r"banner|nightstand|shelving|photo.?booth|telephone.?booth|display wall|booth sign|logo booth|prop|toy|game",re.I)
 strong=re.compile(r"booth|exhibition.{0,12}stand|expo.{0,12}stand|trade.{0,8}show|trade.{0,8}fair|messestand|fuar.?stand",re.I)
