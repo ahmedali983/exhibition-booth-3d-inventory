@@ -1,0 +1,56 @@
+name: ExpoVault Verify Open Booth Previews
+on:
+  push:
+    branches: [research/expovault-open-archive-catalogue-20261105]
+    paths: [.github/workflows/verify-archive-booth-previews.yml]
+permissions: {contents: read}
+jobs:
+  previews:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - run: python -m pip install -q pillow requests
+      - name: Download public previews and size metadata only
+        shell: bash
+        run: |
+          python - <<'PY'
+          import requests,io,json
+          from pathlib import Path
+          from PIL import Image,ImageDraw
+          ids=[
+           ('40359de9049b4a47afe5762da5546005','Bobcat Trade Show Booth'),
+           ('80e40d1e173d4e6ba84a984c3c2aa09d','ADAMVS Exhibition Booth'),
+           ('401c0d92b8e1471cbc67c760d725dc1a','Booth Design'),
+           ('50313afcb5154fb093c3df1ccb251aa5','Booth preliminary design'),
+           ('e0c6bc8225b8477a9a9a5b38a2bf15f4','Oils Booth Design'),
+           ('2018c8c0dfc744288aa3e3092124743a','Al Safwah exhibition stand')]
+          base='https://mirror.traines.eu/sketchfab-backup/'
+          board=Image.new('RGB',(3*380,2*300),'white')
+          draw=ImageDraw.Draw(board)
+          out=[]
+          for n,(uid,name) in enumerate(ids):
+            x=n%3*380;y=n//3*300
+            entry={'uid':uid,'name':name}
+            for suffix,label in [('.zip','gltf_zip'),('.source.zip','native_source')]:
+              try:
+                r=requests.head(base+uid[:2]+'/'+uid+suffix,timeout=15)
+                entry[label]={'status':r.status_code,'bytes':int(r.headers.get('content-length') or 0)}
+              except Exception as e:entry[label]={'error':str(e)[:110]}
+            try:
+              r=requests.get(base+uid[:2]+'/'+uid+'.thumb.jpeg',timeout=15);r.raise_for_status()
+              img=Image.open(io.BytesIO(r.content)).convert('RGB');img.thumbnail((375,255))
+              board.paste(img,(x+(380-img.width)//2,y+(255-img.height)//2))
+            except Exception as e:entry['preview_error']=str(e)[:180]
+            draw.text((x+6,y+260),str(n+1)+'. '+name,fill='black')
+            draw.text((x+6,y+278),'glTF zip '+str(entry.get('gltf_zip',{}).get('bytes',0)//1048576)+' MB / native '+str(entry.get('native_source',{}).get('bytes',0)//1048576)+' MB',fill='black')
+            out.append(entry)
+            print('CANDIDATE',json.dumps(entry),flush=True)
+          Path('verified-previews').mkdir(exist_ok=True)
+          board.save('verified-previews/contact_sheet.jpg',quality=88)
+          Path('verified-previews/size_report.json').write_text(json.dumps(out,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-open-booth-preview-qa
+          path: verified-previews/
+          retention-days: 7
