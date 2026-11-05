@@ -78,9 +78,13 @@
     "fb46556d91b4465bb0c7c0813a280d25",
     "887c57a0235548fd81359dae1b1a45a9",
     "2bd803f8bd684c04a07bd21f63f4a2b6",
-    "ab5db5125a854d0fa9bb6328f169ff4a"
+    "ab5db5125a854d0fa9bb6328f169ff4a",
+    "62f1ce23a16041358834f70995af3002",
+    "efb2d9f282db4757abe218a46c00f592",
+    "f0b925c7cbc74594a64837a1c8d8017d",
+    "c66f3bff0549483ab2d527d9a5555d28"
   ],
   "last_checked": "2026-11-05",
-  "baseline_count": 79,
+  "baseline_count": 83,
   "note": "Excludes quarantined assets and files not verified on Google Drive."
 }
