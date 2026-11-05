@@ -1,0 +1,64 @@
+name: ExpoVault Split Verified Original GLB and Source for Drive
+on:
+  push:
+    branches: [research/expovault-open-archive-catalogue-20261105]
+    paths: [.github/workflows/split-adamvs-source-for-drive.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  repackage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: expovault-three-original-booths-plus-source
+          run-id: 42035278934
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: verified-inputs
+      - name: Separate verified native source and GLB
+        run: |
+          python - <<'PY'
+          import pathlib,zipfile,hashlib,json
+          d=pathlib.Path('verified-inputs')
+          uid='80e40d1e173d4e6ba84a984c3c2aa09d'
+          original=d/('SKFB-'+uid+'-GLB-SOURCE.zip')
+          assert original.is_file()
+          root=pathlib.Path('drive-parts')
+          for part in ['3D_GLBlive','Native_Creator_Source','Original_GLTF_Textures']:
+              (root/part).mkdir(parents=True,exist_ok=True)
+          with zipfile.ZipFile(original) as z:
+              assert z.testzip() is None
+              meta=json.loads(z.read('MANIFEST.json'))
+              glb=z.read('model.glb')
+              assert hashlib.sha256(glb).hexdigest()==meta['GLB_sha256']
+              with zipfile.ZipFile(root/'3D_GLBlive'/'ADAMVS_Booth_3D_GLBlive_and_Attribution.zip','w',zipfile.ZIP_DEFLATED,compresslevel=5) as zz:
+                  for name in ['model.glb','ATTRIBUTION_AND_RIGHTS.txt','MANIFEST.json','preview.jpeg']:
+                      zz.writestr(name,z.read(name))
+              (root/'Native_Creator_Source'/'ADAMVS_Booth_Original_Creator_Source.zip').write_bytes(z.read('original_creator_source.zip'))
+              (root/'Original_GLTF_Textures'/'ADAMVS_Booth_Original_GLTF_Textures.zip').write_bytes(z.read('original_gltf_with_textures.zip'))
+              for f in root.rglob('*.zip'):
+                  with zipfile.ZipFile(f) as verify: assert verify.testzip() is None
+                  assert f.stat().st_size<100_000_000
+                  print('VALID_PART',f.name,f.stat().st_size,flush=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-adamvs-3d-glb-qa
+          path: drive-parts/3D_GLBlive/
+          compression-level: 0
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-adamvs-native-creator-source
+          path: drive-parts/Native_Creator_Source/
+          compression-level: 0
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-adamvs-original-gltf-textures
+          path: drive-parts/Original_GLTF_Textures/
+          compression-level: 0
+          retention-days: 7
