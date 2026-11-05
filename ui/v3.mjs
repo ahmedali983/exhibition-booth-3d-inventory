@@ -343,7 +343,7 @@ async function init(){
  if(featured.length>1){$('heroImageOne').src=featured[3]?.thumbnail||featured[0].thumbnail;$('heroImageTwo').src=featured[10]?.thumbnail||featured[1].thumbnail}
  const hash=location.hash.slice(1);
  if(['models','concepts','technical','saved'].includes(hash))setSection(hash,{changeHash:false,scroll:false});
- else setSection('models',{changeHash:false,scroll:false});
+ else setSection('concepts',{changeHash:false,scroll:false});
  if(hash.startsWith('model='))navigateFromHash();
 }
 init();
