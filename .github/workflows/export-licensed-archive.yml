@@ -46,3 +46,28 @@ jobs:
           compression-level: 6
           retention-days: 7
           if-no-files-found: error
+
+      - name: Export locally hosted CC0 exhibition Items
+        uses: actions/upload-artifact@v4
+        with:
+          name: expovault-open-items-cc0-v05
+          path: |
+            assets/open-3d/
+            catalog/open_3d_cc0.json
+          compression-level: 6
+          retention-days: 7
+          if-no-files-found: error
+
+      - name: Export truthful Sketchfab-archive model census
+        uses: actions/upload-artifact@v4
+        with:
+          name: expovault-real-3d-corpus-audit-v05
+          path: |
+            catalog/objaverse_all_800k_census.json
+            catalog/objaverse_cc_by_cc0_relevant_candidates.jsonl
+            catalog/prosceneverse_booth_census_20261105.json
+            scripts/research_objaverse_all_shards.py
+            scripts/research_prosceneverse_census.py
+          compression-level: 6
+          retention-days: 7
+          if-no-files-found: error
