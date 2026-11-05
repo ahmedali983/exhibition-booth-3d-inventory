@@ -1,0 +1,35 @@
+name: Inspect Licensed 3D Archive Catalog
+on:
+  push:
+    branches:
+      - research/expovault-open-archive-catalogue-20261105
+    paths:
+      - .github/workflows/inspect-licensed-3d-catalog.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Inspect public catalog metadata only
+        shell: bash
+        run: |
+          python - <<'PY'
+          import requests,re,json
+          base='https://mirror.traines.eu/sketchfab-backup/'
+          for segment in ['%2Bcatalogue/','%2BREADME/','00/','01/','02/','03/']:
+              try:
+                  res=requests.get(base+segment,timeout=(8,20),headers={'User-Agent':'ExpoVault-licensed-model-metadata-research/1.0'})
+                  print('DIRECTORY',segment,'status',res.status_code,'bytes',len(res.content))
+                  if not res.ok:continue
+                  links=re.findall('href="([^"]+)"',res.text)
+                  names=[x for x in links if x not in ('../','./')]
+                  hits=[x for x in names if re.search('booth|stand|exhib|expo|fuar|messe|pavilion|stall|showroom|kiosk',x,re.I)]
+                  print('FIRST_LINKS',json.dumps(names[:35],ensure_ascii=False))
+                  print('MATCH_COUNT',len(hits),'SAMPLES',json.dumps(hits[:75],ensure_ascii=False))
+              except Exception as exc:print('ERROR',segment,str(exc)[:180])
+          PY
