@@ -1,0 +1,99 @@
+name: ExpoVault Cloud GLB Export - Rights Checked on Desktop
+on:
+  push:
+    branches: [feature/expovault-professional-booths-batch1]
+    paths: [.github/workflows/drive-wave2-hf-originals.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  collect-originals:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: catalog/drive_wave2_live_checked_11.json
+      - name: Install public dataset download client
+        run: python -m pip install -q --disable-pip-version-check requests huggingface_hub
+      - name: Download GLBs directly from Objaverse public archive
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,pathlib,hashlib,zipfile,requests,time,sys,shutil
+          from huggingface_hub import hf_hub_download
+          root=pathlib.Path.cwd()
+          data=json.loads((root/'catalog/drive_wave2_live_checked_11.json').read_text(encoding='utf8'))
+          output=root/'expovault-drive-wave2'
+          output.mkdir(exist_ok=True)
+          originals=root/'source-downloads'
+          originals.mkdir(exist_ok=True)
+          accepted=[];errors=[];seen_sha=set()
+          for i,item in enumerate(data['assets'],1):
+              uid=item['uid'];name=item['title'];author=item['creator']
+              f=originals/(uid+'.glb')
+              url='https://huggingface.co/datasets/allenai/objaverse/resolve/main/'+item['archive_path']
+              print('FETCH',i,len(data['assets']),uid,flush=True)
+              try:
+                  try:
+                      with requests.get(url,stream=True,timeout=(25,180),headers={'User-Agent':'ExpoVault-CC-Original-3D-Archiver/1.0'}) as resp:
+                          resp.raise_for_status()
+                          if int(resp.headers.get('content-length') or 0)>110_000_000:raise RuntimeError('file >110MB')
+                          written=0
+                          with f.open('wb') as fp:
+                              for chunk in resp.iter_content(1024*1024):
+                                  if chunk:
+                                      written+=len(chunk)
+                                      if written>110_000_000:raise RuntimeError('size cap reached')
+                                      fp.write(chunk)
+                  except Exception as e:
+                      print('REQUESTS_FALLBACK',uid,str(e)[:120],flush=True)
+                      cached=hf_hub_download(repo_id='allenai/objaverse',repo_type='dataset',filename=item['archive_path'])
+                      shutil.copy2(cached,f)
+                  if f.stat().st_size!=item['expected_bytes']:raise ValueError('file size differs from metadata manifest')
+                  with f.open('rb') as fp:
+                      header=fp.read(20)
+                      if header[:4]!=b'glTF' or int.from_bytes(header[4:8],'little')!=2 or int.from_bytes(header[8:12],'little')!=f.stat().st_size or header[16:20]!=b'JSON':raise ValueError('GLB 2.0 header invalid')
+                      fp.seek(12);ln=int.from_bytes(fp.read(4),'little');fp.seek(20);scene=json.loads(fp.read(ln))
+                  if not scene.get('meshes') or not scene.get('nodes'):raise ValueError('empty geometry')
+                  for obj in scene.get('images',[])+scene.get('buffers',[]):
+                      uri=obj.get('uri')
+                      if uri and not str(uri).startswith('data:'):raise ValueError('GLB references external resources')
+                  h=hashlib.file_digest(f.open('rb'),'sha256').hexdigest()
+                  if h in seen_sha:raise ValueError('binary duplicate')
+                  seen_sha.add(h)
+                  licenseid='CC-BY-SA-4.0' if item['license_slug']=='by-sa' else 'CC-BY-4.0'
+                  licurl='https://creativecommons.org/licenses/by-sa/4.0/' if item['license_slug']=='by-sa' else 'https://creativecommons.org/licenses/by/4.0/'
+                  meta={'id':'SKFB-'+uid,'title':name,'creator':author,'source_url':item['source_url'],'source_archive_url':url,'license':licenseid,'license_url':licurl,'rights_checked_date':'2026-11-05',
+                        'GLB_bytes':f.stat().st_size,'sha256':h,'mesh_count':len(scene['meshes']),
+                        'quality_review':'Original artist exhibition booth scene thumbnail inspected; not production drawings',
+                        'disclaimer':'For internal design reference; original Creative Commons license controls use and redistribution'}
+                  target=output/(meta['id']+'-ORIGINAL-3D.zip')
+                  with zipfile.ZipFile(target,'w',zipfile.ZIP_DEFLATED,compresslevel=5) as z:
+                      z.write(f,meta['id']+'/'+meta['id']+'.glb')
+                      z.writestr(meta['id']+'/CREDITS_AND_RIGHTS.txt','Original design: '+name+'\nCreator: '+author+'\nSketchfab: '+item['source_url']+'\nLicense: '+licenseid+' '+licurl+'\nPlease retain attribution. No manufacturer-certified fabrication files.\n')
+                      z.writestr(meta['id']+'/MANIFEST.json',json.dumps(meta,ensure_ascii=False,indent=2))
+                  with zipfile.ZipFile(target) as z:
+                      assert z.testzip() is None
+                      assert hashlib.sha256(z.read(meta['id']+'/'+meta['id']+'.glb')).hexdigest()==h
+                  accepted.append({**meta,'zip_file':target.name,'zip_bytes':target.stat().st_size})
+                  f.unlink(missing_ok=True)
+                  print('SAVED',uid,meta['GLB_bytes'],target.stat().st_size,flush=True)
+              except Exception as e:
+                  errors.append({'uid':uid,'title':name,'error':str(e)[:220]})
+                  print('FAILED',uid,str(e)[:220],flush=True)
+                  f.unlink(missing_ok=True)
+              time.sleep(0.3)
+          (output/'INDEX_AND_RIGHTS_WAVE2.json').write_text(json.dumps({'target':4000,'date':'2026-11-05','count':len(accepted),'assets':accepted,'errors':errors},ensure_ascii=False,indent=2),encoding='utf8')
+          print('RESULT',len(accepted),'accepted',len(errors),'errors',flush=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-verified-source-glb-wave2-11
+          path: expovault-drive-wave2/
+          retention-days: 7
+          compression-level: 0
+          if-no-files-found: error
