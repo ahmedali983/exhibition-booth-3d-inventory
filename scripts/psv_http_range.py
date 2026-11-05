@@ -5,7 +5,9 @@ import requests
 class RemoteTar(io.RawIOBase):
     def __init__(self, url):
         self.pos=0
-        r=requests.head(url,allow_redirects=True,timeout=35)
+        self.session=requests.Session()
+        self.session.headers.update({"User-Agent":"ExpoVault-licensed-3D-Range-Collector/1.0"})
+        r=self.session.head(url,allow_redirects=True,timeout=35)
         r.raise_for_status()
         self.url=r.url
         self.length=int(r.headers["Content-Length"])
@@ -23,7 +25,7 @@ class RemoteTar(io.RawIOBase):
         n=min(n,self.length-self.pos)
         if n==0:return b""
         s=self.pos;e=s+n-1
-        r=requests.get(self.url,headers={"Range":f"bytes={s}-{e}"},timeout=(20,90))
+        r=self.session.get(self.url,headers={"Range":f"bytes={s}-{e}"},timeout=(20,90))
         if r.status_code!=206:raise IOError(f"Expected partial content, got {r.status_code}")
         if not r.headers.get("Content-Range","").startswith(f"bytes {s}-{e}/"):
             raise IOError("Invalid range response")
