@@ -1,0 +1,111 @@
+name: ExpoVault Cloud-First Sketchfab-Origin GLB Wave 2
+on:
+  push:
+    branches: [feature/expovault-professional-booths-batch1]
+    paths: [.github/workflows/drive-wave2-cloud-collection.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cloud-acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: catalog/drive_wave2_selected_11.json
+      - name: Python dependencies
+        run: python -m pip install --disable-pip-version-check -q requests pillow
+      - name: Validate rights, fetch open source GLBs and package independently
+        shell: bash
+        run: |
+          python - <<'PY'
+          import pathlib,hashlib,json,zipfile,requests,io,time,sys
+          from PIL import Image
+          R=pathlib.Path.cwd()
+          rows=json.loads((R/'catalog/drive_wave2_selected_11.json').read_text(encoding='utf8'))['assets']
+          out=R/'drive-collection-wave2'
+          out.mkdir(exist_ok=True)
+          index={'collection':'ExpoVault cloud-fetched author-designed booth models','target':4000,'status':'original-downloadable-3D-only','source':'Sketchfab-origin models openly archived in Objaverse 1.0','date':'2026-11-05','assets':[],'failures':[],'note':'Production CAD or manufacturing files not supplied; internal usage label does not replace the exact Creative Commons model license.'}
+          headers={'User-Agent':'ExpoVault-Creator-CC-3D-Research-Collection/1.0'}
+          seen=set()
+          for k,row in enumerate(rows,1):
+            uid=row['uid']
+            print('PROCESS',k,len(rows),uid,flush=True)
+            try:
+              resp=requests.get('https://api.sketchfab.com/v3/models/'+uid,headers=headers,timeout=30)
+              resp.raise_for_status()
+              meta=resp.json()
+              lic=(meta.get('license') or {}).get('slug')
+              if lic!=row['license'] or lic not in ('by','by-sa') or not meta.get('isDownloadable'):
+                raise RuntimeError('Creator rights/download flag changed; exclude')
+              author=str((meta.get('user') or {}).get('username') or '').strip()
+              if not author:raise RuntimeError('Missing attribution creator')
+              src='https://huggingface.co/datasets/allenai/objaverse/resolve/main/'+row['archive_path']
+              parts=[];count=0;limit=110_000_000
+              with requests.get(src,headers=headers,timeout=(30,140),stream=True) as res:
+                res.raise_for_status()
+                if int(res.headers.get('Content-Length') or 0)>limit:raise RuntimeError('Size cap exceeded')
+                for chunk in res.iter_content(1024*512):
+                  if not chunk:continue
+                  count+=len(chunk)
+                  if count>limit:raise RuntimeError('Stream size limit exceeded')
+                  parts.append(chunk)
+              data=b''.join(parts)
+              if count!=row['expected_bytes']:raise RuntimeError('Archived file bytes unexpectedly changed')
+              if len(data)<32 or data[:4]!=b'glTF' or int.from_bytes(data[4:8],'little')!=2 or int.from_bytes(data[8:12],'little')!=len(data) or data[16:20]!=b'JSON':
+                raise RuntimeError('Invalid GLB 2.0 structure')
+              jlen=int.from_bytes(data[12:16],'little')
+              scene=json.loads(data[20:20+jlen])
+              if not scene.get('meshes') or not scene.get('nodes'):raise RuntimeError('GLB has no geometry')
+              for entry in list(scene.get('images') or [])+list(scene.get('buffers') or []):
+                u=entry.get('uri')
+                if u and not str(u).startswith('data:'):raise RuntimeError('External asset dependency')
+              sha=hashlib.sha256(data).hexdigest()
+              if sha in seen:raise RuntimeError('Duplicate binary sha256')
+              thumbs=sorted((meta.get('thumbnails') or {}).get('images') or [],key=lambda x:abs(int(x.get('width') or 0)-800))
+              thumb=None
+              for pic in thumbs:
+                try:
+                  rs=requests.get(pic['url'],headers=headers,timeout=25);rs.raise_for_status()
+                  im=Image.open(io.BytesIO(rs.content)).convert('RGB')
+                  if im.width<150:continue
+                  im.thumbnail((850,675));buf=io.BytesIO();im.save(buf,'WEBP',quality=82);thumb=buf.getvalue();break
+                except Exception:continue
+              if not thumb:raise RuntimeError('No usable author-supplied preview image')
+              slug='SKFB-'+uid
+              modelurl=meta.get('viewerUrl') or 'https://sketchfab.com/models/'+uid
+              licenseurl='https://creativecommons.org/licenses/by-sa/4.0/' if lic=='by-sa' else 'https://creativecommons.org/licenses/by/4.0/'
+              licenseid='CC-BY-SA-4.0' if lic=='by-sa' else 'CC-BY-4.0'
+              info={'id':slug,'name':meta.get('name') or row['title'],'creator':author,'source_url':modelurl,'license':licenseid,'license_url':licenseurl,
+                    'license_evidence':'https://api.sketchfab.com/v3/models/'+uid,'archive_source':src,'sha256_glb':sha,'bytes_glb':len(data),'mesh_count':len(scene['meshes']),
+                    'quality_status':'Pre-screened booth from source preview; manufacturing not verified','copyright_note':'Credit original author and source; CC-BY-SA derivatives remain share-alike'}
+              archive=out/(slug+'-ORIGINAL-GLB.zip')
+              with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED,compresslevel=5) as z:
+                z.writestr(slug+'/ATTRIBUTION.txt','Title: '+info['name']+'\nCreator: '+author+'\nSketchfab: '+modelurl+'\nLicense: '+licenseid+' ('+licenseurl+')\nInternal research and design references; preserve CC credit on reuse.\n')
+                z.writestr(slug+'/MODEL_INFORMATION.json',json.dumps(info,ensure_ascii=False,indent=2))
+                z.writestr(slug+'/'+slug+'.glb',data)
+                z.writestr(slug+'/'+slug+'.webp',thumb)
+              with zipfile.ZipFile(archive) as z:
+                assert z.testzip() is None
+                assert hashlib.sha256(z.read(slug+'/'+slug+'.glb')).hexdigest()==sha
+              seen.add(sha)
+              index['assets'].append({**info,'zip_name':archive.name,'zip_bytes':archive.stat().st_size})
+              print('SAVED',slug,len(data),'archive',archive.stat().st_size,flush=True)
+            except Exception as exc:
+              index['failures'].append({'uid':uid,'title':row['title'],'reason':str(exc)[:280]})
+              print('REJECT',uid,str(exc)[:250],flush=True)
+            time.sleep(0.6)
+          (out/'INDEX_AND_RIGHTS_WAVE2.json').write_text(json.dumps(index,ensure_ascii=False,indent=2),encoding='utf8')
+          print('SUCCESS',len(index['assets']),'FAILURES',len(index['failures']),flush=True)
+          if not index['assets']:sys.exit('No valid downloadable original models')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-11-source-booths-drive-wave2
+          path: drive-collection-wave2/
+          retention-days: 7
+          compression-level: 0
+          if-no-files-found: error
