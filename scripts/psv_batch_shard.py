@@ -11,7 +11,7 @@ out=pathlib.Path("output-"+shard_id);out.mkdir(exist_ok=True)
 q=json.loads(pathlib.Path("psv-bulk-candidates/candidate_queue.json").read_text())["candidates"]
 already=set(json.loads(pathlib.Path("catalog/bulk_import_existing_uids.json").read_text())["current_verified_drive_uids"])
 bad=re.compile(r"banner|nightstand|shelving|photo.?booth|telephone.?booth|display wall|booth sign|logo booth|prop|toy|game",re.I)
-strong=re.compile(r"booth|exhibition.{0,12}stand|expo|trade.{0,8}show|trade.{0,8}fair|messestand|fuar.?stand|\\bstand\\b",re.I)
+strong=re.compile(r"booth|exhibition.{0,12}stand|expo|trade.{0,8}show|trade.{0,8}fair|messestand|fuar.?stand|(?:^|[\s_-])stand(?:$|[\s_-])",re.I)
 possible=[r for r in q if r["shard"]==shard_name and r["scene_id"] not in already
     and int(r["tar_order"])<=600 and not bad.search(r["name"]) 
     and (strong.search(r["name"]) or int(r["quality_score"])>=9)]
