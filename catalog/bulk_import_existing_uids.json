@@ -12,6 +12,7 @@
     "1c6522188163417cbf383d722c1752f0",
     "2018c8c0dfc744288aa3e3092124743a",
     "2805e8343ca443b598d232ae0ee59f1a",
+    "2b11ff2367434aaabb9ab33f285d6182",
     "2bd803f8bd684c04a07bd21f63f4a2b6",
     "2c6f4626d4eb4474825d827641a80884",
     "2fb735c4ccc64eb7860eb1ad727cb82e",
@@ -19,6 +20,7 @@
     "31ebac036f0b4b039060b1fd80b0446e",
     "34cbe4a1a47445ad8189b9bdb8d3c56f",
     "34ff5f2693a649478caccf99aea4e6c6",
+    "3739467115ca49c79dc685b571af4d91",
     "37477bd585b1491d914761555f2475d7",
     "3915658dbd344dcfa4e47cf6eafad254",
     "3b5a60cce9c84d608101d9fd898d0982",
@@ -43,6 +45,7 @@
     "573a63f0222942d7b848f71562ae9f14",
     "582f06942d2142afa01172139406a10c",
     "584ddb08ab164bfdbc51ba208f1f6468",
+    "5b069d007b4347e59a20817f9557841d",
     "5bf1ae45aac84838a3a64a30a508880d",
     "5e2a9a0387b349d7b11dda5ab0940692",
     "61be25e36a0645df93f3deb66b5f699c",
@@ -67,6 +70,7 @@
     "7efc36bd9ba642168658e3ed94995f71",
     "7efcadaad23f460485c1e9758a4645c8",
     "80e40d1e173d4e6ba84a984c3c2aa09d",
+    "878a1f0783964860a2e8b8727cfdbc4f",
     "887c57a0235548fd81359dae1b1a45a9",
     "8c2ad81f477441798b865bc9d5a507b6",
     "8d4f1f05c4314527ac605de396507ae9",
@@ -79,6 +83,7 @@
     "9b39df3e97bc4f108f80c2a1c1d52610",
     "9efeeff019a44bd493e028fc69c8ddf6",
     "a2f3122e874b4ed29721e0161a4e2b34",
+    "a35d8a5f93014b7684c61cbc496e1513",
     "a44539ed2c0445b2b0681d627ada3740",
     "a6e3fc1464534babb93576240bc4de9c",
     "a8d4837aa14b4b449feddb948e30f39f",
@@ -112,6 +117,7 @@
     "ccceb87a823140bd97bfb838a16fe4e3",
     "cee16e22beaa44c3805a7eb8bd8c5a95",
     "d1690cfb32c4406eb5b22ee9c3bbd226",
+    "d3028eed76064c4d86bfb651320d5748",
     "d30d323be9614a7f8dd851a12464e06a",
     "d7181ed952354a89a82da8770668450e",
     "d922d41591dd4279a957a6d80e366a7f",
@@ -138,6 +144,6 @@
     "fefdb0c8ef0a4a50a79c065ee32a2a3b"
   ],
   "last_checked": "2026-11-05",
-  "baseline_count": 136,
-  "note": "Contains 136 source UIDs verified on Google Drive including 53 new original model packages. Engineering production approval is separate."
+  "baseline_count": 142,
+  "note": "142 original creator-model UIDs with downloadable Drive packages, after Wave09; visual approval provisional, engineering production verification separate."
 }
