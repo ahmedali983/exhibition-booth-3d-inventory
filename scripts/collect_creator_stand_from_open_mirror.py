@@ -86,6 +86,24 @@ with zipfile.ZipFile(package) as z:
  assert z.testzip() is None
  assert hashlib.sha256(z.read("booth.glb")).hexdigest()==manifest["glb_sha256"]
  if hashlib.sha256(z.read("original_creator_source.zip")).hexdigest()!=manifest["native_source_sha256"]:raise ValueError("Native source changed")
-if package.stat().st_size>97000000:raise ValueError("Combined archive too large for Drive; split required")
+if package.stat().st_size>97000000:
+ package.unlink()
+ glb_archive=out/(uidname+"-GLB-ONLY.zip")
+ with zipfile.ZipFile(glb_archive,"w",zipfile.ZIP_DEFLATED,compresslevel=5) as z:
+  z.writestr("MANIFEST.json",json.dumps(manifest,indent=2,ensure_ascii=False))
+  z.writestr("booth.glb",glb_bytes)
+  z.writestr("preview.jpeg",preview)
+  z.writestr("ATTRIBUTION_AND_RIGHTS.txt",title+" by "+creator+"\\n"+manifest["source_url"]+"\\n"+lid+" "+license_url)
+ source_archive_file=out/(uidname+"-CREATOR-SOURCE-ONLY.zip")
+ with zipfile.ZipFile(source_archive_file,"w",zipfile.ZIP_DEFLATED,compresslevel=5) as z:
+  z.writestr("MANIFEST.json",json.dumps(manifest,indent=2,ensure_ascii=False))
+  z.writestr("original_creator_source.zip",source)
+  z.writestr("ATTRIBUTION_AND_RIGHTS.txt",title+" by "+creator+"\\n"+manifest["source_url"]+"\\n"+lid+" "+license_url)
+ for f in [glb_archive,source_archive_file]:
+  with zipfile.ZipFile(f) as z:assert z.testzip() is None
+  if f.stat().st_size>97000000:raise ValueError("Individual source exceeds Drive cap")
+ print("SPLIT_MODEL_ARCHIVES",UID,glb_archive.stat().st_size,source_archive_file.stat().st_size,flush=True)
+else:
+ print("PACKED_SINGLE_ARCHIVE",UID,package.stat().st_size,flush=True)
 shutil.rmtree(scratch,ignore_errors=True)
 print("COLLECTED",UID,title,creator,"PACKAGED_BYTES",package.stat().st_size,"GLB",len(glb_bytes),"NATIVE",len(source),"ORIGINAL_COUNT",len(source_names),flush=True)
