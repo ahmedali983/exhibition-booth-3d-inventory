@@ -1,0 +1,61 @@
+name: ExpoVault Open CAD Production References
+on:
+  push:
+    branches: [feature/provenance-and-native-cad-20261105]
+    paths: [.github/workflows/production-reference-bundles.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package-open-cad:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch original open source 3D and fabrication files
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p third_party
+          git clone --depth 1 https://github.com/VincentMuller/WHNL-WikiStand2014.git third_party/WHNL-WIKISTAND2014
+          git clone --depth 1 https://github.com/jisonZ/Wikihouse-Project-Pavilion-At-School.git third_party/WIKIHOUSE-PAVILION
+      - name: Assemble verified source archives with attribution and checksums
+        shell: bash
+        run: |
+          python - <<'PY'
+          import pathlib,json,zipfile,hashlib,datetime
+          root=pathlib.Path('third_party')
+          out=pathlib.Path('production-reference-archives')
+          out.mkdir(exist_ok=True)
+          cases=[
+             ('WHNL-WIKISTAND2014',True,'https://github.com/VincentMuller/WHNL-WikiStand2014','WikiHouseNL / VincentMuller', 'Exhibition stand actually built and exhibited; DXF original cutting layouts, SKP original model, source dimension PDF'),
+             ('WIKIHOUSE-PAVILION',False,'https://github.com/jisonZ/Wikihouse-Project-Pavilion-At-School','Jason Zhang, Frank Duan, YuMing Bai / WikiHouse','Architectural pavilion reference, not a trade show booth'),
+          ]
+          index={'date_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'license':'CC-BY-SA-3.0','bundles':[]}
+          for slug,booth,url,author,notes in cases:
+              folder=root/slug
+              files=sorted(x for x in folder.iterdir() if x.is_file() and not x.name.startswith('.'))
+              assert any(x.suffix.lower()=='.skp' for x in files)
+              assert any(x.suffix.lower() in ('.dxf','.dwg') for x in files)
+              assert len(files)>=4
+              metadata={'id':slug,'original_creator':author,'source_url':url,'license':'CC-BY-SA-3.0','license_url':'https://creativecommons.org/licenses/by-sa/3.0/','complete_exhibition_stand':booth,'production_drawing_status':'ORIGINAL_SOURCE_NOT_APPROVED_FOR_MANUFACTURE','model_status':'NATIVE_SKP_NO_GLB_CONVERSION','notes':notes,
+                       'files':[{'name':f.name,'bytes':f.stat().st_size,'sha256':hashlib.sha256(f.read_bytes()).hexdigest()} for f in files]}
+              zippath=out/(slug+'-ORIGINAL-CAD.zip')
+              with zipfile.ZipFile(zippath,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=6) as z:
+                  for file in files: z.write(file,arcname=slug+'/'+file.name)
+                  z.writestr(slug+'/EXPOVAULT_SOURCE_AND_RIGHTS.json',json.dumps(metadata,ensure_ascii=False,indent=2))
+              with zipfile.ZipFile(zippath) as z:
+                  assert z.testzip() is None
+              index['bundles'].append({**metadata,'archive':zippath.name,'archive_bytes':zippath.stat().st_size,'archive_sha256':hashlib.sha256(zippath.read_bytes()).hexdigest()})
+              print('PRODUCTION_PACKAGE',slug,len(files),zippath.stat().st_size,flush=True)
+          (out/'verified_index.json').write_text(json.dumps(index,ensure_ascii=False,indent=2),encoding='utf8')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-native-cad-reference-pack
+          path: production-reference-archives/
+          compression-level: 6
+          retention-days: 7
+          if-no-files-found: error
