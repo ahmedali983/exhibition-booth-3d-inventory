@@ -1,0 +1,95 @@
+{
+  "date": "2026-11-05",
+  "purpose": "11 visual-screened original booth models; cloud-first Drive acquisition",
+  "count": 11,
+  "assets": [
+    {
+      "uid": "d7181ed952354a89a82da8770668450e",
+      "title": "Stall Number-1",
+      "archive_path": "glbs/000-081/d7181ed952354a89a82da8770668450e.glb",
+      "expected_bytes": 1466576,
+      "license": "by",
+      "review_status": "VISUAL_PRECHECK_SOURCE_RIGHTS_CONFIRMED_DOWNLOAD_PENDING"
+    },
+    {
+      "uid": "a8d4837aa14b4b449feddb948e30f39f",
+      "title": "Tech Adaptika Booth Sample 01",
+      "archive_path": "glbs/000-045/a8d4837aa14b4b449feddb948e30f39f.glb",
+      "expected_bytes": 754484,
+      "license": "by",
+      "review_status": "VISUAL_PRECHECK_SOURCE_RIGHTS_CONFIRMED_DOWNLOAD_PENDING"
+    },
+    {
+      "uid": "1772ca1da7a043cdbaa582d662eb219c",
+      "title": "Tech Adaptika Booth Sample 02",
+      "archive_path": "glbs/000-115/1772ca1da7a043cdbaa582d662eb219c.glb",
+      "expected_bytes": 770892,
+      "license": "by",
+      "review_status": "VISUAL_PRECHECK_SOURCE_RIGHTS_CONFIRMED_DOWNLOAD_PENDING"
+    },
+    {
+      "uid": "37477bd585b1491d914761555f2475d7",
+      "title": "Tech Adaptika Small Booth 01",
+      "archive_path": "glbs/000-153/37477bd585b1491d914761555f2475d7.glb",
+      "expected_bytes": 714168,
+      "license": "by",
+      "review_status": "VISUAL_PRECHECK_SOURCE_RIGHTS_CONFIRMED_DOWNLOAD_PENDING"
+    },
+    {
+      "uid": "34cbe4a1a47445ad8189b9bdb8d3c56f",
+      "title": "InSite ICSC RECon 2019 Booth",
+      "archive_path": "glbs/000-006/34cbe4a1a47445ad8189b9bdb8d3c56f.glb",
+      "expected_bytes": 46368208,
+      "license": "by",
+      "review_status": "VISUAL_PRECHECK_SOURCE_RIGHTS_CONFIRMED_DOWNLOAD_PENDING"
+    },
+    {
+      "uid": "e6f8869a7579446ba46269fc0d383a82",
+      "title": "Alpine Booth D",
+      "archive_path": "glbs/000-127/e6f8869a7579446ba46269fc0d383a82.glb",
+      "expected_bytes": 3519668,
+      "license": "by-sa",
+      "review_status": "VISUAL_PRECHECK_SOURCE_RIGHTS_CONFIRMED_DOWNLOAD_PENDING"
+    },
+    {
+      "uid": "42b1be487f2948158b3c8ff8c3e018f7",
+      "title": "Alpine Booth B",
+      "archive_path": "glbs/000-090/42b1be487f2948158b3c8ff8c3e018f7.glb",
+      "expected_bytes": 3249012,
+      "license": "by",
+      "review_status": "VISUAL_PRECHECK_SOURCE_RIGHTS_CONFIRMED_DOWNLOAD_PENDING"
+    },
+    {
+      "uid": "8e8be777307f4c18aa5d3aaf01b216fc",
+      "title": "Virtual Trade Fair Booth",
+      "archive_path": "glbs/000-157/8e8be777307f4c18aa5d3aaf01b216fc.glb",
+      "expected_bytes": 17176040,
+      "license": "by",
+      "review_status": "VISUAL_PRECHECK_SOURCE_RIGHTS_CONFIRMED_DOWNLOAD_PENDING"
+    },
+    {
+      "uid": "fb46556d91b4465bb0c7c0813a280d25",
+      "title": "Alpine Booth F",
+      "archive_path": "glbs/000-094/fb46556d91b4465bb0c7c0813a280d25.glb",
+      "expected_bytes": 4616208,
+      "license": "by",
+      "review_status": "VISUAL_PRECHECK_SOURCE_RIGHTS_CONFIRMED_DOWNLOAD_PENDING"
+    },
+    {
+      "uid": "b5859857939b4bab96f38d7586bc20f2",
+      "title": "Exhibition Stall",
+      "archive_path": "glbs/000-044/b5859857939b4bab96f38d7586bc20f2.glb",
+      "expected_bytes": 5688984,
+      "license": "by",
+      "review_status": "VISUAL_PRECHECK_SOURCE_RIGHTS_CONFIRMED_DOWNLOAD_PENDING"
+    },
+    {
+      "uid": "4bfd63741da74521ba96c6d583bdbdf2",
+      "title": "Rugged Booth Expo",
+      "archive_path": "glbs/000-157/4bfd63741da74521ba96c6d583bdbdf2.glb",
+      "expected_bytes": 3532336,
+      "license": "by",
+      "review_status": "VISUAL_PRECHECK_SOURCE_RIGHTS_CONFIRMED_DOWNLOAD_PENDING"
+    }
+  ]
+}
