@@ -142,7 +142,7 @@ function makeOriginalCard(v){
   const download=create('button','inline-download','↓ Download original GLB + licence');
   download.onclick=e=>{e.stopPropagation();downloadCreatorPack(hosted,download)};
   const see=create('a','creator-editor-link','◈ Preview & recolour original 3D');
-  see.href='open-3d.html?asset='+encodeURIComponent(hosted.id);see.onclick=e=>e.stopPropagation();
+  see.href='originals.html?asset='+encodeURIComponent(hosted.id);see.onclick=e=>e.stopPropagation();
   body.append(download,see);
  }else{
   const createNew=create('a','inline-download','✳ Design a downloadable booth instead');
@@ -150,7 +150,7 @@ function makeOriginalCard(v){
   body.append(createNew);
  }
  card.append(visual,body);
- const activate=()=>hosted?window.location.assign('open-3d.html?asset='+encodeURIComponent(hosted.id)):openOriginal(v);
+ const activate=()=>hosted?window.location.assign('originals.html?asset='+encodeURIComponent(hosted.id)):openOriginal(v);
  card.onclick=activate;
  card.onkeydown=e=>{if(e.target===card&&(e.key==='Enter'||e.key===' ')){e.preventDefault();activate()}};
  return card;
@@ -274,7 +274,7 @@ function activeList(){
 }
 function openOriginal(v,{hash=true,fromSaved=false}={}){
  const asset=STATE.hostedByUid.get(uidFor(v));
- if(asset){window.location.href='open-3d.html?asset='+encodeURIComponent(asset.id);return}
+ if(asset){window.location.href='originals.html?asset='+encodeURIComponent(asset.id);return}
  return toast('Only fully hosted GLB files can be opened in this library');
  STATE.active=v;STATE.fromSaved=fromSaved||STATE.section==='saved';
  const list=activeList();STATE.position=list.findIndex(x=>x.id===v.id);if(STATE.position<0)STATE.position=0;
