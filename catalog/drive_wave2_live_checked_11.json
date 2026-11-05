@@ -1,0 +1,107 @@
+{
+  "target": 4000,
+  "quality_stage": "VISUAL_QA_PASS",
+  "rights_verification": "Sketchfab live public model metadata checked from authorized desktop VM on 2026-11-05; no rights bypass",
+  "source_archive": "Objaverse 1.0 (AllenAI public GLB dataset)",
+  "assets": [
+    {
+      "uid": "d7181ed952354a89a82da8770668450e",
+      "archive_path": "glbs/000-081/d7181ed952354a89a82da8770668450e.glb",
+      "expected_bytes": 1466576,
+      "license_slug": "by",
+      "title": "Stall Number-1",
+      "creator": "Kavan.King",
+      "source_url": "https://sketchfab.com/3d-models/stall-number-1-d7181ed952354a89a82da8770668450e"
+    },
+    {
+      "uid": "a8d4837aa14b4b449feddb948e30f39f",
+      "archive_path": "glbs/000-045/a8d4837aa14b4b449feddb948e30f39f.glb",
+      "expected_bytes": 754484,
+      "license_slug": "by",
+      "title": "Tech-Adaptika -Booth Sample 01",
+      "creator": "sebastian21555",
+      "source_url": "https://sketchfab.com/3d-models/tech-adaptika-booth-sample-01-a8d4837aa14b4b449feddb948e30f39f"
+    },
+    {
+      "uid": "1772ca1da7a043cdbaa582d662eb219c",
+      "archive_path": "glbs/000-115/1772ca1da7a043cdbaa582d662eb219c.glb",
+      "expected_bytes": 770892,
+      "license_slug": "by",
+      "title": "Tech-Adaptika - Booth Sample 02",
+      "creator": "sebastian21555",
+      "source_url": "https://sketchfab.com/3d-models/tech-adaptika-booth-sample-02-1772ca1da7a043cdbaa582d662eb219c"
+    },
+    {
+      "uid": "37477bd585b1491d914761555f2475d7",
+      "archive_path": "glbs/000-153/37477bd585b1491d914761555f2475d7.glb",
+      "expected_bytes": 714168,
+      "license_slug": "by",
+      "title": "Tech-Adaptika - Small Booth 01 Sample",
+      "creator": "sebastian21555",
+      "source_url": "https://sketchfab.com/3d-models/tech-adaptika-small-booth-01-sample-37477bd585b1491d914761555f2475d7"
+    },
+    {
+      "uid": "34cbe4a1a47445ad8189b9bdb8d3c56f",
+      "archive_path": "glbs/000-006/34cbe4a1a47445ad8189b9bdb8d3c56f.glb",
+      "expected_bytes": 46368208,
+      "license_slug": "by",
+      "title": "InSite ICSC RECon 2019 Booth S327Q",
+      "creator": "insiterealestate",
+      "source_url": "https://sketchfab.com/3d-models/insite-icsc-recon-2019-booth-s327q-34cbe4a1a47445ad8189b9bdb8d3c56f"
+    },
+    {
+      "uid": "e6f8869a7579446ba46269fc0d383a82",
+      "archive_path": "glbs/000-127/e6f8869a7579446ba46269fc0d383a82.glb",
+      "expected_bytes": 3519668,
+      "license_slug": "by-sa",
+      "title": "Alpine Booth D",
+      "creator": "exhibitbook",
+      "source_url": "https://sketchfab.com/3d-models/alpine-booth-d-e6f8869a7579446ba46269fc0d383a82"
+    },
+    {
+      "uid": "42b1be487f2948158b3c8ff8c3e018f7",
+      "archive_path": "glbs/000-090/42b1be487f2948158b3c8ff8c3e018f7.glb",
+      "expected_bytes": 3249012,
+      "license_slug": "by",
+      "title": "Alpine Booth B",
+      "creator": "exhibitbook",
+      "source_url": "https://sketchfab.com/3d-models/alpine-booth-b-42b1be487f2948158b3c8ff8c3e018f7"
+    },
+    {
+      "uid": "8e8be777307f4c18aa5d3aaf01b216fc",
+      "archive_path": "glbs/000-157/8e8be777307f4c18aa5d3aaf01b216fc.glb",
+      "expected_bytes": 17176040,
+      "license_slug": "by",
+      "title": "Virtuelle Messe Swicos / Virtual Booth",
+      "creator": "Beutler",
+      "source_url": "https://sketchfab.com/3d-models/virtuelle-messe-swicos-virtual-booth-8e8be777307f4c18aa5d3aaf01b216fc"
+    },
+    {
+      "uid": "fb46556d91b4465bb0c7c0813a280d25",
+      "archive_path": "glbs/000-094/fb46556d91b4465bb0c7c0813a280d25.glb",
+      "expected_bytes": 4616208,
+      "license_slug": "by",
+      "title": "Alpine Booth F",
+      "creator": "exhibitbook",
+      "source_url": "https://sketchfab.com/3d-models/alpine-booth-f-fb46556d91b4465bb0c7c0813a280d25"
+    },
+    {
+      "uid": "b5859857939b4bab96f38d7586bc20f2",
+      "archive_path": "glbs/000-044/b5859857939b4bab96f38d7586bc20f2.glb",
+      "expected_bytes": 5688984,
+      "license_slug": "by",
+      "title": "Stall",
+      "creator": "abdul.12",
+      "source_url": "https://sketchfab.com/3d-models/stall-b5859857939b4bab96f38d7586bc20f2"
+    },
+    {
+      "uid": "4bfd63741da74521ba96c6d583bdbdf2",
+      "archive_path": "glbs/000-157/4bfd63741da74521ba96c6d583bdbdf2.glb",
+      "expected_bytes": 3532336,
+      "license_slug": "by",
+      "title": "Rugged Booth Expo",
+      "creator": "exzi",
+      "source_url": "https://sketchfab.com/3d-models/rugged-booth-expo-4bfd63741da74521ba96c6d583bdbdf2"
+    }
+  ]
+}
