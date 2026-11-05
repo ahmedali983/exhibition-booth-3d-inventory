@@ -1,0 +1,19 @@
+name: ExpoVault ProSceneverse Range Probe
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/prosceneverse-range-probe.yml]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/prosceneverse_range_probe.py
+      - name: Install metadata tools
+        run: python -m pip install -q pandas pyarrow requests huggingface_hub
+      - name: Inspect shard index, metadata and HTTP partial-content support
+        run: python scripts/prosceneverse_range_probe.py
