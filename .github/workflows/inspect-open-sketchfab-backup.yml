@@ -1,0 +1,39 @@
+name: ExpoVault Inspect Open Sketchfab Mirror Catalog
+on:
+  push:
+    branches: [feature/expovault-professional-booths-batch1]
+    paths: [.github/workflows/inspect-open-sketchfab-backup.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Read public mirror file indices and ZIP structure, no bulk download
+        shell: bash
+        run: |
+          python - <<'PY'
+          import requests,re,html,zipfile,io,json
+          from html.parser import HTMLParser
+          B='https://mirror.traines.eu/sketchfab-backup'
+          for url in [B+'/',B+'/61/',B+'/41/']:
+            try:
+              r=requests.get(url,timeout=(5,20),headers={'User-Agent':'ExpoVault-Source-Catalog-Research/1.0'})
+              print('INDEX',url,'HTTP',r.status_code,'BYTES',len(r.content),'TYPE',r.headers.get('content-type'))
+              if r.ok:
+                s=r.text
+                print('INDEX_PREVIEW',re.sub(r'\s+',' ',s[:1500])[:1200])
+                print('LINKS',re.findall(r'href=[\x22\x27]([^\x22\x27]+)',s,re.I)[:25])
+            except Exception as e:print('INDEX_ERROR',url,str(e)[:150])
+          u=B+'/61/61be25e36a0645df93f3deb66b5f699c.zip'
+          try:
+            r=requests.get(u,timeout=(10,40),headers={'User-Agent':'ExpoVault-Source-Catalog-Research/1.0'})
+            print('ARCHIVE_HTTP',r.status_code,'SIZE',len(r.content))
+            r.raise_for_status()
+            z=zipfile.ZipFile(io.BytesIO(r.content))
+            members=[{'filename':x.filename,'size':x.file_size} for x in z.infolist()[:35]]
+            print('MEMBERS',json.dumps(members)[:4600])
+          except Exception as e:print('ARCHIVE_ERROR',str(e)[:400])
+          PY
