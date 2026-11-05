@@ -10,7 +10,7 @@ const el=(tag,className,text)=>{
  if(text!==undefined)node.textContent=String(text);
  return node;
 };
-const state={assets:[],visible:[],packs:[],filter:'all',query:'',sort:'featured',count:32,active:null,activeIndex:-1,originalMaterials:[],scene:null,camera:null,renderer:null,controls:null,object:null,resetView:null,observer:null,frame:0,loadId:0};
+const state={assets:[],visible:[],packs:[],filter:'items',query:'',sort:'featured',count:32,active:null,activeIndex:-1,originalMaterials:[],scene:null,camera:null,renderer:null,controls:null,object:null,resetView:null,observer:null,frame:0,loadId:0};
 let toastTimer=0;
 const fmt=num=>Number(num||0).toLocaleString('en-US');
 const size=bytes=>bytes>=1048576?(bytes/1048576).toFixed(2)+' MB':(bytes/1024).toFixed(0)+' KB';
@@ -101,7 +101,7 @@ async function downloadLicensedPackage(asset,button){
 }
 function sortedAssets(){
  const q=state.query.trim().toLowerCase();
- let list=state.assets.filter(a=>(state.filter==='all'||a.pack_slug===state.filter)&&
+ let list=state.assets.filter(a=>(state.filter==='all'||(state.filter==='items'&&!a.is_full_booth)||a.pack_slug===state.filter)&&
   (!q||[a.name,a.pack,a.description,a.kind,a.id].some(s=>String(s||'').toLowerCase().includes(q))));
  switch(state.sort){
   case 'name':list.sort((a,b)=>a.name.localeCompare(b.name));break;
@@ -121,7 +121,7 @@ function render(more=false){
  grid.append(fragment);
  $('emptyAssets').hidden=state.visible.length>0;
  $('visibleCount').textContent=fmt(state.visible.length);
- $('resultsLabel').textContent=fmt(state.visible.length)+' files';
+ $('resultsLabel').textContent=fmt(state.visible.length)+' locally hosted GLB files';
  $('showMoreAssets').hidden=grid.children.length>=state.visible.length;
  $('assetProgress').textContent='Showing '+fmt(grid.children.length)+' of '+fmt(state.visible.length)+' self-hosted GLB files';
 }
@@ -321,13 +321,15 @@ async function init(){
   const countByPack=new Map();
   for(const asset of state.assets)countByPack.set(asset.pack_slug,(countByPack.get(asset.pack_slug)||0)+1);
   state.packs=(data.packs||[]).filter(p=>countByPack.has(p.slug)).map(p=>({...p,count:countByPack.get(p.slug)}));
-  $('totalAssets').textContent=fmt(state.assets.length);
+  state.packs.unshift({slug:'items',title:'All 3D Items',count:state.assets.filter(x=>!x.is_full_booth).length});
+  $('totalAssets').textContent=fmt(location.pathname.endsWith('/originals.html')?state.assets.filter(x=>x.is_full_booth).length:state.assets.filter(x=>!x.is_full_booth).length);
   $('totalPacks').textContent=fmt(state.packs.length);
-  $('sideAssetCount').textContent=fmt(state.assets.length);
+  $('sideAssetCount').textContent=fmt(state.assets.filter(x=>!x.is_full_booth).length);
  $('libraryLicenses').textContent=data.licensedCount?'Open + approved':'CC0';
   filters();
   const params=new URLSearchParams(location.search);
   const initialPack=params.get('pack');
+  if(location.pathname.endsWith('/originals.html'))state.filter='licensed-booths';
   if(initialPack&&state.packs.some(p=>p.slug===initialPack))state.filter=initialPack;
   const chosen=$('packFilters').querySelector('[data-pack="'+state.filter+'"]');
   if(chosen)$('packFilters').querySelectorAll('[data-pack]').forEach(b=>b.classList.toggle('selected',b===chosen));
@@ -335,7 +337,7 @@ async function init(){
   const chosenAsset=params.get('asset');
   if(chosenAsset){
    const matching=state.assets.find(a=>a.id===chosenAsset);
-   if(matching){if(state.filter!=='all'&&matching.pack_slug!==state.filter){state.filter=matching.pack_slug;runFilters()}open(matching)}
+   if(matching){if(state.filter!=='all'&&matching.pack_slug!==state.filter&&!(state.filter==='items'&&!matching.is_full_booth)){state.filter=matching.pack_slug;runFilters()}open(matching)}
   }
  }catch(error){$('assetGrid').textContent='Catalogue failed to load: '+error.message;notice(error.message)}
 }
