@@ -45,7 +45,7 @@ creator=str(user.get("username") or "") if isinstance(user,dict) else ""
 if not creator:raise ValueError("Missing creator")
 title=meta.get("name") or UID
 original=fetch(base+UID+".zip",150000000)
-source=fetch(base+UID+".source.zip",90000000)
+source=fetch(base+UID+".source.zip",155000000)
 preview=fetch(base+UID+".thumb.jpeg",3800000)
 with Image.open(BytesIO(preview)) as im:im.verify()
 gltf_archive=inspect_zip(original)
