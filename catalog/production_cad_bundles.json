@@ -1,0 +1,169 @@
+{
+  "name": "ExpoVault Native CAD Production Reference Collection",
+  "count": 2,
+  "originals_with_real_production_cad": 1,
+  "generated_3d_variations_counted": 0,
+  "updated_at_utc": "2026-11-05T09:17:23.450896+00:00",
+  "assets": [
+    {
+      "id": "WHNL-WIKISTAND2014",
+      "folder": "WikiStand2014",
+      "title": "WikiHouseNL WikiStand2014",
+      "creator": "WikiHouseNL team",
+      "source_url": "https://github.com/VincentMuller/WHNL-WikiStand2014",
+      "original_sha": "a5516fa90e0f37c694075abd8325117a7c805251",
+      "type": "real_exhibition_stand",
+      "complete_booth": true,
+      "description": "Real stand built and exhibited at trade events; original SketchUp, CNC DXF cut plans and measured PDF sheets.",
+      "license": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "license_notice": "Credit original authors, link license, indicate modifications, and apply ShareAlike to derivatives as required.",
+      "engineering_disclaimer": "Uncertified fabrication references. Check dimensions, materials, tolerances, local codes, assembly and safety with a qualified professional.",
+      "original_source_format": "SKP",
+      "glb_is_converted_from_original_skp": true,
+      "glb_visual_qa": "PENDING",
+      "generated_fabrication_drawings": false,
+      "files": [
+        {
+          "name": "LICENSE.md",
+          "size_bytes": 368,
+          "sha256": "83e9aa03afc19b598d2dc540505f920d37db41bbded7979ce64a74cf1902c5a2",
+          "is_original": true
+        },
+        {
+          "name": "README.txt",
+          "size_bytes": 2437,
+          "sha256": "853489084ae19b4ca3a1f5876bacce908ba8ea977149125b1d0c1dcf7d66c6cf",
+          "is_original": true
+        },
+        {
+          "name": "WikiStand2014_WikiHouseNL.jpg",
+          "size_bytes": 232896,
+          "sha256": "6481644054e21dd94fa194c66cf67adb44aed6af830f0357338483790a56dbf8",
+          "is_original": true
+        },
+        {
+          "name": "WikiStand2014_WikiHouseNL_all panels for cutting.dxf",
+          "size_bytes": 2887724,
+          "sha256": "00007fba8019ad832ba5d8cd3a6c3b93e7f204c60f8433aaf2e818ac827dd223",
+          "is_original": true
+        },
+        {
+          "name": "WikiStand2014_WikiHouseNL_concept-stand.pdf",
+          "size_bytes": 912114,
+          "sha256": "c8c7291ba1f6d35762249ce45f30e9f6d16822e6e072fba6fe2e9cdc915679ee",
+          "is_original": true
+        },
+        {
+          "name": "WikiStand2014_WikiHouseNL_cutting parts.dxf",
+          "size_bytes": 2398318,
+          "sha256": "2814b2c662dd285582b1dd936f2def234cf6e794af4baae065da2e5fac621419",
+          "is_original": true
+        },
+        {
+          "name": "WikiStand2014_WikiHouseNL_dimensions.pdf",
+          "size_bytes": 2236731,
+          "sha256": "832ab22defd11ebed0e2416e42fe61de6d6a489726356a2e1930180d1c9d36f9",
+          "is_original": true
+        },
+        {
+          "name": "WikiStand2014_WikiHouseNL_panels for cutting.pdf",
+          "size_bytes": 254186,
+          "sha256": "1187c93ef15bf523ea9a72c7262fc4fca5642a6d12fe2335cc2ada8127353426",
+          "is_original": true
+        },
+        {
+          "name": "WikiStand2014_WikiHouseNL_skp8.skp",
+          "size_bytes": 5570173,
+          "sha256": "88a1ccc346b6c76bd12fa7bda73377767b408d6b9f4260657d758831cd0286fb",
+          "is_original": true
+        },
+        {
+          "name": "WikiStand2014_WikiHouseNL_unique panels for cutting.dxf",
+          "size_bytes": 1805155,
+          "sha256": "a655cabfade913692ecba4a6707d5087bcd7b04cd53ae4ba3caad4179f9dbb8c",
+          "is_original": true
+        },
+        {
+          "name": "WHNL-WIKISTAND2014.glb",
+          "size_bytes": 7812132,
+          "sha256": "9b2928c94e3219087fdd447868b8663914e5a8bd675f22387022d3cc6a963580",
+          "is_original": false,
+          "role": "derived_web_preview"
+        }
+      ],
+      "glb": "assets/production-cad/WHNL-WIKISTAND2014.glb",
+      "image": "assets/production-cad/WHNL-WIKISTAND2014.jpg",
+      "bundle": "assets/production-cad/WHNL-WIKISTAND2014-COMPLETE-DESIGN-BUNDLE.zip",
+      "bundle_bytes": 7846852,
+      "bundle_sha256": "24f61c6d074d887a542168148ee1c66bed344e2493e3db4e51319b7ef5eb0f4b",
+      "glb_bytes": 7812132,
+      "source_cad_available": true
+    },
+    {
+      "id": "WIKIHOUSE-PAVILION",
+      "folder": "WikiHousePavilion",
+      "title": "WikiHouse Pavilion at School",
+      "creator": "Jason Zhang and Frank Duan, led by YuMing Bai",
+      "source_url": "https://github.com/jisonZ/Wikihouse-Project-Pavilion-At-School",
+      "original_sha": "aaff1ee7230ad03aa9b3b2b6b8fcaf84473ca762",
+      "type": "architectural_pavilion_reference",
+      "complete_booth": false,
+      "description": "Architectural design reference. NOT a commercial exhibition booth.",
+      "license": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "license_notice": "Credit original authors, link license, indicate modifications, and apply ShareAlike to derivatives as required.",
+      "engineering_disclaimer": "Uncertified fabrication references. Check dimensions, materials, tolerances, local codes, assembly and safety with a qualified professional.",
+      "original_source_format": "SKP",
+      "glb_is_converted_from_original_skp": true,
+      "glb_visual_qa": "PENDING",
+      "generated_fabrication_drawings": false,
+      "files": [
+        {
+          "name": "Pavilion.dwg",
+          "size_bytes": 713340,
+          "sha256": "35a92c9b10cbb1c80f93b8a55cec4fab7775aa58300f59975cb3bfbed93e6e2d",
+          "is_original": true
+        },
+        {
+          "name": "Pavilion.jpg",
+          "size_bytes": 766788,
+          "sha256": "670eae0d62306069b34db76cf5ff1f4d179e5a7ae88f78a6cacbc78da252c17f",
+          "is_original": true
+        },
+        {
+          "name": "Pavilion.pdf",
+          "size_bytes": 771727,
+          "sha256": "23530a492de98de12f46ae572d06df25baa243a1bfffda1ae50e67e85a47f5f0",
+          "is_original": true
+        },
+        {
+          "name": "Pavilion.skp",
+          "size_bytes": 7060142,
+          "sha256": "09f85970c5de6c1718800e8d9bb54f050f5887e15c38137ec70f6329f1fbde4c",
+          "is_original": true
+        },
+        {
+          "name": "README.md",
+          "size_bytes": 2894,
+          "sha256": "ebbbe76ff8a88675621f9644b730a1a3676bf7bdf10d928ac8cbc255e113aada",
+          "is_original": true
+        },
+        {
+          "name": "WIKIHOUSE-PAVILION.glb",
+          "size_bytes": 13952220,
+          "sha256": "843afef07d42a0f39ab66284083bbdbc10ec081234f3b9f1d3ad6dc0fbd4b785",
+          "is_original": false,
+          "role": "derived_web_preview"
+        }
+      ],
+      "glb": "assets/production-cad/WIKIHOUSE-PAVILION.glb",
+      "image": "assets/production-cad/WIKIHOUSE-PAVILION.jpg",
+      "bundle": "assets/production-cad/WIKIHOUSE-PAVILION-COMPLETE-DESIGN-BUNDLE.zip",
+      "bundle_bytes": 6817611,
+      "bundle_sha256": "d62e858706003e7083f3897f830426ef9d2177c4124a370851d1290a67f63462",
+      "glb_bytes": 13952220,
+      "source_cad_available": true
+    }
+  ]
+}
