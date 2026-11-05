@@ -1,0 +1,23 @@
+name: ExpoVault Sketchfab Booth Census Sample
+on:
+  push:
+    branches: [research/expovault-open-archive-catalogue-20261105]
+    paths: [.github/workflows/booth-census-sample.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install -q requests pillow
+      - name: Inspect bounded CC backup metadata sample
+        run: python scripts/booth_census_sample.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sketchfab-booth-metadata-candidates
+          path: booth-census-sample/
+          retention-days: 7
+          if-no-files-found: error
