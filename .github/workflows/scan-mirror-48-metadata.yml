@@ -1,0 +1,22 @@
+name: ExpoVault Discover More CC Stand Models From Mirror Metadata
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/scan-mirror-48-metadata.yml]
+permissions: {contents: read}
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/mirror_48_metadata.py
+      - run: python -m pip install -q requests
+      - run: python -u scripts/mirror_48_metadata.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-48-shards-new-licensed-booth-candidates
+          path: mirror-title-discovery/
+          retention-days: 7
+          if-no-files-found: error
