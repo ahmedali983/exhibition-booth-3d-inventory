@@ -1,0 +1,48 @@
+name: ExpoVault Review Remaining Open Archive Booth Previews
+on:
+  push:
+    branches: [research/expovault-open-archive-catalogue-20261105]
+    paths: [.github/workflows/booth-previews-last14.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  images:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: expovault-booth-presence-and-previews
+          run-id: 42037132380
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: input
+      - run: python -m pip install -q requests pillow
+      - run: |
+          python - <<'PY'
+          import pathlib,json,requests,io
+          from PIL import Image,ImageDraw
+          data=json.loads(pathlib.Path('input/source_presence_audit.json').read_text())
+          records=data['valid'][28:]
+          W,H=332,255
+          im=Image.new('RGB',(W*4,H*((len(records)+3)//4)),'white')
+          d=ImageDraw.Draw(im)
+          for i,r in enumerate(records):
+              x=i%4*W;y=i//4*H
+              try:
+                  resp=requests.get(r['thumbnail_url'],timeout=14);resp.raise_for_status()
+                  pic=Image.open(io.BytesIO(resp.content)).convert('RGB')
+                  pic.thumbnail((W-7,H-58))
+                  im.paste(pic,(x+(W-pic.width)//2,y+(H-58-pic.height)//2))
+              except Exception as e: print('PREVIEW_FAILED',r['uid'],str(e)[:80])
+              d.text((x+5,y+H-50),str(i+29)+'. '+r['title'][:43],fill='black')
+              d.text((x+5,y+H-28),r['uid'],fill='black')
+              d.text((x+5,y+H-12),'gltf '+str(r['original_gltf'].get('bytes',0)//1000000)+'MB source '+str(r['original_source'].get('bytes',0)//1000000)+'MB',fill='black')
+          pathlib.Path('images').mkdir(exist_ok=True)
+          im.save('images/last14-booths.jpg',quality=83)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-last14-booths-preview-sheet
+          path: images/
+          retention-days: 7
