@@ -379,8 +379,18 @@ async function init(){
  // Customer-facing gallery includes only source-authored GLBs stored on our own server.
  // External metadata references remain research-only: never show non-downloadable cards.
  STATE.models=STATE.models.filter(v=>STATE.hostedByUid.has(uidFor(v)));
+ // Files imported directly from the authorised model archive may not have appeared
+ // in the historical inspiration index. Always surface every verified hosted GLB.
+ const existingOriginals=new Set(STATE.models.map(v=>uidFor(v)));
+ for(const a of (approved.assets||[])){
+  if(!a.uid||!STATE.hostedByUid.has(a.uid)||existingOriginals.has(a.uid))continue;
+  const record={id:'SKFB-'+a.uid,title:a.name,author:a.creator,uid:a.uid,
+   is_downloadable:true,thumbnail:a.thumbnail,license:a.license,
+   view_count:0,category:category({title:a.name}),relevance:score({title:a.name,view_count:0})};
+  STATE.models.push(record);existingOriginals.add(a.uid);
+ }
  STATE.concepts=(concepts.items||[]).map(c=>({id:c[0],width_m:c[1],depth_m:c[2],booth_type:c[3],style:c[4],fitout:c[5],area_m2:c[6]}));STATE.technical=[];
- // Main catalogue: 14 independently created designer originals plus 4200 downloadable
+ // Main catalogue: rights-verified designer originals plus 4200 downloadable
  // procedural layouts. Variants are labeled as concepts, never as original designer art.
  for(const c of STATE.concepts){
    c.is_local_concept=true;
