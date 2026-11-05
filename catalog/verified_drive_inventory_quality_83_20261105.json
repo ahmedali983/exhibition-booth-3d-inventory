@@ -1,0 +1,1265 @@
+{
+  "project": "ExpoVault professional exhibition booth library",
+  "target": 4000,
+  "status": "DRIVE_FIRST_COLLECTION_IN_PROGRESS",
+  "raw_distinct_source_models_on_drive": 86,
+  "provisional_accepted_source_model_uids": 83,
+  "prior_original_models_not_reaudited_in_this_pass": 48,
+  "new_visual_quality_approved": 28,
+  "quarantined": [
+    {
+      "uid": "e5eeea956e1e48fbb93a8dd5d0fac4da",
+      "reason": "Display fixture, not complete exhibition booth",
+      "file": "https://drive.google.com/file/d/16ZKZiRaEfOAUZX6dhIMVWFWk294rbJ9w/view?usp=drivesdk"
+    },
+    {
+      "uid": "89a98f342d394326a8c123c483da392d",
+      "reason": "Display fixture, not complete exhibition booth",
+      "file": "https://drive.google.com/file/d/1Dn-z23Fu5UJI18zMnB5-ZXGRTvaCxcOp/view?usp=drivesdk"
+    },
+    {
+      "uid": "c9b132cdab3648979b01695573c35aed",
+      "reason": "Duplicate exact binary geometry of 70462312d2814a358f21369fc7be1a5c",
+      "file": "https://drive.google.com/file/d/1jR6EDL4hdorizHvitUcUpSAFs8iiXo-9/view?usp=drivesdk"
+    }
+  ],
+  "validation": "Source license CC BY 4.0 for 31 new; GLB SHA256 verified and all source archives CRC verified. 30 distinct GLB BIN payloads out of 31; identical Unilever 6x6 geometry quarantined; two component-style stands quarantined.",
+  "warning": "Exact manufacturing Production files are NOT certified; original creator uploaded source ZIPs exist but may contain other model formats.",
+  "folders": {
+    "legacy_originals": "https://drive.google.com/drive/folders/1pJNA1ZopzJ1ndTFmHlIvy_nMDQcOCMzL",
+    "originals_new_root": "https://drive.google.com/drive/folders/1voG47srN0fpkhiebxA6ua5tDR3HK6exP",
+    "quality_approved": "https://drive.google.com/drive/folders/1EPtH6nmmcCqgaXOI_gf3z4XUKtluTrij",
+    "quarantine": "https://drive.google.com/drive/folders/1FrBRpjag1-R0Q9uBeuxulwp_JfVGT5XI",
+    "psv_range": "https://drive.google.com/drive/folders/1MgP8-A8bYd4XhZRTySRkMJvDyWBUucj9"
+  },
+  "models": [
+    {
+      "uid": "048de16d9edf42f5903c3c829a1a05c9",
+      "source_model_url": "https://sketchfab.com/models/048de16d9edf42f5903c3c829a1a05c9",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-048de16d9edf42f5903c3c829a1a05c9-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 14838856,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/1ZoiB43TZH9N6jk68qeYfYL45bDXQZh0G/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "0713fbce6c1f452e8ed7664cd2fc703d",
+      "sketchfab_model_url": "https://sketchfab.com/models/0713fbce6c1f452e8ed7664cd2fc703d",
+      "assets": [
+        {
+          "file_name": "SKFB-0713fbce6c1f452e8ed7664cd2fc703d-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1xFOwBss8wx6L6dR8TAzYeLuARFrA3msd/view?usp=drivesdk",
+          "file_bytes": 9933,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "08e81cf16098428eae38457e8e28c9ea",
+      "sketchfab_model_url": "https://sketchfab.com/models/08e81cf16098428eae38457e8e28c9ea",
+      "assets": [
+        {
+          "file_name": "SKFB-08e81cf16098428eae38457e8e28c9ea-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1McHfUq6ZAUSYyWOiZWuO_9NIwim3PJg8/view?usp=drivesdk",
+          "file_bytes": 9009707,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "1772ca1da7a043cdbaa582d662eb219c",
+      "sketchfab_model_url": "https://sketchfab.com/models/1772ca1da7a043cdbaa582d662eb219c",
+      "assets": [
+        {
+          "file_name": "SKFB-1772ca1da7a043cdbaa582d662eb219c-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/1jOwHLZFxYede8mAj1rPSjb-lIQt_6kaJ/view?usp=drivesdk",
+          "file_bytes": 619426,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "1ad2a14edf434982b3005b7739f8f193",
+      "source_model_url": "https://sketchfab.com/models/1ad2a14edf434982b3005b7739f8f193",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-1ad2a14edf434982b3005b7739f8f193-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 64164784,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/1rnJkdWAJKsVCkzhy2ieblGlCxgTO9cq2/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "2018c8c0dfc744288aa3e3092124743a",
+      "sketchfab_model_url": "https://sketchfab.com/models/2018c8c0dfc744288aa3e3092124743a",
+      "assets": [
+        {
+          "file_name": "SKFB-2018c8c0dfc744288aa3e3092124743a-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1bI8Pzn9DirsWliLNdSvcgNGIastNVqo5/view?usp=drivesdk",
+          "file_bytes": 18336484,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "2bd803f8bd684c04a07bd21f63f4a2b6",
+      "title": "Booth 3x2m Acuvue",
+      "creator": "alivenn",
+      "origin_group": "prosceneverse_range_GLBS",
+      "original_source_url": "https://sketchfab.com/models/2bd803f8bd684c04a07bd21f63f4a2b6",
+      "license": "CC-BY-4.0",
+      "sha256": "327a3b88d5b4d34f331e3475b0cf01c106f346b565642cad1d54bd478ccfe62a",
+      "visual_review": "PASS_AS_COMPLETE_EXHIBITION_BOOTH",
+      "production_status": "GLB_ONLY_NO_FABRICATION_PLANS",
+      "assets": [
+        {
+          "file_name": "ExpoVault_2_Approved_Original_PSV_Booths_GLBS.zip",
+          "downloadable": true,
+          "drive_url": "https://drive.google.com/file/d/1PJmDpIksdHmz1DLXjxaSROgMPtCUzIbY/view",
+          "path_inside_zip": "PSV-2bd803f8bd684c04a07bd21f63f4a2b6/original.glb"
+        }
+      ]
+    },
+    {
+      "uid": "2c6f4626d4eb4474825d827641a80884",
+      "source_model_url": "https://sketchfab.com/models/2c6f4626d4eb4474825d827641a80884",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-2c6f4626d4eb4474825d827641a80884-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 11892609,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/1dUn8_elN86IilAZtM11y0h0YiX5Qw5WC/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "2fb735c4ccc64eb7860eb1ad727cb82e",
+      "sketchfab_model_url": "https://sketchfab.com/models/2fb735c4ccc64eb7860eb1ad727cb82e",
+      "assets": [
+        {
+          "file_name": "Bunker_USA_Booth_Original_Creator_Source.zip",
+          "url": "https://drive.google.com/file/d/11Ccl_gYv1x9TxY3ihF0euQ7E86TAFbWd/view?usp=drivesdk",
+          "file_bytes": 55597382,
+          "downloadable": true
+        },
+        {
+          "file_name": "Bunker_USA_Booth_3D_GLB.zip",
+          "url": "https://drive.google.com/file/d/148qiJEVibzkhT2ZqjNIWc9zQlDlYsvFK/view?usp=drivesdk",
+          "file_bytes": 45021751,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_bunker"
+    },
+    {
+      "uid": "34cbe4a1a47445ad8189b9bdb8d3c56f",
+      "sketchfab_model_url": "https://sketchfab.com/models/34cbe4a1a47445ad8189b9bdb8d3c56f",
+      "assets": [
+        {
+          "file_name": "SKFB-34cbe4a1a47445ad8189b9bdb8d3c56f-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/1LISmbMZvGREaOs0q26HcKRJvnaTgTq5o/view?usp=drivesdk",
+          "file_bytes": 13462169,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "34ff5f2693a649478caccf99aea4e6c6",
+      "sketchfab_model_url": "https://sketchfab.com/models/34ff5f2693a649478caccf99aea4e6c6",
+      "assets": [
+        {
+          "file_name": "SKFB-34ff5f2693a649478caccf99aea4e6c6-GLB-AND-NATIVE-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1eyYJURLdzlCHYkTkQoINYKKUoF4WcoeE/view?usp=drivesdk",
+          "file_bytes": 90227078,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "37477bd585b1491d914761555f2475d7",
+      "sketchfab_model_url": "https://sketchfab.com/models/37477bd585b1491d914761555f2475d7",
+      "assets": [
+        {
+          "file_name": "SKFB-37477bd585b1491d914761555f2475d7-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/19Vf2336tVCa5UeVizsw2RbxN05gGbm_h/view?usp=drivesdk",
+          "file_bytes": 624414,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "3b5a60cce9c84d608101d9fd898d0982",
+      "source_model_url": "https://sketchfab.com/models/3b5a60cce9c84d608101d9fd898d0982",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-3b5a60cce9c84d608101d9fd898d0982-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 15094745,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/1HOtZ2wyhwvCegMATAR2rvGc30yLs38Bu/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "3b6b6dd246ee4b7fb4b326e930859076",
+      "sketchfab_model_url": "https://sketchfab.com/models/3b6b6dd246ee4b7fb4b326e930859076",
+      "assets": [
+        {
+          "file_name": "SKFB-3b6b6dd246ee4b7fb4b326e930859076-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/1qkp5EoWrHzpcJzkoe36zz0s-xwLeQDnX/view?usp=drivesdk",
+          "file_bytes": 9472833,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "3bc5e8c4319b4bff9980e055062d1b7c",
+      "source_model_url": "https://sketchfab.com/models/3bc5e8c4319b4bff9980e055062d1b7c",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-3bc5e8c4319b4bff9980e055062d1b7c-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 58692378,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/17QRENI2VQQ7TAkw0WlWmEr7mT7mB2oGv/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "3c34ee10443a442e9df5b2ef6bad5501",
+      "source_model_url": "https://sketchfab.com/models/3c34ee10443a442e9df5b2ef6bad5501",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-3c34ee10443a442e9df5b2ef6bad5501-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 7841682,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/1LgczWD6e5IFNOnRJlxl2H-HX1RmKW_Wy/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "3ec62777dc614d8cb8a4f90ac49569ed",
+      "sketchfab_model_url": "https://sketchfab.com/models/3ec62777dc614d8cb8a4f90ac49569ed",
+      "assets": [
+        {
+          "file_name": "SKFB-3ec62777dc614d8cb8a4f90ac49569ed-3D-AND-ORIGINAL-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1N6AiHf3FZpYcWAwKKQ1yaLywL3A52XiX/view?usp=drivesdk",
+          "file_bytes": 78286077,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "3f763434ee1249f499fd2d64bc734e25",
+      "sketchfab_model_url": "https://sketchfab.com/models/3f763434ee1249f499fd2d64bc734e25",
+      "assets": [
+        {
+          "file_name": "SKFB-3f763434ee1249f499fd2d64bc734e25-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1mvbXuaMXlQXqa96URAOq8paesKpXl_g-/view?usp=drivesdk",
+          "file_bytes": 3279967,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "3fed9b4cc3e74f4199c1d838ee2836e9",
+      "sketchfab_model_url": "https://sketchfab.com/models/3fed9b4cc3e74f4199c1d838ee2836e9",
+      "assets": [
+        {
+          "file_name": "SKFB-3fed9b4cc3e74f4199c1d838ee2836e9-3D-AND-ORIGINAL-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1aMfKKFLhNwSxUoZgh59nCDO0HjKC1-HD/view?usp=drivesdk",
+          "file_bytes": 27531829,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "401c0d92b8e1471cbc67c760d725dc1a",
+      "sketchfab_model_url": "https://sketchfab.com/models/401c0d92b8e1471cbc67c760d725dc1a",
+      "assets": [
+        {
+          "file_name": "SKFB-401c0d92b8e1471cbc67c760d725dc1a-GLB-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/13Uzvbkak2cJd--FYldZRWTzIkL5jhct2/view?usp=drivesdk",
+          "file_bytes": 1919742,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "40359de9049b4a47afe5762da5546005",
+      "sketchfab_model_url": "https://sketchfab.com/models/40359de9049b4a47afe5762da5546005",
+      "assets": [
+        {
+          "file_name": "SKFB-40359de9049b4a47afe5762da5546005-GLB-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1h2ODASD5iJm-y9EZee0AtyKns6n6H6_F/view?usp=drivesdk",
+          "file_bytes": 87784138,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "4180959c279344c38a448938339b9854",
+      "sketchfab_model_url": "https://sketchfab.com/models/4180959c279344c38a448938339b9854",
+      "assets": [
+        {
+          "file_name": "SKFB-4180959c279344c38a448938339b9854-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1BQ85xLmApn9QxTPXAS9GLeoBkR2KMfbA/view?usp=drivesdk",
+          "file_bytes": 320653,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "42b1be487f2948158b3c8ff8c3e018f7",
+      "sketchfab_model_url": "https://sketchfab.com/models/42b1be487f2948158b3c8ff8c3e018f7",
+      "assets": [
+        {
+          "file_name": "SKFB-42b1be487f2948158b3c8ff8c3e018f7-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/1T0I-DwSZNSC2ubaQ9mFiUQTdeI6O96ul/view?usp=drivesdk",
+          "file_bytes": 2648634,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "4b75f0246eb749b1bda39c2ee6004335",
+      "sketchfab_model_url": "https://sketchfab.com/models/4b75f0246eb749b1bda39c2ee6004335",
+      "assets": [
+        {
+          "file_name": "SKFB-4b75f0246eb749b1bda39c2ee6004335-3D-AND-ORIGINAL-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1Asjig9xN7BWyCHrTu3RZYhKipW1EunQP/view?usp=drivesdk",
+          "file_bytes": 53928020,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "4bfd63741da74521ba96c6d583bdbdf2",
+      "sketchfab_model_url": "https://sketchfab.com/models/4bfd63741da74521ba96c6d583bdbdf2",
+      "assets": [
+        {
+          "file_name": "SKFB-4bfd63741da74521ba96c6d583bdbdf2-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/1P_EJQS9S1ij4eKpFKwHPu4itU0ktnFUF/view?usp=drivesdk",
+          "file_bytes": 2765839,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "510c0c5188d04784a462db88456b2217",
+      "sketchfab_model_url": "https://sketchfab.com/models/510c0c5188d04784a462db88456b2217",
+      "assets": [
+        {
+          "file_name": "SKFB-510c0c5188d04784a462db88456b2217-GLB-AND-NATIVE-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/13Mysy06f4xRYpR6ZkOKpojAbBPu_cDqJ/view?usp=drivesdk",
+          "file_bytes": 31083720,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "547afebba737485ca855f90483955248",
+      "sketchfab_model_url": "https://sketchfab.com/models/547afebba737485ca855f90483955248",
+      "assets": [
+        {
+          "file_name": "SKFB-547afebba737485ca855f90483955248-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1xodWkKcoEISUm6J_QvXHDFvAXVVjgkQs/view?usp=drivesdk",
+          "file_bytes": 2891013,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "573a63f0222942d7b848f71562ae9f14",
+      "source_model_url": "https://sketchfab.com/models/573a63f0222942d7b848f71562ae9f14",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-573a63f0222942d7b848f71562ae9f14-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 57369958,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/1W0rCojkM6PnYWqcL9W_klAkq17w2fwr7/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "582f06942d2142afa01172139406a10c",
+      "source_model_url": "https://sketchfab.com/models/582f06942d2142afa01172139406a10c",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-582f06942d2142afa01172139406a10c-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 30821538,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/1P35IiT0gOaP1DI5ukab7xuE7zEYcWwAU/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "5bf1ae45aac84838a3a64a30a508880d",
+      "sketchfab_model_url": "https://sketchfab.com/models/5bf1ae45aac84838a3a64a30a508880d",
+      "assets": [
+        {
+          "file_name": "SKFB-5bf1ae45aac84838a3a64a30a508880d-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1Q7FuReQZsTMEjdNYuCDYAG9rKtHuW-bf/view?usp=drivesdk",
+          "file_bytes": 8245681,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "61be25e36a0645df93f3deb66b5f699c",
+      "sketchfab_model_url": "https://sketchfab.com/models/61be25e36a0645df93f3deb66b5f699c",
+      "assets": [
+        {
+          "file_name": "SKFB-61be25e36a0645df93f3deb66b5f699c-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1rqCngoFVinoIKANReWgpfUDMjynOosbQ/view?usp=drivesdk",
+          "file_bytes": 8070986,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "62f1ce23a16041358834f70995af3002",
+      "title": "Teaching Factory booth Gridas",
+      "creator": "renraleerning",
+      "origin_group": "prosceneverse_range_GLBS",
+      "original_source_url": "https://sketchfab.com/models/62f1ce23a16041358834f70995af3002",
+      "license": "CC-BY-4.0",
+      "sha256": "aefb7e166272a714af8731b4f2cbf7608aa00e8fadc48c5dbe72380058f3269d",
+      "visual_review": "PASS_AS_COMPLETE_EXHIBITION_BOOTH",
+      "production_status": "GLB_ONLY_NO_FABRICATION_PLANS",
+      "assets": [
+        {
+          "file_name": "ExpoVault_Four_Accepted_PSV_Original_Booths_GLBS.zip",
+          "downloadable": true,
+          "drive_url": "https://drive.google.com/file/d/1FUYRTAXDypLFsk74mebBaIeKrb14kDpU/view",
+          "path_inside_zip": "PSV-62f1ce23a16041358834f70995af3002/original.glb"
+        }
+      ]
+    },
+    {
+      "uid": "6482e2bcddbc4888a126ea0b4bf306df",
+      "source_model_url": "https://sketchfab.com/models/6482e2bcddbc4888a126ea0b4bf306df",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-6482e2bcddbc4888a126ea0b4bf306df-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 10213626,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/1NCbHJQ3Ou01u-m3gueajtrBnaxZ2uMp0/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "677b1d73182840f08a05c96f85b4470b",
+      "sketchfab_model_url": "https://sketchfab.com/models/677b1d73182840f08a05c96f85b4470b",
+      "assets": [
+        {
+          "file_name": "SKFB-677b1d73182840f08a05c96f85b4470b-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1Hystn2YnMCXQwvvIFzzCZ2OSECNu0_aL/view?usp=drivesdk",
+          "file_bytes": 13729783,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "6b1c54d4ec9c4282a4dac2bb08c86e64",
+      "source_model_url": "https://sketchfab.com/models/6b1c54d4ec9c4282a4dac2bb08c86e64",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-6b1c54d4ec9c4282a4dac2bb08c86e64-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 12197575,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/1ck5UhfF94U0rDDARSPrKMrLrEZGkUskA/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "6ec839cd9777491e9cb911fdf296a124",
+      "source_model_url": "https://sketchfab.com/models/6ec839cd9777491e9cb911fdf296a124",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-6ec839cd9777491e9cb911fdf296a124-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 40962257,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/18AThTDUZ7_7nXFM6OdCrdfSj5fd4iIMx/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "70462312d2814a358f21369fc7be1a5c",
+      "source_model_url": "https://sketchfab.com/models/70462312d2814a358f21369fc7be1a5c",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-70462312d2814a358f21369fc7be1a5c-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 41275281,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/1R3hSyJ8tIdOR8yyjf6UV1h1wesOr5Mvy/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "72c81dfce60d4cc789d83046c8c17b4a",
+      "sketchfab_model_url": "https://sketchfab.com/models/72c81dfce60d4cc789d83046c8c17b4a",
+      "assets": [
+        {
+          "file_name": "SKFB-72c81dfce60d4cc789d83046c8c17b4a-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1cN0gi34NjssTvbIP-oo_2omnG6-TSQHz/view?usp=drivesdk",
+          "file_bytes": 5642008,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "75245a1d11e44dcb8e8b1725c7891bfd",
+      "source_model_url": "https://sketchfab.com/models/75245a1d11e44dcb8e8b1725c7891bfd",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-75245a1d11e44dcb8e8b1725c7891bfd-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 5346104,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/1nVZznWZbSPOQTaGXsdt8f2AARTVdcUDa/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "771c524cabb54896a24fdae884f08974",
+      "source_model_url": "https://sketchfab.com/models/771c524cabb54896a24fdae884f08974",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-771c524cabb54896a24fdae884f08974-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 42801080,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/1OnokfbJS_mXUiyY4QvdQXQpU2Q-mqDV4/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "7bb482bf78f3468b8387dedf63f964da",
+      "source_model_url": "https://sketchfab.com/models/7bb482bf78f3468b8387dedf63f964da",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-7bb482bf78f3468b8387dedf63f964da-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 28193074,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/1-fM1NNuzixsGon7mvVBeiXA1fxDM9GL2/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "7d46a4fbd5a94b2487a810b105e529fc",
+      "source_model_url": "https://sketchfab.com/models/7d46a4fbd5a94b2487a810b105e529fc",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-7d46a4fbd5a94b2487a810b105e529fc-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 21162843,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/1UpCmKmZFyZwTsleSVHjYO3IVJW7Sef7K/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "80e40d1e173d4e6ba84a984c3c2aa09d",
+      "sketchfab_model_url": "https://sketchfab.com/models/80e40d1e173d4e6ba84a984c3c2aa09d",
+      "assets": [
+        {
+          "file_name": "ADAMVS_Booth_Original_GLTF_with_Textures_ARTIFACT.zip",
+          "url": "https://drive.google.com/file/d/1H_E5vvP7sExzFXwJHZ3WfbrZC4XvDqud/view?usp=drivesdk",
+          "file_bytes": 57429031,
+          "downloadable": true
+        },
+        {
+          "file_name": "ADAMVS_Booth_Creator_Native_Source_ARTIFACT.zip",
+          "url": "https://drive.google.com/file/d/1n9CYon6x8pPY_0eYrrtQYt8JYFys5-cC/view?usp=drivesdk",
+          "file_bytes": 52442843,
+          "downloadable": true
+        },
+        {
+          "file_name": "ADAMVS_Booth_3D_GLBlive_and_Attribution_ARTIFACT.zip",
+          "url": "https://drive.google.com/file/d/1aylzRjrGY4ARjenQ2QnakI0uV_23puBB/view?usp=drivesdk",
+          "file_bytes": 45125021,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_adamvs"
+    },
+    {
+      "uid": "887c57a0235548fd81359dae1b1a45a9",
+      "title": "Big Stand Design",
+      "creator": "shahin.fahim1364",
+      "origin_group": "prosceneverse_range_GLBS",
+      "original_source_url": "https://sketchfab.com/models/887c57a0235548fd81359dae1b1a45a9",
+      "license": "CC-BY-4.0",
+      "sha256": "9b5b63b25dce28354addef9e5f377faea2c988dd40e01a688d8728893a98a4d8",
+      "visual_review": "PASS_AS_COMPLETE_EXHIBITION_BOOTH",
+      "production_status": "GLB_ONLY_NO_FABRICATION_PLANS",
+      "assets": [
+        {
+          "file_name": "PSV-887c57a0235548fd81359dae1b1a45a9-ORIGINAL-GLB.zip",
+          "downloadable": true,
+          "drive_url": "https://drive.google.com/file/d/1a03--2GwMa2oQUIXWa_bWCOzL9BqI8Ei/view",
+          "path_inside_zip": "original.glb"
+        }
+      ]
+    },
+    {
+      "uid": "8d4f1f05c4314527ac605de396507ae9",
+      "sketchfab_model_url": "https://sketchfab.com/models/8d4f1f05c4314527ac605de396507ae9",
+      "assets": [
+        {
+          "file_name": "SKFB-8d4f1f05c4314527ac605de396507ae9-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1yKRPCsrVWSzIOQHxCmYWpFKcfm5odycO/view?usp=drivesdk",
+          "file_bytes": 938974,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "8e8be777307f4c18aa5d3aaf01b216fc",
+      "sketchfab_model_url": "https://sketchfab.com/models/8e8be777307f4c18aa5d3aaf01b216fc",
+      "assets": [
+        {
+          "file_name": "SKFB-8e8be777307f4c18aa5d3aaf01b216fc-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/1R1gTH6Db5BeVZRuQnerf__dnJLqZxmGZ/view?usp=drivesdk",
+          "file_bytes": 4312332,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "93b596e1ed0b41afb679f59a6f07a2b3",
+      "source_model_url": "https://sketchfab.com/models/93b596e1ed0b41afb679f59a6f07a2b3",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-93b596e1ed0b41afb679f59a6f07a2b3-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 10101004,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/19S-mlxOIgN6tFbPOEsDDqHC4Ew33wbT_/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "995cb4c00fef43d583b8aae8a590b3d8",
+      "source_model_url": "https://sketchfab.com/models/995cb4c00fef43d583b8aae8a590b3d8",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-995cb4c00fef43d583b8aae8a590b3d8-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 35363565,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/16YlZvfUEJxQQ7Xl0KKKvymKJDH31a621/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "99e582c1931145f198711eaa4e2b4ead",
+      "sketchfab_model_url": "https://sketchfab.com/models/99e582c1931145f198711eaa4e2b4ead",
+      "assets": [
+        {
+          "file_name": "SKFB-99e582c1931145f198711eaa4e2b4ead-GLB-AND-NATIVE-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1PaCx5udVjfGmDnOu-EKz4AO-hi669M-D/view?usp=drivesdk",
+          "file_bytes": 28079078,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "a6e3fc1464534babb93576240bc4de9c",
+      "source_model_url": "https://sketchfab.com/models/a6e3fc1464534babb93576240bc4de9c",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-a6e3fc1464534babb93576240bc4de9c-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 60969689,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/156TqgG08JQWoFbKAJUuvDvekNX8_vIjm/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "a8d4837aa14b4b449feddb948e30f39f",
+      "sketchfab_model_url": "https://sketchfab.com/models/a8d4837aa14b4b449feddb948e30f39f",
+      "assets": [
+        {
+          "file_name": "SKFB-a8d4837aa14b4b449feddb948e30f39f-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/1GRsyYiusRL1ls6hVnH2ybi1kzxr2OC2p/view?usp=drivesdk",
+          "file_bytes": 617707,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "aa67df5e2698470db54d20de2bc070fa",
+      "sketchfab_model_url": "https://sketchfab.com/models/aa67df5e2698470db54d20de2bc070fa",
+      "assets": [
+        {
+          "file_name": "SKFB-aa67df5e2698470db54d20de2bc070fa-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1hIq39WXRjfpnZT9KqnNnrq5d7GAzuK0R/view?usp=drivesdk",
+          "file_bytes": 264607,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "ab5db5125a854d0fa9bb6328f169ff4a",
+      "title": "main booth for Andrew Patti",
+      "creator": "Ahmed.Akrab",
+      "origin_group": "prosceneverse_range_GLBS",
+      "original_source_url": "https://sketchfab.com/models/ab5db5125a854d0fa9bb6328f169ff4a",
+      "license": "CC-BY-4.0",
+      "sha256": "cc316de0c45822c6cc385c9c234053f673a229da0869c66c73f2e82c5d1b5849",
+      "visual_review": "PASS_AS_COMPLETE_EXHIBITION_BOOTH",
+      "production_status": "GLB_ONLY_NO_FABRICATION_PLANS",
+      "assets": [
+        {
+          "file_name": "ExpoVault_2_Approved_Original_PSV_Booths_GLBS.zip",
+          "downloadable": true,
+          "drive_url": "https://drive.google.com/file/d/1PJmDpIksdHmz1DLXjxaSROgMPtCUzIbY/view",
+          "path_inside_zip": "PSV-ab5db5125a854d0fa9bb6328f169ff4a/original.glb"
+        }
+      ]
+    },
+    {
+      "uid": "ab70bfe5d7464251b61af81558c69e54",
+      "sketchfab_model_url": "https://sketchfab.com/models/ab70bfe5d7464251b61af81558c69e54",
+      "assets": [
+        {
+          "file_name": "SKFB-ab70bfe5d7464251b61af81558c69e54-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1PyXOJNvjLNX4BOWi7gVK_SjLyk9-zCf0/view?usp=drivesdk",
+          "file_bytes": 1572510,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "ace1fa191ea54587bbc335391f1ff1b1",
+      "sketchfab_model_url": "https://sketchfab.com/models/ace1fa191ea54587bbc335391f1ff1b1",
+      "assets": [
+        {
+          "file_name": "SKFB-ace1fa191ea54587bbc335391f1ff1b1-3D-AND-ORIGINAL-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1crskJjfG04RVdZCkF6JC7fSimkFJF1mO/view?usp=drivesdk",
+          "file_bytes": 43999921,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "aedce51a1a5747369d812f290a94d425",
+      "source_model_url": "https://sketchfab.com/models/aedce51a1a5747369d812f290a94d425",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-aedce51a1a5747369d812f290a94d425-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 17986193,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/15o8LaDS1e_GQQ2loTWVJZsA8s0KFVQmv/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "b4137c295ed04237a778ad5c7d8e819a",
+      "source_model_url": "https://sketchfab.com/models/b4137c295ed04237a778ad5c7d8e819a",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-b4137c295ed04237a778ad5c7d8e819a-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 1859469,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/12QhoeDR5prFj4KdYXutDHD7syjTktrNl/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "b42e3e53027c40f8b11658cf417c8389",
+      "source_model_url": "https://sketchfab.com/models/b42e3e53027c40f8b11658cf417c8389",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-b42e3e53027c40f8b11658cf417c8389-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 24680547,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/1TU9gASEOaXPAG14zLxEjErYsGYscWS9C/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "b5859857939b4bab96f38d7586bc20f2",
+      "sketchfab_model_url": "https://sketchfab.com/models/b5859857939b4bab96f38d7586bc20f2",
+      "assets": [
+        {
+          "file_name": "SKFB-b5859857939b4bab96f38d7586bc20f2-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/18OxmtMeHhjjNmZ4wisUP9tNjXvpCgXL0/view?usp=drivesdk",
+          "file_bytes": 1764722,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "b5db4e32f8c64c93ba88666f1d417ab3",
+      "sketchfab_model_url": "https://sketchfab.com/models/b5db4e32f8c64c93ba88666f1d417ab3",
+      "assets": [
+        {
+          "file_name": "SKFB-b5db4e32f8c64c93ba88666f1d417ab3-GLB-AND-NATIVE-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1q7mnSZnAEZqtxQV9S6JoMdTwHX5zBpQj/view?usp=drivesdk",
+          "file_bytes": 87922645,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "b706b30b9a3e4f7e95e90b92e5f4b493",
+      "sketchfab_model_url": "https://sketchfab.com/models/b706b30b9a3e4f7e95e90b92e5f4b493",
+      "assets": [
+        {
+          "file_name": "SKFB-b706b30b9a3e4f7e95e90b92e5f4b493-GLB-AND-NATIVE-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1V8c1uDaLGiRkP8U3LIrbbF60mZ0XVaXP/view?usp=drivesdk",
+          "file_bytes": 2215618,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "bc60786f16b447e9827e83339e6ead1d",
+      "sketchfab_model_url": "https://sketchfab.com/models/bc60786f16b447e9827e83339e6ead1d",
+      "assets": [
+        {
+          "file_name": "SKFB-bc60786f16b447e9827e83339e6ead1d-3D-AND-ORIGINAL-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1lAo-37krH6H45fKCiUOIVNiiMmNv0xY3/view?usp=drivesdk",
+          "file_bytes": 37069279,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "bca80b0638794990ae4f0e563fc91fd8",
+      "sketchfab_model_url": "https://sketchfab.com/models/bca80b0638794990ae4f0e563fc91fd8",
+      "assets": [
+        {
+          "file_name": "SKFB-bca80b0638794990ae4f0e563fc91fd8-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1Ibbve1IXLq3uYC7IZJJ7hKxqbIcqLxmG/view?usp=drivesdk",
+          "file_bytes": 22255095,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "c4f9148b3d904f59b21ca51bd756103c",
+      "source_model_url": "https://sketchfab.com/models/c4f9148b3d904f59b21ca51bd756103c",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-c4f9148b3d904f59b21ca51bd756103c-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 11725691,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/1HiymWCVDOEAZrcxurb6gYlkwOxwPygd7/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "c66f3bff0549483ab2d527d9a5555d28",
+      "title": "messestand02",
+      "creator": "KAEM_Arch",
+      "origin_group": "prosceneverse_range_GLBS",
+      "original_source_url": "https://sketchfab.com/models/c66f3bff0549483ab2d527d9a5555d28",
+      "license": "CC-BY-4.0",
+      "sha256": "81732eac0ed0b66ba354fe1bbd926b9861ad47b01c9eaaa45535ee37036d0410",
+      "visual_review": "PASS_AS_COMPLETE_EXHIBITION_BOOTH",
+      "production_status": "GLB_ONLY_NO_FABRICATION_PLANS",
+      "assets": [
+        {
+          "file_name": "ExpoVault_Four_Accepted_PSV_Original_Booths_GLBS.zip",
+          "downloadable": true,
+          "drive_url": "https://drive.google.com/file/d/1FUYRTAXDypLFsk74mebBaIeKrb14kDpU/view",
+          "path_inside_zip": "PSV-c66f3bff0549483ab2d527d9a5555d28/original.glb"
+        }
+      ]
+    },
+    {
+      "uid": "ccceb87a823140bd97bfb838a16fe4e3",
+      "sketchfab_model_url": "https://sketchfab.com/models/ccceb87a823140bd97bfb838a16fe4e3",
+      "assets": [
+        {
+          "file_name": "SKFB-ccceb87a823140bd97bfb838a16fe4e3-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/18O7lrCtdKvlekBTjD20Hmh2qylxodlnE/view?usp=drivesdk",
+          "file_bytes": 789994,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "cee16e22beaa44c3805a7eb8bd8c5a95",
+      "source_model_url": "https://sketchfab.com/models/cee16e22beaa44c3805a7eb8bd8c5a95",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-cee16e22beaa44c3805a7eb8bd8c5a95-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 38452905,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/1jQjqYHOro_e81edUtQAN-0q1Dh1nX9Mo/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "d1690cfb32c4406eb5b22ee9c3bbd226",
+      "source_model_url": "https://sketchfab.com/models/d1690cfb32c4406eb5b22ee9c3bbd226",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-d1690cfb32c4406eb5b22ee9c3bbd226-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 18636893,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/1EYYQuA6pcUOP8ITQRoLnv_Uz8RbcLaKh/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "d30d323be9614a7f8dd851a12464e06a",
+      "sketchfab_model_url": "https://sketchfab.com/models/d30d323be9614a7f8dd851a12464e06a",
+      "assets": [
+        {
+          "file_name": "SKFB-d30d323be9614a7f8dd851a12464e06a-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1J6ISJvE03v0Pox_pBIVZAPp18PaMVK-C/view?usp=drivesdk",
+          "file_bytes": 1776536,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "d7181ed952354a89a82da8770668450e",
+      "sketchfab_model_url": "https://sketchfab.com/models/d7181ed952354a89a82da8770668450e",
+      "assets": [
+        {
+          "file_name": "SKFB-d7181ed952354a89a82da8770668450e-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/1ffv6FQYFvDBzpzvZz0WNteEBtuk5khPQ/view?usp=drivesdk",
+          "file_bytes": 155074,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "d922d41591dd4279a957a6d80e366a7f",
+      "sketchfab_model_url": "https://sketchfab.com/models/d922d41591dd4279a957a6d80e366a7f",
+      "assets": [
+        {
+          "file_name": "SKFB-d922d41591dd4279a957a6d80e366a7f-3D-AND-ORIGINAL-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1IVw1BOfWl8iPrHHQRIcPUvX9uChNx2L_/view?usp=drivesdk",
+          "file_bytes": 44018092,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "d9ce01ee574847e88b50b5a80c348036",
+      "sketchfab_model_url": "https://sketchfab.com/models/d9ce01ee574847e88b50b5a80c348036",
+      "assets": [
+        {
+          "file_name": "SKFB-d9ce01ee574847e88b50b5a80c348036-3D-AND-ORIGINAL-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1JhFyS-a4onhR_uCLYUwWuvvjwvdccgOc/view?usp=drivesdk",
+          "file_bytes": 44579627,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "d9df83c02b414d0784163319686ea726",
+      "source_model_url": "https://sketchfab.com/models/d9df83c02b414d0784163319686ea726",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-d9df83c02b414d0784163319686ea726-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 60765306,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/1QoQWe3R-hCny4LxJNBMWjbUDDCuHsvhf/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "df76a00dc3394979adce157f177deffd",
+      "sketchfab_model_url": "https://sketchfab.com/models/df76a00dc3394979adce157f177deffd",
+      "assets": [
+        {
+          "file_name": "SKFB-df76a00dc3394979adce157f177deffd-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/1sxYUo1Db08dp6RekRIM9edQy68l0pgy6/view?usp=drivesdk",
+          "file_bytes": 2384680,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "dfdbea2d91924f3798babfda20dccf69",
+      "source_model_url": "https://sketchfab.com/models/dfdbea2d91924f3798babfda20dccf69",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-dfdbea2d91924f3798babfda20dccf69-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 51818198,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/120431JSr49odJzb6IB7ifY2dsroguyQ4/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "e482030317ca4e1a939cffd3287aeb22",
+      "sketchfab_model_url": "https://sketchfab.com/models/e482030317ca4e1a939cffd3287aeb22",
+      "assets": [
+        {
+          "file_name": "SKFB-e482030317ca4e1a939cffd3287aeb22-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1cn2ttfitQSVurcMgItUy5Sf9cCwFClMD/view?usp=drivesdk",
+          "file_bytes": 4601044,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "e66e1f99149c4f868867636c30af9135",
+      "source_model_url": "https://sketchfab.com/models/e66e1f99149c4f868867636c30af9135",
+      "origin_group": "trellis_high_aesthetic_original",
+      "source_dataset": "https://huggingface.co/datasets/JeffreyXiang/TRELLIS-500K",
+      "source_quality_filter": "Aesthetic score >=5.5; visual booth shape reviewed on preview contact sheet",
+      "creator_source_warning": "Creator source may not be manufacturer-approved CAD/DXF",
+      "assets": [
+        {
+          "file_name": "SKFB-e66e1f99149c4f868867636c30af9135-GLB-ORIGINAL-CREATOR-SOURCE.zip",
+          "file_bytes": 2214917,
+          "downloadable": true,
+          "url": "https://drive.google.com/file/d/1Z-QWEArw5MxsEjWr26SpOQKMLOsA2IHt/view?usp=drivesdk"
+        }
+      ]
+    },
+    {
+      "uid": "e6f8869a7579446ba46269fc0d383a82",
+      "sketchfab_model_url": "https://sketchfab.com/models/e6f8869a7579446ba46269fc0d383a82",
+      "assets": [
+        {
+          "file_name": "SKFB-e6f8869a7579446ba46269fc0d383a82-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/1VqZec442X2hHSS59JcLQTdV6YjfQzxwW/view?usp=drivesdk",
+          "file_bytes": 2484858,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "e932db32e2624d33b771443770c5bfef",
+      "sketchfab_model_url": "https://sketchfab.com/models/e932db32e2624d33b771443770c5bfef",
+      "assets": [
+        {
+          "file_name": "SKFB-e932db32e2624d33b771443770c5bfef-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1Jbb1WdT6buM5LHDkrbNjmooVJ-mPgHs1/view?usp=drivesdk",
+          "file_bytes": 13773759,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "efb2d9f282db4757abe218a46c00f592",
+      "title": "booth desain - Arlina Diva Oktaferisa",
+      "creator": "arlinadiva",
+      "origin_group": "prosceneverse_range_GLBS",
+      "original_source_url": "https://sketchfab.com/models/efb2d9f282db4757abe218a46c00f592",
+      "license": "CC-BY-4.0",
+      "sha256": "205db868aa903bb99781177de23d456911244e80d44db7057d7d8389072b4a47",
+      "visual_review": "PASS_AS_COMPLETE_EXHIBITION_BOOTH",
+      "production_status": "GLB_ONLY_NO_FABRICATION_PLANS",
+      "assets": [
+        {
+          "file_name": "ExpoVault_Four_Accepted_PSV_Original_Booths_GLBS.zip",
+          "downloadable": true,
+          "drive_url": "https://drive.google.com/file/d/1FUYRTAXDypLFsk74mebBaIeKrb14kDpU/view",
+          "path_inside_zip": "PSV-efb2d9f282db4757abe218a46c00f592/original.glb"
+        }
+      ]
+    },
+    {
+      "uid": "f0b925c7cbc74594a64837a1c8d8017d",
+      "title": "Renewi Beurstand",
+      "creator": "timvandiessen",
+      "origin_group": "prosceneverse_range_GLBS",
+      "original_source_url": "https://sketchfab.com/models/f0b925c7cbc74594a64837a1c8d8017d",
+      "license": "CC-BY-4.0",
+      "sha256": "be2b68c0c906194b60fed7f879478b20c00e71e51a32395c7afbcf97d69c9633",
+      "visual_review": "PASS_AS_COMPLETE_EXHIBITION_BOOTH",
+      "production_status": "GLB_ONLY_NO_FABRICATION_PLANS",
+      "assets": [
+        {
+          "file_name": "ExpoVault_Four_Accepted_PSV_Original_Booths_GLBS.zip",
+          "downloadable": true,
+          "drive_url": "https://drive.google.com/file/d/1FUYRTAXDypLFsk74mebBaIeKrb14kDpU/view",
+          "path_inside_zip": "PSV-f0b925c7cbc74594a64837a1c8d8017d/original.glb"
+        }
+      ]
+    },
+    {
+      "uid": "f2aca6e1c57e48ebb2228136a2e3b956",
+      "sketchfab_model_url": "https://sketchfab.com/models/f2aca6e1c57e48ebb2228136a2e3b956",
+      "assets": [
+        {
+          "file_name": "SKFB-f2aca6e1c57e48ebb2228136a2e3b956-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1Yhmye0ZKtq0HeJA3x_zw3fwu6Rs8qsFh/view?usp=drivesdk",
+          "file_bytes": 20423410,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "fb46556d91b4465bb0c7c0813a280d25",
+      "sketchfab_model_url": "https://sketchfab.com/models/fb46556d91b4465bb0c7c0813a280d25",
+      "assets": [
+        {
+          "file_name": "SKFB-fb46556d91b4465bb0c7c0813a280d25-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/1viwCxqZHlTgVMtm21xlVYzatcC-hPfoN/view?usp=drivesdk",
+          "file_bytes": 2240718,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    }
+  ],
+  "added_source_models": 7,
+  "previous_model_count": 76,
+  "collection_date": "2026-11-05",
+  "site_integration": "NOT_DEPLOYED_Drive_FIRST",
+  "note": "7 ProSceneverse GLB source models have creator license and current public download verified on Sketchfab, GLB SHA256 and visual QA. No engineering production plans or native CAD for this batch."
+}
