@@ -1,0 +1,658 @@
+{
+  "collection": "ExpoVault real exhibition stand source archives",
+  "target": 4000,
+  "verified_unique_model_uids": 48,
+  "verified_at": "2026-11-05",
+  "method": "Checked Google Drive folder listings and per-file downloadable flags. Does not claim engineering-approved fabrication designs.",
+  "quality_warning": "GLB source plus native creator asset may exist; not all native formats represent manufacturing plans.",
+  "folders": {
+    "originals": "https://drive.google.com/drive/folders/1pJNA1ZopzJ1ndTFmHlIvy_nMDQcOCMzL",
+    "new_root": "https://drive.google.com/drive/folders/1voG47srN0fpkhiebxA6ua5tDR3HK6exP",
+    "adamvs": "https://drive.google.com/drive/folders/1ayq-xfYbLQzyJeOs1GI_CrwS0SHrQ0TD",
+    "bunker": "https://drive.google.com/drive/folders/1X8bI3L3ru6c2EsKr3T41sYjSOq_az7VY"
+  },
+  "models": [
+    {
+      "uid": "0713fbce6c1f452e8ed7664cd2fc703d",
+      "sketchfab_model_url": "https://sketchfab.com/models/0713fbce6c1f452e8ed7664cd2fc703d",
+      "assets": [
+        {
+          "file_name": "SKFB-0713fbce6c1f452e8ed7664cd2fc703d-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1xFOwBss8wx6L6dR8TAzYeLuARFrA3msd/view?usp=drivesdk",
+          "file_bytes": 9933,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "08e81cf16098428eae38457e8e28c9ea",
+      "sketchfab_model_url": "https://sketchfab.com/models/08e81cf16098428eae38457e8e28c9ea",
+      "assets": [
+        {
+          "file_name": "SKFB-08e81cf16098428eae38457e8e28c9ea-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1McHfUq6ZAUSYyWOiZWuO_9NIwim3PJg8/view?usp=drivesdk",
+          "file_bytes": 9009707,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "1772ca1da7a043cdbaa582d662eb219c",
+      "sketchfab_model_url": "https://sketchfab.com/models/1772ca1da7a043cdbaa582d662eb219c",
+      "assets": [
+        {
+          "file_name": "SKFB-1772ca1da7a043cdbaa582d662eb219c-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/1jOwHLZFxYede8mAj1rPSjb-lIQt_6kaJ/view?usp=drivesdk",
+          "file_bytes": 619426,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "2018c8c0dfc744288aa3e3092124743a",
+      "sketchfab_model_url": "https://sketchfab.com/models/2018c8c0dfc744288aa3e3092124743a",
+      "assets": [
+        {
+          "file_name": "SKFB-2018c8c0dfc744288aa3e3092124743a-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1bI8Pzn9DirsWliLNdSvcgNGIastNVqo5/view?usp=drivesdk",
+          "file_bytes": 18336484,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "2fb735c4ccc64eb7860eb1ad727cb82e",
+      "sketchfab_model_url": "https://sketchfab.com/models/2fb735c4ccc64eb7860eb1ad727cb82e",
+      "assets": [
+        {
+          "file_name": "Bunker_USA_Booth_Original_Creator_Source.zip",
+          "url": "https://drive.google.com/file/d/11Ccl_gYv1x9TxY3ihF0euQ7E86TAFbWd/view?usp=drivesdk",
+          "file_bytes": 55597382,
+          "downloadable": true
+        },
+        {
+          "file_name": "Bunker_USA_Booth_3D_GLB.zip",
+          "url": "https://drive.google.com/file/d/148qiJEVibzkhT2ZqjNIWc9zQlDlYsvFK/view?usp=drivesdk",
+          "file_bytes": 45021751,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_bunker"
+    },
+    {
+      "uid": "34cbe4a1a47445ad8189b9bdb8d3c56f",
+      "sketchfab_model_url": "https://sketchfab.com/models/34cbe4a1a47445ad8189b9bdb8d3c56f",
+      "assets": [
+        {
+          "file_name": "SKFB-34cbe4a1a47445ad8189b9bdb8d3c56f-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/1LISmbMZvGREaOs0q26HcKRJvnaTgTq5o/view?usp=drivesdk",
+          "file_bytes": 13462169,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "34ff5f2693a649478caccf99aea4e6c6",
+      "sketchfab_model_url": "https://sketchfab.com/models/34ff5f2693a649478caccf99aea4e6c6",
+      "assets": [
+        {
+          "file_name": "SKFB-34ff5f2693a649478caccf99aea4e6c6-GLB-AND-NATIVE-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1eyYJURLdzlCHYkTkQoINYKKUoF4WcoeE/view?usp=drivesdk",
+          "file_bytes": 90227078,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "37477bd585b1491d914761555f2475d7",
+      "sketchfab_model_url": "https://sketchfab.com/models/37477bd585b1491d914761555f2475d7",
+      "assets": [
+        {
+          "file_name": "SKFB-37477bd585b1491d914761555f2475d7-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/19Vf2336tVCa5UeVizsw2RbxN05gGbm_h/view?usp=drivesdk",
+          "file_bytes": 624414,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "3b6b6dd246ee4b7fb4b326e930859076",
+      "sketchfab_model_url": "https://sketchfab.com/models/3b6b6dd246ee4b7fb4b326e930859076",
+      "assets": [
+        {
+          "file_name": "SKFB-3b6b6dd246ee4b7fb4b326e930859076-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/1qkp5EoWrHzpcJzkoe36zz0s-xwLeQDnX/view?usp=drivesdk",
+          "file_bytes": 9472833,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "3ec62777dc614d8cb8a4f90ac49569ed",
+      "sketchfab_model_url": "https://sketchfab.com/models/3ec62777dc614d8cb8a4f90ac49569ed",
+      "assets": [
+        {
+          "file_name": "SKFB-3ec62777dc614d8cb8a4f90ac49569ed-3D-AND-ORIGINAL-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1N6AiHf3FZpYcWAwKKQ1yaLywL3A52XiX/view?usp=drivesdk",
+          "file_bytes": 78286077,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "3f763434ee1249f499fd2d64bc734e25",
+      "sketchfab_model_url": "https://sketchfab.com/models/3f763434ee1249f499fd2d64bc734e25",
+      "assets": [
+        {
+          "file_name": "SKFB-3f763434ee1249f499fd2d64bc734e25-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1mvbXuaMXlQXqa96URAOq8paesKpXl_g-/view?usp=drivesdk",
+          "file_bytes": 3279967,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "3fed9b4cc3e74f4199c1d838ee2836e9",
+      "sketchfab_model_url": "https://sketchfab.com/models/3fed9b4cc3e74f4199c1d838ee2836e9",
+      "assets": [
+        {
+          "file_name": "SKFB-3fed9b4cc3e74f4199c1d838ee2836e9-3D-AND-ORIGINAL-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1aMfKKFLhNwSxUoZgh59nCDO0HjKC1-HD/view?usp=drivesdk",
+          "file_bytes": 27531829,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "401c0d92b8e1471cbc67c760d725dc1a",
+      "sketchfab_model_url": "https://sketchfab.com/models/401c0d92b8e1471cbc67c760d725dc1a",
+      "assets": [
+        {
+          "file_name": "SKFB-401c0d92b8e1471cbc67c760d725dc1a-GLB-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/13Uzvbkak2cJd--FYldZRWTzIkL5jhct2/view?usp=drivesdk",
+          "file_bytes": 1919742,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "40359de9049b4a47afe5762da5546005",
+      "sketchfab_model_url": "https://sketchfab.com/models/40359de9049b4a47afe5762da5546005",
+      "assets": [
+        {
+          "file_name": "SKFB-40359de9049b4a47afe5762da5546005-GLB-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1h2ODASD5iJm-y9EZee0AtyKns6n6H6_F/view?usp=drivesdk",
+          "file_bytes": 87784138,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "4180959c279344c38a448938339b9854",
+      "sketchfab_model_url": "https://sketchfab.com/models/4180959c279344c38a448938339b9854",
+      "assets": [
+        {
+          "file_name": "SKFB-4180959c279344c38a448938339b9854-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1BQ85xLmApn9QxTPXAS9GLeoBkR2KMfbA/view?usp=drivesdk",
+          "file_bytes": 320653,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "42b1be487f2948158b3c8ff8c3e018f7",
+      "sketchfab_model_url": "https://sketchfab.com/models/42b1be487f2948158b3c8ff8c3e018f7",
+      "assets": [
+        {
+          "file_name": "SKFB-42b1be487f2948158b3c8ff8c3e018f7-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/1T0I-DwSZNSC2ubaQ9mFiUQTdeI6O96ul/view?usp=drivesdk",
+          "file_bytes": 2648634,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "4b75f0246eb749b1bda39c2ee6004335",
+      "sketchfab_model_url": "https://sketchfab.com/models/4b75f0246eb749b1bda39c2ee6004335",
+      "assets": [
+        {
+          "file_name": "SKFB-4b75f0246eb749b1bda39c2ee6004335-3D-AND-ORIGINAL-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1Asjig9xN7BWyCHrTu3RZYhKipW1EunQP/view?usp=drivesdk",
+          "file_bytes": 53928020,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "4bfd63741da74521ba96c6d583bdbdf2",
+      "sketchfab_model_url": "https://sketchfab.com/models/4bfd63741da74521ba96c6d583bdbdf2",
+      "assets": [
+        {
+          "file_name": "SKFB-4bfd63741da74521ba96c6d583bdbdf2-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/1P_EJQS9S1ij4eKpFKwHPu4itU0ktnFUF/view?usp=drivesdk",
+          "file_bytes": 2765839,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "510c0c5188d04784a462db88456b2217",
+      "sketchfab_model_url": "https://sketchfab.com/models/510c0c5188d04784a462db88456b2217",
+      "assets": [
+        {
+          "file_name": "SKFB-510c0c5188d04784a462db88456b2217-GLB-AND-NATIVE-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/13Mysy06f4xRYpR6ZkOKpojAbBPu_cDqJ/view?usp=drivesdk",
+          "file_bytes": 31083720,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "547afebba737485ca855f90483955248",
+      "sketchfab_model_url": "https://sketchfab.com/models/547afebba737485ca855f90483955248",
+      "assets": [
+        {
+          "file_name": "SKFB-547afebba737485ca855f90483955248-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1xodWkKcoEISUm6J_QvXHDFvAXVVjgkQs/view?usp=drivesdk",
+          "file_bytes": 2891013,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "5bf1ae45aac84838a3a64a30a508880d",
+      "sketchfab_model_url": "https://sketchfab.com/models/5bf1ae45aac84838a3a64a30a508880d",
+      "assets": [
+        {
+          "file_name": "SKFB-5bf1ae45aac84838a3a64a30a508880d-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1Q7FuReQZsTMEjdNYuCDYAG9rKtHuW-bf/view?usp=drivesdk",
+          "file_bytes": 8245681,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "61be25e36a0645df93f3deb66b5f699c",
+      "sketchfab_model_url": "https://sketchfab.com/models/61be25e36a0645df93f3deb66b5f699c",
+      "assets": [
+        {
+          "file_name": "SKFB-61be25e36a0645df93f3deb66b5f699c-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1rqCngoFVinoIKANReWgpfUDMjynOosbQ/view?usp=drivesdk",
+          "file_bytes": 8070986,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "677b1d73182840f08a05c96f85b4470b",
+      "sketchfab_model_url": "https://sketchfab.com/models/677b1d73182840f08a05c96f85b4470b",
+      "assets": [
+        {
+          "file_name": "SKFB-677b1d73182840f08a05c96f85b4470b-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1Hystn2YnMCXQwvvIFzzCZ2OSECNu0_aL/view?usp=drivesdk",
+          "file_bytes": 13729783,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "72c81dfce60d4cc789d83046c8c17b4a",
+      "sketchfab_model_url": "https://sketchfab.com/models/72c81dfce60d4cc789d83046c8c17b4a",
+      "assets": [
+        {
+          "file_name": "SKFB-72c81dfce60d4cc789d83046c8c17b4a-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1cN0gi34NjssTvbIP-oo_2omnG6-TSQHz/view?usp=drivesdk",
+          "file_bytes": 5642008,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "80e40d1e173d4e6ba84a984c3c2aa09d",
+      "sketchfab_model_url": "https://sketchfab.com/models/80e40d1e173d4e6ba84a984c3c2aa09d",
+      "assets": [
+        {
+          "file_name": "ADAMVS_Booth_Original_GLTF_with_Textures_ARTIFACT.zip",
+          "url": "https://drive.google.com/file/d/1H_E5vvP7sExzFXwJHZ3WfbrZC4XvDqud/view?usp=drivesdk",
+          "file_bytes": 57429031,
+          "downloadable": true
+        },
+        {
+          "file_name": "ADAMVS_Booth_Creator_Native_Source_ARTIFACT.zip",
+          "url": "https://drive.google.com/file/d/1n9CYon6x8pPY_0eYrrtQYt8JYFys5-cC/view?usp=drivesdk",
+          "file_bytes": 52442843,
+          "downloadable": true
+        },
+        {
+          "file_name": "ADAMVS_Booth_3D_GLBlive_and_Attribution_ARTIFACT.zip",
+          "url": "https://drive.google.com/file/d/1aylzRjrGY4ARjenQ2QnakI0uV_23puBB/view?usp=drivesdk",
+          "file_bytes": 45125021,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_adamvs"
+    },
+    {
+      "uid": "8d4f1f05c4314527ac605de396507ae9",
+      "sketchfab_model_url": "https://sketchfab.com/models/8d4f1f05c4314527ac605de396507ae9",
+      "assets": [
+        {
+          "file_name": "SKFB-8d4f1f05c4314527ac605de396507ae9-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1yKRPCsrVWSzIOQHxCmYWpFKcfm5odycO/view?usp=drivesdk",
+          "file_bytes": 938974,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "8e8be777307f4c18aa5d3aaf01b216fc",
+      "sketchfab_model_url": "https://sketchfab.com/models/8e8be777307f4c18aa5d3aaf01b216fc",
+      "assets": [
+        {
+          "file_name": "SKFB-8e8be777307f4c18aa5d3aaf01b216fc-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/1R1gTH6Db5BeVZRuQnerf__dnJLqZxmGZ/view?usp=drivesdk",
+          "file_bytes": 4312332,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "99e582c1931145f198711eaa4e2b4ead",
+      "sketchfab_model_url": "https://sketchfab.com/models/99e582c1931145f198711eaa4e2b4ead",
+      "assets": [
+        {
+          "file_name": "SKFB-99e582c1931145f198711eaa4e2b4ead-GLB-AND-NATIVE-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1PaCx5udVjfGmDnOu-EKz4AO-hi669M-D/view?usp=drivesdk",
+          "file_bytes": 28079078,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "a8d4837aa14b4b449feddb948e30f39f",
+      "sketchfab_model_url": "https://sketchfab.com/models/a8d4837aa14b4b449feddb948e30f39f",
+      "assets": [
+        {
+          "file_name": "SKFB-a8d4837aa14b4b449feddb948e30f39f-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/1GRsyYiusRL1ls6hVnH2ybi1kzxr2OC2p/view?usp=drivesdk",
+          "file_bytes": 617707,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "aa67df5e2698470db54d20de2bc070fa",
+      "sketchfab_model_url": "https://sketchfab.com/models/aa67df5e2698470db54d20de2bc070fa",
+      "assets": [
+        {
+          "file_name": "SKFB-aa67df5e2698470db54d20de2bc070fa-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1hIq39WXRjfpnZT9KqnNnrq5d7GAzuK0R/view?usp=drivesdk",
+          "file_bytes": 264607,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "ab70bfe5d7464251b61af81558c69e54",
+      "sketchfab_model_url": "https://sketchfab.com/models/ab70bfe5d7464251b61af81558c69e54",
+      "assets": [
+        {
+          "file_name": "SKFB-ab70bfe5d7464251b61af81558c69e54-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1PyXOJNvjLNX4BOWi7gVK_SjLyk9-zCf0/view?usp=drivesdk",
+          "file_bytes": 1572510,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "ace1fa191ea54587bbc335391f1ff1b1",
+      "sketchfab_model_url": "https://sketchfab.com/models/ace1fa191ea54587bbc335391f1ff1b1",
+      "assets": [
+        {
+          "file_name": "SKFB-ace1fa191ea54587bbc335391f1ff1b1-3D-AND-ORIGINAL-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1crskJjfG04RVdZCkF6JC7fSimkFJF1mO/view?usp=drivesdk",
+          "file_bytes": 43999921,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "b5859857939b4bab96f38d7586bc20f2",
+      "sketchfab_model_url": "https://sketchfab.com/models/b5859857939b4bab96f38d7586bc20f2",
+      "assets": [
+        {
+          "file_name": "SKFB-b5859857939b4bab96f38d7586bc20f2-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/18OxmtMeHhjjNmZ4wisUP9tNjXvpCgXL0/view?usp=drivesdk",
+          "file_bytes": 1764722,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "b5db4e32f8c64c93ba88666f1d417ab3",
+      "sketchfab_model_url": "https://sketchfab.com/models/b5db4e32f8c64c93ba88666f1d417ab3",
+      "assets": [
+        {
+          "file_name": "SKFB-b5db4e32f8c64c93ba88666f1d417ab3-GLB-AND-NATIVE-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1q7mnSZnAEZqtxQV9S6JoMdTwHX5zBpQj/view?usp=drivesdk",
+          "file_bytes": 87922645,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "b706b30b9a3e4f7e95e90b92e5f4b493",
+      "sketchfab_model_url": "https://sketchfab.com/models/b706b30b9a3e4f7e95e90b92e5f4b493",
+      "assets": [
+        {
+          "file_name": "SKFB-b706b30b9a3e4f7e95e90b92e5f4b493-GLB-AND-NATIVE-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1V8c1uDaLGiRkP8U3LIrbbF60mZ0XVaXP/view?usp=drivesdk",
+          "file_bytes": 2215618,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "bc60786f16b447e9827e83339e6ead1d",
+      "sketchfab_model_url": "https://sketchfab.com/models/bc60786f16b447e9827e83339e6ead1d",
+      "assets": [
+        {
+          "file_name": "SKFB-bc60786f16b447e9827e83339e6ead1d-3D-AND-ORIGINAL-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1lAo-37krH6H45fKCiUOIVNiiMmNv0xY3/view?usp=drivesdk",
+          "file_bytes": 37069279,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "bca80b0638794990ae4f0e563fc91fd8",
+      "sketchfab_model_url": "https://sketchfab.com/models/bca80b0638794990ae4f0e563fc91fd8",
+      "assets": [
+        {
+          "file_name": "SKFB-bca80b0638794990ae4f0e563fc91fd8-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1Ibbve1IXLq3uYC7IZJJ7hKxqbIcqLxmG/view?usp=drivesdk",
+          "file_bytes": 22255095,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "ccceb87a823140bd97bfb838a16fe4e3",
+      "sketchfab_model_url": "https://sketchfab.com/models/ccceb87a823140bd97bfb838a16fe4e3",
+      "assets": [
+        {
+          "file_name": "SKFB-ccceb87a823140bd97bfb838a16fe4e3-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/18O7lrCtdKvlekBTjD20Hmh2qylxodlnE/view?usp=drivesdk",
+          "file_bytes": 789994,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "d30d323be9614a7f8dd851a12464e06a",
+      "sketchfab_model_url": "https://sketchfab.com/models/d30d323be9614a7f8dd851a12464e06a",
+      "assets": [
+        {
+          "file_name": "SKFB-d30d323be9614a7f8dd851a12464e06a-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1J6ISJvE03v0Pox_pBIVZAPp18PaMVK-C/view?usp=drivesdk",
+          "file_bytes": 1776536,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "d7181ed952354a89a82da8770668450e",
+      "sketchfab_model_url": "https://sketchfab.com/models/d7181ed952354a89a82da8770668450e",
+      "assets": [
+        {
+          "file_name": "SKFB-d7181ed952354a89a82da8770668450e-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/1ffv6FQYFvDBzpzvZz0WNteEBtuk5khPQ/view?usp=drivesdk",
+          "file_bytes": 155074,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "d922d41591dd4279a957a6d80e366a7f",
+      "sketchfab_model_url": "https://sketchfab.com/models/d922d41591dd4279a957a6d80e366a7f",
+      "assets": [
+        {
+          "file_name": "SKFB-d922d41591dd4279a957a6d80e366a7f-3D-AND-ORIGINAL-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1IVw1BOfWl8iPrHHQRIcPUvX9uChNx2L_/view?usp=drivesdk",
+          "file_bytes": 44018092,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "d9ce01ee574847e88b50b5a80c348036",
+      "sketchfab_model_url": "https://sketchfab.com/models/d9ce01ee574847e88b50b5a80c348036",
+      "assets": [
+        {
+          "file_name": "SKFB-d9ce01ee574847e88b50b5a80c348036-3D-AND-ORIGINAL-SOURCE.zip",
+          "url": "https://drive.google.com/file/d/1JhFyS-a4onhR_uCLYUwWuvvjwvdccgOc/view?usp=drivesdk",
+          "file_bytes": 44579627,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "df76a00dc3394979adce157f177deffd",
+      "sketchfab_model_url": "https://sketchfab.com/models/df76a00dc3394979adce157f177deffd",
+      "assets": [
+        {
+          "file_name": "SKFB-df76a00dc3394979adce157f177deffd-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/1sxYUo1Db08dp6RekRIM9edQy68l0pgy6/view?usp=drivesdk",
+          "file_bytes": 2384680,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "e482030317ca4e1a939cffd3287aeb22",
+      "sketchfab_model_url": "https://sketchfab.com/models/e482030317ca4e1a939cffd3287aeb22",
+      "assets": [
+        {
+          "file_name": "SKFB-e482030317ca4e1a939cffd3287aeb22-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1cn2ttfitQSVurcMgItUy5Sf9cCwFClMD/view?usp=drivesdk",
+          "file_bytes": 4601044,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "e6f8869a7579446ba46269fc0d383a82",
+      "sketchfab_model_url": "https://sketchfab.com/models/e6f8869a7579446ba46269fc0d383a82",
+      "assets": [
+        {
+          "file_name": "SKFB-e6f8869a7579446ba46269fc0d383a82-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/1VqZec442X2hHSS59JcLQTdV6YjfQzxwW/view?usp=drivesdk",
+          "file_bytes": 2484858,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    },
+    {
+      "uid": "e932db32e2624d33b771443770c5bfef",
+      "sketchfab_model_url": "https://sketchfab.com/models/e932db32e2624d33b771443770c5bfef",
+      "assets": [
+        {
+          "file_name": "SKFB-e932db32e2624d33b771443770c5bfef-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1Jbb1WdT6buM5LHDkrbNjmooVJ-mPgHs1/view?usp=drivesdk",
+          "file_bytes": 13773759,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "f2aca6e1c57e48ebb2228136a2e3b956",
+      "sketchfab_model_url": "https://sketchfab.com/models/f2aca6e1c57e48ebb2228136a2e3b956",
+      "assets": [
+        {
+          "file_name": "SKFB-f2aca6e1c57e48ebb2228136a2e3b956-CCBY-ORIGINAL.zip",
+          "url": "https://drive.google.com/file/d/1Yhmye0ZKtq0HeJA3x_zw3fwu6Rs8qsFh/view?usp=drivesdk",
+          "file_bytes": 20423410,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "legacy_originals"
+    },
+    {
+      "uid": "fb46556d91b4465bb0c7c0813a280d25",
+      "sketchfab_model_url": "https://sketchfab.com/models/fb46556d91b4465bb0c7c0813a280d25",
+      "assets": [
+        {
+          "file_name": "SKFB-fb46556d91b4465bb0c7c0813a280d25-ORIGINAL-3D.zip",
+          "url": "https://drive.google.com/file/d/1viwCxqZHlTgVMtm21xlVYzatcC-hPfoN/view?usp=drivesdk",
+          "file_bytes": 2240718,
+          "downloadable": true
+        }
+      ],
+      "origin_group": "new_archived_booths"
+    }
+  ]
+}
