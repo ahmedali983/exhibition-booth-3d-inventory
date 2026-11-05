@@ -19,7 +19,7 @@ let highlight=null,dragging=false,dragOffset=new THREE.Vector3(),dragPlane=new T
 let baseOriginalMaterials=[],logoBoard=null,logoTexture=null;
 const loader=new GLTFLoader();
 const downloader=new GLTFExporter();
-const formats={width:[3,4,5,6,8,10,12],depth:[2,3,4,5,6,8],exposure:['Inline','Corner','Peninsula','Island'],style:['Minimal','Portal','Truss','Feature Wall','Canopy'],fitout:['Reception','Meeting','Demo','Lounge','Storage']};
+const formats={width:[3,4,5,6,8,10,12],depth:[2,3,4,5,6,8],exposure:['Inline','Corner','Peninsula','Island'],style:['Minimal','Portal','Truss','Feature Wall','Canopy'],fitout:['Reception','Meeting','Retail','Digital','Storage']};
 function toast(message){const box=$('toast');box.textContent=message;box.classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>box.classList.remove('visible'),3200)}
 function setStatus(message){$('sceneStatus').textContent=message;$('viewportState').textContent=message}
 function setDirty(){state.dirty=true;$('saveState').textContent='● Unsaved changes'}
