@@ -1,0 +1,24 @@
+name: ExpoVault Search Aesthetic Curated 3D Dataset
+on:
+  push:
+    branches: [research/expovault-trellis-aesthetic-20261105]
+    paths: [.github/workflows/search-curated-trellis-3d.yml]
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  filter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/scan_trellis_booths.py
+      - run: python -m pip install -q requests
+      - name: Filter high aesthetic-score source metadata
+        run: python scripts/scan_trellis_booths.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-trellis-high-aesthetic-booth-shortlist
+          path: trellis-booth-scan/
+          retention-days: 14
+          if-no-files-found: error
