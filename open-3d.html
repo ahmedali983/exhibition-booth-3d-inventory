@@ -20,7 +20,7 @@
   <p class="side-caption">YOUR WORKSPACE</p>
   <nav class="side-nav">
     <a class="side-link" href="./#models"><span class="nav-icon">⌗</span><span>Explore designs</span></a>
-    <a class="side-link selected" href="open-3d.html"><span class="nav-icon">◈</span><span>Items</span><span class="side-amount" id="sideAssetCount">—</span></a><a class="side-link" href="composer.html"><span class="nav-icon">▣</span><span>Booth composer</span></a>
+    <a class="side-link selected" href="open-3d.html"><span class="nav-icon">◈</span><span>Items</span><span class="side-amount" id="sideAssetCount">—</span></a><a class="side-link" href="open-3d.html?pack=licensed-booths"><span class="nav-icon">⬡</span><span>Original designer booths</span><span class="side-amount">CC BY</span></a><a class="side-link" href="composer.html"><span class="nav-icon">▣</span><span>Booth composer</span></a>
     <a class="side-link" href="./#concepts"><span class="nav-icon">▦</span><span>Booth studio</span></a>
     <a class="side-link" href="./#technical"><span class="nav-icon">⌁</span><span>Production files</span></a>
     <a class="side-link" href="library.html"><span class="nav-icon">⬡</span><span>My 3D files</span></a>
@@ -43,7 +43,7 @@
       <div class="overline light-overline"><span class="green-dot"></span> EXPOVAULT · ITEMS COLLECTION</div>
       <h1>Exhibition essentials.<br><em>Every piece editable.</em></h1>
       <p>Actual editable GLB models, fully hosted in your workspace. Preview in 3D, experiment with brand colours, and download without making an account or leaving ExpoVault.</p>
-      <div class="hero-cta-row"><button id="scrollArchive" class="button-yellow">Browse 3D files <span>↘</span></button><a href="composer.html" class="archive-outline">✳ Build booth with these items ↗</a><a href="./#technical" class="archive-outline">Get DXF booth plans ↗</a><a href="https://github.com/ahmedali983/exhibition-booth-3d-inventory/releases/download/v0.3.0/expovault-559-cc0-3d-models.zip" class="archive-outline" download>↓ Download all 559 3D models (ZIP)</a></div>
+      <div class="hero-cta-row"><a href="open-3d.html?pack=licensed-booths" class="button-yellow">⬡ Original Sketchfab designer GLBs ↗</a><button id="scrollArchive" class="button-yellow">Browse 3D files <span>↘</span></button><a href="composer.html" class="archive-outline">✳ Build booth with these items ↗</a><a href="./#technical" class="archive-outline">Get DXF booth plans ↗</a><a href="https://github.com/ahmedali983/exhibition-booth-3d-inventory/releases/download/v0.3.0/expovault-559-cc0-3d-models.zip" class="archive-outline" download>↓ Download all 559 3D models (ZIP)</a></div>
       <div class="archive-hero-note">SELF-HOSTED FILES · ORIGINAL MODEL GEOMETRY · OPEN LICENSE</div>
       <div class="archive-hero-art"><div class="sample-card sample-one"><img src="assets/thumbs/EV-1807.webp" alt="Modular booth concept"></div><div class="sample-card sample-two"><img src="assets/thumbs/EV-1808.webp" alt="Retail booth concept"></div></div>
     </section>
@@ -66,7 +66,7 @@
       <div id="emptyAssets" class="empty" hidden><div>⌕</div><h3>No files match this search</h3><p>Try a different keyword or pack.</p><button id="clearAssetSearch">Show all assets</button></div>
       <div class="pagination"><button class="load-button" id="showMoreAssets">Browse more model files ↓</button><small id="assetProgress"></small></div>
     </section>
-    <section class="archive-info"><div>◈</div><div><h3>More than a render.</h3><p>These downloads contain actual GLB geometry. For a complete exhibition booth, use the <a href="./#technical">Production Files collection</a> for our parametric GLB + preliminary DXF plan pairs. Use these open assets to furnish and develop new designs. Final manufacturing still requires specialist engineering.</p></div></section>
+    <section class="archive-info"><div>◈</div><div><h3>More than a render.</h3><p>These downloads contain actual GLB geometry. The Original Designer Booths group includes CC BY 4.0 models previously available on Sketchfab, hosted here with creator licence and source credit. For a complete exhibition booth, use the <a href="./#technical">Production Files collection</a> for our parametric GLB + preliminary DXF plan pairs. Use these open assets to furnish and develop new designs. Final manufacturing still requires specialist engineering.</p></div></section>
   </main>
   <footer class="footer"><div>EXPOVAULT <span>© 2026 · 3D DESIGN WORKSPACE</span></div><p>Downloaded assets in this collection are independently licensed CC0 files; source and author remain documented in the model metadata.</p><a href="./#technical">3D BOOTH FILES ↗</a></footer>
 </div></div>
@@ -96,5 +96,6 @@
   </div>
 </section>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="vendor/jszip/jszip.min.js"></script>
 <script type="module" src="ui/open-3d.mjs"></script>
 </body></html>
