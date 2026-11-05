@@ -1,0 +1,48 @@
+name: ExpoVault Licensed 3D Archive Export
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export-ccby-originals:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout permitted model files
+        uses: actions/checkout@v4
+
+      - name: Prepare per-designer attribution
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          root=pathlib.Path('.')
+          manifest=json.loads((root/'catalog'/'authorized_booths.json').read_text(encoding='utf-8'))
+          assert manifest['count']==len(manifest['assets'])
+          for asset in manifest['assets']:
+              assert asset['license']=='CC-BY-4.0'
+              assert (root/asset['glb']).is_file()
+              text='\n'.join([
+                  'Source model: '+asset['name'],
+                  'Original creator: '+asset['creator'],
+                  'Original model: '+asset['source_url'],
+                  'License: CC BY 4.0 https://creativecommons.org/licenses/by/4.0/',
+                  'Original archived GLB is unmodified.',
+                  'Attribution and notice of changes required for derivatives.',
+                  'No native CAD, construction or engineering drawings supplied.'
+              ])+'\n'
+              (root/'assets'/'authorized-booths'/(asset['id']+'-ATTRIBUTION.txt')).write_text(text,encoding='utf-8')
+          print('Prepared',len(manifest['assets']),'individually attributed original GLBs')
+          PY
+
+      - name: Create reusable connector-supported archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: expovault-original-booths-ccby-v05
+          path: |
+            assets/authorized-booths/
+            catalog/authorized_booths.json
+          compression-level: 6
+          retention-days: 7
+          if-no-files-found: error
