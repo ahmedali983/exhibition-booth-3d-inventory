@@ -1,0 +1,42 @@
+name: ExpoVault QA Newly Discovered Mirror Booths
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/qa-new-archive-booths-b.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/qa_new_archive_booths_b.py
+            catalog/verified_drive_inventory_quality_142_20261105.json
+      - uses: actions/download-artifact@v4
+        with:
+          name: expovault-48-new-shards-licensed-booth-wave10
+          run-id: 42116007919
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: candidate-input/
+      - name: Prepare metadata input
+        run: |
+          python - <<'PY'
+          import pathlib,zipfile
+          p=pathlib.Path('candidate-input')
+          f=p/'metadata.zip'
+          if not f.exists():
+              with zipfile.ZipFile(f,'w') as z:
+                  for item in p.glob('*.json'):z.write(item,item.name)
+          PY
+      - run: python -m pip install -q requests pillow
+      - run: python -u scripts/qa_new_archive_booths.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-mirror-wave10-new-originals-visual-QA
+          path: wave10-booth-quality/
+          retention-days: 7
+          if-no-files-found: error
