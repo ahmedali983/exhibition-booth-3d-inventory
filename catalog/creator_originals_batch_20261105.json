@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-05",
+  "from_sketchfab_origin_public_objaverse_archive": true,
+  "models_added": 3,
+  "resulting_total": 21,
+  "disclaimer": "Internal research and design reference only; every original file retains CC BY 4.0 rights, attribution and source. Noncommercial notice does not override third-party rights.",
+  "model_quality_qa": "Preview image and GLB mesh validations; visual QA of site pending.",
+  "assets": [
+    {
+      "id": "SKFB-ccceb87a823140bd97bfb838a16fe4e3",
+      "uid": "ccceb87a823140bd97bfb838a16fe4e3",
+      "name": "Messestand2-export-sketchfab Fbm",
+      "creator": "nuovy",
+      "source_url": "https://sketchfab.com/3d-models/messestand2-export-sketchfab-fbm-ccceb87a823140bd97bfb838a16fe4e3",
+      "glb": "assets/authorized-booths/SKFB-ccceb87a823140bd97bfb838a16fe4e3.glb",
+      "sha256": "6c02b01a9d0b3c21d68689b0b1228788c7da6ca1c88f14d8e8ca0e53840ad28d",
+      "license": "CC-BY-4.0",
+      "thumbnail": "assets/authorized-booths/SKFB-ccceb87a823140bd97bfb838a16fe4e3.webp"
+    },
+    {
+      "id": "SKFB-df76a00dc3394979adce157f177deffd",
+      "uid": "df76a00dc3394979adce157f177deffd",
+      "name": "fuar standı",
+      "creator": "turkchem",
+      "source_url": "https://sketchfab.com/3d-models/fuar-stand-df76a00dc3394979adce157f177deffd",
+      "glb": "assets/authorized-booths/SKFB-df76a00dc3394979adce157f177deffd.glb",
+      "sha256": "5813af60501757479ae001e6650028640eb10ce34d6dd366dfddfdc6e91f0c07",
+      "license": "CC-BY-4.0",
+      "thumbnail": "assets/authorized-booths/SKFB-df76a00dc3394979adce157f177deffd.webp"
+    },
+    {
+      "id": "SKFB-3b6b6dd246ee4b7fb4b326e930859076",
+      "uid": "3b6b6dd246ee4b7fb4b326e930859076",
+      "name": "Messestand Innotrans 2018",
+      "creator": "vividblack",
+      "source_url": "https://sketchfab.com/3d-models/messestand-innotrans-2018-3b6b6dd246ee4b7fb4b326e930859076",
+      "glb": "assets/authorized-booths/SKFB-3b6b6dd246ee4b7fb4b326e930859076.glb",
+      "sha256": "8f094e6c446bb2ca9b0c50b3a25881c7bd1a13b488caa791c06e75ce0f6d030c",
+      "license": "CC-BY-4.0",
+      "thumbnail": "assets/authorized-booths/SKFB-3b6b6dd246ee4b7fb4b326e930859076.webp"
+    }
+  ]
+}
