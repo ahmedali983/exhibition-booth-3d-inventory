@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shard: [glbs-0008, glbs-0040, glbs-0062]
+        shard: [glbs-0038, glbs-0064, glbs-0044, glbs-0018]
     steps:
       - uses: actions/checkout@v4
         with:
