@@ -1,0 +1,62 @@
+name: ExpoVault High Aesthetic Licensed Booth Collection 01
+on:
+  push:
+    branches: [research/expovault-trellis-aesthetic-20261105]
+    paths: [.github/workflows/collect-quality-booths-01.yml]
+permissions: {contents: read}
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        uid:
+          - 6482e2bcddbc4888a126ea0b4bf306df
+          - 2c6f4626d4eb4474825d827641a80884
+          - 3b5a60cce9c84d608101d9fd898d0982
+          - 7bb482bf78f3468b8387dedf63f964da
+          - 6b1c54d4ec9c4282a4dac2bb08c86e64
+          - b4137c295ed04237a778ad5c7d8e819a
+          - b42e3e53027c40f8b11658cf417c8389
+          - a6e3fc1464534babb93576240bc4de9c
+          - c4f9148b3d904f59b21ca51bd756103c
+          - 75245a1d11e44dcb8e8b1725c7891bfd
+          - d9df83c02b414d0784163319686ea726
+          - 582f06942d2142afa01172139406a10c
+          - 3bc5e8c4319b4bff9980e055062d1b7c
+          - 995cb4c00fef43d583b8aae8a590b3d8
+          - dfdbea2d91924f3798babfda20dccf69
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/collect_creator_trellis_booth.py
+      - run: python -m pip install -q requests pillow
+      - run: npm install --global @gltf-transform/cli@4
+      - name: Verify license, preserve artist source, convert original glTF to downloadable GLB
+        run: python scripts/collect_creator_trellis_booth.py ${{ matrix.uid }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-quality1-${{ matrix.uid }}-full
+          path: trellis-collected-${{ matrix.uid }}/*-REAL-GLB-AND-CREATOR-SOURCE.zip
+          if-no-files-found: warn
+          compression-level: 0
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-quality1-${{ matrix.uid }}-glb
+          path: trellis-collected-${{ matrix.uid }}/*-GLB-ONLY.zip
+          if-no-files-found: warn
+          compression-level: 0
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-quality1-${{ matrix.uid }}-native
+          path: trellis-collected-${{ matrix.uid }}/*-CREATOR-SOURCE-ONLY.zip
+          if-no-files-found: warn
+          compression-level: 0
+          retention-days: 7
