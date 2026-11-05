@@ -1,0 +1,61 @@
+name: ExpoVault Package Visually Approved ProSceneverse Original Booths
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/package-psv-approved.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  verified:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: psv-licensed-glbs-0008
+          run-id: 42092813213
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: staging/0008
+      - uses: actions/download-artifact@v4
+        with:
+          name: psv-licensed-glbs-0062
+          run-id: 42092813213
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: staging/0062
+      - name: Make single-download original-GLB batch without rejected props
+        run: |
+          python - <<'PY'
+          import pathlib,zipfile,hashlib,json,io
+          root=pathlib.Path("approved");root.mkdir(exist_ok=True)
+          approved=[
+            ("0008","2bd803f8bd684c04a07bd21f63f4a2b6"),
+            ("0062","ab5db5125a854d0fa9bb6328f169ff4a")
+          ]
+          items=[]
+          for shard,uid in approved:
+            p=pathlib.Path("staging")/shard/("PSV-"+uid+"-GLB-CC.zip")
+            with zipfile.ZipFile(p) as z:
+              assert z.testzip() is None
+              meta=json.loads(z.read("MODEL_INFO.json"))
+              assert meta["uid"]==uid and meta["license"] in ("by","cc0","by-sa")
+              raw=z.read("original.glb")
+              assert hashlib.sha256(raw).hexdigest()==meta["sha256"]
+              assert raw[:4]==b"glTF" and int.from_bytes(raw[8:12],"little")==len(raw)
+              asset=root/("PSV-"+uid);asset.mkdir()
+              (asset/"original.glb").write_bytes(raw)
+              (asset/"MODEL_INFO.json").write_text(json.dumps(meta,ensure_ascii=False,indent=2))
+              (asset/"CREATOR_CREDIT.txt").write_bytes(z.read("CREATOR_CREDIT.txt"))
+              items.append({"uid":uid,"name":meta["name"],"creator":meta["creator"],"source":meta["sketchfab_url"],
+                "license":meta["license"],"sha256":meta["sha256"],"bytes":len(raw),
+                "visual_review":"Accept: complete exhibition booth. Production drawings not supplied."})
+              print("BATCH_APPROVED",uid,meta["name"],len(raw),flush=True)
+          (root/"BATCH_INDEX.json").write_text(json.dumps({"total":len(items),"models":items},ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-2-accepted-psv-booths-glbs
+          path: approved/
+          retention-days: 7
+          compression-level: 0
+          if-no-files-found: error
