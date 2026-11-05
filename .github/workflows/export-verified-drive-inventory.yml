@@ -1,0 +1,19 @@
+name: ExpoVault Export Verified Drive Inventory
+on:
+  push:
+    branches: [research/expovault-open-archive-catalogue-20261105]
+    paths: [.github/workflows/export-verified-drive-inventory.yml]
+permissions: {contents: read}
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: catalog/verified_drive_inventory_48_20261105.json
+      - run: python -c "import json; d=json.load(open('catalog/verified_drive_inventory_48_20261105.json')); assert len(d['models'])==48; print('VERIFY',d['verified_unique_model_uids'])"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-48-verified-drive-model-index
+          path: catalog/verified_drive_inventory_48_20261105.json
+          retention-days: 7
