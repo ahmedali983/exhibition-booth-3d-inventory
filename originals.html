@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Professional original exhibition stand GLBs locally hosted with per-author CC BY 4.0 credits, direct downloads and design editor — no external login.">
+<meta name="theme-color" content="#121c23">
+<title>Original Designer Booths | ExpoVault 3D Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ui/v3.css">
+<link rel="stylesheet" href="ui/open-3d.css">
+<script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.js","three/addons/":"./vendor/three/examples/jsm/"}}</script>
+</head>
+<body>
+<div class="layout">
+<aside class="side">
+  <a class="identity" href="./"><span class="identity-mark">E<span>.</span></span><span class="identity-text">ex<span>po</span>vault<small>3D DESIGN WORKSPACE</small></span></a>
+  <p class="side-caption">YOUR WORKSPACE</p>
+  <nav class="side-nav">
+    <a class="side-link" href="./#models"><span class="nav-icon">⌗</span><span>Explore designs</span></a>
+    <a class="side-link" href="open-3d.html"><span class="nav-icon">◈</span><span>Items</span><span class="side-amount" id="sideAssetCount">—</span></a><a class="side-link selected" href="originals.html"><span class="nav-icon">⬡</span><span>Original designer booths</span><span class="side-amount">14</span></a><a class="side-link" href="composer.html"><span class="nav-icon">▣</span><span>Booth composer</span></a>
+    <a class="side-link" href="./#concepts"><span class="nav-icon">▦</span><span>Booth studio</span></a>
+    <a class="side-link" href="./#technical"><span class="nav-icon">⌁</span><span>Production files</span></a>
+    <a class="side-link" href="library.html"><span class="nav-icon">⬡</span><span>My 3D files</span></a>
+  </nav>
+  <p class="side-caption tool-caption">PROJECT WORKSPACE</p>
+  <div class="quick-access"><div class="tool-glyph">✳</div>
+    <strong>Real model files.</strong>
+    <p>Direct GLB downloads, native 3D preview, and brand-colour editing. Your colleagues don't need an account.</p>
+    <a href="./#technical" class="quick-link">See production concept files <span>↗</span></a>
+  </div>
+  <div class="side-bottom"><div class="available"><i></i> No login required</div><small>Original 3D files self-hosted by ExpoVault. Assets in this collection carry CC0 licences and are not fabrication-approved drawings.</small></div>
+</aside>
+<div class="content-frame">
+  <header class="topbar"><div class="topbar-left"><a class="topbar-crumb" href="./">ExpoVault <b>/</b> <strong>Original Designer Booths</strong></a></div>
+    <div class="global-search"><span class="search-symbol">⌕</span><input type="search" id="searchAssets" aria-label="Search downloadable 3D assets" placeholder="Search displays, retail, signage, stands..."><kbd>⌘ K</kbd></div>
+    <a href="./#technical" class="head-action">Production files ↗</a>
+  </header>
+  <main class="archive-main">
+    <section class="archive-hero">
+      <div class="overline light-overline"><span class="green-dot"></span> EXPOVAULT · REAL DESIGNER BOOTHS</div>
+      <h1>Designer-made booths.<br><em>Real GLBs. Yours to edit.</em></h1>
+      <p>14 original exhibition booth designs, sourced with CC BY 4.0 licences and hosted here. Inspect 3D, recolour, download original GLB with creator credits, or start a new project in the Composer.</p>
+      <div class="hero-cta-row"><a href="composer.html" class="button-yellow">✳ Edit in 3D Composer ↗</a><button id="scrollArchive" class="button-yellow">Browse 3D files <span>↘</span></button><a href="composer.html" class="archive-outline">✳ Build booth with these items ↗</a><a href="./#technical" class="archive-outline">Get DXF booth plans ↗</a><a href="open-3d.html" class="archive-outline">◈ Browse 579 3D Items ↗</a></div>
+      <div class="archive-hero-note">SELF-HOSTED FILES · ORIGINAL MODEL GEOMETRY · OPEN LICENSE</div>
+      <div class="archive-hero-art"><div class="sample-card sample-one"><img src="assets/authorized-booths/SKFB-61be25e36a0645df93f3deb66b5f699c.webp" alt="Modular booth concept"></div><div class="sample-card sample-two"><img src="assets/authorized-booths/SKFB-ab70bfe5d7464251b61af81558c69e54.webp" alt="Retail booth concept"></div></div>
+    </section>
+    <div class="archive-stats">
+      <div><span>◈</span><strong id="totalAssets">—</strong><small>Real downloadable GLB files</small></div>
+      <div><span>▣</span><strong id="totalPacks">—</strong><small>Coordinated display kits</small></div>
+      <div><span>↓</span><strong>No login</strong><small>Direct ExpoVault downloads</small></div>
+      <div><span>✳</span><strong id="libraryLicenses">CC0</strong><small>Clear model licences</small></div>
+    </div>
+    <section class="archive-section" id="assetCollection">
+      <div class="archive-title"><div><span class="overline accent-overline">ORIGINAL BOOTHS · VERIFIED CREATOR MODELS</span><h2>Explore original <em>booth designs.</em></h2>
+        <p>Complete source-authored GLB scenes from independent designers. The file and credit notice download directly; native DWG, SKP and fabrication plans were not supplied.</p></div>
+        <span class="archive-number" id="resultsLabel">Loading…</span>
+      </div>
+      <div class="pack-tabs" id="packFilters"><button data-pack="all" class="pack-tab selected">All assets</button></div>
+      <div class="archive-toolbar"><div class="archive-toolbar-text">◉ <strong id="visibleCount">—</strong> designs available · GLB + built-in materials</div>
+        <label>Sort <select id="sortAssets"><option value="featured">Featured first</option><option value="name">Name A–Z</option><option value="size">Smallest download</option><option value="triangles">Most detailed</option></select></label>
+      </div>
+      <div id="assetGrid" class="open-grid" aria-live="polite"><div class="grid-loading">Loading self-hosted 3D files…</div></div>
+      <div id="emptyAssets" class="empty" hidden><div>⌕</div><h3>No files match this search</h3><p>Try a different keyword or pack.</p><button id="clearAssetSearch">Show all assets</button></div>
+      <div class="pagination"><button class="load-button" id="showMoreAssets">Browse more model files ↓</button><small id="assetProgress"></small></div>
+    </section>
+    <section class="archive-info"><div>◈</div><div><h3>More than a render.</h3><p>These source-authored 3D scenes are available as original GLB files, with per-author attribution under CC BY 4.0. Use the Composer to customise and add items. Original fabrication files were not supplied; final physical construction still requires independent engineering.</p></div></section>
+  </main>
+  <footer class="footer"><div>EXPOVAULT <span>© 2026 · 3D DESIGN WORKSPACE</span></div><p>Creator models in this collection carry CC BY 4.0 attribution and a link to the original author and source.</p><a href="./#technical">3D BOOTH FILES ↗</a></footer>
+</div></div>
+<div id="openOverlay" class="open-overlay" hidden></div>
+<section id="openViewer" role="dialog" aria-modal="true" aria-labelledby="openTitle" class="open-modal" hidden>
+  <header class="open-modal-head"><div><span class="overline light-overline">EXPOVAULT · LIVE 3D INSPECTOR</span><h2 id="openTitle">3D Asset</h2></div><div class="modal-head-actions"><button id="nextAsset" aria-label="Next model">Next →</button><button id="closeAsset" aria-label="Close 3D inspector">✕</button></div></header>
+  <div class="open-modal-grid">
+    <div class="open-stage">
+      <div class="open-stage-label"><span>◉ &nbsp; REAL 3D MESH</span><span>Drag to rotate · Scroll to zoom</span></div>
+      <div class="open-canvas" id="openCanvas"><div id="loading3d" class="loading3d">Preparing native 3D preview…</div></div>
+      <div class="open-stage-footer"><button id="resetView">↻ Reset view</button><strong id="meshDetail">Model dimensions available after load</strong></div>
+    </div>
+    <aside class="open-inspector">
+      <span class="panel-overline">DIRECT DOWNLOAD · NO ACCOUNT</span>
+      <h3 id="inspectorTitle">3D design asset</h3>
+      <p id="inspectorDescription">Inspectable editable GLB model.</p>
+      <div class="inspector-facts"><div><small>Format</small><strong>GLB · glTF 2.0</strong></div><div><small>Licence</small><strong id="inspectorLicense">CC0 1.0</strong></div><div><small>Size</small><strong id="inspectorSize">—</strong></div><div><small>Triangles</small><strong id="inspectorTris">—</strong></div></div>
+      <a id="downloadRealGLB" class="real-download" download>↓ &nbsp; Download original GLB file</a>
+      <div class="color-lab"><strong>✳ &nbsp; Try brand colours</strong><p>Change a material in the 3D preview. The original model remains intact.</p><label for="editableMaterial">Select material</label><select id="editableMaterial"></select>
+        <div class="color-controls"><input type="color" id="editableColor" value="#ee7653"><span id="editableHex">#EE7653</span></div>
+        <div class="color-actions"><button id="applyAssetColor">Apply colour</button><button id="resetAssetColor">Reset</button></div>
+      </div>
+      <button id="exportCustomized" class="branded-export" disabled>↓ Download coloured GLB</button>
+      <div class="origin-credit">Model provenance: <a id="originName" target="_blank" rel="noopener noreferrer">—</a><br><span id="licenseStatus">CC0 — no login or attribution required</span></div>
+      <p class="build-note">3D geometry for design and visualization. Dimensions are not independently certified; do not use directly as structural shop drawings.</p>
+    </aside>
+  </div>
+</section>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="vendor/jszip/jszip.min.js"></script>
+<script type="module" src="ui/open-3d.mjs"></script>
+</body></html>
