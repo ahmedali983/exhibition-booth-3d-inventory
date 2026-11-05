@@ -1,0 +1,47 @@
+name: ExpoVault Mirror Native CAD and 3D Assets
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  mirror-source-packages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify source bundles and 3D previews before export
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,pathlib,zipfile,hashlib
+          root=pathlib.Path('.')
+          data=json.loads((root/'catalog/production_cad_bundles.json').read_text())
+          assert data['count']==2
+          for item in data['assets']:
+            z=root/item['bundle'];model=root/item['glb'];pic=root/item['image']
+            assert z.is_file() and model.is_file() and pic.is_file()
+            assert hashlib.sha256(z.read_bytes()).hexdigest()==item['bundle_sha256']
+            with zipfile.ZipFile(z) as archive:
+              assert archive.testzip() is None
+              names=[s.lower() for s in archive.namelist()]
+              assert any(n.endswith('.skp') for n in names)
+              assert any(n.endswith(('.dwg','.dxf')) for n in names)
+              assert any(n.endswith('.glb') for n in names)
+            b=model.read_bytes()
+            assert b[:4]==b'glTF' and int.from_bytes(b[8:12],'little')==len(b)
+            print('VERIFIED',item['id'],len(b),flush=True)
+          PY
+      - name: Export ready-to-mirror source CAD ZIP and converted GLB
+        uses: actions/upload-artifact@v4
+        with:
+          name: expovault-complete-cad-plus-glb
+          path: |
+            assets/production-cad/*.glb
+            assets/production-cad/*-COMPLETE-DESIGN-BUNDLE.zip
+            assets/production-cad/*.jpg
+            catalog/production_cad_bundles.json
+          compression-level: 6
+          retention-days: 7
+          if-no-files-found: error
