@@ -138,3 +138,8 @@
 .concept-pack-download:hover:not(:disabled),.production-zip:hover:not(:disabled){background:#bde0ca}
 .concept-pack-download:disabled,.production-zip:disabled{opacity:.65}
 .inline-download{display:block;text-align:center;text-decoration:none}
+
+/* Exact source-authored Sketchfab CC-BY booth geometry now locally downloadable. */
+.creator-editor-link{display:block;text-align:center;margin-top:7px;padding:10px 8px;border-radius:8px;background:#f0f7f0;border:1px solid #dbe9dd;color:#3d7652;font-size:10px;font-weight:900}
+.creator-editor-link:hover{background:#deefdf}
+.model-card:has(.creator-editor-link){border-color:#a8d3b5;box-shadow:0 4px 19px #2b704419}
