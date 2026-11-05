@@ -1,0 +1,29 @@
+name: ExpoVault Bulk ProSceneverse Selective GLB Extractor
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/export-psv-range-batch.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/export_psv_range_batch.py
+      - run: python -m pip install -q pandas pyarrow requests huggingface_hub
+      - name: Retrieve up to five source-authored CC booth GLBs by HTTP Range
+        run: python -u scripts/export_psv_range_batch.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-prosceneverse-real-booth-glb-range-batch
+          path: psv-export/
+          if-no-files-found: warn
+          retention-days: 7
+          compression-level: 0
