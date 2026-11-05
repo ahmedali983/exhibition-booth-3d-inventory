@@ -30,7 +30,7 @@ function score(v){
  score+=Math.min(17,Math.log10(1+(v.view_count||0))*3);
  return score;
 }
-function sectionTitle(s){return({models:'Original 3D booths',concepts:'Editable booth layouts',technical:'Concept floor plans',saved:'My collection'})[s]}
+function sectionTitle(s){return({models:'3D Designs',concepts:'Editable booth layouts',technical:'Concept floor plans',saved:'My collection'})[s]}
 function setSection(name,{changeHash=true,scroll=true}={}){
  if(!['models','concepts','technical','saved'].includes(name))name='models';
  STATE.section=name;
@@ -55,7 +55,7 @@ function runModelFilters(){
  const q=STATE.search.models.toLowerCase().trim();
  let items=STATE.models.filter(v=>
    (STATE.kind==='all'||v.category===STATE.kind)
-   &&(STATE.availability==='any'||(STATE.availability==='download'?STATE.hostedByUid.has(uidFor(v)):!STATE.hostedByUid.has(uidFor(v))))
+   &&(STATE.availability==='any'||(STATE.availability==='download'?true:STATE.availability==='original'?!v.is_local_concept:STATE.availability==='generated'?v.is_local_concept:true))
    &&(STATE.licence==='any'||(STATE.licence==='cc'&&/CC|Creative Commons/i.test(v.license))||(STATE.licence==='noncommercial'&&/NonCommercial|NC\b/i.test(v.license))||(STATE.licence==='unspecified'&&!/CC|Creative Commons/i.test(v.license)))
    &&(!q||(v.title+' '+v.author+' '+v.license+' '+v.category).toLowerCase().includes(q))
  );
@@ -158,7 +158,7 @@ function makeOriginalCard(v){
 function renderModels(append=false){
  const host=$('modelGrid');if(!append)host.replaceChildren();
  const frag=document.createDocumentFragment();
- for(const item of STATE.modelsFiltered.slice(host.children.length,STATE.modelsShow))frag.append(makeOriginalCard(item));
+ for(const item of STATE.modelsFiltered.slice(host.children.length,STATE.modelsShow))frag.append(item.is_local_concept?makeConceptCard(item):makeOriginalCard(item));
  host.append(frag);
  $('modelEmpty').hidden=STATE.modelsFiltered.length!==0;
  $('moreModels').hidden=host.children.length>=STATE.modelsFiltered.length;
@@ -265,7 +265,7 @@ function renderTechnical(append=false){
 }
 function renderSaved(){
  const host=$('savedGrid');host.replaceChildren();const modelMap=new Map(STATE.models.map(x=>[x.id,x])),conceptMap=new Map(STATE.concepts.map(x=>[x.id,x]));
- for(const id of STATE.saved){const v=modelMap.get(id)||conceptMap.get(id);if(!v)continue;host.append(id.startsWith('SKFB-')?makeOriginalCard(v):makeConceptCard(v))}
+ for(const id of STATE.saved){const v=modelMap.get(id)||conceptMap.get(id);if(!v)continue;host.append(v.is_local_concept||id.startsWith('EV-')?makeConceptCard(v):makeOriginalCard(v))}
  $('savedEmpty').hidden=host.children.length>0;
 }
 function activeList(){
@@ -380,6 +380,17 @@ async function init(){
  // External metadata references remain research-only: never show non-downloadable cards.
  STATE.models=STATE.models.filter(v=>STATE.hostedByUid.has(uidFor(v)));
  STATE.concepts=(concepts.items||[]).map(c=>({id:c[0],width_m:c[1],depth_m:c[2],booth_type:c[3],style:c[4],fitout:c[5],area_m2:c[6]}));STATE.technical=[];
+ // Main catalogue: 14 independently created designer originals plus 4200 downloadable
+ // procedural layouts. Variants are labeled as concepts, never as original designer art.
+ for(const c of STATE.concepts){
+   c.is_local_concept=true;
+   c.title=c.style+' '+c.booth_type+' · '+c.width_m+'×'+c.depth_m+' m';
+   c.author='ExpoVault parametric studio';
+   c.license='Original layout concept';
+   c.category='booth';
+   c.relevance=80;c.view_count=0;c.is_downloadable=true;
+   STATE.models.push(c);
+ }
  const thumbnails=highRes.thumbnails||{};for(const item of STATE.models){const value=thumbnails[item.id];if(value&&validHttp(value.thumbnail,['sketchfab.com','cloudfront.net']))item.thumbnail=value.thumbnail;const stored=STATE.hostedByUid.get(uidFor(item));if(stored?.thumbnail)item.thumbnail=stored.thumbnail}
  STATE.models.sort((a,b)=>(Number(STATE.hostedByUid.has(uidFor(b)))-Number(STATE.hostedByUid.has(uidFor(a))))||b.relevance-a.relevance);
  $('metricModels').textContent=number(STATE.models.length);
@@ -387,7 +398,7 @@ async function init(){
  if($('sideLicensed'))$('sideLicensed').textContent=number(STATE.hostedByUid.size);
  persistSaved();runModelFilters();runConceptFilters();runProductionFilters();
  // Hero images come exclusively from the locally hosted original model previews.
- const featured=STATE.models.filter(x=>STATE.hostedByUid.get(uidFor(x))?.thumbnail);
+ const featured=STATE.models.filter(x=>!x.is_local_concept&&STATE.hostedByUid.get(uidFor(x))?.thumbnail);
  if(featured.length>1){$('heroImageOne').src=featured[3]?.thumbnail||featured[0].thumbnail;$('heroImageTwo').src=featured[10]?.thumbnail||featured[1].thumbnail}
  const hash=location.hash.slice(1);
  if(['models','concepts','technical','saved'].includes(hash))setSection(hash,{changeHash:false,scroll:false});
