@@ -1,0 +1,21 @@
+name: ExpoVault Discover Other CC Booths Shards Wave10
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/scan-mirror-48-metadata-b.yml]
+permissions: {contents: read}
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/mirror_48_metadata_b.py
+      - run: python -m pip install -q requests
+      - run: python -u scripts/mirror_48_metadata_b.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-48-new-shards-licensed-booth-wave10
+          path: mirror-title-discovery-b/
+          retention-days: 7
