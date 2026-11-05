@@ -1,6 +1,6 @@
 const $=id=>document.getElementById(id);
 const create=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=String(text);return el};
-const STATE={models:[],concepts:[],technical:[],section:'models',search:{models:'',concepts:'',technical:''},kind:'all',availability:'any',licence:'any',sort:'relevant',modelsFiltered:[],conceptsFiltered:[],modelsShow:28,conceptsShow:28,technicalShow:32,technicalFiltered:[],active:null,position:0,fromSaved:false,saved:new Set()};
+const STATE={models:[],concepts:[],technical:[],section:'models',search:{models:'',concepts:'',technical:''},kind:'all',availability:'any',licence:'any',sort:'relevant',modelsFiltered:[],conceptsFiltered:[],modelsShow:28,conceptsShow:28,technicalShow:32,technicalFiltered:[],active:null,position:0,fromSaved:false,saved:new Set(),hostedByUid:new Map()};
 const PROFILE='https://sketchfab.com/';
 let noticeTimer=0;
 try{const entries=JSON.parse(localStorage.getItem('expovault-v3-saved')||'[]');if(Array.isArray(entries))STATE.saved=new Set(entries)}catch(_){}
@@ -55,7 +55,7 @@ function runModelFilters(){
  const q=STATE.search.models.toLowerCase().trim();
  let items=STATE.models.filter(v=>
    (STATE.kind==='all'||v.category===STATE.kind)
-   &&(STATE.availability==='any'||(STATE.availability==='download'?v.is_downloadable:!v.is_downloadable))
+   &&(STATE.availability==='any'||(STATE.availability==='download'?STATE.hostedByUid.has(uidFor(v)):!STATE.hostedByUid.has(uidFor(v))))
    &&(STATE.licence==='any'||(STATE.licence==='cc'&&/CC|Creative Commons/i.test(v.license))||(STATE.licence==='noncommercial'&&/NonCommercial|NC\b/i.test(v.license))||(STATE.licence==='unspecified'&&!/CC|Creative Commons/i.test(v.license)))
    &&(!q||(v.title+' '+v.author+' '+v.license+' '+v.category).toLowerCase().includes(q))
  );
@@ -63,7 +63,7 @@ function runModelFilters(){
   case 'views':items.sort((a,b)=>(b.view_count||0)-(a.view_count||0));break;
   case 'new':items.sort((a,b)=>String(b.published_at||'').localeCompare(String(a.published_at||'')));break;
   case 'az':items.sort((a,b)=>a.title.localeCompare(b.title));break;
-  default:items.sort((a,b)=>b.relevance-a.relevance);break;
+  default:items.sort((a,b)=>(Number(STATE.hostedByUid.has(uidFor(b)))-Number(STATE.hostedByUid.has(uidFor(a))))||b.relevance-a.relevance);break;
  }
  STATE.modelsFiltered=items;STATE.modelsShow=28;renderModels();
  $('modelCount').textContent=number(items.length);
@@ -94,24 +94,65 @@ function thumbnail(src,alt){
  img.onerror=()=>{const parent=img.parentElement;if(parent)parent.insertBefore(create('div','model-thumb-fallback','◇'),img);img.remove()};
  return img;
 }
+function creatorCredits(asset){
+ return ['ORIGINAL 3D BOOTH — CREATOR ATTRIBUTION','',
+  'Title: '+asset.name,'Creator: '+asset.creator,'Sketchfab: '+asset.source_url,
+  'License: CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/',
+  'Archived GLB from Objaverse 1.0 (AllenAI); no geometry changed in this ZIP.',
+  'When modifying the file, indicate what changed and retain this attribution.',
+  'Not manufacturer-certified geometry or approved shop drawings.',''].join('\n');
+}
+async function downloadCreatorPack(asset,button){
+ const previous=button.textContent;button.disabled=true;button.textContent='Preparing original 3D…';
+ try{
+  if(!window.JSZip)throw Error('ZIP exporter unavailable');
+  const response=await fetch(asset.glb);
+  if(!response.ok)throw Error('Original GLB not found (HTTP '+response.status+')');
+  const data=await response.arrayBuffer(),header=new DataView(data);
+  if(data.byteLength<20||header.getUint32(0,true)!==0x46546c67||header.getUint32(8,true)!==data.byteLength)throw Error('Invalid original GLB');
+  const zip=new window.JSZip();
+  zip.file('3D/'+asset.id+'.glb',data);
+  zip.file('CREDITS.txt',creatorCredits(asset));
+  zip.file('MODEL_INFORMATION.json',JSON.stringify({title:asset.name,creator:asset.creator,source:asset.source_url,license:asset.license,license_url:asset.license_url},null,2));
+  const file=await zip.generateAsync({type:'blob',compression:'DEFLATE',compressionOptions:{level:4}});
+  const url=URL.createObjectURL(file),a=document.createElement('a');
+  a.href=url;a.download=asset.id+'-ORIGINAL-3D.zip';a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),10000);
+  toast('Original designer GLB and credits saved. No Sketchfab account needed.');
+ }catch(error){toast('Original download failed: '+error.message);console.error(error)}
+ finally{button.disabled=false;button.textContent=previous}
+}
 function makeOriginalCard(v){
- const card=create('article','model-card');card.tabIndex=0;card.setAttribute('role','button');card.setAttribute('aria-label','Open embedded 3D preview of '+v.title);
+ const hosted=STATE.hostedByUid.get(uidFor(v));
+ const card=create('article','model-card');card.tabIndex=0;card.setAttribute('role','button');
+ card.setAttribute('aria-label',hosted?'Inspect locally hosted original 3D of '+v.title:'Open 3D preview of '+v.title);
  const visual=create('div','model-thumb');const fallback=create('div','model-thumb-fallback','◇');
- const imgSrc=validHttp(v.thumbnail,['sketchfab.com','cloudfront.net']);
+ const imgSrc=hosted?.thumbnail||validHttp(v.thumbnail,['sketchfab.com','cloudfront.net']);
  if(imgSrc)visual.append(thumbnail(imgSrc,v.title));else visual.append(fallback);
  const top=create('div','thumb-top');
- top.append(create('span','mini-label','ORIGINAL PREVIEW'),favoriteButton(v));visual.append(top,create('div','thumb-overlay','◈ Explore interactive 3D ↗'));
- const body=create('div','card-text');body.append(create('h3','',v.title),create('div','card-author','by '+(v.author||'Original creator')));
- const bottom=create('div','card-bottom');bottom.append(create('span','',number(v.view_count)+' views'),create('b',v.category==='other'?'muted-badge':'',v.category==='booth'?'EXHIBITION':v.category==='pavilion'?'PAVILION':v.category==='display'?'DISPLAY':v.category==='event'?'EVENT':'RELATED'));
+ top.append(create('span','mini-label'+(hosted?' download':''),hosted?'LOCAL ORIGINAL · CC BY':'ORIGINAL PREVIEW'),favoriteButton(v));
+ visual.append(top,create('div','thumb-overlay',hosted?'◈ Inspect locally hosted 3D':'◈ Explore original 3D preview ↗'));
+ const body=create('div','card-text');
+ body.append(create('h3','',v.title),create('div','card-author','by '+(hosted?.creator||v.author||'Original creator')));
+ const bottom=create('div','card-bottom');
+ bottom.append(create('span','',hosted?'GLB file stored here':number(v.view_count)+' views'),
+  create('b',hosted?'':v.category==='other'?'muted-badge':'',hosted?'CC BY 4.0':v.category==='booth'?'EXHIBITION':v.category==='pavilion'?'PAVILION':v.category==='display'?'DISPLAY':v.category==='event'?'EVENT':'RELATED'));
  body.append(bottom);
- const control=create('a','inline-download','✳ Create an editable booth instead');
- control.href='composer.html';
- control.setAttribute('aria-label','Open Composer — original '+v.title+' is a preview, not a locally hosted 3D file');
- control.onclick=e=>e.stopPropagation();
- body.append(control);
+ if(hosted){
+  const download=create('button','inline-download','↓ Download original GLB + licence');
+  download.onclick=e=>{e.stopPropagation();downloadCreatorPack(hosted,download)};
+  const see=create('a','creator-editor-link','◈ Preview & recolour original 3D');
+  see.href='open-3d.html?asset='+encodeURIComponent(hosted.id);see.onclick=e=>e.stopPropagation();
+  body.append(download,see);
+ }else{
+  const createNew=create('a','inline-download','✳ Design a downloadable booth instead');
+  createNew.href='composer.html';createNew.onclick=e=>e.stopPropagation();
+  body.append(createNew);
+ }
  card.append(visual,body);
- card.onclick=()=>openOriginal(v);
- card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openOriginal(v)}};
+ const activate=()=>hosted?window.location.assign('open-3d.html?asset='+encodeURIComponent(hosted.id)):openOriginal(v);
+ card.onclick=activate;
+ card.onkeydown=e=>{if(e.target===card&&(e.key==='Enter'||e.key===' ')){e.preventDefault();activate()}};
  return card;
 }
 function renderModels(append=false){
@@ -322,9 +363,10 @@ async function fetchJSON(url){
 async function init(){
  bindControls();
  let fileResults;
- try{fileResults=await Promise.all([fetchJSON('catalog/sketchfab_index.json'),fetchJSON('catalog/creator_discovery.json'),fetchJSON('catalog/concept_cards.json'),fetchJSON('catalog/oembed_thumbnails.json')])}
+ try{fileResults=await Promise.all([fetchJSON('catalog/sketchfab_index.json'),fetchJSON('catalog/creator_discovery.json'),fetchJSON('catalog/concept_cards.json'),fetchJSON('catalog/oembed_thumbnails.json'),fetchJSON('catalog/authorized_booths.json')])}
  catch(error){console.error(error);$('modelGrid').textContent='Catalogue load failed — refresh this page to retry';toast('Catalogue could not load');return}
- const [original,discovery,concepts,highRes]=fileResults;
+ const [original,discovery,concepts,highRes,approved]=fileResults;
+ for(const a of (approved.assets||[])){if(a.uid&&a.glb&&a.license==='CC-BY-4.0')STATE.hostedByUid.set(a.uid,a)}
  const seen=new Set();
  for(const v of [...(original.items||[]),...(discovery.items||[])]){
   if(!uidFor(v)||seen.has(v.id))continue;seen.add(v.id);
@@ -333,17 +375,18 @@ async function init(){
   STATE.models.push(item);
  }
  STATE.concepts=(concepts.items||[]).map(c=>({id:c[0],width_m:c[1],depth_m:c[2],booth_type:c[3],style:c[4],fitout:c[5],area_m2:c[6]}));STATE.technical=[];
- const thumbnails=highRes.thumbnails||{};for(const item of STATE.models){const value=thumbnails[item.id];if(value&&validHttp(value.thumbnail,['sketchfab.com','cloudfront.net']))item.thumbnail=value.thumbnail}
- STATE.models.sort((a,b)=>b.relevance-a.relevance);
+ const thumbnails=highRes.thumbnails||{};for(const item of STATE.models){const value=thumbnails[item.id];if(value&&validHttp(value.thumbnail,['sketchfab.com','cloudfront.net']))item.thumbnail=value.thumbnail;const stored=STATE.hostedByUid.get(uidFor(item));if(stored?.thumbnail)item.thumbnail=stored.thumbnail}
+ STATE.models.sort((a,b)=>(Number(STATE.hostedByUid.has(uidFor(b)))-Number(STATE.hostedByUid.has(uidFor(a))))||b.relevance-a.relevance);
  $('metricModels').textContent=number(STATE.models.length);
  $('sideSources').textContent=number(STATE.models.length);
+ if($('sideLicensed'))$('sideLicensed').textContent=number(STATE.hostedByUid.size);
  persistSaved();runModelFilters();runConceptFilters();runProductionFilters();
  // Surface genuine source content in hero, without copying or rehosting protected meshes.
  const featured=STATE.models.filter(x=>x.category==='booth'&&validHttp(x.thumbnail,['sketchfab.com','cloudfront.net']));
  if(featured.length>1){$('heroImageOne').src=featured[3]?.thumbnail||featured[0].thumbnail;$('heroImageTwo').src=featured[10]?.thumbnail||featured[1].thumbnail}
  const hash=location.hash.slice(1);
  if(['models','concepts','technical','saved'].includes(hash))setSection(hash,{changeHash:false,scroll:false});
- else setSection('concepts',{changeHash:false,scroll:false});
+ else setSection('models',{changeHash:false,scroll:false});
  if(hash.startsWith('model='))navigateFromHash();
 }
 init();
