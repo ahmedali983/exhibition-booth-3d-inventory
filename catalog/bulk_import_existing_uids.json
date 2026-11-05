@@ -76,9 +76,11 @@
     "e932db32e2624d33b771443770c5bfef",
     "f2aca6e1c57e48ebb2228136a2e3b956",
     "fb46556d91b4465bb0c7c0813a280d25",
-    "887c57a0235548fd81359dae1b1a45a9"
+    "887c57a0235548fd81359dae1b1a45a9",
+    "2bd803f8bd684c04a07bd21f63f4a2b6",
+    "ab5db5125a854d0fa9bb6328f169ff4a"
   ],
   "last_checked": "2026-11-05",
-  "baseline_count": 77,
+  "baseline_count": 79,
   "note": "Excludes quarantined assets and files not verified on Google Drive."
 }
