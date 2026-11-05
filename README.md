@@ -8,7 +8,7 @@
 
 | Collection | Number | Local GLB | 2D files | Important distinction |
 |---|---:|---|---|---|
-| Real exhibition stands authored by original designers, sourced from Objaverse's public Sketchfab-origin archive with live CC BY licence checks | **14** | **Yes**, editable GLB | **No authentic native DXF or DWG provided** | Each archive retains creator name, model URL and CC BY 4.0 attribution |
+| Real exhibition stands authored by original designers, sourced from Objaverse's public Sketchfab-origin archive with live CC BY licence checks | **18** | **Yes**, editable GLB | **No authentic native DXF or DWG provided** | Each archive retains creator name, model URL and CC BY 4.0 attribution |
 | CC0 Items, furniture and merchandising parts | **579** | **Yes** | No certified production drawings | 20 are not tagged AI-generated; 559 are tagged AI-generated in source metadata. Components, not 579 full booths |
 | Procedural booth layout combinations | **4,200** | **Yes** | **4,200 conceptual DXF** | Variations of design rules, not 4,200 independently authored professional booths |
 | External metadata-only references | ~1,009, retained for research | **No** except the 14 separately verified and hosted models | No | **Excluded** from the customer-facing gallery |
@@ -16,10 +16,10 @@
 
 ## How to use it
 
-1. Visit [the original 3D gallery](https://ahmedali983.github.io/exhibition-booth-3d-inventory/). All 14 cards refer to locally hosted source-authored GLB geometry; click **Download** to receive a ZIP containing the GLB and creator credits. Click the card to inspect the model in our viewer.
-2. Visit [Booth Composer](https://ahmedali983.github.io/exhibition-booth-3d-inventory/composer.html). Start with a generated booth **or choose from the 14 real designer booths**, apply your colours or logo, place [579 CC0 Items](https://ahmedali983.github.io/exhibition-booth-3d-inventory/open-3d.html), then export the assembled 3D GLB and editable JSON.
+1. Visit [the original 3D gallery](https://ahmedali983.github.io/exhibition-booth-3d-inventory/). All 18 cards refer to locally hosted source-authored GLB geometry; click **Download** to receive a ZIP containing the GLB and creator credits. Click the card to inspect the model in our viewer.
+2. Visit [Booth Composer](https://ahmedali983.github.io/exhibition-booth-3d-inventory/composer.html). Start with a generated booth **or choose from the 18 real designer booths**, apply your colours or logo, place [579 CC0 Items](https://ahmedali983.github.io/exhibition-booth-3d-inventory/open-3d.html), then export the assembled 3D GLB and editable JSON.
 3. For a generated concept, also export a preliminary DXF floor plan. Original designer GLBs **do not contain original fabrication DXF or native SketchUp files** and we do not fabricate them.
-4. To back up the real 3D files, use [Google Drive — original designer GLBs](https://drive.google.com/drive/folders/1pJNA1ZopzJ1ndTFmHlIvy_nMDQcOCMzL) (14 separate ZIPs and a manifest), or [Google Drive — CC0 Items](https://drive.google.com/drive/folders/1ba5s4BXjbltQT0fkmrOvpAu5QlFgsPcy) (nine category ZIPs and manifests). Team members need Drive permission; the website itself serves the verified models from GitHub Pages, not through Drive authentication.
+4. To back up the real 3D files, use [Google Drive — original designer GLBs](https://drive.google.com/drive/folders/1pJNA1ZopzJ1ndTFmHlIvy_nMDQcOCMzL) (14 existing Drive ZIPs, with four new originals added to the live website pending the next Drive backup), or [Google Drive — CC0 Items](https://drive.google.com/drive/folders/1ba5s4BXjbltQT0fkmrOvpAu5QlFgsPcy) (nine category ZIPs and manifests). Team members need Drive permission; the website itself serves the verified models from GitHub Pages, not through Drive authentication.
 5. Read the [Objaverse / ProSceneverse full corpus audit](https://drive.google.com/drive/folders/1stirgQhNquApqh4J-vprxT_A2cE3KshM).
 
 ## Reality check on the 8,000-booth target
@@ -50,3 +50,13 @@ Reproduce the research with `scripts/research_objaverse_all_shards.py` and `scri
 - Historical third-party reference metadata remains under `catalog/sketchfab_index.json` and `catalog/creator_discovery.json` for rights research **only**, not as downloads.
 
 **All exports are design concepts, not engineer-approved construction documents.**
+
+## 2026-11-05: Strict real-booth acquisition gate
+
+The target is **4,000 genuinely different professional complete exhibition booth designs**, not 4,000 pieces of furniture or 4,200 layout parameter combinations. This target is **not achieved**. There are currently **18 separately authored, source-licensed original exhibition booth GLBs** hosted and available for direct download, and the remainder of the 4,200 locally hosted generated designs must be counted separately.
+
+The targeted public Sketchfab catalogue investigation found 311 candidate booth-related records from 19 queries, of which 89 had high-confidence complete-booth titles and 61 had matching GLB locations in the Objaverse historical public archive. Only four additional designs passed individual source, licence, GLB integrity, image and manual visual inspection and were incorporated in the library. Several other archived search results were variations of one near-identical stall design and should not be counted as diverse professional booths.
+
+The real-booth pipeline is documented in `scripts/discover_real_exhibition_booths.py`, `scripts/ingest_curated_booth_batch.py`, and their matching record files in `catalog/`. Quality gate: complete booth visible in 3D; source-authored (not generated by the ExpoVault parametric system); meaningful stylistic uniqueness; current redistribution rights; self-contained valid GLB with texture/geometry; direct editable output and creator attribution.
+
+The 5,000 mixed Objaverse search candidates discovered previously contain mostly fixture/retail object files and must not be advertised as professional full booths. For 4,000 diverse booths, the missing constraint is **asset supply and permission to store the native models**, not gallery pagination or a downloader button. Bulk supplier contracts or commissioned model packages are the realistic expansion path.
