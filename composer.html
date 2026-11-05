@@ -23,7 +23,7 @@
       <a href="./#models"><span>⌗</span> 3D Designs</a>
       <a href="open-3d.html"><span>◈</span> Items collection</a>
       <a href="composer.html" class="active"><span>▣</span> Booth composer</a>
-      <a href="./#technical"><span>⌁</span> Production files</a>
+      <a href="production-files.html"><span>⌁</span> Original production CAD</a><a href="./#technical"><span>▦</span> Generated concept DXF</a>
       <a href="library.html"><span>⬡</span> My local files</a>
     </nav>
     <div class="rail-card">
@@ -69,7 +69,7 @@
           <div class="panel-tabs"><button class="tab selected" data-tab="base">01 &nbsp; Structure</button><button class="tab" data-tab="items">02 &nbsp; Items</button><button class="tab" data-tab="brand">03 &nbsp; Brand</button><button class="tab" data-tab="export">04 &nbsp; Export</button></div>
           <div class="tab-pane selected" id="tab-base">
             <div class="panel-head"><div class="panel-eyebrow">CHOOSE YOUR BASE</div><h3>Build your foundation.</h3><p>Every preset below is an actual hosted GLB booth. Choose dimensions and exposure, then switch to Items.</p></div>
-            <div class="composer-source-picker"><label for="originalDesign"><strong>Original designer booth</strong><small>Real CC BY GLB models hosted in ExpoVault. Includes original creator credit on export.</small></label><select id="originalDesign"><option value="">Choose a complete licensed booth…</option></select><button class="secondary-action" id="applyOriginal">Use selected original GLB in Studio ↗</button><small class="sub-note">Creator GLB is supplied; original fabrication DWG/SketchUp file is not included unless the creator provided it.</small></div><div class="form-grid">
+            <div class="composer-source-picker"><label for="originalDesign"><strong>Original designer booth</strong><small>Real CC BY GLB models hosted in ExpoVault. Includes original creator credit on export.</small></label><select id="originalDesign"><option value="">Choose a complete licensed booth…</option></select><button class="secondary-action" id="applyOriginal">Use selected original GLB in Studio ↗</button><small class="sub-note">Most creator GLBs have no source fabrication files. The WikiStand2014 source archive includes real original SKP + DXF; see original CAD files below.</small><a id="nativeCadDownload" class="secondary-action" hidden href="production-files.html">↓ Download authentic source design &amp; production CAD ZIP</a></div><div class="form-grid">
               <label>Width<select id="widthSelect"></select></label>
               <label>Depth<select id="depthSelect"></select></label>
               <label>Exposure<select id="exposureSelect"></select></label>
@@ -98,7 +98,7 @@
           </div>
           <div class="tab-pane" id="tab-export">
             <div class="panel-head"><div class="panel-eyebrow">YOUR FINAL FILES</div><h3>Take the booth with you.</h3><p>Download the assembled 3D scene and a concept handoff pack, directly from this workspace.</p></div>
-            <div class="export-list">
+            <a href="production-files.html" class="secondary-action">Browse original production CAD drawings (source-authored) ↗</a><div class="export-list">
               <div><span class="export-icon">◈</span><div><strong>Full assembled 3D model</strong><small>GLB, includes booth + positioned items + brand</small></div><span class="format">GLB</span></div>
               <div><span class="export-icon">⌁</span><div><strong>Floor plan (generated bases only)</strong><small>Original designer GLB archives do not include fabrication DXF</small></div><span class="format">DXF*</span></div>
               <div><span class="export-icon">▤</span><div><strong>Placed item schedule</strong><small>Provenance, dimensions, colours and placement</small></div><span class="format">JSON</span></div>

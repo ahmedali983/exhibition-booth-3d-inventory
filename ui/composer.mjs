@@ -170,17 +170,19 @@ async function loadBase(b,{preserve=true,quiet=false}={}){
   if(!preserve)for(const item of [...state.placed])removeItem(item);
   $('loadingScene').hidden=true;
   $('currentBoothTitle').textContent=b.is_creator_base?b.name:b.style+' '+b.booth_type+' · '+b.width_m+' × '+b.depth_m+' m';
-  $('dimensions').textContent=b.is_creator_base?'ORIGINAL CC BY GLB · normalized preview, not measured CAD': 'BASE: '+b.width_m+' × '+b.depth_m+' m · '+b.area_m2+' m²';
+  $('dimensions').textContent=b.is_creator_base?'SOURCE '+(b.license||'GLB')+' · normalized preview, not measured CAD': 'BASE: '+b.width_m+' × '+b.depth_m+' m · '+b.area_m2+' m²';
   $('boothArea').textContent=b.area_m2+' m²';
   setStatus('Booth structure ready · '+b.id);
   $('partsCount').textContent=String(state.placed.length);
   if(b.is_creator_base){
    $('basePreview').src=b.thumbnail||'assets/thumbs/EV-0001.webp';
    $('baseName').textContent=b.name;
-   $('baseId').textContent='by '+b.creator+' · CC BY 4.0';
+   $('baseId').textContent='by '+b.creator+' · '+(b.license||'unknown licence');
   }else updateBasePreview();
+  const native=$('nativeCadDownload');
+  if(native){native.hidden=!b.native_cad_bundle;if(b.native_cad_bundle)native.href=b.native_cad_bundle}
   $('exportDxf').disabled=!!b.is_creator_base;
-  $('exportDxf').title=b.is_creator_base?'Creator original only includes GLB, no authentic DXF':'Download preliminary generated DXF';
+  $('exportDxf').title=b.native_cad_bundle?'Original CNC drawings available inside the separate authentic source CAD bundle':b.is_creator_base?'Creator original only includes GLB, no authentic DXF':'Download preliminary generated DXF';
   setDirty();state.ready=true;
   if(!quiet)toast('3D booth structure loaded');
  }catch(error){$('loadingScene').hidden=false;$('loadingScene').querySelector('p').textContent=error.message;setStatus('Could not load base geometry');toast(error.message);console.error(error)}
@@ -432,7 +434,7 @@ async function downloadGLB(){
 }
 async function downloadDXF(){
  if(!state.base)return toast('Select a booth first');
- if(state.base.is_creator_base)return toast('Original creator GLB contains no authentic DXF or original drawing; please use a generated booth for 2D concept plans.');
+ if(state.base.is_creator_base)return toast(state.base.native_cad_bundle?'Download authentic native source CAD from the source package link above.':'This original GLB has no authentic creator DXF; only generated bases have concept DXF.');
  const response=await fetch(baseUrl(state.base,'dxf'));
  if(!response.ok)return toast('DXF is not available');
  downloadBlob(state.base.id+'-concept.dxf',await response.blob(),'application/dxf');
@@ -464,7 +466,7 @@ async function downloadZIP(){
   zip.file('README.txt',[
    'EXPOVAULT — CONCEPT HANDOFF PACK','',
    'The 3D GLB contains the selected base booth, hosted CC0 items and custom brand artwork.',
-   dxf?'The DXF shows the generated base floor plan, NOT final installation drawings.':'Original creator model has no authentic source DXF; none is included.',
+   dxf?'The DXF shows the generated base floor plan, NOT final installation drawings.':state.base.native_cad_bundle?'Native source SKP and authentic DXF fabrication reference drawings are available in the separate source bundle: '+state.base.native_cad_bundle:'Original creator GLB provided no authentic source DXF; none is included.',
    'The placed-items list documents the original sources and colours.',
    'No Sketchfab view-only mesh was downloaded, copied or extracted.','',
    'IMPORTANT: NOT FABRICATION READY.',
@@ -474,10 +476,11 @@ async function downloadZIP(){
   if(state.base.is_creator_base)zip.file('CREATOR_CREDITS.txt',[
    'Original model: '+state.base.name,'Original creator: '+state.base.creator,
    'Source: '+state.base.source_url,
-   'Licence: CC BY 4.0 https://creativecommons.org/licenses/by/4.0/',
+   'Licence: '+(state.base.license||'')+' '+(state.base.license==='CC-BY-SA-3.0'?'https://creativecommons.org/licenses/by-sa/3.0/':'https://creativecommons.org/licenses/by/4.0/'),
    'Changes: uniformly scaled for composition, brand materials/sign or placed items may have been added.',
    'Credit original creator and link licence in downstream derivative works.',
-   'This is not an original native SketchUp/FBX/DWG or fabrication-ready drawing.'
+   state.base.native_cad_bundle?'An authentic source SKP and DXF production reference package is separately available: '+state.base.native_cad_bundle:'This artist GLB source did not supply authentic SketchUp/FBX/DWG fabrication drawings.',
+   state.base.license==='CC-BY-SA-3.0'?'This derivative may require ShareAlike under CC BY-SA 3.0.':'Observe source licence conditions.'
   ].join('\n'));
   const result=await zip.generateAsync({type:'blob',compression:'DEFLATE',compressionOptions:{level:5}});
   downloadBlob(projectFilename()+'-CONCEPT-PACK.zip',result,'application/zip');
@@ -534,16 +537,23 @@ function wire(){
 async function init(){
  wire();createViewer();
  try{
-  const [manif,open,creatorData]=await Promise.all([
+  const [manif,open,creatorData,productionData]=await Promise.all([
    fetch('catalog/generated_manifest.json').then(r=>r.json()),
    fetch('catalog/open_3d_cc0.json').then(r=>r.json()),
-   fetch('catalog/authorized_booths.json').then(r=>r.json())
+   fetch('catalog/authorized_booths.json').then(r=>r.json()),
+   fetch('catalog/production_cad_bundles.json').then(r=>r.ok?r.json():{assets:[]}).catch(()=>({assets:[]}))
   ]);
   state.sourceBases=(creatorData.assets||[]).filter(a=>a.is_full_booth&&a.license==='CC-BY-4.0'&&/^assets\/authorized-booths\/SKFB-[0-9a-f]{32}\.glb$/.test(a.glb)).map(a=>({
    id:a.id,name:a.name,creator:a.creator,source_url:a.source_url,license:a.license,
    is_creator_base:true,glb:a.glb,thumbnail:a.thumbnail,booth_type:'Designer original',
    style:'Artist-made',fitout:'Original',width_m:6,depth_m:6,area_m2:36
   }));
+  const productionBases=(productionData.assets||[]).filter(a=>a.complete_booth&&a.license==='CC-BY-SA-3.0'&&/^assets\/production-cad\/[A-Z0-9-]+\.glb$/.test(a.glb)&&a.bundle).map(a=>({
+   id:a.id,name:a.title,creator:a.creator,source_url:a.source_url,license:a.license,
+   is_creator_base:true,native_cad_bundle:a.bundle,glb:a.glb,thumbnail:a.image,
+   booth_type:'Source CAD original',style:'Artist-made',fitout:'Original',width_m:6,depth_m:6,area_m2:36
+  }));
+  state.sourceBases.push(...productionBases);
   state.bases=[...(manif.items||[]),...state.sourceBases];
   const select=$('originalDesign');
   for(const b of state.sourceBases){const opt=document.createElement('option');opt.value=b.id;opt.textContent=b.name+' — '+b.creator;select.append(opt)}
