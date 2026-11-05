@@ -1,0 +1,60 @@
+name: ExpoVault Original CC-BY Booth Drive Export
+on:
+  push:
+    branches: [feature/expovault-professional-booths-batch1]
+    paths: [.github/workflows/drive-first-booth-export.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            catalog/creator_originals_batch_20261105.json
+            assets/authorized-booths
+      - name: Assemble verified per-model source archives and checksums
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,hashlib,pathlib,zipfile
+          root=pathlib.Path.cwd()
+          batch=json.loads((root/'catalog/creator_originals_batch_20261105.json').read_text(encoding='utf8'))
+          assert batch['models_added']==len(batch['assets'])==3
+          out=root/'drive-first-original-booths'
+          out.mkdir()
+          index={'collection':'ExpoVault legitimate creator originals', 'type':'full exhibition booths with original GLB', 'target':4000, 'already_in_previous_drive_folder':18, 'this_export_count':3, 'total_unique_after_export':21,
+          'notice':'For internal experimentation and design reference. CC-BY-4.0 author credit and model source must be retained. Native manufacturing CAD is not supplied.', 'bundles':[]}
+          for asset in batch['assets']:
+            stem=asset['id']
+            file=root/asset['glb']
+            image=root/asset['thumbnail']
+            assert file.is_file() and image.is_file()
+            blob=file.read_bytes()
+            assert blob[:4]==b'glTF' and int.from_bytes(blob[4:8],'little')==2 and int.from_bytes(blob[8:12],'little')==len(blob)
+            assert hashlib.sha256(blob).hexdigest()==asset['sha256']
+            author='Original 3D: '+asset['name']+'\nCreator: '+asset['creator']+'\nSource: '+asset['source_url']+'\nLicense: CC BY 4.0 https://creativecommons.org/licenses/by/4.0/\nInternal experimentation only; preserve creator credit. No fabrication guarantee.\n'
+            dest=out/(stem+'-ORIGINAL-3D.zip')
+            with zipfile.ZipFile(dest,'w',zipfile.ZIP_DEFLATED,compresslevel=5) as z:
+              z.writestr(stem+'/ATTRIBUTION.txt',author)
+              z.writestr(stem+'/MODEL_INFORMATION.json',json.dumps(asset,ensure_ascii=False,indent=2))
+              z.write(file,arcname=stem+'/'+stem+'.glb')
+              z.write(image,arcname=stem+'/'+stem+'.webp')
+            with zipfile.ZipFile(dest) as z:
+              assert z.testzip() is None
+              assert z.read(stem+'/'+stem+'.glb')==blob
+            index['bundles'].append({'name':dest.name,'id':stem,'creator':asset['creator'],'original_model':asset['source_url'],'file_bytes':len(blob),'sha256_glb':asset['sha256'],'zip_bytes':dest.stat().st_size})
+            print('EXPORTED',dest.name,len(blob))
+          (out/'INDEX_AND_RIGHTS.json').write_text(json.dumps(index,ensure_ascii=False,indent=2),encoding='utf8')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-3-sketchfab-origin-original-glbs-for-drive
+          path: drive-first-original-booths/
+          retention-days: 7
+          if-no-files-found: error
