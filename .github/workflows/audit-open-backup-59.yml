@@ -1,0 +1,25 @@
+name: ExpoVault Check 59 New Creator Booths Against Open Backup
+on:
+  push:
+    branches: [research/expovault-open-archive-catalogue-20261105]
+    paths: [.github/workflows/audit-open-backup-59.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 13
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/audit_59_original_exhibition_booths.py
+            catalog/new_real_booth_discovery_20261105.json
+      - run: python -m pip install -q requests pillow
+      - run: python scripts/audit_59_original_exhibition_booths.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-booth-presence-and-previews
+          path: new-mirror-discovery/
+          retention-days: 7
+          if-no-files-found: error
