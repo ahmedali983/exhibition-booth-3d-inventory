@@ -1,115 +1,52 @@
-# ExpoVault — Exhibition Design Archive
+# ExpoVault — Self-Hosted Exhibition 3D Library
 
-Explore independent 3D exhibition models **inside ExpoVault**, try temporary brand colours in the live viewer, and work with thousands of separately hosted editable booth concepts.
+[**Open the live 3D gallery**](https://ahmedali983.github.io/exhibition-booth-3d-inventory/) · [**Edit a booth**](https://ahmedali983.github.io/exhibition-booth-3d-inventory/composer.html) · [**Browse locally hosted Items**](https://ahmedali983.github.io/exhibition-booth-3d-inventory/open-3d.html) · [**Open the team's Google Drive archive**](https://drive.google.com/drive/folders/1CSwu83cRerX6E1-kahJBUiu9XJqfuSZk)
 
-**[Open the live gallery](https://ahmedali983.github.io/exhibition-booth-3d-inventory/)** · [3D Brand Studio](https://ahmedali983.github.io/exhibition-booth-3d-inventory/studio.html) · [All generated GLB + DXF files](https://github.com/ahmedali983/exhibition-booth-3d-inventory/releases/tag/v0.1.0)
+**Verified November 5, 2026.** Only locally hosted original designer models appear as cards in the main gallery. There are no Sketchfab-viewer embeds in the current customer-facing gallery or Brand Studio. Every gallery model can be downloaded without a Sketchfab login. The separate original designer and generated concept collections are clearly distinguished.
 
-## What's actually in the library?
+## Verified inventory
 
-| Asset group | Count | Where the data lives |
-|---|---:|---|
-| Sketchfab original creator listings | **1,009** | Model names, source IDs, authors, licences and catalogue metadata stored in this GitHub repository; 3D scenes embedded live from Sketchfab |
-| Public high-resolution model thumbnail URLs | **1,009** | Stored in catalogue JSON; original image bytes remain on the Sketchfab CDN |
-| Sketchfab listings marked downloadable | **299** | Downloads require Sketchfab authentication and the creator's licence; these files are not redistributed here |
-| Procedurally generated booth layout combinations | **4,200** | Locally hosted in this repository, with original thumbnail images |
-| GLB and DXF concept files | **4,200 GLB + 4,200 DXF** | Fully hosted here and bundled into a GitHub release ZIP |
-| Independent manufacturer/CAD/marketplace source references | **35** | Local reference index links to original suppliers |
+| Collection | Number | Local GLB | 2D files | Important distinction |
+|---|---:|---|---|---|
+| Real exhibition stands authored by original designers, sourced from Objaverse's public Sketchfab-origin archive with live CC BY licence checks | **14** | **Yes**, editable GLB | **No authentic native DXF or DWG provided** | Each archive retains creator name, model URL and CC BY 4.0 attribution |
+| CC0 Items, furniture and merchandising parts | **579** | **Yes** | No certified production drawings | 20 are not tagged AI-generated; 559 are tagged AI-generated in source metadata. Components, not 579 full booths |
+| Procedural booth layout combinations | **4,200** | **Yes** | **4,200 conceptual DXF** | Variations of design rules, not 4,200 independently authored professional booths |
+| External metadata-only references | ~1,009, retained for research | **No** except the 14 separately verified and hosted models | No | **Excluded** from the customer-facing gallery |
+| Requested 6,000–8,000 independent professional booth designs | **Not currently available** | No | No | Not achieved. Never treat unrelated 3D objects as booth designs |
 
-The 4,200 layouts combine 7 widths, 6 depths, 4 booth exposure types, 5 structural styles and 5 interior fit-outs. They are not 4,200 independent professional architectural designs. The 1,009 external models also include related display systems, kiosks, halls, pavilion and event assets; use the category filters to narrow to booths.
+## How to use it
 
-## What's new in v3
+1. Visit [the original 3D gallery](https://ahmedali983.github.io/exhibition-booth-3d-inventory/). All 14 cards refer to locally hosted source-authored GLB geometry; click **Download** to receive a ZIP containing the GLB and creator credits. Click the card to inspect the model in our viewer.
+2. Visit [Booth Composer](https://ahmedali983.github.io/exhibition-booth-3d-inventory/composer.html). Start with a generated booth **or choose from the 14 real designer booths**, apply your colours or logo, place [579 CC0 Items](https://ahmedali983.github.io/exhibition-booth-3d-inventory/open-3d.html), then export the assembled 3D GLB and editable JSON.
+3. For a generated concept, also export a preliminary DXF floor plan. Original designer GLBs **do not contain original fabrication DXF or native SketchUp files** and we do not fabricate them.
+4. To back up the real 3D files, use [Google Drive — original designer GLBs](https://drive.google.com/drive/folders/1pJNA1ZopzJ1ndTFmHlIvy_nMDQcOCMzL) (14 separate ZIPs and a manifest), or [Google Drive — CC0 Items](https://drive.google.com/drive/folders/1ba5s4BXjbltQT0fkmrOvpAu5QlFgsPcy) (nine category ZIPs and manifests). Team members need Drive permission; the website itself serves the verified models from GitHub Pages, not through Drive authentication.
+5. Read the [Objaverse / ProSceneverse full corpus audit](https://drive.google.com/drive/folders/1stirgQhNquApqh4J-vprxT_A2cE3KshM).
 
-- **In-site Sketchfab 3D inspection:** open a model card to orbit and inspect the real 3D scene inside a full-size viewer without navigating away from ExpoVault.
-- **Live material lab:** optionally use the [official Sketchfab Viewer API](https://sketchfab.com/developers/viewer/functions) to select an exposed material, choose a colour and try it *only in that live preview*. Reset reloads the untouched original scene. Texture-based materials can react differently.
-- **Professional gallery:** high-resolution creator imagery via [Sketchfab oEmbed](https://sketchfab.com/developers/oembed), relevant-first feed, filters, download-status badges, search, keyboard support, next/previous navigation, shareable model deep-links and local saved collections.
-- **Editable Concepts:** browse 4,200 original procedural GLB/DXF designs. Open any design in the brand studio with a direct URL to change its colours/logo and download a concept production ZIP.
-- **Production Library:** supplier and CAD documentation indexed alongside general 3D references. These are references, not a transfer of third-party file licences.
+## Reality check on the 8,000-booth target
 
-## Items vs creator-licensed booth designs
+We systematically scanned **798,759** Sketchfab-origin Objaverse models across 160 metadata shards. **708,311** were historically flagged downloadable with CC BY or CC0. Only **42** were strongly matched by explicit full-booth-related titles/descriptions; another **426** were loosely related to exhibition or retail scenes and **174** were candidate modular display items. These are *metadata results*, not acquired GLBs. Current rights and physical geometry must be checked individually.
 
-- **Items** now contains the 559 hosted CC0 GLB components such as signs, display walls, counters and retail fixtures. This is not the same thing as a complete exhibition booth.
-- **3D inspiration** retains the existing third-party Sketchfab metadata and official previews. Those are not mirrored GLB files and may need provider login to download; there is no unsupported claim that 1,009 creator meshes are stored in our repository.
-- **Creator-approved booth ingestion** is available through `scripts/ingest_authorized_booths.py`. A curator supplies a directly available GLB (or a previously acquired local GLB) plus the creator name, verified licence/redistribution evidence, source and reviewer. The script rejects unsupported licences and corrupt GLBs, stores approved models under `assets/authorized-booths/`, and writes `catalog/authorized_booths.json`. These assets are then automatically included in the Items viewer, with a separate creator-licensed booth or item filter. The initial authorised booth library has **zero** imported Sketchfab files because there has been no creator permission or verified rehosting grant for them.
-- Optional `thumbnail_file` attaches an authorised WebP design thumbnail. Otherwise the gallery shows a neutral placeholder rather than a fabricated preview.
+In ProSceneverse, **74,624** scene descriptions include **52** explicit exhibition stand/booth matches among the **68,304** CC BY/CC0 scenes; broader terms match **2,517** mixed scenes, including stores, museums, galleries and games. Broad Objaverse and ProSceneverse candidates together have **3,593 unique model IDs**, not 3,593 complete professionally designed stands. The evidence does not justify a claim of 6,000–8,000 real complete booths.
 
-```bash
-python scripts/ingest_authorized_booths.py --manifest catalog/authorized_import_example.json --dry-run
-# Replace the example placeholders with real creator consent / licensed direct files.
-python scripts/ingest_authorized_booths.py --manifest catalog/approved_models.json
-git add catalog/authorized_booths.json assets/authorized-booths
-```
+Reproduce the research with `scripts/research_objaverse_all_shards.py` and `scripts/research_prosceneverse_census.py`, inspect `catalog/objaverse_all_800k_census.json` and `catalog/prosceneverse_booth_census_20261105.json`.
 
-For Sketchfab models, the standard Download API requires user authentication; application-level access without per-user login requires a separate agreement with Sketchfab. `sketchrip` (a dated viewer-extraction project) is not used; reverse engineering the public embedded viewer to mirror restricted models is not part of this ingest pipeline. Creator licence credits and evidence remain recorded per asset.
+## Hosting, rights, and expansion
 
-## No-login, self-hosted, editable CC0 3D assets (new)
+- **One-click local downloads:** The shipped original designer GLBs are source-authored model files retrieved from the public Objaverse archive. They are stored as site assets; the original designer and source licence follow each ZIP and derivative.
+- **No login dependencies for team downloads:** No Sketchfab account, embeds or player extraction are used in the main gallery or Composer.
+- **Sketchfab one-click Download API without end-user OAuth:** Requires a separate business/integrator arrangement. See [official guidance](https://sketchfab.com/developers/download-api/guidelines).
+- **Noncommercial/internal use does not grant rights to rehost view-only models.** The application therefore does not copy models that prohibit downloads merely by extracting fragments from a public 3D player.
+- **At scale, use an authenticated object-storage/CDN backend.** Private Google Drive is useful for backups, but not a direct anonymous file CDN. GitHub Pages has a published-site limit of 1 GB and a soft 100 GB/month traffic limit ([official docs](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits)). Multiple thousands of high-fidelity original GLBs cannot sensibly stay in a single Pages deployment.
+- To expand the collection, add a new author-supplied or openly licensed GLB plus creator metadata and licence evidence via `scripts/ingest_authorized_booths.py`, then update `catalog/authorized_booths.json`.
 
-[**Open the direct-download 3D library**](https://ahmedali983.github.io/exhibition-booth-3d-inventory/open-3d.html) · [**Download the entire 559-model CC0 collection ZIP (20.2 MB)**](https://github.com/ahmedali983/exhibition-booth-3d-inventory/releases/download/v0.3.0/expovault-559-cc0-3d-models.zip)
+## Technical files
 
-The no-login source model collection holds **559 independent GLB objects and scene components** from **7 CC0 design packs** (about **60.9 MB** of original geometry) self-hosted in `assets/open-3d/` with matching WebP thumbnails and a JSON catalog at `catalog/open_3d_cc0.json`. The original, unmodified GLB files were downloaded through 3DAssets.dev's documented anonymous REST API. All asset records had a verified **CC0-1.0** licence and all files passed GLB v2 header/length checks at ingestion time. They can be previewed, recoloured and downloaded from the ExpoVault site itself without a separate account or third-party download step.
+- Main gallery: `index.html`, `ui/v3.mjs`, `ui/v3.css`.
+- Original GLBs: `assets/authorized-booths/SKFB-<uid>.glb`, metadata: `catalog/authorized_booths.json`.
+- Composer: `composer.html`, `ui/composer.mjs`, `ui/composer.css`.
+- CC0 Items: `assets/open-3d/*.glb`, metadata: `catalog/open_3d_cc0.json`.
+- Parametric bases: `assets/generated/<size>/EV-xxxx.glb`, `*.dxf`.
+- Source research audit and reproducibility: `catalog/objaverse_all_800k_census.json` and `scripts/research_objaverse_all_shards.py`.
+- Historical third-party reference metadata remains under `catalog/sketchfab_index.json` and `catalog/creator_discovery.json` for rights research **only**, not as downloads.
 
-The 7 curated source packs are: Art Gallery and Exhibition Rooms (58), Retail Store Fixtures and Mall (166), Indoor Market Hall and Traders (53), Village Hall and Community Events (52), Opticians and Eyewear Showroom (48), Trading Post and Barter Market (47), Hardware Store and DIY Warehouse (135). **These 559 are individual 3D assets (display panels, retail counters, shelves, signage, props and scene elements), not 559 ready-to-fabricate exhibition stands.** A large share of these packs are marked AI-generated by their source. The `4,200` original ExpoVault parameter variations are a separate collection, along with their concept-stage GLB/DXF plans.
-
-To regenerate/recheck the local collection:
-
-```bash
-python scripts/ingest_cc0_3d.py --workers 7
-```
-
-The downloader checks HTTPS hostnames, source licence metadata, expected file formats, file sizes, binary glTF 2.0 integrity and SHA-256 hashes. It is resumable and skips existing valid downloads. The actual GLBs and thumbnails are stored locally (not hotlinked). Source provenance and licence metadata remain in the catalogue and designer details. **No Sketchfab protected model was downloaded, copied, bypassed or added to this mirror.** Sketchfab requires end-user login for its normal Download API, and offers a contact route for developers seeking no-end-user-auth integration; supplier authorization would be needed before mirroring rights-restricted models.
-
-## Download and edit 3D files inside ExpoVault
-
-The gallery has two separate workflows, each with explicit rights:
-
-- **ExpoVault's 4,200 generated concepts:** download GLB (editable 3D mesh) or DXF (preliminary schematic) directly from the card. Open the model in the brand studio to download a per-booth *concept production ZIP* with OBJ, SVG panel guides, indicative BOM and specification data. These are not supplier-approved cut sheets.
-- **Creator-uploaded Sketchfab models marked as downloadable:** the *Download 3D* button opens the official Sketchfab Importer **inside ExpoVault**. Users must sign in with their own Sketchfab account, and each download must be permitted by the provider and creator. Once approved, the official API returns a short-lived signed glTF ZIP URL, which ExpoVault tries to save without navigation (with a direct-link fallback if CORS prevents it). A separate creator attribution file is offered. The original 3D mesh is never mirrored to this repository.
-- **View-only creator models:** 3D orbit/inspection and session-only material recolouring, but no original-mesh download button. Use an independently created editable concept instead.
-- **Your own licensed files:** import GLB, OBJ, STL or FBX into [My 3D Library](library.html), save local browser copies, recolour, and export GLB or mesh-only OBJ.
-
-The [Sketchfab Download API](https://sketchfab.com/developers/download-api/downloading-models) requires user authentication and model-specific permission. The [official web importer](https://sketchfab.com/developers/download-api/libraries) is used; no bypasses or scraping of view-only scenes occur. Author and provider attribution remains visible in model details and must accompany downloaded files as the licence requires.
-
-**Important verification limit:** the importer iframe and login UI are tested in a browser, but an end-to-end third-party archive download after an authorized Sketchfab login requires a real signed-in account and was not claimed as fully validated in anonymous tests.
-
-## My 3D Files — local asset library
-
-**[Open the local asset library](https://ahmedali983.github.io/exhibition-booth-3d-inventory/library.html)** to import a model that you own or are authorized to use. This is separate from Sketchfab's embedded models and is designed for *your own legitimately obtained files*.
-
-- Drag and drop a **GLB, OBJ, STL or FBX** file (up to 150 MB per import; FBX compatibility varies with authoring format).
-- Inspect mesh/triangle counts, bounding-box dimensions in explicitly assumed units, and orbit a real WebGL model.
-- Select a material and try a brand colour; optionally preview without the base texture, reset the material, or export a modified **GLB** or **OBJ mesh**.
-- Save the **original** input file in browser IndexedDB and reopen it after a page reload. Original bytes are stored separately from a light-weight metadata/thumbnail index, so listing many items doesn't read all model binaries. Older local version 1 stores are migrated automatically.
-- Importing and saving are **browser-only actions**; the site does not send uploaded models to an ExpoVault backend. Local records are *not synced* across devices, may be evicted by the browser, and are deleted if the user clears site storage. Keep independent backups.
-- OBJ export does not guarantee a matching MTL or textures; imported models and exports are not certified production geometry. **Do not import or redistribute third-party files you lack rights to use.**
-
-## Important repo paths
-
-- index.html, ui/v3.mjs, ui/v3.css — current user interface
-- ui/material-lab.mjs — opt-in Sketchfab 3D material editing, browser session only
-- studio.html and ui/app.mjs — parametric brand/customization studio
-- library.html, ui/library.mjs and ui/library.css — local file browser, WebGL viewer, editable materials and IndexedDB asset library
-- catalog/sketchfab_index.json — 203 original source records
-- catalog/creator_discovery.json — 806 additional model records
-- catalog/oembed_thumbnails.json — 1,009 high-resolution oEmbed thumbnail URLs
-- catalog/generated_manifest.json — parameters and direct GLB/DXF links for 4,200 generated items
-- catalog/sources.json — 35 CAD, producer, marketplace and other research references
-- assets/generated/ — 8,400 original generated GLB and DXF files
-- assets/thumbs/ — 4,200 originally generated WebP booth thumbnails
-- scripts/generate_assets.py — reproducible 3D/DXF generation
-- scripts/render_thumbnails.py — reproducible original thumbnail generator
-- scripts/enrich_sketchfab_thumbnails.py — public oEmbed metadata enrichment (no model geometry copied)
-
-## Run and extend
-
-Serve the repository root over HTTP using Python: `python -m http.server 8000`, then open `http://localhost:8000/`. For the generated design library, run `python scripts/generate_assets.py --all` (pure Python) and `python scripts/render_thumbnails.py` (Pillow required). Browsing source-hosted Sketchfab models requires internet.
-
-## Source rights and production status
-
-Sketchfab's [official Download API](https://sketchfab.com/developers/download-api/downloading-models) requires authenticated requests and only allows permitted downloads. We never bypass that, scrape protected meshes, or remove original viewer credit. The source model stays with the original artist. This project indexes public metadata, URLs and permitted embeds; **it does not host the original third-party geometry**.
-
-Original ExpoVault code and procedurally generated mesh and plan files are CC0-1.0 per [LICENSE](LICENSE). Third-party content keeps its original creator licence regardless of whether it is embedded or linked.
-
-**Production caveat:** our GLB, DXF, SVG panel guides and BOM estimates are preliminary concepts. They are not certified cutting sheets, final CMYK artwork, engineering/rigging plans or guaranteed build-ready geometry. Validate panel/frame tolerances, joinery, electrical, fire safety, accessibility and manufacturer specifications with an exhibition contractor.
-
----
-
-ExpoVault · Learn, explore, adapt.
+**All exports are design concepts, not engineer-approved construction documents.**
