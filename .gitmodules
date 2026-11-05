@@ -1,0 +1,3 @@
+[submodule "integrations/sketchfab-backup"]
+	path = integrations/sketchfab-backup
+	url = https://github.com/ahmedali983/sketchfab-backup.git
