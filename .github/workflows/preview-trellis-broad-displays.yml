@@ -1,0 +1,47 @@
+name: ExpoVault Qualify Extra Original Event Booth Designs
+on:
+  push:
+    branches: [research/expovault-trellis-aesthetic-20261105]
+    paths: [.github/workflows/preview-trellis-broad-displays.yml]
+permissions: {contents: read}
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - run: python -m pip install -q requests pillow
+      - run: |
+          python - <<'PY'
+          import requests,io,json,pathlib
+          from PIL import Image,ImageDraw
+          ids=["d9e17d05b9d24a06b8edf206b5a06436","ebe2c48acdb14f579aa21449b61d4f62","5f224364daea41d2b54023ac82874563","97868455a6664ec99f392ee65476552e","5431b7f6d128461e9f47b7f727e5052f","d2bee855ea8e461e955501ce3397a3f7","07d8df94c5f64c59a7cb2d097b29128b","b201b2aa1f6c4af49f6124d8f89f3360"]
+          board=Image.new('RGB',(4*300,2*250),'white')
+          draw=ImageDraw.Draw(board);records=[]
+          base='https://mirror.traines.eu/sketchfab-backup/'
+          for i,uid in enumerate(ids):
+            root=base+uid[:2]+'/'+uid
+            row={'uid':uid,'source_url':'https://sketchfab.com/models/'+uid}
+            for ext,label in [('.zip','original_gltf'),('.source.zip','author_source')]:
+              try:
+                r=requests.head(root+ext,timeout=12)
+                row[label]={'http':r.status_code,'bytes':int(r.headers.get('content-length') or 0)}
+              except Exception as e:row[label]={'error':str(e)[:140]}
+            x=(i%4)*300;y=(i//4)*250
+            try:
+              r=requests.get(root+'.thumb.jpeg',timeout=14);r.raise_for_status()
+              im=Image.open(io.BytesIO(r.content)).convert('RGB')
+              im.thumbnail((290,190));board.paste(im,(x+(300-im.width)//2,y+(190-im.height)//2))
+            except Exception as e:row['preview_error']=str(e)[:140]
+            draw.text((x+5,y+196),str(i+1)+'. '+uid[:18],fill='black')
+            draw.text((x+5,y+217),'3D MB '+str(row.get('original_gltf',{}).get('bytes',0)//1048576),fill='black')
+            records.append(row)
+            print('CANDIDATE',json.dumps(row),flush=True)
+          pathlib.Path('extra-booth-previews').mkdir(exist_ok=True)
+          board.save('extra-booth-previews/contact.jpg',quality=85)
+          pathlib.Path('extra-booth-previews/data.json').write_text(json.dumps(records,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-extra-professional-booths-visual-check
+          path: extra-booth-previews/
+          retention-days: 7
