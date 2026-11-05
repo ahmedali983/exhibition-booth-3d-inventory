@@ -14,3 +14,11 @@
 @media(max-width:1050px){.app{grid-template-columns:70px 1fr}.rail{align-items:center;padding:24px 8px}.brand-name,.rail-small,.rail-card,.rail-bottom,.rail-links a:not(.active){display:none}.brand{margin:0 0 38px}.rail-links{width:100%}.rail-links a{font-size:0;justify-content:center;padding:13px 5px}.rail-links a span{font-size:23px}.studio-grid{grid-template-columns:minmax(0,1fr) 315px}.viewport{height:390px}.scene-label{display:none}.saved-state{display:none}}
 @media(max-width:840px){.app{display:block}.rail{display:none}.toolbar{height:61px;padding:0 12px}.workspace{padding:19px 13px}.studio-grid{grid-template-columns:1fr}.scene-panel{position:static}.viewport{height:480px}.inspector{width:100%}.tab-pane{padding:20px}.item-browser{grid-template-columns:repeat(3,1fr);max-height:470px}.steps{display:none}.intro{margin-bottom:17px}.intro h1{font-size:32px}.toolbar-actions button{font-size:10px;padding:10px}.crumb{font-size:11px}}
 @media(max-width:540px){.toolbar-actions .button-soft{display:none}.intro h1{font-size:29px}.intro p{font-size:11px}.viewport{height:360px}.scene-head{height:67px}.scene-head h2{font-size:15px}.viewer-overlay-text{font-size:9px}.scene-metrics strong{font-size:16px}.scene-metrics small{font-size:8px}.bottom-tools{padding:16px}.shortcuts{display:block}.shortcuts strong{margin-right:6px}.item-browser{grid-template-columns:repeat(2,1fr)}.form-grid{gap:8px}.tab{font-size:9px;padding:12px 2px}.panel-tabs{gap:1px}.transform-panel{padding:16px}.toolbar-actions .button-main{font-size:9px}.crumb span{display:none}.crumb a{display:none}.steps{display:none}}
+
+
+.composer-source-picker{border:1px solid #add9ba;background:linear-gradient(160deg,#edf9ef,#f7fcf5);padding:14px;border-radius:10px;margin-bottom:16px}
+.composer-source-picker label{display:block;margin-bottom:9px}
+.composer-source-picker strong{display:block;font:700 13px var(--head);color:#24553b}
+.composer-source-picker small{display:block;font-size:10px;line-height:1.6;color:#779183;margin:5px 0}
+.composer-source-picker select{width:100%;border:1px solid #bddcc5;border-radius:8px;padding:12px;font-size:11px;color:#365d42;background:#fff}
+.composer-source-picker .secondary-action{margin-top:9px;background:#225e3d;color:#fff;border-color:#225e3d}

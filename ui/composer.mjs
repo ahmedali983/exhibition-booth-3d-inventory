@@ -9,7 +9,7 @@ const UI={
   width:'widthSelect',depth:'depthSelect',exposure:'exposureSelect',style:'styleSelect',fitout:'fitoutSelect'
 };
 const state={
-  bases:[],assets:[],base:null,baseObject:null,baseBox:null,baseFloor:0,baseLoad:0,
+  bases:[],sourceBases:[],assets:[],base:null,baseObject:null,baseBox:null,baseFloor:0,baseLoad:0,
   placed:[],selectedId:null,nextId:1,filterText:'',filterPack:'all',
   logoUrl:null,brand:'YOUR BRAND',primary:'#0d614e',accent:'#ebc486',panel:'#f3f7f4',
   exporting:false,dirty:false,ready:false
@@ -39,7 +39,7 @@ function baseChoice(){const f={
  };
  return state.bases.find(b=>b.width_m===f.width_m&&b.depth_m===f.depth_m&&b.booth_type===f.booth_type&&b.style===f.style&&b.fitout===f.fitout);
 }
-function baseUrl(base,ext='glb'){return 'assets/generated/'+base.width_m+'x'+base.depth_m+'/'+base.id+'.'+ext}
+function baseUrl(base,ext='glb'){if(base?.is_creator_base)return ext==='glb'?base.glb:null;return 'assets/generated/'+base.width_m+'x'+base.depth_m+'/'+base.id+'.'+ext}
 function updateBasePreview(){
  const b=baseChoice();if(!b)return;
  $('baseName').textContent=b.style+' · '+b.booth_type;
@@ -99,6 +99,7 @@ function recolorBase(){
   const meshName=(baseOriginalMaterials[i].node.name+' '+m.name).toLowerCase();
   if(!m.color)continue;
   const orig=baseOriginalMaterials[i].original.color;
+  if(state.base?.is_creator_base && m.map)continue;
   if(/floor|carpet|ground|baseplate/.test(meshName))m.color.copy(orig);
   else if(/panel|back|wall|wallboard|roof|screen/.test(meshName))m.color.set(state.panel);
   else if(/trim|metal|pole|column|rail|frame|truss/.test(meshName))m.color.set(state.accent);
@@ -141,6 +142,21 @@ async function loadBase(b,{preserve=true,quiet=false}={}){
   baseOriginalMaterials.forEach(x=>x.original.dispose());
   state.baseObject=gltf.scene;
   state.baseObject.name='Base '+b.id;
+  if(b.is_creator_base){
+   // Preserve original mesh topology, with a uniformly scaled editing scene.
+   const before=new THREE.Box3().setFromObject(state.baseObject);
+   const dims=before.getSize(new THREE.Vector3());
+   if(before.isEmpty()||!Number.isFinite(dims.x)||dims.x<=0)throw Error('Original GLB has no valid geometry');
+   const maxHorizontal=Math.max(dims.x,dims.z,.001);
+   const uniformScale=Math.max(.00001,Math.min(10000,6/maxHorizontal));
+   state.baseObject.scale.setScalar(uniformScale);
+   const scaled=new THREE.Box3().setFromObject(state.baseObject);
+   const center=scaled.getCenter(new THREE.Vector3());
+   state.baseObject.position.set(-center.x,-scaled.min.y,-center.z);
+   const size=new THREE.Box3().setFromObject(state.baseObject).getSize(new THREE.Vector3());
+   b.width_m=Number(size.x.toFixed(2));b.depth_m=Number(size.z.toFixed(2));
+   b.area_m2=Number((size.x*size.z).toFixed(2));
+  }
   exportRoot.add(state.baseObject);
   baseOriginalMaterials=collectMaterials(state.baseObject);
   state.base=b;
@@ -149,16 +165,23 @@ async function loadBase(b,{preserve=true,quiet=false}={}){
   grid.position.y=state.baseFloor-.025;
   const maxSize=Math.max(b.width_m,b.depth_m);
   grid.scale.setScalar(Math.max(1,maxSize/16));
-  recolorBase();await updateBrandBoard();
+  if(!b.is_creator_base)recolorBase();await updateBrandBoard();
   resetCamera();
   if(!preserve)for(const item of [...state.placed])removeItem(item);
   $('loadingScene').hidden=true;
-  $('currentBoothTitle').textContent=b.style+' '+b.booth_type+' · '+b.width_m+' × '+b.depth_m+' m';
-  $('dimensions').textContent='BASE: '+b.width_m+' × '+b.depth_m+' m · '+b.area_m2+' m²';
+  $('currentBoothTitle').textContent=b.is_creator_base?b.name:b.style+' '+b.booth_type+' · '+b.width_m+' × '+b.depth_m+' m';
+  $('dimensions').textContent=b.is_creator_base?'ORIGINAL CC BY GLB · normalized preview, not measured CAD': 'BASE: '+b.width_m+' × '+b.depth_m+' m · '+b.area_m2+' m²';
   $('boothArea').textContent=b.area_m2+' m²';
   setStatus('Booth structure ready · '+b.id);
   $('partsCount').textContent=String(state.placed.length);
-  updateBasePreview();setDirty();state.ready=true;
+  if(b.is_creator_base){
+   $('basePreview').src=b.thumbnail||'assets/thumbs/EV-0001.webp';
+   $('baseName').textContent=b.name;
+   $('baseId').textContent='by '+b.creator+' · CC BY 4.0';
+  }else updateBasePreview();
+  $('exportDxf').disabled=!!b.is_creator_base;
+  $('exportDxf').title=b.is_creator_base?'Creator original only includes GLB, no authentic DXF':'Download preliminary generated DXF';
+  setDirty();state.ready=true;
   if(!quiet)toast('3D booth structure loaded');
  }catch(error){$('loadingScene').hidden=false;$('loadingScene').querySelector('p').textContent=error.message;setStatus('Could not load base geometry');toast(error.message);console.error(error)}
 }
@@ -409,6 +432,7 @@ async function downloadGLB(){
 }
 async function downloadDXF(){
  if(!state.base)return toast('Select a booth first');
+ if(state.base.is_creator_base)return toast('Original creator GLB contains no authentic DXF or original drawing; please use a generated booth for 2D concept plans.');
  const response=await fetch(baseUrl(state.base,'dxf'));
  if(!response.ok)return toast('DXF is not available');
  downloadBlob(state.base.id+'-concept.dxf',await response.blob(),'application/dxf');
@@ -422,7 +446,7 @@ function BOM(){
   rotation_deg:THREE.MathUtils.radToDeg(i.pivot.rotation.y),scale:i.pivot.scale.x
  }));
  return {base:{id:state.base.id,width_m:state.base.width_m,depth_m:state.base.depth_m,area_m2:state.base.area_m2,
-   schematic:baseUrl(state.base,'dxf'),production_status:'CONCEPT_NOT_MANUFACTURING_APPROVED'},
+   schematic:baseUrl(state.base,'dxf'),source_url:state.base.source_url||null,creator:state.base.creator||null,license:state.base.license||null,production_status:'CONCEPT_NOT_MANUFACTURING_APPROVED'},
   brand:state.brand,parts,count:parts.length,
   note:'This is a design composition, not a BOM with verified commercial part codes or engineering tolerances.'};
 }
@@ -430,21 +454,30 @@ async function downloadZIP(){
  if(state.exporting)return;
  state.exporting=true;$('exportZip').disabled=true;setStatus('Packaging full concept files…');
  try{
-  const [glb,dxf]=await Promise.all([generateGlb(),fetch(baseUrl(state.base,'dxf')).then(r=>{if(!r.ok)throw Error('DXF missing');return r.arrayBuffer()})]);
+  const glb=await generateGlb();
+  const dxf=state.base.is_creator_base?null:await fetch(baseUrl(state.base,'dxf')).then(r=>{if(!r.ok)throw Error('DXF missing');return r.arrayBuffer()});
   const zip=new JSZip();
   zip.file('3D/'+projectFilename()+'.glb',glb);
-  zip.file('PLAN/'+state.base.id+'-concept.dxf',dxf);
+  if(dxf)zip.file('PLAN/'+state.base.id+'-concept.dxf',dxf);
   zip.file('PROJECT/'+projectFilename()+'.json',JSON.stringify(buildProject(),null,2));
   zip.file('PARTS/placed-items.json',JSON.stringify(BOM(),null,2));
   zip.file('README.txt',[
    'EXPOVAULT — CONCEPT HANDOFF PACK','',
    'The 3D GLB contains the selected base booth, hosted CC0 items and custom brand artwork.',
-   'The DXF shows the parametric base floor plan, NOT final installation or cut drawings.',
+   dxf?'The DXF shows the generated base floor plan, NOT final installation drawings.':'Original creator model has no authentic source DXF; none is included.',
    'The placed-items list documents the original sources and colours.',
    'No Sketchfab view-only mesh was downloaded, copied or extracted.','',
    'IMPORTANT: NOT FABRICATION READY.',
    'Engineer and fabricator verification is required for tolerances, frame systems, cut sheets,',
    'joinery, accessibility, safety, print bleeds, electrical layouts and structural stability.'
+  ].join('\n'));
+  if(state.base.is_creator_base)zip.file('CREATOR_CREDITS.txt',[
+   'Original model: '+state.base.name,'Original creator: '+state.base.creator,
+   'Source: '+state.base.source_url,
+   'Licence: CC BY 4.0 https://creativecommons.org/licenses/by/4.0/',
+   'Changes: uniformly scaled for composition, brand materials/sign or placed items may have been added.',
+   'Credit original creator and link licence in downstream derivative works.',
+   'This is not an original native SketchUp/FBX/DWG or fabrication-ready drawing.'
   ].join('\n'));
   const result=await zip.generateAsync({type:'blob',compression:'DEFLATE',compressionOptions:{level:5}});
   downloadBlob(projectFilename()+'-CONCEPT-PACK.zip',result,'application/zip');
@@ -462,6 +495,11 @@ function wire(){
  $('exposureSelect').value='Inline';$('styleSelect').value='Portal';$('fitoutSelect').value='Reception';
  document.querySelectorAll('.tab').forEach(button=>button.onclick=()=>switchTab(button.dataset.tab));
  $('applyBase').onclick=async()=>{await loadBase(baseChoice());switchTab('items')};
+ $('applyOriginal').onclick=async()=>{
+  const b=state.sourceBases.find(x=>x.id===$('originalDesign').value);
+  if(!b){toast('Choose an original hosted designer booth first');return}
+  await loadBase(b,{preserve:false});switchTab('brand');
+ };
  $('itemSearch').oninput=e=>{state.filterText=e.target.value;renderItems()};
  $('itemPack').onchange=e=>{state.filterPack=e.target.value;renderItems()};
  for(const [picker,hex] of [['primaryColor','primaryHex'],['accentColor','accentHex'],['panelColor','panelHex']]){
@@ -496,11 +534,19 @@ function wire(){
 async function init(){
  wire();createViewer();
  try{
-  const [manif,open]=await Promise.all([
+  const [manif,open,creatorData]=await Promise.all([
    fetch('catalog/generated_manifest.json').then(r=>r.json()),
-   fetch('catalog/open_3d_cc0.json').then(r=>r.json())
+   fetch('catalog/open_3d_cc0.json').then(r=>r.json()),
+   fetch('catalog/authorized_booths.json').then(r=>r.json())
   ]);
-  state.bases=manif.items||[];
+  state.sourceBases=(creatorData.assets||[]).filter(a=>a.is_full_booth&&a.license==='CC-BY-4.0'&&/^assets\/authorized-booths\/SKFB-[0-9a-f]{32}\.glb$/.test(a.glb)).map(a=>({
+   id:a.id,name:a.name,creator:a.creator,source_url:a.source_url,license:a.license,
+   is_creator_base:true,glb:a.glb,thumbnail:a.thumbnail,booth_type:'Designer original',
+   style:'Artist-made',fitout:'Original',width_m:6,depth_m:6,area_m2:36
+  }));
+  state.bases=[...(manif.items||[]),...state.sourceBases];
+  const select=$('originalDesign');
+  for(const b of state.sourceBases){const opt=document.createElement('option');opt.value=b.id;opt.textContent=b.name+' — '+b.creator;select.append(opt)}
   state.assets=(open.assets||[]).filter(validAsset);
   $('assetCount').textContent=String(state.assets.length);
   const packs=new Map();
@@ -509,8 +555,13 @@ async function init(){
    const opt=document.createElement('option');opt.value=key;opt.textContent=name;
    $('itemPack').append(opt);
   }
-  renderItems();const preset=state.bases.find(x=>x.id===new URLSearchParams(location.search).get('design'));if(preset){for(const [field,value] of Object.entries({width:preset.width_m,depth:preset.depth_m,exposure:preset.booth_type,style:preset.style,fitout:preset.fitout}))$(UI[field]).value=String(value)}updateBasePreview();
-  await loadBase(baseChoice(),{quiet:false});
+  renderItems();const preset=state.bases.find(x=>x.id===new URLSearchParams(location.search).get('design'));
+  if(preset&&!preset.is_creator_base){for(const [field,value] of Object.entries({width:preset.width_m,depth:preset.depth_m,exposure:preset.booth_type,style:preset.style,fitout:preset.fitout}))$(UI[field]).value=String(value)}
+  if(preset?.is_creator_base)$('originalDesign').value=preset.id;
+  updateBasePreview();
+  await loadBase(preset?.is_creator_base?preset:baseChoice(),{quiet:false});
+  const chosenTab=new URLSearchParams(location.search).get('tab');
+  if(['brand','items','export','base'].includes(chosenTab))switchTab(chosenTab);
  }catch(error){
   setStatus('Could not load the catalogues');$('loadingScene').querySelector('p').textContent=error.message;
   toast('Cannot load studio inventory: '+error.message);console.error(error);
