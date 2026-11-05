@@ -509,7 +509,7 @@ async function init(){
    const opt=document.createElement('option');opt.value=key;opt.textContent=name;
    $('itemPack').append(opt);
   }
-  renderItems();updateBasePreview();
+  renderItems();const preset=state.bases.find(x=>x.id===new URLSearchParams(location.search).get('design'));if(preset){for(const [field,value] of Object.entries({width:preset.width_m,depth:preset.depth_m,exposure:preset.booth_type,style:preset.style,fitout:preset.fitout}))$(UI[field]).value=String(value)}updateBasePreview();
   await loadBase(baseChoice(),{quiet:false});
  }catch(error){
   setStatus('Could not load the catalogues');$('loadingScene').querySelector('p').textContent=error.message;
