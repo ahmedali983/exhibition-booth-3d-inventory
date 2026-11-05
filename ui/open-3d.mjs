@@ -63,10 +63,41 @@ function card(asset){
  const facts=el('div','open-card-facts');
  facts.append(el('span','','GLB · '+size(asset.file_size)),el('span','',asset.license==='CC0-1.0'?'CC0':asset.license==='CC-BY-4.0'?'CC BY':'Licensed'));
  const actions=el('div','open-card-actions');
- const direct=el('a','','↓ Download 3D');direct.href=asset.glb;direct.download=asset.id+'.glb';direct.setAttribute('aria-label','Download original GLB for '+asset.name);
+ const direct=asset.license==='CC-BY-4.0'?el('button','','↓ GLB + licence ZIP'):el('a','','↓ Download 3D');
+ if(asset.license==='CC-BY-4.0')direct.onclick=()=>downloadLicensedPackage(asset,direct);
+ else {direct.href=asset.glb;direct.download=asset.id+'.glb';direct.setAttribute('aria-label','Download original GLB for '+asset.name)}
  const customise=el('button','','✳ Recolour');customise.onclick=()=>open(asset);
  actions.append(direct,customise);body.append(facts,actions);item.append(picture,body);
  return item;
+}
+async function downloadLicensedPackage(asset,button){
+ const old=button.textContent;button.disabled=true;button.textContent='Preparing…';
+ try{
+  if(!window.JSZip)throw Error('ZIP exporter is not available');
+  const response=await fetch(asset.glb);
+  if(!response.ok)throw Error('Original 3D GLB missing: HTTP '+response.status);
+  const data=await response.arrayBuffer(),view=new DataView(data);
+  if(data.byteLength<20||view.getUint32(0,true)!==0x46546c67||view.getUint32(8,true)!==data.byteLength)throw Error('Invalid GLB binary');
+  const zip=new window.JSZip();
+  zip.file('3D/'+asset.id+'.glb',data);
+  zip.file('CREDITS.txt',[
+   'Original designer: '+asset.creator,
+   'Model title: '+asset.name,
+   'Model source: '+asset.source_url,
+   'Licence: Creative Commons Attribution 4.0',
+   'https://creativecommons.org/licenses/by/4.0/',
+   'Changes: none to archived source model in this package',
+   'For any modified version, credit the author, link the licence, and state changes.',
+   'The model is not an approved manufacturing/shop drawing.'
+  ].join('\n'));
+  zip.file('SOURCE.json',JSON.stringify({id:asset.id,uid:asset.uid,name:asset.name,creator:asset.creator,source:asset.source_url,license:asset.license,license_url:asset.license_url},null,2));
+  const blob=await zip.generateAsync({type:'blob',compression:'DEFLATE',compressionOptions:{level:4}});
+  const url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download=asset.id+'-ORIGINAL-3D.zip';a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),10000);
+  notice('Original Sketchfab model GLB downloaded from ExpoVault with CC BY credits');
+ }catch(error){notice('3D download failed: '+error.message);console.error(error)}
+ finally{button.disabled=false;button.textContent=old}
 }
 function sortedAssets(){
  const q=state.query.trim().toLowerCase();
@@ -76,7 +107,7 @@ function sortedAssets(){
   case 'name':list.sort((a,b)=>a.name.localeCompare(b.name));break;
   case 'size':list.sort((a,b)=>a.file_size-b.file_size);break;
   case 'triangles':list.sort((a,b)=>b.triangles-a.triangles);break;
-  default:list.sort((a,b)=>((/gallery|retail|indoor-market/.test(a.pack_slug)?0:1)-(/gallery|retail|indoor-market/.test(b.pack_slug)?0:1))||a.name.localeCompare(b.name));
+  default:list.sort((a,b)=>Number(!!b.is_full_booth)-Number(!!a.is_full_booth)||((/gallery|retail|indoor-market/.test(a.pack_slug)?0:1)-(/gallery|retail|indoor-market/.test(b.pack_slug)?0:1))||a.name.localeCompare(b.name));
  }
  return list;
 }
@@ -103,6 +134,7 @@ function filters(){
  }
  host.querySelectorAll('[data-pack]').forEach(b=>b.onclick=()=>{
   state.filter=b.dataset.pack;
+  history.replaceState(null,'',location.pathname+'?pack='+encodeURIComponent(state.filter));
   host.querySelectorAll('[data-pack]').forEach(c=>c.classList.toggle('selected',c===b));
   runFilters();
  });
@@ -203,6 +235,8 @@ async function open(asset){
  $('licenseStatus').textContent=asset.license==='CC0-1.0'?'CC0: no attribution required':asset.license==='CC-BY-4.0'?'CC BY: credit creator and source with any reuse':'Usage limited to the creator’s specific written permission';
  $('downloadRealGLB').href=asset.glb;
  $('downloadRealGLB').download=asset.id+'.glb';
+ $('downloadRealGLB').textContent=asset.license==='CC-BY-4.0'?'↓ Download original 3D + licence ZIP':'↓ Download original GLB';
+ $('downloadRealGLB').onclick=asset.license==='CC-BY-4.0'?e=>{e.preventDefault();downloadLicensedPackage(asset,$('downloadRealGLB'))}:null;
  $('nextAsset').disabled=state.activeIndex>=state.visible.length-1;
  $('loading3d').hidden=false;$('loading3d').textContent='Loading the original 3D geometry…';
  setupViewer();clearObject();
@@ -291,7 +325,18 @@ async function init(){
   $('totalPacks').textContent=fmt(state.packs.length);
   $('sideAssetCount').textContent=fmt(state.assets.length);
  $('libraryLicenses').textContent=data.licensedCount?'Open + approved':'CC0';
-  filters();runFilters();
+  filters();
+  const params=new URLSearchParams(location.search);
+  const initialPack=params.get('pack');
+  if(initialPack&&state.packs.some(p=>p.slug===initialPack))state.filter=initialPack;
+  const chosen=$('packFilters').querySelector('[data-pack="'+state.filter+'"]');
+  if(chosen)$('packFilters').querySelectorAll('[data-pack]').forEach(b=>b.classList.toggle('selected',b===chosen));
+  runFilters();
+  const chosenAsset=params.get('asset');
+  if(chosenAsset){
+   const matching=state.assets.find(a=>a.id===chosenAsset);
+   if(matching){if(state.filter!=='all'&&matching.pack_slug!==state.filter){state.filter=matching.pack_slug;runFilters()}open(matching)}
+  }
  }catch(error){$('assetGrid').textContent='Catalogue failed to load: '+error.message;notice(error.message)}
 }
 init();
