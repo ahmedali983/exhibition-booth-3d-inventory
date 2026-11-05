@@ -30,7 +30,7 @@ function score(v){
  score+=Math.min(17,Math.log10(1+(v.view_count||0))*3);
  return score;
 }
-function sectionTitle(s){return({models:'Design inspiration',concepts:'Downloadable booths',technical:'Production files',saved:'My collection'})[s]}
+function sectionTitle(s){return({models:'Original 3D booths',concepts:'Editable booth layouts',technical:'Concept floor plans',saved:'My collection'})[s]}
 function setSection(name,{changeHash=true,scroll=true}={}){
  if(!['models','concepts','technical','saved'].includes(name))name='models';
  STATE.section=name;
@@ -273,7 +273,9 @@ function activeList(){
  return list.length?list:STATE.models;
 }
 function openOriginal(v,{hash=true,fromSaved=false}={}){
- if(!v||!uidFor(v))return toast('This original source is not available for embedding');
+ const asset=STATE.hostedByUid.get(uidFor(v));
+ if(asset){window.location.href='open-3d.html?asset='+encodeURIComponent(asset.id);return}
+ return toast('Only fully hosted GLB files can be opened in this library');
  STATE.active=v;STATE.fromSaved=fromSaved||STATE.section==='saved';
  const list=activeList();STATE.position=list.findIndex(x=>x.id===v.id);if(STATE.position<0)STATE.position=0;
  $('viewer').hidden=false;$('viewerOverlay').hidden=false;document.body.style.overflow='hidden';
@@ -374,6 +376,9 @@ async function init(){
   item.category=category(item);item.relevance=score(item);
   STATE.models.push(item);
  }
+ // Customer-facing gallery includes only source-authored GLBs stored on our own server.
+ // External metadata references remain research-only: never show non-downloadable cards.
+ STATE.models=STATE.models.filter(v=>STATE.hostedByUid.has(uidFor(v)));
  STATE.concepts=(concepts.items||[]).map(c=>({id:c[0],width_m:c[1],depth_m:c[2],booth_type:c[3],style:c[4],fitout:c[5],area_m2:c[6]}));STATE.technical=[];
  const thumbnails=highRes.thumbnails||{};for(const item of STATE.models){const value=thumbnails[item.id];if(value&&validHttp(value.thumbnail,['sketchfab.com','cloudfront.net']))item.thumbnail=value.thumbnail;const stored=STATE.hostedByUid.get(uidFor(item));if(stored?.thumbnail)item.thumbnail=stored.thumbnail}
  STATE.models.sort((a,b)=>(Number(STATE.hostedByUid.has(uidFor(b)))-Number(STATE.hostedByUid.has(uidFor(a))))||b.relevance-a.relevance);
@@ -381,8 +386,8 @@ async function init(){
  $('sideSources').textContent=number(STATE.models.length);
  if($('sideLicensed'))$('sideLicensed').textContent=number(STATE.hostedByUid.size);
  persistSaved();runModelFilters();runConceptFilters();runProductionFilters();
- // Surface genuine source content in hero, without copying or rehosting protected meshes.
- const featured=STATE.models.filter(x=>x.category==='booth'&&validHttp(x.thumbnail,['sketchfab.com','cloudfront.net']));
+ // Hero images come exclusively from the locally hosted original model previews.
+ const featured=STATE.models.filter(x=>STATE.hostedByUid.get(uidFor(x))?.thumbnail);
  if(featured.length>1){$('heroImageOne').src=featured[3]?.thumbnail||featured[0].thumbnail;$('heroImageTwo').src=featured[10]?.thumbnail||featured[1].thumbnail}
  const hash=location.hash.slice(1);
  if(['models','concepts','technical','saved'].includes(hash))setSection(hash,{changeHash:false,scroll:false});
