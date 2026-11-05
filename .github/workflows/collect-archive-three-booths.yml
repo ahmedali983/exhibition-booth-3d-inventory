@@ -1,0 +1,37 @@
+name: ExpoVault Collect Original CC Exhibition Booth 3D and Source
+on:
+  push:
+    branches: [research/expovault-open-archive-catalogue-20261105]
+    paths: [.github/workflows/collect-archive-three-booths.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/collect_archive_three_full_booths.py
+      - name: Dependencies
+        run: |
+          python -m pip install -q requests pillow
+          npm install -g @gltf-transform/cli@4
+      - name: Collect licensed originals as GLB and creator source
+        run: python scripts/collect_archive_three_full_booths.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-three-original-booths-plus-source
+          path: archive-three-booths/*GLB-SOURCE.zip
+          if-no-files-found: warn
+          retention-days: 7
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-original-booth-batch-manifest
+          path: archive-three-booths/COLLECTION_INDEX.json
+          if-no-files-found: warn
+          retention-days: 7
