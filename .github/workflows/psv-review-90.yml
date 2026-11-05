@@ -1,0 +1,32 @@
+name: ExpoVault Review 90 Real Booth Originals
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/psv-review-90.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/psv_review_90.py
+            catalog/bulk_import_existing_uids.json
+      - uses: actions/download-artifact@v4
+        with:
+          name: expovault-ranked-bulk-prosceneverse-booth-candidates
+          run-id: 42092232098
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: psv-bulk-candidates/
+      - run: python -m pip install -q requests pillow
+      - run: python -u scripts/psv_review_90.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-90-original-booth-quality-contact-sheets
+          path: psv-booth-visual-census/
+          retention-days: 7
+          compression-level: 0
