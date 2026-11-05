@@ -19,7 +19,8 @@
   <p class="side-caption">YOUR WORKSPACE</p>
   <nav class="side-nav" aria-label="Explore library">
     <button class="side-link selected" data-section="models"><span class="nav-icon">⌗</span><span>Design inspiration</span><span class="side-amount" id="sideSources">1K+</span></button>
-    <a class="side-link" href="open-3d.html"><span class="nav-icon">◈</span><span>Items</span><span class="side-amount">CC0</span></a><a class="side-link" href="composer.html"><span class="nav-icon">▣</span><span>Booth composer</span></a>
+    <a class="side-link" href="open-3d.html"><span class="nav-icon">◈</span><span>Items</span><span class="side-amount">CC0</span></a>
+    <a class="side-link" href="open-3d.html?pack=licensed-booths"><span class="nav-icon">⬡</span><span>Original designer booths</span><span class="side-amount" id="sideLicensed">14</span></a><a class="side-link" href="composer.html"><span class="nav-icon">▣</span><span>Booth composer</span></a>
     <button class="side-link" data-section="concepts"><span class="nav-icon">▦</span><span>Downloadable booths</span><span class="side-amount">4.2K</span></button>
     <button class="side-link" data-section="technical"><span class="nav-icon">⌁</span><span>Production files</span></button>
     <button class="side-link" data-section="saved"><span class="nav-icon">♡</span><span>My collection</span><span class="side-amount" id="sideSaved">0</span></button>
@@ -53,7 +54,7 @@
           <div class="hero-copy"><div class="overline light-overline"><span class="green-dot"></span> EXPOVAULT · DESIGN WORKSPACE</div>
             <h1>Every great space<br>starts with <em>inspiration.</em></h1>
             <p>Discover 3D booth ideas, explore them interactively, try brand colours, and download editable design files where permitted. Everything starts in your workspace.</p>
-            <div class="hero-buttons"><a class="button-yellow" href="composer.html">✳ Build your own 3D booth <span>↗</span></a><a class="button-yellow" href="open-3d.html">◈ Browse 3D items <span>↗</span></a><button id="jumpCollection" class="button-yellow">Explore 3D models <span>↗</span></button><button class="button-outline" data-section="concepts">Create your own booth ↗</button></div>
+            <div class="hero-buttons"><a class="button-yellow" href="open-3d.html?pack=licensed-booths">↓ Original designer GLBs <span>↗</span></a><a class="button-yellow" href="composer.html">✳ Build your own 3D booth <span>↗</span></a><a class="button-yellow" href="open-3d.html">◈ Browse 3D items <span>↗</span></a><button id="jumpCollection" class="button-yellow">Explore 3D models <span>↗</span></button><button class="button-outline" data-section="concepts">Create your own booth ↗</button></div>
             <div class="hero-bottom"><span class="hero-line"></span> CURATED FOR DESIGNERS, CREATORS & BUILDERS</div>
           </div>
           <div class="hero-composition">
@@ -82,7 +83,7 @@
           <div class="toolbar-end"><select id="modelSort" aria-label="Sort models"><option value="relevant">Most relevant</option><option value="views">Most viewed</option><option value="new">Newest first</option><option value="az">Name A–Z</option></select><span class="grid-indicator">▦ GRID VIEW</span></div>
         </div>
         <div class="drawer" id="filterDrawer" hidden>
-          <label>Availability<select id="availability"><option value="any">All listings</option><option value="download">Creator allows download</option><option value="preview">Preview only</option></select></label>
+          <label>Availability<select id="availability"><option value="any">All listings</option><option value="download">Original GLB hosted here</option><option value="preview">Preview only</option></select></label>
           <label>Licence<select id="modelLicence"><option value="any">All licences</option><option value="cc">Creative Commons</option><option value="noncommercial">Noncommercial</option><option value="unspecified">Unspecified / other</option></select></label>
           <button id="clearFilters" class="drawer-clear">Reset filters ✕</button>
         </div>
