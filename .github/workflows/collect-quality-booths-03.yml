@@ -1,0 +1,51 @@
+name: ExpoVault Five More High Quality Brand Exhibition Booths
+on:
+  push:
+    branches: [research/expovault-trellis-aesthetic-20261105]
+    paths: [.github/workflows/collect-quality-booths-03.yml]
+permissions: {contents: read}
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        uid:
+          - d9e17d05b9d24a06b8edf206b5a06436
+          - ebe2c48acdb14f579aa21449b61d4f62
+          - 5f224364daea41d2b54023ac82874563
+          - 5431b7f6d128461e9f47b7f727e5052f
+          - d2bee855ea8e461e955501ce3397a3f7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/collect_creator_trellis_booth.py
+      - run: python -m pip install -q requests pillow
+      - run: npm install -g @gltf-transform/cli@4
+      - run: python scripts/collect_creator_trellis_booth.py ${{ matrix.uid }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-quality3-${{ matrix.uid }}-full
+          path: trellis-collected-${{ matrix.uid }}/*-REAL-GLB-AND-CREATOR-SOURCE.zip
+          if-no-files-found: warn
+          compression-level: 0
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-quality3-${{ matrix.uid }}-glb
+          path: trellis-collected-${{ matrix.uid }}/*-GLB-ONLY.zip
+          if-no-files-found: warn
+          compression-level: 0
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-quality3-${{ matrix.uid }}-native
+          path: trellis-collected-${{ matrix.uid }}/*-CREATOR-SOURCE-ONLY.zip
+          if-no-files-found: warn
+          compression-level: 0
+          retention-days: 7
