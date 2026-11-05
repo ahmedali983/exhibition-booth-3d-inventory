@@ -20,3 +20,5 @@ jobs:
           path: trellis-github-booth-scan/
           retention-days: 14
           if-no-files-found: error
+
+# Rerun after increasing GitHub-source metadata CSV stream size cap to 520 MB.
