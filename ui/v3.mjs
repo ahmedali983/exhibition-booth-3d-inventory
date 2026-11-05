@@ -30,7 +30,7 @@ function score(v){
  score+=Math.min(17,Math.log10(1+(v.view_count||0))*3);
  return score;
 }
-function sectionTitle(s){return({models:'3D designs',concepts:'Booth studio',technical:'Production files',saved:'My collection'})[s]}
+function sectionTitle(s){return({models:'Design inspiration',concepts:'Downloadable booths',technical:'Production files',saved:'My collection'})[s]}
 function setSection(name,{changeHash=true,scroll=true}={}){
  if(!['models','concepts','technical','saved'].includes(name))name='models';
  STATE.section=name;
@@ -99,17 +99,16 @@ function makeOriginalCard(v){
  const visual=create('div','model-thumb');const fallback=create('div','model-thumb-fallback','◇');
  const imgSrc=validHttp(v.thumbnail,['sketchfab.com','cloudfront.net']);
  if(imgSrc)visual.append(thumbnail(imgSrc,v.title));else visual.append(fallback);
- const top=create('div','thumb-top'),downloadable=v.is_downloadable;
- top.append(create('span','mini-label'+(downloadable?' download':''),downloadable?'3D + DOWNLOAD':'LIVE 3D'),favoriteButton(v));visual.append(top,create('div','thumb-overlay','◈ Explore interactive 3D ↗'));
+ const top=create('div','thumb-top');
+ top.append(create('span','mini-label','ORIGINAL PREVIEW'),favoriteButton(v));visual.append(top,create('div','thumb-overlay','◈ Explore interactive 3D ↗'));
  const body=create('div','card-text');body.append(create('h3','',v.title),create('div','card-author','by '+(v.author||'Original creator')));
  const bottom=create('div','card-bottom');bottom.append(create('span','',number(v.view_count)+' views'),create('b',v.category==='other'?'muted-badge':'',v.category==='booth'?'EXHIBITION':v.category==='pavilion'?'PAVILION':v.category==='display'?'DISPLAY':v.category==='event'?'EVENT':'RELATED'));
  body.append(bottom);
- if(v.is_downloadable){
-  const control=create('button','inline-download','↓ Download 3D');
-  control.setAttribute('aria-label','Download authorized 3D files for '+v.title);
-  control.onclick=e=>{e.stopPropagation();openDownloadCenter(v)};
-  body.append(control);
- }
+ const control=create('a','inline-download','✳ Create an editable booth instead');
+ control.href='composer.html';
+ control.setAttribute('aria-label','Open Composer — original '+v.title+' is a preview, not a locally hosted 3D file');
+ control.onclick=e=>e.stopPropagation();
+ body.append(control);
  card.append(visual,body);
  card.onclick=()=>openOriginal(v);
  card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openOriginal(v)}};
@@ -123,6 +122,26 @@ function renderModels(append=false){
  $('modelEmpty').hidden=STATE.modelsFiltered.length!==0;
  $('moreModels').hidden=host.children.length>=STATE.modelsFiltered.length;
  $('modelProgress').textContent='Showing '+number(host.children.length)+' of '+number(STATE.modelsFiltered.length)+' original source records';
+}
+async function downloadConceptPack(v,button){
+ if(!window.JSZip){toast('Pack exporter is still loading. Try again.');return}
+ const label=button.textContent;button.disabled=true;button.textContent='Packaging…';
+ try{
+  const base='assets/generated/'+v.width_m+'x'+v.depth_m+'/'+v.id;
+  const [glb,dxf]=await Promise.all(['.glb','.dxf'].map(async ext=>{
+   const r=await fetch(base+ext);if(!r.ok)throw Error(ext+' unavailable ('+r.status+')');
+   return r.arrayBuffer();
+  }));
+  const zip=new window.JSZip();
+  zip.file('3D/'+v.id+'.glb',glb);
+  zip.file('FLOORPLAN/'+v.id+'.dxf',dxf);
+  zip.file('SPECIFICATION/'+v.id+'.json',JSON.stringify(v,null,2));
+  zip.file('README.txt','ExpoVault — '+v.id+'\nEditable GLB 3D geometry and preliminary DXF plan.\nThis original procedural concept is not an engineer-approved manufacturing/shop drawing.\nOpen composer.html?design='+v.id+' to add furniture and apply a brand.\n');
+  const blob=await zip.generateAsync({type:'blob',compression:'DEFLATE',compressionOptions:{level:4}});
+  const u=URL.createObjectURL(blob);const a=document.createElement('a');a.href=u;a.download=v.id+'-DESIGN-PACK.zip';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),12000);
+  toast('Downloaded '+v.id+' design ZIP: GLB + DXF + JSON');
+ }catch(error){toast('Could not prepare design ZIP: '+error.message);console.warn(error)}
+ finally{button.disabled=false;button.textContent=label}
 }
 function makeConceptCard(v){
  const card=create('article','model-card concept-card');card.tabIndex=0;card.setAttribute('role','button');card.setAttribute('aria-label','Open editable concept '+v.id);
@@ -138,8 +157,10 @@ function makeConceptCard(v){
   a.onclick=e=>e.stopPropagation();
   direct.append(a);
  }
- body.append(direct);card.append(visual,body);
- const open=()=>{window.location.href='studio.html?design='+encodeURIComponent(v.id)};
+ const zip=create('button','concept-pack-download','↓ Download full 3D + DXF pack');
+ zip.onclick=e=>{e.stopPropagation();downloadConceptPack(v,zip)};
+ body.append(direct,zip);card.append(visual,body);
+ const open=()=>{window.location.href='composer.html?design='+encodeURIComponent(v.id)};
  card.onclick=open;card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}};
  return card;
 }
@@ -185,9 +206,11 @@ function makeProductionCard(v){
   a.download=v.id+'.'+ext;a.setAttribute('aria-label','Download '+v.id+' '+ext.toUpperCase());
   actions.append(a);
  }
- const pack=create('a','production-pack-link','✧ Customize and export full concept pack ↗');
- pack.href='studio.html?design='+encodeURIComponent(v.id);
- body.append(label,title,sub,info,actions,pack);card.append(image,body);
+ const zip=create('button','production-zip','↓ Download full design ZIP');
+ zip.onclick=()=>downloadConceptPack(v,zip);
+ const pack=create('a','production-pack-link','✧ Customize in 3D Composer ↗');
+ pack.href='composer.html?design='+encodeURIComponent(v.id);
+ body.append(label,title,sub,info,actions,zip,pack);card.append(image,body);
  return card;
 }
 function renderTechnical(append=false){
@@ -215,11 +238,11 @@ function openOriginal(v,{hash=true,fromSaved=false}={}){
  $('viewer').hidden=false;$('viewerOverlay').hidden=false;document.body.style.overflow='hidden';
  $('viewerTitle').textContent=v.title;$('viewerAuthor').textContent=v.author||'Original creator';
  $('viewerAuthor').href=validHttp(v.author_url,['sketchfab.com'])||PROFILE+encodeURIComponent(v.author||'');
- $('detailDownload').textContent=v.is_downloadable?'With creator permission':'Preview only';
- $('downloadExternal').disabled=!v.is_downloadable;
- $('downloadExternal').textContent=v.is_downloadable?'↓ Download licensed 3D':'View-only model · no file';
- $('downloadAvailability').textContent=v.is_downloadable?'Eligible for sign-in':'No public download';
- $('downloadExternalHint').textContent=v.is_downloadable?'Use the official embedded sign-in to request this model’s glTF ZIP and textures. Current access is checked at download time.':'This model’s original mesh is not offered for public download. Create a separate editable concept in Booth Studio.';
+ $('detailDownload').textContent='Preview only — original not hosted';
+ $('downloadExternal').disabled=false;
+ $('downloadExternal').textContent='✳ Build a downloadable 3D booth';
+ $('downloadAvailability').textContent='Reference design · no local original';
+ $('downloadExternalHint').textContent='This preview is not the downloadable creator file. Open Booth Composer to create and export your own editable stand (not a copy of this original).';
  $('detailKind').textContent=v.category.toUpperCase();
  $('detailLicense').textContent=v.license||'Not specified';
  $('detailViews').textContent=number(v.view_count)+' views';
@@ -275,7 +298,7 @@ function bindControls(){
  $('viewerShare').onclick=async()=>{const u=new URL(location.href);u.hash='model='+uidFor(STATE.active);try{await navigator.clipboard.writeText(u.href);toast('Shareable model link copied')}catch(_){toast('Share this link: '+u.href)}};
  $('modelPrev').onclick=()=>moveModel(-1);$('modelNext').onclick=()=>moveModel(1);
  $('findConcept').onclick=()=>{closeViewer({restoreHash:false});setSection('concepts')};
- $('downloadExternal').onclick=()=>{if(STATE.active?.is_downloadable)openDownloadCenter(STATE.active)};
+ $('downloadExternal').onclick=()=>{window.location.href='composer.html'};
  document.addEventListener('keydown',e=>{
   if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();$('query').focus()}
   if(e.key==='Escape'){if(STATE.active)closeViewer();else $('side').classList.remove('mobile-show')}
