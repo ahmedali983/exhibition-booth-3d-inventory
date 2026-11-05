@@ -21,7 +21,7 @@ with tempfile.NamedTemporaryFile(mode="w+b",suffix=".csv") as file:
     for c in res.iter_content(1024*1024):
         if not c:continue
         total+=len(c)
-        if total>300_000_000:raise RuntimeError("unexpected dataset size")
+        if total>520_000_000:raise RuntimeError("unexpected dataset size")
         file.write(c)
     file.flush();file.seek(0)
     stream=(line.decode("utf-8-sig","replace") for line in file)
