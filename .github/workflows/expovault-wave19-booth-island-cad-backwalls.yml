@@ -1,0 +1,60 @@
+name: ExpoVault Wave19 three island-booth originals and 25 architectural display systems
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/expovault-wave19-booth-island-cad-backwalls.yml]
+  workflow_dispatch: {}
+permissions: {contents: read}
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 21
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        uid:
+          - 8154f902fbfd4ff79d2288cddd5c143b
+          - 65e235b1ad8c40218e48b816ede321b4
+          - f1ae7517a4e64e10bc5a9bf800f5ef40
+          - 7bdd17628cc948b78e6f3fb891203f77
+          - 47270693940547518952a04d8a44e472
+          - adc66b342b454c5094b96f6698ebb6e7
+          - 07d07c6ba34040029fde6e299557b48a
+          - 8d687f61952741eb8e4b8fb7f116c563
+          - bdddd998bae24ed0b0b8316b5a235905
+          - 6e689580a81344aa908db4222b67c683
+          - e920980ceb854ca4b81cd80a85f36822
+          - 206b4f04fc954546919a70021afac381
+          - 00598954a55346178e13320dbb8acf8a
+          - 31823678e0594a298b304bca78ae1c0c
+          - 0c6f08ba3e6b4ac694695971ed4dd73d
+          - 4572956addcc4dd3b8a9044468c34adf
+          - 3cfe1dfb59d741738daf901b8916d3bc
+          - 324141e22d504669ab022cf9b5d5f65f
+          - ed01c4aacb544dc4a924ef83471ce235
+          - e8f92cfd6fe94343abe6532e30941170
+          - 3010d7bfde344a769e01d9781040546b
+          - 02c2d433a25b4a739e00a11091e0e057
+          - 41d643e7a37e4c22a7fd146ef0299dbc
+          - ebdc179296974a28ad4f903ebc98f68f
+          - c8cc16f6c2f64038bd243091dbf1e3b2
+          - 98d9c06f37a34274aedd4060285a973a
+          - ee811f8e90754e7cbeaa121f9cf5b34f
+          - 01e9e212cc6a448883e900e70382d29a
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/rescue_large_creator_booth_sources.py
+      - run: python -m pip install -q requests pillow
+      - run: npm install -g @gltf-transform/cli@4
+      - name: Safely retrieve public source only if source creator CC rights are compatible
+        run: python -u scripts/rescue_large_creator_booth_sources.py ${{ matrix.uid }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-wave19-${{ matrix.uid }}
+          path: rescue-booth-${{ matrix.uid }}/*.zip
+          if-no-files-found: warn
+          retention-days: 7
+          compression-level: 0
