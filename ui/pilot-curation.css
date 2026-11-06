@@ -76,3 +76,7 @@
 #rawArchiveWrap[hidden]{display:none!important}
 .pilot-section .pilot-foot{color:#47624e}
 @media(max-width:650px){.pilot-dialog-viewer{aspect-ratio:4/5;min-height:360px}.pilot-dialog-top strong{font-size:14px}.pilot-dialog-top{padding:12px}.pilot-dialog-footer{padding:12px}}
+
+/* Viewer fallback stays visible if an external 3D embed cannot initialize. */
+.pilot-direct-link{display:inline-flex;margin-top:5px!important;font-size:11px!important;font-weight:800!important;color:#7ce4ae!important;text-decoration:underline!important;text-underline-offset:3px}
+.pilot-dialog-top .pilot-direct-link:focus-visible{outline:2px solid #ddf6ad;outline-offset:3px}
