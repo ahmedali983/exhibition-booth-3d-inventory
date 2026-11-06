@@ -1,0 +1,82 @@
+name: ExpoVault Split Two Original 3D Booth Packages for Google Drive
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/expovault-split-wave10-large.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  split:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    strategy:
+      fail-fast: false
+      matrix:
+        uid: [25a38668148847a3ac36c3e318545cd5, 9a65115e26084225990ac2802e40e389]
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: expovault-wave10-${{ matrix.uid }}
+          run-id: 42160581938
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: input
+      - name: Split intact original author source ZIP into Drive-friendly chunks
+        env:
+          BOOTH_UID: ${{ matrix.uid }}
+        run: |
+          python - <<'PY'
+          import os,pathlib,zipfile,json,hashlib,io
+          uid=os.environ["BOOTH_UID"]
+          bundle=next(pathlib.Path("input").glob("*.zip"))
+          out=pathlib.Path("parts");out.mkdir(exist_ok=True)
+          with zipfile.ZipFile(bundle) as container:
+            assert container.testzip() is None
+            glb=container.read("SKFB-"+uid+"-GLB-ONLY.zip")
+            native=container.read("SKFB-"+uid+"-CREATOR-SOURCE-ONLY.zip")
+          with zipfile.ZipFile(io.BytesIO(glb)) as z:
+            assert z.testzip() is None
+            info=json.loads(z.read("MANIFEST.json"))
+            data=z.read("booth.glb")
+            assert hashlib.sha256(data).hexdigest()==info["glb_sha256"]
+            assert data[:4]==b"glTF" and int.from_bytes(data[8:12],"little")==len(data)
+          with zipfile.ZipFile(io.BytesIO(native)) as z:assert z.testzip() is None
+          sub=out/uid
+          for name in ("glb","native1","native2"): (sub/name).mkdir(parents=True,exist_ok=True)
+          glb_file="SKFB-"+uid+"-ORIGINAL-GLB.zip"
+          (sub/"glb"/glb_file).write_bytes(glb)
+          size=63_000_000
+          pieces=[native[i:i+size] for i in range(0,len(native),size)]
+          if len(pieces)!=2:raise ValueError("Expected two source pieces; actually "+str(len(pieces)))
+          details=[]
+          for i,piece in enumerate(pieces):
+            partname="SKFB-"+uid+"-CREATOR-SOURCE-ONLY.zip.part"+str(i+1).zfill(3)
+            (sub/("native"+str(i+1))/partname).write_bytes(piece)
+            details.append({"filename":partname,"bytes":len(piece),"sha256":hashlib.sha256(piece).hexdigest()})
+          manifest={"uid":uid,"original_model_url":"https://sketchfab.com/models/"+uid,"full_source_archive_name":"SKFB-"+uid+"-CREATOR-SOURCE-ONLY.zip",
+                    "full_source_sha256":hashlib.sha256(native).hexdigest(),"full_source_bytes":len(native),"parts":details,
+                    "original_GLBlive_sha256":hashlib.sha256(data).hexdigest(),
+                    "original_native_source_is_not_fabrication_certification":True,
+                    "reassemble_in_order":"Concatenate part001 and part002 as bytes, then open the result as a ZIP."}
+          (sub/"glb"/"PARTS_MANIFEST.json").write_text(json.dumps(manifest,indent=2))
+          for folder in ["glb","native1","native2"]:
+            print("READY",uid,folder,[(f.name,f.stat().st_size) for f in (sub/folder).iterdir()],flush=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-wave10-large-${{ matrix.uid }}-GLB
+          path: parts/${{ matrix.uid }}/glb/
+          compression-level: 0
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-wave10-large-${{ matrix.uid }}-native1
+          path: parts/${{ matrix.uid }}/native1/
+          compression-level: 0
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-wave10-large-${{ matrix.uid }}-native2
+          path: parts/${{ matrix.uid }}/native2/
+          compression-level: 0
+          retention-days: 7
