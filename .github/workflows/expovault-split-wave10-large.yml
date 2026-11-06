@@ -28,12 +28,9 @@ jobs:
           python - <<'PY'
           import os,pathlib,zipfile,json,hashlib,io
           uid=os.environ["BOOTH_UID"]
-          bundle=next(pathlib.Path("input").glob("*.zip"))
           out=pathlib.Path("parts");out.mkdir(exist_ok=True)
-          with zipfile.ZipFile(bundle) as container:
-            assert container.testzip() is None
-            glb=container.read("SKFB-"+uid+"-GLB-ONLY.zip")
-            native=container.read("SKFB-"+uid+"-CREATOR-SOURCE-ONLY.zip")
+          glb=(pathlib.Path("input")/("SKFB-"+uid+"-GLB-ONLY.zip")).read_bytes()
+          native=(pathlib.Path("input")/("SKFB-"+uid+"-CREATOR-SOURCE-ONLY.zip")).read_bytes()
           with zipfile.ZipFile(io.BytesIO(glb)) as z:
             assert z.testzip() is None
             info=json.loads(z.read("MANIFEST.json"))
