@@ -403,7 +403,7 @@ async function init(){
  }
  const thumbnails=highRes.thumbnails||{};for(const item of STATE.models){const value=thumbnails[item.id];if(value&&validHttp(value.thumbnail,['sketchfab.com','cloudfront.net']))item.thumbnail=value.thumbnail;const stored=STATE.hostedByUid.get(uidFor(item));if(stored?.thumbnail)item.thumbnail=stored.thumbnail}
  STATE.models.sort((a,b)=>(Number(STATE.hostedByUid.has(uidFor(b)))-Number(STATE.hostedByUid.has(uidFor(a))))||b.relevance-a.relevance);
- $('metricModels').textContent='10';
+ $('metricModels').textContent='5';
  $('sideSources').textContent='369';
  if($('sideLicensed'))$('sideLicensed').textContent=number(STATE.hostedByUid.size);
  persistSaved();runModelFilters();runConceptFilters();runProductionFilters();
