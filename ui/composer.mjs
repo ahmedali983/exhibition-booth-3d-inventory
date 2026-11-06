@@ -94,19 +94,22 @@ function collectMaterials(root){
 }
 function recolorBase(){
  if(!state.baseObject)return;
+ const preserve=!!$('preserveArtwork')?.checked;
  for(let i=0;i<baseOriginalMaterials.length;i++){
-  const m=baseOriginalMaterials[i].material;
-  const meshName=(baseOriginalMaterials[i].node.name+' '+m.name).toLowerCase();
-  if(!m.color)continue;
-  const orig=baseOriginalMaterials[i].original.color;
-  if(state.base?.is_creator_base && m.map)continue;
-  if(/floor|carpet|ground|baseplate/.test(meshName))m.color.copy(orig);
-  else if(/panel|back|wall|wallboard|roof|screen/.test(meshName))m.color.set(state.panel);
-  else if(/trim|metal|pole|column|rail|frame|truss/.test(meshName))m.color.set(state.accent);
-  else if(i%5===0)m.color.set(state.accent);
-  else if(i%4===0)m.color.set(state.panel);
-  else m.color.set(state.primary);
-  m.needsUpdate=true;
+  const info=baseOriginalMaterials[i],mat=info.material,orig=info.original;
+  if(!mat.color||!orig.color)continue;
+  const name=(info.node.name+' '+mat.name).toLowerCase();
+  // Retain floor textures and optionally preserve printed author artwork.
+  if(/floor|carpet|ground|baseplate|terrain/.test(name)||(preserve&&orig.map)){
+   mat.map=orig.map||null;mat.color.copy(orig.color);mat.needsUpdate=true;continue;
+  }
+  let target=state.primary;
+  if(/panel|back|wall|roof|screen|display|fabric|banner|partition/.test(name))target=state.panel;
+  else if(/metal|pole|column|rail|frame|truss|support|leg|trim/.test(name))target=state.accent;
+  else if(i%5===0)target=state.accent;
+  else if(i%4===0)target=state.panel;
+  // A GLTF texture multiplies base colour; paint only this editable material clone.
+  mat.map=null;mat.color.set(target);mat.needsUpdate=true;
  }
 }
 function removeObject(node){
@@ -218,10 +221,10 @@ async function updateBrandBoard(){
  group.position.set((bbox.min.x+bbox.max.x)/2,Math.max(bbox.min.y+1.3,bbox.max.y-.47),bbox.min.z+Math.min(.42,size.z*.17));
  logoBoard=group;exportRoot.add(logoBoard);
 }
-function updateBrand(){
+function updateBrand(silent=false){
  state.brand=$('brandName').value.trim().slice(0,32)||'YOUR BRAND';
  state.primary=$('primaryColor').value;state.accent=$('accentColor').value;state.panel=$('panelColor').value;
- recolorBase();updateBrandBoard();setDirty();toast('Brand palette applied to the booth');
+ recolorBase();void updateBrandBoard();setDirty();if(!silent)toast('Brand palette applied to the 3D materials');
 }
 function getRay(ev){
  const r=renderer.domElement.getBoundingClientRect();
@@ -270,7 +273,7 @@ function selectItem(id){
  $('selectedName').textContent=selected?selected.asset.name:'Select a placed item to edit';
  $('selectionTag').hidden=!selected;
  $('selectedName').style.color=selected?'#2c6a44':'#8ba38f';
- for(const id of ['itemX','itemZ','itemRot','itemScale','removeItem','selectedMaterial','selectedItemColor','applyItemColor','moveLeft','moveRight','moveFront','moveBack'])$(id).disabled=!selected;
+ for(const id of ['itemX','itemZ','itemRot','itemScale','removeItem','selectedMaterial','selectedItemColor','applyItemColor','resetItemColor','moveLeft','moveRight','moveFront','moveBack'])$(id).disabled=!selected;
  if(highlight){scene.remove(highlight);highlight.geometry.dispose();highlight.material.dispose();highlight=null}
  if(selected){
   highlight=new THREE.BoxHelper(selected.pivot,0x1e9b70);
@@ -342,8 +345,17 @@ function paintItem(){
  const item=getSelected();if(!item)return;
  const index=Number($('selectedMaterial').value),m=item.materials[index]?.material;
  if(!m?.color){toast('Selected material has no editable base colour');return}
+ if(m.map)m.map=null;
  m.color.set($('selectedItemColor').value);m.needsUpdate=true;
  setDirty();toast('Selected 3D material recoloured');
+}
+function resetItemPaint(){
+ const item=getSelected();if(!item)return;
+ const ref=item.materials[Number($('selectedMaterial').value)];if(!ref)return;
+ if(ref.material.color&&ref.original.color)ref.material.color.copy(ref.original.color);
+ ref.material.map=ref.original.map||null;ref.material.needsUpdate=true;
+ if(ref.material.color)$('selectedItemColor').value='#'+ref.material.color.getHexString();
+ setDirty();toast('Original source material restored');
 }
 function changeTransform(){
  const item=getSelected();if(!item)return;
@@ -506,9 +518,11 @@ function wire(){
  $('itemSearch').oninput=e=>{state.filterText=e.target.value;renderItems()};
  $('itemPack').onchange=e=>{state.filterPack=e.target.value;renderItems()};
  for(const [picker,hex] of [['primaryColor','primaryHex'],['accentColor','accentHex'],['panelColor','panelHex']]){
-  $(picker).oninput=e=>$(hex).textContent=e.target.value.toUpperCase();
+  $(picker).oninput=e=>{$(hex).textContent=e.target.value.toUpperCase();updateBrand(true)};
  }
- $('applyBrand').onclick=updateBrand;
+ $('preserveArtwork').onchange=()=>updateBrand(true);
+ $('brandName').onchange=()=>updateBrand(true);
+ $('applyBrand').onclick=()=>updateBrand();
  $('logoFile').onchange=async e=>{
   const file=e.target.files?.[0];if(!file)return;
   if(file.size>2_000_000){toast('Maximum logo size is 2 MB');return}
@@ -522,6 +536,8 @@ function wire(){
  }
  $('removeItem').onclick=removeSelected;
  $('applyItemColor').onclick=paintItem;
+ $('resetItemColor').onclick=resetItemPaint;
+ $('selectedMaterial').onchange=()=>{const info=getSelected()?.materials[Number($('selectedMaterial').value)];if(info?.material.color)$('selectedItemColor').value='#'+info.material.color.getHexString()};
  $('resetCamera').onclick=resetCamera;
  $('snapFloor').onclick=()=>{const item=getSelected();if(item){item.pivot.position.y=state.baseFloor;toast('Snapped to booth floor')}};
  $('saveProject').onclick=saveProject;$('saveProjectPanel').onclick=saveProject;
