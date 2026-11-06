@@ -1,0 +1,61 @@
+name: ExpoVault Wave21 real modular production components CAD sources
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/expovault-wave21-production-components-cad.yml]
+  workflow_dispatch: {}
+permissions: {contents: read}
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 19
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        uid:
+          - 041dcbd6b03741a1aa7815feb89ff156
+          - 62ffac0eb8fe4f95bb4cd0d86cb17666
+          - fa4b59b0d16c4cdb8aadb034f339f301
+          - 56c30898c08e4721be8f881a4bd13041
+          - ab8abe94528c4bd2943699fcb2455bf5
+          - 43c49515066b4079acf558ac43d2568c
+          - 75cc022ab9124681943f1fabba222129
+          - c6944ee38dfc492a81d2126e83901482
+          - 02fbe4efc7984c18bde8ba95b25925e0
+          - 534ec7ce58984bd9b72b95402726467e
+          - 2eb27b8153cf48029b9fe59586c6d092
+          - 6ac9e8c19c5045e69aeeb9b3df24ddf7
+          - 49438892883e498ba54e1ad6aba85a28
+          - 71144992cb6e425fae59b0db52f247f3
+          - c7c5e615ef674c9e9e43eb55bf3ab4fa
+          - a61428dfd0f445f68030779eb102e132
+          - 7c10b3606862405d8b71bbb8f8ec4179
+          - 3896722811e64cdf93d07b5bcb5f93c7
+          - 7e0e975752374090ae91c6411573e06b
+          - bede899c7f23472f949df984308e80bc
+          - c8de4f554cf64f0ba58ba5a917398086
+          - 33d43d74b86640638b1030dd2ad69b8d
+          - e0d9f9765c6e4303ba261e70b1ebee4a
+          - e559281ca11b4363a0cc464999577d4
+          - e75b2086aeb0451d9ad65eb3a9b49da8
+          - 8508c80e853144d487624ffad758eb17
+          - 5ce28bd193b94929b61227857811e997
+          - cbfe9f82299d4d03baae190aeeeb7625
+          - 48827be5e27d4884ac47baa70d59dce3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/rescue_large_creator_booth_sources.py
+      - run: python -m pip install -q requests pillow
+      - run: npm install -g @gltf-transform/cli@4
+      - name: Source license and native CAD with fail-closed rights screening
+        run: python -u scripts/rescue_large_creator_booth_sources.py ${{ matrix.uid }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-wave21-${{ matrix.uid }}
+          path: rescue-booth-${{ matrix.uid }}/*.zip
+          if-no-files-found: warn
+          retention-days: 7
+          compression-level: 0
