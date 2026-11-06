@@ -1,0 +1,47 @@
+name: ExpoVault Wave12 visually shortlisted worldwide original booths
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/expovault-wave12-worldwide-licensed-qa.yml]
+permissions: {contents: read}
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      max-parallel: 7
+      matrix:
+        uid:
+          - 96537d99704845d49be1eb9a5398f08b
+          - 0f9507a0dc00436da5e24fd0df4c9e5c
+          - 22fac038efc948d8bd7fd5436584d431
+          - 1576adf635d54070a9ebb4af5049fd23
+          - 1f7f6c666da64dd68c7a906456d654aa
+          - 9bd0ed986e2c4e3d889f6690b125f9c8
+          - fcb9f8e962544265bb488845b8d1e3b6
+          - 2fac978549d64358ac4b2b7f052530b8
+          - b6d079412dce41e9b61cbcd11cf6e978
+          - 0c2568446e4110a8b854442a86949e
+          - 453e5b293e674518a895331b389a3d5f
+          - 223d15421037458baf1ad533f0569215
+          - 100fdec9fe3f4921a2d93cc79479d478
+          - e0ae255d627f40158017a3ccd4872b4
+          - 18f376ba110b45cd9021e642a025423e
+          - c6c66ccf3c364daaacf716ceaef79a
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/rescue_large_creator_booth_sources.py
+      - run: python -m pip install -q requests pillow
+      - run: npm install -g @gltf-transform/cli@4
+      - name: Check creator's archive license and convert original glTF
+        run: python -u scripts/rescue_large_creator_booth_sources.py ${{ matrix.uid }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-wave12-${{ matrix.uid }}
+          path: rescue-booth-${{ matrix.uid }}/*.zip
+          if-no-files-found: warn
+          compression-level: 0
+          retention-days: 7
