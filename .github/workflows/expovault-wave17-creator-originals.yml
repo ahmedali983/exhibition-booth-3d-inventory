@@ -1,0 +1,43 @@
+name: ExpoVault Wave17 native author exhibition stand sources
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/expovault-wave17-creator-originals.yml]
+  workflow_dispatch: {}
+permissions: {contents: read}
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 21
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        uid:
+          - aaf7e820f197430ea3df720d3b69028c
+          - 731deda27bd34bbf96818133f0c32de6
+          - cd97827142484c3fbb5716b43597fecf
+          - af1b15e388b94e1f9f96b5faad8117e7
+          - 72e88f36bc4a4d6cb388c354f7edc8b9
+          - d9711297db1e434da4e1cdcac2bf0e5c
+          - 1930a592c64647bd8c3de538614ba694
+          - dd13b4ed65c74333bbe713f2428fe03f
+          - 07db01e16863471f8b0b9194e2e200d0
+          - db3d269c2c7d4fa18e67e2c4e1d25fab
+          - 75fe884b6761410fa3648a38ed8f3c99
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/rescue_large_creator_booth_sources.py
+      - run: python -m pip install -q requests pillow
+      - run: npm install -g @gltf-transform/cli@4
+      - name: Validate source creator license and original 3D scene without ripping
+        run: python -u scripts/rescue_large_creator_booth_sources.py ${{ matrix.uid }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-wave17-${{ matrix.uid }}
+          path: rescue-booth-${{ matrix.uid }}/*.zip
+          retention-days: 7
+          compression-level: 0
+          if-no-files-found: warn
