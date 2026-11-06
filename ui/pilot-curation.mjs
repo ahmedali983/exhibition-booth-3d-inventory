@@ -55,6 +55,7 @@ function card(m,i){
  const actions=create('div','pilot-actions');
  const open=create('button','pilot-primary pilot-a11y','◈ View real 3D');open.type='button';open.addEventListener('click',()=>dialog3D(m));
  actions.append(open);
+ if(m.uid)actions.append(link('↗ Open on Sketchfab',m.source_model_url));
  if(m.original_3d_drive)actions.append(link(m.can_download_from_team_drive?'↗ Team source files':'↗ Original design files',m.original_3d_drive));
  body.append(actions,create('div','pilot-rights','Source attribution preserved · 3D visual screening is not fabrication certification'));
  article.append(cover,body);return article;
