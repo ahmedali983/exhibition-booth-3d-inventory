@@ -1,0 +1,39 @@
+name: ExpoVault Quality Review Newly Indexed CC Booths A-B
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/qa-mirror-A-B.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/qa_remaining_mirror_booth_sources.py
+            catalog/verified_drive_inventory_quality_142_20261106.json
+      - uses: actions/download-artifact@v4
+        with:
+          name: expovault-CC-booth-candidates-A
+          run-id: 42159709977
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: input/A
+      - uses: actions/download-artifact@v4
+        with:
+          name: expovault-CC-booth-candidates-B
+          run-id: 42159709977
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: input/B
+      - run: python -m pip install -q requests pillow
+      - name: Compare against 142 and prepare licensed booth visual contact sheets
+        run: python -u scripts/qa_remaining_mirror_booth_sources.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: expovault-new-CC-booths-visual-QA-A-B
+          path: mirror-fresh-candidates/
+          retention-days: 7
+          if-no-files-found: error
