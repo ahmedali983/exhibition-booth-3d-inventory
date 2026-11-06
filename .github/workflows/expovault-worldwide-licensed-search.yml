@@ -1,0 +1,36 @@
+name: ExpoVault worldwide licensed complete-booth source discovery
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths:
+      - .github/workflows/expovault-worldwide-licensed-search.yml
+  workflow_dispatch: {}
+permissions:
+  contents: read
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        region: [EN_CORE, EN_SPECIFIC, EUROPE_WEST, EUROPE_CENTRAL, IBERIA_LATAM, RUS_CIS, ARAB_TURKISH, ASIA_EAST, ASIA_SOUTH, EN_EXPANDED]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/expovault_worldwide_licensed_booth_scan.py
+            catalog/expovault_known_uids_204_20261106.json
+      - name: Install requests
+        run: python -m pip install -q requests
+      - name: Search official public catalogue and check archived source candidates
+        run: python -u scripts/expovault_worldwide_licensed_booth_scan.py ${{ matrix.region }}
+      - name: Archive ONLY metadata and preflight evidence; no unlicensed file download
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-global-licensed-booth-${{ matrix.region }}
+          path: worldwide-booths/${{ matrix.region }}/candidate_report.json
+          retention-days: 7
+          if-no-files-found: warn
