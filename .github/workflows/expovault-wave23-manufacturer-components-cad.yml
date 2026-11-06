@@ -1,0 +1,61 @@
+name: ExpoVault Wave23 original 3D production components with author CAD
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/expovault-wave23-manufacturer-components-cad.yml]
+permissions: {contents: read}
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    strategy:
+      fail-fast: false
+      max-parallel: 7
+      matrix:
+        uid:
+          - f87abf5b61e14d6496e364969628e3ad
+          - 9701f2b0d47641a1963659d989ba53ee
+          - e38bccbd55ef47c9aaee43054e5a2a95
+          - eebdfd7c841745c18387135f50e0cbd6
+          - a05250a4eada43ff8c63ca399b64e128
+          - e559281ca11b4363a0cc464999577d4e
+          - 410d16fe16364062b4391f0a20bc610c
+          - 5b51d192210a4f848a012451baaffc6b
+          - 436733267e334faa8c76c5d6cad35ab2
+          - 1b4ffd5483844b30800b51f22c13fe3b
+          - fcec5d170ead409eb41424cdd07ebe41
+          - fd93b57719eb454e8cd609a675c5c0f7
+          - 20e9e0b3db57452aa248580dbd6c86b7
+          - ce64fda524e2423fbae25fa87a71d92c
+          - 6dda658b0dfb46e6a9fb243eb55679a3
+          - fbf7435fd32b4014b8b78c4c6d818e22
+          - 74818e1257da490da23f1aecbd9b9ac8
+          - 65a16fbf6e9c4e90b7867bd3938a78b3
+          - 55d09d30353c43778581bf55e832be77
+          - 106f0964f35a445882a86bad1143f932
+          - d7f2abb815054d0b803404570157d727
+          - 310d676ba1c44d269eacefb072a5c25f
+          - 31fa9a8f60154e9e87b54f15423e5deb
+          - 5c9e9c03c82b41d8b66ddaac5b160c97
+          - 1eff4ec38ff44960bc31a4984f797c23
+          - b86f1f07bfa444b796b0c0cee97f36a3
+          - d7ef9c6e5ad5407aa85eb5e68b9ed6d5
+          - 852584e6c6e04cdc91bb3b3f2b99f0ed
+          - 731bb620849f4baea0291a85f18c77c8
+          - 97b28b8a6b594bfcb2dbe3abd605e77b
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/rescue_large_creator_booth_sources.py
+      - run: python -m pip install -q requests pillow
+      - run: npm install -g @gltf-transform/cli@4
+      - name: Respect archived CC attribution and fetch only licensed original CAD files
+        run: python -u scripts/rescue_large_creator_booth_sources.py ${{ matrix.uid }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-wave23-${{ matrix.uid }}
+          path: rescue-booth-${{ matrix.uid }}/*.zip
+          retention-days: 7
+          compression-level: 0
+          if-no-files-found: warn
