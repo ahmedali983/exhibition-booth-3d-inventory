@@ -1,0 +1,26 @@
+name: ExpoVault Wave15 Future Tech Expo Booth source audit
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/expovault-wave15-new-expo-booth.yml]
+permissions: {contents: read}
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 17
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/rescue_large_creator_booth_sources.py
+      - run: python -m pip install -q requests pillow
+      - run: npm install -g @gltf-transform/cli@4
+      - name: Validate license and original files, stop on rights conflict
+        run: python -u scripts/rescue_large_creator_booth_sources.py bcd88c8f7c484d3b8b56f80009f61333
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-wave15-bcd88c8f7c484d3b8b56f80009f61333
+          path: rescue-booth-bcd88c8f7c484d3b8b56f80009f61333/*.zip
+          if-no-files-found: warn
+          compression-level: 0
+          retention-days: 7
