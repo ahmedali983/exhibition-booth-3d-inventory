@@ -54,8 +54,8 @@
       <div class="inner">
         <div class="hero">
           <div class="hero-copy"><div class="overline light-overline"><span class="green-dot"></span> EXPOVAULT · DESIGN WORKSPACE</div>
-            <h1>Original 3D booths.<br><em>Production sources first.</em></h1>
-            <p>Explore 369 source-authored 3D model records staged for our internal team, including modular booth kits with original DWG and Parasolid CAD. Start with real designs; review generated concepts separately. Native drawings require engineering approval.</p>
+            <h1>Real exhibition booths.<br><em>Explore the actual 3D.</em></h1>
+            <p>Discover a selected gallery of complete-looking booth designs with real interactive Sketchfab 3D previews. The larger team archive includes engineering parts and unreviewed designs, separated from this showcase. Native drawings require engineering approval.</p>
             <div class="hero-buttons"><a class="button-yellow" href="originals.html">↓ Original designer GLBs <span>↗</span></a><a class="button-yellow" href="composer.html">✳ Build your own 3D booth <span>↗</span></a><a class="button-yellow" href="open-3d.html">◈ Browse 3D items <span>↗</span></a><a class="button-yellow" href="production-files.html">⌁ Original production files <span>↗</span></a><button id="jumpCollection" class="button-yellow">Explore 3D models <span>↗</span></button><button class="button-outline" data-section="concepts">Browse 4,200 editable layouts ↗</button></div>
             <div class="hero-bottom"><span class="hero-line"></span> CURATED FOR DESIGNERS, CREATORS & BUILDERS</div>
           </div>
@@ -66,31 +66,36 @@
           </div>
         </div>
         <div class="metrics">
-          <div><span class="metric-icon">◈</span><strong id="metricModels">369</strong><small>original 3D source records</small></div>
-          <div><span class="metric-icon">▧</span><strong>4,200</strong><small>editable booth concepts</small></div>
-          <div><span class="metric-icon">⌘</span><strong>8,400</strong><small>GLB & DXF concept files</small></div>
-          <div><span class="metric-icon">◉</span><strong>In-site</strong><small>interactive model previews</small></div>
+          <div><span class="metric-icon">◈</span><strong id="metricModels">10</strong><small>visually curated designer booths</small></div>
+          <div><span class="metric-icon">▧</span><strong>1</strong><small>documented physical reference</small></div>
+          <div><span class="metric-icon">⌘</span><strong>369</strong><small>source archive IDs — QA pending</small></div>
+          <div><span class="metric-icon">◉</span><strong>360°</strong><small>interactive official 3D previews</small></div>
         </div>
         <section class="pilot-section" id="pilotSection" aria-labelledby="pilotTitle">
-          <div class="pilot-kicker"><i aria-hidden="true"></i> REAL DESIGNER SOURCES · INTERNAL ENGINEERING ARCHIVE</div>
+          <div class="pilot-kicker"><i aria-hidden="true"></i> CURATED DESIGNER BOOTHS · GENUINE 3D MODELS</div>
           <div class="pilot-heading"><div>
-            <h2 id="pilotTitle">The best booth originals.<br><em>Production reference files included.</em></h2>
-            <p>Curated source-authored 3D models at the top, with editable CAD where the designer supplied it. Open a hosted model in Composer, or download an internal ZIP from Drive and import its GLB. We do not represent unapproved models as fabrication-ready.</p>
-          </div><div class="pilot-steps"><span id="pilotLibraryStats">Preparing sources…</span><span class="pilot-warning">Engineering review pending</span></div></div>
+            <h2 id="pilotTitle">Designs worth exploring.<br><em>Inspect the real 3D model.</em></h2>
+            <p>We replaced the mass-uploaded stand shells with individually selected, creator-authored booths. Rotate and zoom the original model using the official Sketchfab viewer. Genuine source files are linked; only the documented physical reference includes confirmed DXF cutting files. No item is described as fabrication-certified.</p>
+          </div><div class="pilot-steps"><span id="pilotLibraryStats">Preparing sources…</span><span class="pilot-warning">3D previews checked · fabrication QC separate</span></div></div>
           <div class="pilot-controls">
-            <input id="pilotSearch" type="search" placeholder="Search original booth, designer, CAD or model ID…" aria-label="Search real 3D sources">
+            <input id="pilotSearch" type="search" placeholder="Search shortlisted designs, creators and source formats…" aria-label="Search real 3D sources">
             <div class="pilot-filter-group" aria-label="Filter curated 3D sources">
-              <button class="pilot-filter" data-pilot-filter="booth" aria-pressed="true">Booths &amp; designer originals</button>
-              <button class="pilot-filter" data-pilot-filter="cad" aria-pressed="false">Native CAD included</button>
-              <button class="pilot-filter" data-pilot-filter="component" aria-pressed="false">Production components</button>
-              <button class="pilot-filter" data-pilot-filter="all" aria-pressed="false">All sources</button>
+              <button class="pilot-filter" data-pilot-filter="booth" aria-pressed="true">Best exhibition booths</button>
+              <button class="pilot-filter" data-pilot-filter="cad" aria-pressed="false">Original FBX / DXF</button>
+              <button class="pilot-filter" data-pilot-filter="component" aria-pressed="false">Design concepts</button>
+              <button class="pilot-filter" data-pilot-filter="all" aria-pressed="false">All reviewed</button>
             </div>
           </div>
-          <div class="pilot-grid" id="pilotGrid" aria-live="polite"><div class="pilot-empty">Loading source-authored 3D designs…</div></div>
+          <div class="pilot-grid" id="pilotGrid" aria-live="polite"><div class="pilot-empty">Loading real designer booth previews…</div></div>
           <div class="pilot-empty" id="pilotEmpty" hidden>No matching source files. Try another category or search.</div>
           <div class="pilot-foot"><span id="pilotVisibleCount">Preparing source collection…</span><button id="pilotMore" class="pilot-more" hidden>Explore more originals ↓</button>
-          <span>Source CAD ≠ certified shop drawings. Model files stay under the team’s Drive permissions.</span></div>
+          <span>Each model links to its creator and official 3D viewer. Production files are kept in team Drive; engineer verification is still required.</span></div>
         </section>
+        <div class="pilot-archive-bar">
+          <div><strong>Explore the remaining 3D archive only when you need it.</strong><p>369 original model IDs are stored for internal review, but many are production parts, basic modular shells or unverified scenes. Generated layouts are maintained separately. These are not the main portfolio.</p></div>
+          <button id="archiveToggle" type="button" aria-expanded="false" aria-controls="rawArchiveWrap">Open unreviewed archive ↓</button>
+        </div>
+        <div id="rawArchiveWrap" hidden>
         <div class="collection-title" id="collectionAnchor"><div><div class="overline accent-overline">EXPLORE · CUSTOMIZE · EXPORT</div><h2>The 3D design <em>library.</em></h2><p>Hosted 3D originals and generated layouts are shown below. Browse the 369 source-authored archive records above; only hosted originals load instantly, while team Drive models can be imported into Composer.</p></div><div class="collection-view"><span class="view-dot"></span> ALL MODELS EXPLORE IN THIS SITE</div></div>
         <div class="discover-chips" id="chips" aria-label="Asset categories">
           <button class="chip active" data-kind="all">✳ &nbsp; Everything</button>
@@ -112,7 +117,8 @@
         <div class="model-grid" id="modelGrid" aria-live="polite"><div class="grid-loading">Loading the 3D collection…</div></div>
         <div class="empty" id="modelEmpty" hidden><div>⌕</div><h3>No models match this search.</h3><p>Try removing a filter or searching for a broader term.</p><button id="resetEmpty">Reset search</button></div>
         <div class="pagination"><button id="moreModels" class="load-button">Explore more designs <span>↓</span></button><small id="modelProgress"></small></div>
-        <div class="notice"><b>Design files & licences:</b> ExpoVault's generated stands can be downloaded directly as GLB and DXF. Creator-uploaded models can only be downloaded when their licence and account permissions allow it; interactive previews alone do not grant file rights.</div>
+        <div class="notice"><b>Design files & licences:</b> Generated stands are concepts, not professional fabrication models. Original creator models have independent rights; a 3D viewer does not grant permission to download or redistribute.</div>
+        </div>
       </div>
     </section>
     <section class="page" id="section-concepts" data-page="concepts"><div class="inner">
