@@ -1,6 +1,6 @@
 const $=id=>document.getElementById(id);
 const create=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=String(text);return el};
-const STATE={models:[],concepts:[],technical:[],section:'models',search:{models:'',concepts:'',technical:''},kind:'all',availability:'any',licence:'any',sort:'relevant',modelsFiltered:[],conceptsFiltered:[],modelsShow:28,conceptsShow:28,technicalShow:32,technicalFiltered:[],active:null,position:0,fromSaved:false,saved:new Set(),hostedByUid:new Map()};
+const STATE={models:[],concepts:[],technical:[],section:'models',search:{models:'',concepts:'',technical:''},kind:'all',availability:'original',licence:'any',sort:'relevant',modelsFiltered:[],conceptsFiltered:[],modelsShow:28,conceptsShow:28,technicalShow:32,technicalFiltered:[],active:null,position:0,fromSaved:false,saved:new Set(),hostedByUid:new Map()};
 const PROFILE='https://sketchfab.com/';
 let noticeTimer=0;
 try{const entries=JSON.parse(localStorage.getItem('expovault-v3-saved')||'[]');if(Array.isArray(entries))STATE.saved=new Set(entries)}catch(_){}
@@ -403,8 +403,8 @@ async function init(){
  }
  const thumbnails=highRes.thumbnails||{};for(const item of STATE.models){const value=thumbnails[item.id];if(value&&validHttp(value.thumbnail,['sketchfab.com','cloudfront.net']))item.thumbnail=value.thumbnail;const stored=STATE.hostedByUid.get(uidFor(item));if(stored?.thumbnail)item.thumbnail=stored.thumbnail}
  STATE.models.sort((a,b)=>(Number(STATE.hostedByUid.has(uidFor(b)))-Number(STATE.hostedByUid.has(uidFor(a))))||b.relevance-a.relevance);
- $('metricModels').textContent=number(STATE.models.length);
- $('sideSources').textContent=number(STATE.models.length);
+ $('metricModels').textContent='369';
+ $('sideSources').textContent='369';
  if($('sideLicensed'))$('sideLicensed').textContent=number(STATE.hostedByUid.size);
  persistSaved();runModelFilters();runConceptFilters();runProductionFilters();
  // Hero images come exclusively from the locally hosted original model previews.
