@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="ui/composer.css">
+<link rel="stylesheet" href="ui/pilot-composer.css">
 <script type="importmap">
 {"imports":{"three":"./vendor/three/build/three.module.js","three/addons/":"./vendor/three/examples/jsm/"}}
 </script>
@@ -69,7 +70,8 @@
           <div class="panel-tabs"><button class="tab selected" data-tab="base">01 &nbsp; Structure</button><button class="tab" data-tab="items">02 &nbsp; Items</button><button class="tab" data-tab="brand">03 &nbsp; Brand</button><button class="tab" data-tab="export">04 &nbsp; Export</button></div>
           <div class="tab-pane selected" id="tab-base">
             <div class="panel-head"><div class="panel-eyebrow">CHOOSE YOUR BASE</div><h3>Build your foundation.</h3><p>Every preset below is an actual hosted GLB booth. Choose dimensions and exposure, then switch to Items.</p></div>
-            <div class="composer-source-picker"><label for="originalDesign"><strong>Original designer booth</strong><small>Real CC BY GLB models hosted in ExpoVault. Includes original creator credit on export.</small></label><select id="originalDesign"><option value="">Choose a complete licensed booth…</option></select><button class="secondary-action" id="applyOriginal">Use selected original GLB in Studio ↗</button><small class="sub-note">Most creator GLBs have no source fabrication files. The WikiStand2014 source archive includes real original SKP + DXF; see original CAD files below.</small><a id="nativeCadDownload" class="secondary-action" hidden href="production-files.html">↓ Download authentic source design &amp; production CAD ZIP</a></div><div class="form-grid">
+            <div class="composer-source-picker"><label for="originalDesign"><strong>Original designer booth</strong><small>Real CC BY GLB models hosted in ExpoVault. Includes original creator credit on export.</small></label><select id="originalDesign"><option value="">Choose a complete licensed booth…</option></select><button class="secondary-action" id="applyOriginal">Use selected original GLB in Studio ↗</button><small class="sub-note">Most creator GLBs have no source fabrication files. The WikiStand2014 source archive includes real original SKP + DXF; see original CAD files below.</small><a id="nativeCadDownload" class="secondary-action" hidden href="production-files.html">↓ Download authentic source design &amp; production CAD ZIP</a></div>
+            <section class="team-source" aria-labelledby="teamSourceTitle"><div class="team-source-title"><span class="source-spark">◈</span><div><h4 id="teamSourceTitle">Team source library</h4><p>369 original 3D archives · source CAD where supplied</p></div></div><input id="teamSourceSearch" type="search" placeholder="Search booth, designer or model ID" aria-label="Search archived booth sources"><div id="teamSourceList" class="team-source-list" aria-live="polite"><span>Loading archived source files…</span></div><p class="team-source-note">Private Drive files are not streamed to this public preview. Download an authorized team package and import its GLB or ZIP below.</p><label class="team-import" for="sourceFileImport"><span>↥ Import booth GLB or source ZIP</span><small>Loads the real file locally for recolouring and export</small><input id="sourceFileImport" type="file" accept=".glb,.zip,model/gltf-binary,application/zip"></label><p id="importSourceStatus" class="team-import-status" role="status" aria-live="polite"></p></section><div class="form-grid">
               <label>Width<select id="widthSelect"></select></label>
               <label>Depth<select id="depthSelect"></select></label>
               <label>Exposure<select id="exposureSelect"></select></label>
@@ -85,6 +87,7 @@
             <input id="itemSearch" class="search-box" type="search" placeholder="Search stands, displays, counters, furniture…" aria-label="Search 3D items">
             <div class="item-tools"><select id="itemPack"><option value="all">All categories</option></select><span id="itemResults">559 items</span></div>
             <div class="item-browser" id="itemBrowser"><div class="blank-loader">Loading items…</div></div>
+            <section class="team-source team-source-items"><div class="team-source-title"><span class="source-spark">⌁</span><div><h4>Collected production parts</h4><p>Find frames, display systems, lightboxes and counters</p></div></div><input id="partSourceSearch" type="search" placeholder="Search source CAD parts…" aria-label="Search collected 3D production parts"><div id="partSourceList" class="team-source-list" aria-live="polite"><span>Loading source part list…</span></div><label class="team-import" for="partFileImport"><span>↥ Add a downloaded GLB / source ZIP as an item</span><small>Imported parts remain on your device</small><input id="partFileImport" type="file" accept=".glb,.zip,model/gltf-binary,application/zip"></label><p id="importPartStatus" class="team-import-status" role="status" aria-live="polite"></p></section>
             <div class="items-help">Every added item is part of the exported GLB. You can change colours, size and position later.</div>
           </div>
           <div class="tab-pane" id="tab-brand">
@@ -93,7 +96,7 @@
             <label class="field">Primary colour<div class="color-group"><input type="color" id="primaryColor" value="#0d614e"><span id="primaryHex">#0D614E</span></div></label>
             <label class="field">Accent colour<div class="color-group"><input type="color" id="accentColor" value="#ebc486"><span id="accentHex">#EBC486</span></div></label>
             <label class="field">Display panels colour<div class="color-group"><input type="color" id="panelColor" value="#f3f7f4"><span id="panelHex">#F3F7F4</span></div></label>
-            <button id="applyBrand" class="panel-action">Apply brand to booth <span>✳</span></button>
+            <label class="source-checkbox"><input id="preserveArtwork" type="checkbox"> Preserve existing designer artwork instead of painting textured surfaces</label><p class="team-source-note">For a visible colour change on textured imported models, leave this unchecked. The original source ZIP is never modified.</p><button id="applyBrand" class="panel-action">Apply brand to booth <span>✳</span></button>
             <label class="field">Or add a logo (PNG/JPG)<input type="file" id="logoFile" accept="image/png,image/jpeg,image/webp"><span class="sub-note">Logo will be embedded in your final GLB as a texture on a front-facing plane.</span></label>
           </div>
           <div class="tab-pane" id="tab-export">
