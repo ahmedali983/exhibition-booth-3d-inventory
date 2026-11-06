@@ -1,0 +1,60 @@
+name: ExpoVault Wave24 original 3D production components with author CAD
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/expovault-wave24-manufacturer-components-cad.yml]
+permissions: {contents: read}
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    strategy:
+      fail-fast: false
+      max-parallel: 7
+      matrix:
+        uid:
+          - b7fdcea7652c443da4cf37d400177cdf
+          - 6b390c2cf13f40c1a124cdb1c025e2e8
+          - 3fe7b01bd6da409688bdd65399b43056
+          - 921cc1b811c34f29a27f48c0ab403266
+          - 8143023416a0402bbe119b5531012f22
+          - cd44c4a1822b4d12a7d360ec3aa7d7f6
+          - f199c3eacd1642428d39d55016aab1d4
+          - 298281181dbb486eba55bcd2b4159204
+          - 0366138f3ca24326b6f39eb14c3b0f6b
+          - 88761ba4777e4e31b69d095b8611ec02
+          - 1c653b674825452a8cf2b8c13c67a721
+          - e31a779f14bd457eb5339ac7de136a48
+          - 390e76d05df847cbae432a25e0497691
+          - 08e1cbe063904dec8a5513e78287faa7
+          - 6e19ee8b83a6405da571603b03273b44
+          - c25c93673b944a64ba919009f22571c6
+          - c11efb928eb14281a5a0c560ad8e97c0
+          - d0ee2de7b8664c479821aa360e0b93bf
+          - d5a72daff5f14584ae974b79308c7c1e
+          - 4ce726bb9655492198664ae410aa0eb1
+          - 24072bcefab34ce09a8460cd99896c9c
+          - 3d18fb8d96f347458ef35b8aefd92644
+          - 0add1ba9bdf34156a4c70f76797e6f9f
+          - 4e1c6e5838ce4186a2f3a93feea2173e
+          - c61a47ed96364e7f920dc1142a5359a9
+          - d695f3acbfea4b5aae208d50d6e88168
+          - 3a3e229cb2874414be9941783aebe7ff
+          - 08d0caa7fd8b41cbbe34f58ba9890a24
+          - 6e66115129d94f60b9acc8c7b6798253
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/rescue_large_creator_booth_sources.py
+      - run: python -m pip install -q requests pillow
+      - run: npm install -g @gltf-transform/cli@4
+      - name: Respect archived CC attribution and fetch only licensed original CAD files
+        run: python -u scripts/rescue_large_creator_booth_sources.py ${{ matrix.uid }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-wave24-${{ matrix.uid }}
+          path: rescue-booth-${{ matrix.uid }}/*.zip
+          retention-days: 7
+          compression-level: 0
+          if-no-files-found: warn
