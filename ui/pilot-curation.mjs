@@ -1,70 +1,90 @@
-/* ExpoVault pilot: priority original CAD + source GLBs before generated concepts.
- * Keep unverified and private Drive assets out of automatic public download. */
-const q=id=>document.getElementById(id);
-const section=q('pilotSection');
-const grid=q('pilotGrid');
-const search=q('pilotSearch');
-const count=q('pilotVisibleCount');
-let catalog=[],visible=[],limit=16,filter='booth';
-const TYPE_LABEL={full_booth_reference:'Physically built reference',modular_booth:'Original booth kit',designer_archive:'Author 3D source',original_study:'Designer study',architectural_display:'Architectural system',display_system:'Display system',production_component:'Technical component'};
-const catGroup=x=>x.category==='full_booth_reference'||x.category==='modular_booth'||x.category==='designer_archive'||x.category==='original_study'?'booth':x.has_native_cad?'components':'other';
-function el(tag,className,text){const node=document.createElement(tag);if(className)node.className=className;if(text!=null)node.textContent=String(text);return node}
-function safeAssetUrl(value){if(typeof value!=='string')return null;try{const u=new URL(value,location.href);if(u.protocol!=='https:'&&u.origin!==location.origin)return null;if(u.protocol==='https:'&&u.hostname!=='media.sketchfab.com'&&u.origin!==location.origin)return null;return u.href}catch{return null}}
-function safeLink(value){try{const u=new URL(value,location.href);return u.protocol==='https:'||u.origin===location.origin?u.href:null}catch{return null}}
-function makeLink(text,url,primary=false){const a=el('a',primary?'pilot-primary pilot-a11y':'pilot-a11y',text);a.href=url;a.target=url.startsWith(location.origin)?'_self':'_blank';if(a.target==='_blank')a.rel='noopener noreferrer';return a}
-function card(m){
- const article=el('article','pilot-card'),cover=el('div','pilot-cover'),label=el('span','pilot-overline',TYPE_LABEL[m.category]||'Original 3D source');
- const number=el('span','pilot-number',m.uid?'#'+m.uid.slice(0,7).toUpperCase():'CUT FILES');
- const imgURL=safeAssetUrl(m.thumbnail);
- const fallback=el('div','pilot-wire');
- if(imgURL){const img=el('img');img.loading='lazy';img.decoding='async';img.src=imgURL;img.alt=m.title+' 3D model preview';img.onerror=()=>{img.remove();cover.prepend(fallback)};cover.append(img)}else cover.append(fallback);
- cover.append(label,number);
- const content=el('div','pilot-card-content'),title=el('h3','',m.title),by=el('div','pilot-byline','by '+(m.creator||'Original designer')),tags=el('div','pilot-tags');
- tags.append(el('span','pilot-tag cad','Original 3D'));
- if(m.has_native_cad)tags.append(el('span','pilot-tag cad','Native CAD supplied'));
- else tags.append(el('span','pilot-tag','Source ZIP'));
- tags.append(el('span','pilot-tag warning','Engineering QA pending'));
- const formats=el('div','pilot-detail',Array.isArray(m.formats)?m.formats.join('  ·  '):'Creator source package');
- const actions=el('div','pilot-actions');
- if(m.hosted_glb){actions.append(makeLink('◈ Open in 3D Composer','composer.html?design='+encodeURIComponent(m.id),true))}
- else if(m.uid){actions.append(makeLink('◈ Compose from source','composer.html?source='+encodeURIComponent(m.uid),true))}
- const src=safeLink(m.source_file_url);
- if(src)actions.append(makeLink(src.includes('drive.google.com')?'↗ Team Drive source':'↓ Original source pack',src));
- else actions.append(makeLink('↗ Original creator',safeLink(m.source_model_url)||'originals.html'));
- content.append(title,by,tags,formats,actions);article.append(cover,content);return article
+/* ExpoVault Studio: spotlight high-quality source-authored booth models.
+ * Official Sketchfab embeds; avoid viewer ripping, misleading CAD certification,
+ * placeholders, and incorrectly counting components as complete booths.
+ */
+const el=id=>document.getElementById(id);
+const wrap=el('pilotSection'), grid=el('pilotGrid'), search=el('pilotSearch');
+let items=[],filtered=[],filter='booth';
+const filterMatch=x=>filter==='all'||(filter==='booth'&&x.category==='featured')||
+ (filter==='cad'&&(x.cad_cutting_files_verified||x.editable_creator_source_format==='FBX'))||
+ (filter==='component'&&x.category==='concept');
+const tags={featured:'Designer original · exhibition booth',concept:'Designer concept · inspiration',production:'Built reference · cutting files'};
+const trusted=url=>{try{const u=new URL(url,location.href);return (u.protocol==='https:'||u.origin===location.origin)?u.href:null}catch{return null}};
+function create(tag,cls,txt){const o=document.createElement(tag);if(cls)o.className=cls;if(txt!==undefined)o.textContent=txt;return o}
+function link(text,url){const a=create('a','pilot-a11y',text);a.href=trusted(url)||'#';a.target='_blank';a.rel='noopener noreferrer';return a}
+function dialog3D(m){
+ if(!m.uid){window.location.href='composer.html?design='+encodeURIComponent(m.id);return}
+ const dlg=document.createElement('dialog');dlg.className='pilot-3d-dialog';dlg.setAttribute('aria-label',m.title+' — interactive 3D');
+ const top=create('div','pilot-dialog-top');
+ const details=create('div','');details.append(create('strong','',m.title),create('small','',m.creator+' · 3D hosted by Sketchfab'));
+ const close=create('button','pilot-dialog-close','✕ Close');close.type='button';close.setAttribute('aria-label','Close 3D viewer');
+ top.append(details,close);
+ const viewer=create('div','pilot-dialog-viewer');
+ const iframe=document.createElement('iframe');iframe.title='Sketchfab interactive 3D preview for '+m.title;
+ iframe.src='https://sketchfab.com/models/'+encodeURIComponent(m.uid)+'/embed?autostart=1&ui_hint=0';
+ iframe.loading='eager';iframe.allow='autoplay; fullscreen; xr-spatial-tracking';iframe.allowFullscreen=true;
+ iframe.referrerPolicy='strict-origin-when-cross-origin';viewer.append(iframe);
+ const footer=create('div','pilot-dialog-footer');
+ footer.append(create('span','',m.cad_cutting_files_verified?'Original cutting-file sets included':'3D source provided; fabrication drawings not certified'));
+ footer.append(link('↗ View original on Sketchfab',m.source_model_url));
+ const source=trusted(m.original_3d_drive);if(source)footer.append(link('↗ Creator source / team Drive',source));
+ dlg.append(top,viewer,footer);document.body.append(dlg);
+ close.addEventListener('click',()=>dlg.close());
+ dlg.addEventListener('click',evt=>{if(evt.target===dlg)dlg.close()});
+ dlg.addEventListener('close',()=>{iframe.src='about:blank';dlg.remove()},{once:true});
+ dlg.showModal();close.focus();
 }
-function activeFilter(item){
- if(filter==='all')return true;
- if(filter==='booth')return catGroup(item)==='booth';
- if(filter==='cad')return item.has_native_cad;
- if(filter==='component')return ['production_component','display_system','architectural_display'].includes(item.category);
- return true;
+function card(m,i){
+ const article=create('article','pilot-card pilot-curated-card');
+ const cover=create('button','pilot-cover pilot-cover-button');cover.type='button';cover.setAttribute('aria-label','Open real 3D preview: '+m.title);
+ const img=create('img');img.alt='Original 3D model preview: '+m.title;img.src=trusted(m.preview)||'';
+ img.loading=i<12?'eager':'lazy';img.decoding='async';if(i<6)img.fetchPriority='high';
+ img.onerror=()=>{img.hidden=true;cover.classList.add('pilot-no-preview');cover.append(create('span','pilot-no-preview-message','Preview unavailable · click to open 3D'))};
+ const status=create('span','pilot-overline',tags[m.category]||'Original 3D');
+ cover.append(img,status);cover.addEventListener('click',()=>dialog3D(m));
+ const body=create('div','pilot-card-content');
+ body.append(create('h3','',m.title),create('div','pilot-byline','Designer: '+m.creator));
+ const chips=create('div','pilot-tags');
+ chips.append(create('span','pilot-tag cad','Original 3D verified'));
+ if(m.cad_cutting_files_verified)chips.append(create('span','pilot-tag cad','Cutting-file reference'));
+ else if(m.editable_creator_source_format==='FBX')chips.append(create('span','pilot-tag','Editable FBX included'));
+ else chips.append(create('span','pilot-tag','Creator 3D source'));
+ chips.append(create('span','pilot-tag warning','Engineer approval pending'));
+ body.append(chips,create('p','pilot-detail',m.description||'3D scene supplied by its creator'));
+ const actions=create('div','pilot-actions');
+ const open=create('button','pilot-primary pilot-a11y','◈ View real 3D');open.type='button';open.addEventListener('click',()=>dialog3D(m));
+ actions.append(open);
+ if(m.original_3d_drive)actions.append(link(m.can_download_from_team_drive?'↗ Team source files':'↗ Original design files',m.original_3d_drive));
+ body.append(actions,create('div','pilot-rights','Source attribution preserved · 3D visual screening is not fabrication certification'));
+ article.append(cover,body);return article;
 }
 function render(){
- const word=(search?.value||'').trim().toLowerCase();
- visible=catalog.filter(x=>activeFilter(x)&&(!word||[x.title,x.creator,x.uid,x.category,x.formats?.join(' ')].join(' ').toLowerCase().includes(word)));
- visible.sort((a,b)=>b.rank-a.rank||a.title.localeCompare(b.title));
- grid.replaceChildren();for(const x of visible.slice(0,limit))grid.append(card(x));
- count.textContent='Showing '+Math.min(limit,visible.length)+' of '+visible.length+' matching source files';
- q('pilotMore').hidden=visible.length<=limit;
- q('pilotEmpty').hidden=visible.length!==0
+ const word=(search.value||'').trim().toLowerCase();
+ filtered=items.filter(x=>filterMatch(x)&&(!word||[x.title,x.creator,x.description,x.uid,x.editable_creator_source_format].join(' ').toLowerCase().includes(word)));
+ filtered.sort((a,b)=>b.rank-a.rank);
+ grid.replaceChildren(...filtered.map(card));
+ el('pilotVisibleCount').textContent='Showing '+filtered.length+' selected original 3D models';
+ el('pilotMore').hidden=true;el('pilotEmpty').hidden=filtered.length>0;
 }
-function bind(){
- if(!section)return;
- search.addEventListener('input',()=>{limit=16;render()});
- section.querySelectorAll('[data-pilot-filter]').forEach(btn=>btn.addEventListener('click',()=>{
-  filter=btn.dataset.pilotFilter;limit=16;section.querySelectorAll('[data-pilot-filter]').forEach(x=>x.setAttribute('aria-pressed',x===btn?'true':'false'));render()
+function setButtons(){wrap.querySelectorAll('[data-pilot-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.pilotFilter===filter)))}
+function init(){
+ if(!wrap)return;
+ search.addEventListener('input',render);
+ wrap.querySelectorAll('[data-pilot-filter]').forEach(b=>b.addEventListener('click',()=>{
+  filter=b.dataset.pilotFilter;setButtons();render();
  }));
- q('pilotMore').addEventListener('click',()=>{limit+=16;render()});
-}
-async function init(){
- if(!section)return;bind();
- try{const r=await fetch('catalog/pilot_source_library.json',{cache:'no-store'});if(!r.ok)throw new Error('Catalog HTTP '+r.status);
- const data=await r.json();catalog=Array.isArray(data.assets)?data.assets:[];
- if(catalog.length!==data.showcase_total||data.staged_original_uid_count!==369)throw new Error('Curated manifest is inconsistent');
- const n=el('span','','369 original source IDs · '+data.has_native_cad_count+' with native CAD');
- q('pilotLibraryStats').replaceChildren(n);
- render()
- }catch(err){q('pilotEmpty').hidden=false;q('pilotEmpty').textContent='Source collection unavailable. Existing hosted 3D library remains available.';count.textContent='Source index unavailable';console.warn('Pilot source collection',err)}
+ const toggle=el('archiveToggle');
+ toggle?.addEventListener('click',()=>{const archive=el('rawArchiveWrap');const opening=archive.hidden;archive.hidden=!opening;
+  toggle.setAttribute('aria-expanded',String(opening));
+  toggle.textContent=opening?'Hide unreviewed archive ↑':'Open unreviewed archive ↓';
+  if(opening)archive.scrollIntoView({behavior:'smooth',block:'start'});
+ });
+ fetch('catalog/studio_quality_shortlist.json',{cache:'no-store'})
+ .then(r=>{if(!r.ok)throw Error('Curated 3D source manifest missing');return r.json()})
+ .then(data=>{if(!Array.isArray(data.items)||data.full_booth_featured_count<8)throw Error('Invalid shortlist');
+  items=data.items;
+  el('pilotLibraryStats').textContent=String(data.full_booth_featured_count)+' curated booths · '+String(data.documented_physical_reference_count)+' built reference · '+String(data.additional_concepts)+' concepts';
+  render();
+ }).catch(err=>{grid.replaceChildren();el('pilotEmpty').hidden=false;el('pilotEmpty').textContent='Real 3D model previews temporarily unavailable. Visit the archived designer source library.';console.error(err)});
 }
 init();
