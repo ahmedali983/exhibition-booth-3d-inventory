@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="ui/v3.css">
+<link rel="stylesheet" href="ui/pilot-curation.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='13' fill='%23101720'/%3E%3Cpath d='M17 16h30v8H25v9h20v8H25v-2h22v9H17z' fill='%23b9f2cd'/%3E%3C/svg%3E">
 </head>
 <body>
@@ -39,7 +40,7 @@
     <div class="available"><i></i> All libraries available</div>
     <a href="composer.html">Open 3D Booth Composer ↗</a>
     <a href="#technical" data-section="technical">Download booth GLB + DXF ↗</a>
-    <small>All displayed designs have direct 3D downloads. Original designer models include CC BY 4.0 creator attribution; the 4,200 other designs are procedural variations.</small>
+    <small>Original CAD archives are staged on authenticated team Drive. Generated designs are separate concepts. Rights and fabrication readiness are independently reviewed.</small>
   </div>
 </aside>
 <div class="content-frame">
@@ -53,8 +54,8 @@
       <div class="inner">
         <div class="hero">
           <div class="hero-copy"><div class="overline light-overline"><span class="green-dot"></span> EXPOVAULT · DESIGN WORKSPACE</div>
-            <h1>18 real designer booths.<br><em>Plus 4,200 editable layouts.</em></h1>
-            <p>Explore 18 independently authored booth GLBs and 4,200 editable layout variations. Every card has a real, locally hosted 3D file — no external viewer or account.</p>
+            <h1>Original 3D booths.<br><em>Production sources first.</em></h1>
+            <p>Explore 369 source-authored 3D model records staged for our internal team, including modular booth kits with original DWG and Parasolid CAD. Start with real designs; review generated concepts separately. Native drawings require engineering approval.</p>
             <div class="hero-buttons"><a class="button-yellow" href="originals.html">↓ Original designer GLBs <span>↗</span></a><a class="button-yellow" href="composer.html">✳ Build your own 3D booth <span>↗</span></a><a class="button-yellow" href="open-3d.html">◈ Browse 3D items <span>↗</span></a><a class="button-yellow" href="production-files.html">⌁ Original production files <span>↗</span></a><button id="jumpCollection" class="button-yellow">Explore 3D models <span>↗</span></button><button class="button-outline" data-section="concepts">Browse 4,200 editable layouts ↗</button></div>
             <div class="hero-bottom"><span class="hero-line"></span> CURATED FOR DESIGNERS, CREATORS & BUILDERS</div>
           </div>
@@ -65,12 +66,32 @@
           </div>
         </div>
         <div class="metrics">
-          <div><span class="metric-icon">◈</span><strong id="metricModels">4,218</strong><small>downloadable GLB designs</small></div>
+          <div><span class="metric-icon">◈</span><strong id="metricModels">369</strong><small>original 3D source records</small></div>
           <div><span class="metric-icon">▧</span><strong>4,200</strong><small>editable booth concepts</small></div>
           <div><span class="metric-icon">⌘</span><strong>8,400</strong><small>GLB & DXF concept files</small></div>
           <div><span class="metric-icon">◉</span><strong>In-site</strong><small>interactive model previews</small></div>
         </div>
-        <div class="collection-title" id="collectionAnchor"><div><div class="overline accent-overline">EXPLORE · CUSTOMIZE · EXPORT</div><h2>The 3D design <em>library.</em></h2><p>Browse 18 independent designer originals and 4,200 parametric booth concepts. All models have local GLB downloads; procedural concepts also include preliminary DXF floor plans.</p></div><div class="collection-view"><span class="view-dot"></span> ALL MODELS EXPLORE IN THIS SITE</div></div>
+        <section class="pilot-section" id="pilotSection" aria-labelledby="pilotTitle">
+          <div class="pilot-kicker"><i aria-hidden="true"></i> REAL DESIGNER SOURCES · INTERNAL ENGINEERING ARCHIVE</div>
+          <div class="pilot-heading"><div>
+            <h2 id="pilotTitle">The best booth originals.<br><em>Production reference files included.</em></h2>
+            <p>Curated source-authored 3D models at the top, with editable CAD where the designer supplied it. Open a hosted model in Composer, or download an internal ZIP from Drive and import its GLB. We do not represent unapproved models as fabrication-ready.</p>
+          </div><div class="pilot-steps"><span id="pilotLibraryStats">Preparing sources…</span><span class="pilot-warning">Engineering review pending</span></div></div>
+          <div class="pilot-controls">
+            <input id="pilotSearch" type="search" placeholder="Search original booth, designer, CAD or model ID…" aria-label="Search real 3D sources">
+            <div class="pilot-filter-group" aria-label="Filter curated 3D sources">
+              <button class="pilot-filter" data-pilot-filter="booth" aria-pressed="true">Booths &amp; designer originals</button>
+              <button class="pilot-filter" data-pilot-filter="cad" aria-pressed="false">Native CAD included</button>
+              <button class="pilot-filter" data-pilot-filter="component" aria-pressed="false">Production components</button>
+              <button class="pilot-filter" data-pilot-filter="all" aria-pressed="false">All sources</button>
+            </div>
+          </div>
+          <div class="pilot-grid" id="pilotGrid" aria-live="polite"><div class="pilot-empty">Loading source-authored 3D designs…</div></div>
+          <div class="pilot-empty" id="pilotEmpty" hidden>No matching source files. Try another category or search.</div>
+          <div class="pilot-foot"><span id="pilotVisibleCount">Preparing source collection…</span><button id="pilotMore" class="pilot-more" hidden>Explore more originals ↓</button>
+          <span>Source CAD ≠ certified shop drawings. Model files stay under the team’s Drive permissions.</span></div>
+        </section>
+        <div class="collection-title" id="collectionAnchor"><div><div class="overline accent-overline">EXPLORE · CUSTOMIZE · EXPORT</div><h2>The 3D design <em>library.</em></h2><p>Hosted 3D originals and generated layouts are shown below. Browse the 369 source-authored archive records above; only hosted originals load instantly, while team Drive models can be imported into Composer.</p></div><div class="collection-view"><span class="view-dot"></span> ALL MODELS EXPLORE IN THIS SITE</div></div>
         <div class="discover-chips" id="chips" aria-label="Asset categories">
           <button class="chip active" data-kind="all">✳ &nbsp; Everything</button>
           <button class="chip" data-kind="booth">▣ &nbsp; Exhibition booths</button>
@@ -198,6 +219,7 @@
 <div class="toast" id="toast" aria-live="polite"></div>
 <script src="vendor/jszip/jszip.min.js"></script>
 <script type="module" src="ui/v3.mjs"></script>
+<script type="module" src="ui/pilot-curation.mjs"></script>
 <script type="module" src="ui/material-lab.mjs"></script>
 <script type="module" src="ui/authorized-download.mjs"></script>
 </body></html>
