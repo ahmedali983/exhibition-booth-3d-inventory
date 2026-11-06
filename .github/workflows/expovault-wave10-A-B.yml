@@ -1,0 +1,62 @@
+name: ExpoVault Original Booth Source Bulk Wave10 A-B
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/expovault-wave10-A-B.yml]
+permissions: {contents: read}
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        uid:
+          - 19bf984c0fb3433fb1e9ab09e939c29f
+          - 25a38668148847a3ac36c3e318545cd5
+          - 3184b7659d9d447490ff4f6363ee7a7e
+          - 4180959c279344c38a448938339b9854
+          - 4582bc92f181424286872ace8aca2703
+          - 59d20b960fe64ae9963c8bf864aac50f
+          - 61be25e36a0645df93f3deb66b5f699c
+          - 69ef43d6966440f292ac79691e776f19
+          - 7116f5e3ecf746509290c9c3c8466304
+          - 811d84f47e4d4deba206137b5e880081
+          - 95e1012adaa4489bae40fff91cdb6dd4
+          - 95fc5f5359fd4d06afc0ebefe522a8ea
+          - d524b70d85a2472bbaccb93d7e19facf
+          - e932db32e2624d33b771443770c5bfef
+          - f10f2c867724460f93c399124b561bcf
+          - 0af91aa55d1c4614b6579f7ec7008c30
+          - 225455f1b2d24d7fa78f73a192b8764f
+          - 2a71d3f137184e0ca0b058268ceb0e22
+          - 5673e9e6dfb249568754bd3ec886b659
+          - 5a7e04dff7d24b2b97edb0a63049a5bc
+          - 72c81dfce60d4cc789d83046c8c17b4a
+          - 7a07f596b1c441778795cc8133cffbfe
+          - 7a42cc7070c142159dfbfa57216488d4
+          - 9a65115e26084225990ac2802e40e389
+          - aa67df5e2698470db54d20de2bc070fa
+          - ba1951fb2dba4cf9aca165c8f3d344e4
+          - ca9215cda00d4c33bf2c950485bbecbe
+          - d28f03d9c3fc42a3881ed8c97ffc020b
+          - d2d7f5e2b11543aebef48d49898aa274
+          - d61ae22048cd45a0875aa13a31369dca
+          - f2aca6e1c57e48ebb2228136a2e3b956
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/rescue_large_creator_booth_sources.py
+      - run: python -m pip install -q requests pillow
+      - run: npm install -g @gltf-transform/cli@4
+      - name: Check creator license, convert glTF to GLB, retain original source
+        run: python -u scripts/rescue_large_creator_booth_sources.py ${{ matrix.uid }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-wave10-${{ matrix.uid }}
+          path: rescue-booth-${{ matrix.uid }}/*.zip
+          if-no-files-found: warn
+          compression-level: 0
+          retention-days: 7
