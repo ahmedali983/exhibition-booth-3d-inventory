@@ -10,6 +10,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="ui/composer.css">
+<link rel="stylesheet" href="ui/engineering.css">
+<link rel="stylesheet" href="ui/engineering.css">
 <script type="importmap">
 {"imports":{"three":"./vendor/three/build/three.module.js","three/addons/":"./vendor/three/examples/jsm/"}}
 </script>
@@ -69,7 +71,11 @@
           <div class="panel-tabs"><button class="tab selected" data-tab="base">01 &nbsp; Structure</button><button class="tab" data-tab="items">02 &nbsp; Items</button><button class="tab" data-tab="brand">03 &nbsp; Brand</button><button class="tab" data-tab="export">04 &nbsp; Export</button></div>
           <div class="tab-pane selected" id="tab-base">
             <div class="panel-head"><div class="panel-eyebrow">CHOOSE YOUR BASE</div><h3>Build your foundation.</h3><p>Every preset below is an actual hosted GLB booth. Choose dimensions and exposure, then switch to Items.</p></div>
-            <div class="composer-source-picker"><label for="originalDesign"><strong>Original designer booth</strong><small>Real CC BY GLB models hosted in ExpoVault. Includes original creator credit on export.</small></label><select id="originalDesign"><option value="">Choose a complete licensed booth…</option></select><button class="secondary-action" id="applyOriginal">Use selected original GLB in Studio ↗</button><small class="sub-note">Most creator GLBs have no source fabrication files. The WikiStand2014 source archive includes real original SKP + DXF; see original CAD files below.</small><a id="nativeCadDownload" class="secondary-action" hidden href="production-files.html">↓ Download authentic source design &amp; production CAD ZIP</a></div><div class="form-grid">
+            <div class="composer-source-picker"><label for="originalDesign"><strong>Original designer booth</strong><small>Real CC BY GLB models hosted in ExpoVault. Includes original creator credit on export.</small></label><select id="originalDesign"><option value="">Choose a complete licensed booth…</option></select><button class="secondary-action" id="applyOriginal">Use selected original GLB in Studio ↗</button><small class="sub-note">Some selected new creator archives have native DWG, 3DS and X_T sources on team Drive. These are not certified shop drawings.</small><a id="nativeCadDownload" class="secondary-action" hidden href="production-files.html">↓ Download authentic source design &amp; production CAD ZIP</a></div><label class="eng-quick-upload"><strong>Import an original engineer 3D base from Drive (ZIP or GLB)</strong>
+ <small>Download the source package from the collection, then select it here. ZIPs containing booth.glb are supported directly. No file leaves your browser.</small>
+ <input id="sourceBaseFile" type="file" accept=".glb,.zip,model/gltf-binary,application/zip" aria-label="Import original booth base ZIP or GLB"></label><label class="eng-quick-upload"><strong>Import an original engineer 3D base from Drive (ZIP or GLB)</strong>
+ <small>Download the source package from the collection, then select it here. ZIPs containing booth.glb are supported directly. No file leaves your browser.</small>
+ <input id="sourceBaseFile" type="file" accept=".glb,.zip,model/gltf-binary,application/zip" aria-label="Import original booth base ZIP or GLB"></label><div class="form-grid">
               <label>Width<select id="widthSelect"></select></label>
               <label>Depth<select id="depthSelect"></select></label>
               <label>Exposure<select id="exposureSelect"></select></label>
@@ -81,7 +87,25 @@
             <div class="panel-note">Changing the base preserves added items but changes the footprint. Verify that fixtures still fit the new dimensions.</div>
           </div>
           <div class="tab-pane" id="tab-items">
-            <div class="panel-head"><div class="panel-eyebrow">MODULAR 3D COMPONENTS</div><h3>Make the space yours.</h3><p>Pick from our hosted CC0 items. Add and position as many as needed in the booth.</p></div>
+            <div class="panel-head"><div class="panel-eyebrow">MODULAR 3D COMPONENTS</div><h3>Make the space yours.</h3><p>Import original model ZIPs from the engineer archive or place hosted CC0 components. Native CAD remains inside the source ZIP.</p></div>
+            <div class="eng-source-helper"><strong>Original 3D + CAD source collection</strong>
+ <p>Use the team's 369 source-archived models. Six live-licence-checked original GLBs can load directly; the remaining CAD bundles are protected on Drive and can be imported as ZIP/GLB below.</p>
+ <label class="eng-quick-upload">Add an original source item (.glb or source ZIP)
+ <input id="sourceItemFile" type="file" accept=".glb,.zip,model/gltf-binary,application/zip" aria-label="Add model from source ZIP or GLB"></label>
+ <input id="sourceSearch" class="search-box" type="search" placeholder="Search original models or paste the source UID…">
+ <div id="sourceAssetsCount" class="eng-mini-header">Loading source inventory…</div>
+ <div id="sourceAssetsList" class="eng-source-tiles" aria-live="polite"></div>
+ </div>
+ <div class="eng-mini-header">CC0 add-on items · 3D primitives and fixtures</div>
+            <div class="eng-source-helper"><strong>Original 3D + CAD source collection</strong>
+ <p>Use the team's 369 source-archived models. Six live-licence-checked original GLBs can load directly; the remaining CAD bundles are protected on Drive and can be imported as ZIP/GLB below.</p>
+ <label class="eng-quick-upload">Add an original source item (.glb or source ZIP)
+ <input id="sourceItemFile" type="file" accept=".glb,.zip,model/gltf-binary,application/zip" aria-label="Add model from source ZIP or GLB"></label>
+ <input id="sourceSearch" class="search-box" type="search" placeholder="Search original models or paste the source UID…">
+ <div id="sourceAssetsCount" class="eng-mini-header">Loading source inventory…</div>
+ <div id="sourceAssetsList" class="eng-source-tiles" aria-live="polite"></div>
+ </div>
+ <div class="eng-mini-header">CC0 add-on items · 3D primitives and fixtures</div>
             <input id="itemSearch" class="search-box" type="search" placeholder="Search stands, displays, counters, furniture…" aria-label="Search 3D items">
             <div class="item-tools"><select id="itemPack"><option value="all">All categories</option></select><span id="itemResults">559 items</span></div>
             <div class="item-browser" id="itemBrowser"><div class="blank-loader">Loading items…</div></div>

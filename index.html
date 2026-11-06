@@ -10,6 +10,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="ui/v3.css">
+<link rel="stylesheet" href="ui/engineering.css">
+<link rel="stylesheet" href="ui/engineering.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='13' fill='%23101720'/%3E%3Cpath d='M17 16h30v8H25v9h20v8H25v-2h22v9H17z' fill='%23b9f2cd'/%3E%3C/svg%3E">
 </head>
 <body>
@@ -18,7 +20,7 @@
   <a class="identity" href="#models" aria-label="ExpoVault home"><span class="identity-mark">E<span>.</span></span><span class="identity-text">ex<span>po</span>vault<small>THE EXHIBIT ARCHIVE</small></span></a>
   <p class="side-caption">YOUR WORKSPACE</p>
   <nav class="side-nav" aria-label="Explore library">
-    <button class="side-link selected" data-section="models"><span class="nav-icon">⌗</span><span>3D Designs</span><span class="side-amount" id="sideSources">4.2K+</span></button>
+    <button class="side-link selected" data-section="models"><span class="nav-icon">⌗</span><span>3D Designs</span><span class="side-amount" id="sideSources">369 originals</span></button>
     <a class="side-link" href="open-3d.html"><span class="nav-icon">◈</span><span>3D Items</span><span class="side-amount">579</span></a>
     <a class="side-link" href="originals.html"><span class="nav-icon">⬡</span><span>Designer originals</span><span class="side-amount" id="sideLicensed">18</span></a><a class="side-link" href="production-files.html"><span class="nav-icon">⌁</span><span>Original Production CAD</span><span class="side-amount">NEW</span></a><a class="side-link" href="composer.html"><span class="nav-icon">▣</span><span>Booth composer</span></a>
     <button class="side-link" data-section="concepts"><span class="nav-icon">▦</span><span>Generated layouts</span><span class="side-amount">4.2K</span></button>
@@ -51,10 +53,52 @@
   <main>
     <section class="page active" id="section-models" data-page="models">
       <div class="inner">
+        <section class="eng-collection" id="engineeringCollection" aria-label="Original engineering source collection">
+ <div class="eng-head">
+  <div class="eng-kicker">SOURCE-ORIGINAL 3D · ENGINEER-FIRST EXHIBIT ARCHIVE</div>
+  <h1>Original exhibition design.<br><em>Editable CAD sources first.</em></h1>
+  <p>Professionally sourced 3D models, native manufacturer CAD where actually present, and original editable scenes. Curated booth candidates first, modular booth kits next, technical components last. Generated layouts live in their own collection. Drive files require team access.</p>
+  <div class="eng-metrics"><div class="eng-metric"><strong id="engTotal">369</strong><small>Source-model UIDs staged</small></div><div class="eng-metric"><strong id="engEmbedded">—</strong><small>3D GLBs hosted for direct editing</small></div><div class="eng-metric"><strong>CAD + 3D</strong><small>Original DWG / 3DS / X_T where verified</small></div></div>
+ </div>
+ <div class="eng-toolbar" role="group" aria-label="Engineer source filters">
+  <div class="eng-tabs">
+   <button class="eng-tab active" data-eng-filter="all" aria-pressed="true">Originals · All</button>
+   <button class="eng-tab" data-eng-filter="booth" aria-pressed="false">Featured booths</button>
+   <button class="eng-tab" data-eng-filter="modular" aria-pressed="false">Modular kits</button>
+   <button class="eng-tab" data-eng-filter="original" aria-pressed="false">Designer GLBs</button>
+   <button class="eng-tab" data-eng-filter="component" aria-pressed="false">CAD components</button>
+  </div>
+  <input id="engQuery" class="eng-search" type="search" placeholder="Search creator, booth name, source ID, CAD…" aria-label="Search original CAD 3D models">
+ </div>
+ <div id="engCount" class="eng-count">Loading original inventory…</div>
+ <div class="eng-grid" id="engCards" aria-live="polite"><div class="eng-empty">Loading original engineering models…</div></div>
+ <div class="eng-bottom"><p>CAD-file availability is verified by archive integrity checks, not factory sign-off. Original designs with unresolved rights remain in access-controlled Drive staging; copying a model ID helps locate the matching ZIP. Downloaded source ZIPs can be imported directly into the Composer.</p><button id="engMore" class="eng-more" hidden>Explore more original sources ↓</button></div>
+</section>
+        <section class="eng-collection" id="engineeringCollection" aria-label="Original engineering source collection">
+ <div class="eng-head">
+  <div class="eng-kicker">SOURCE-ORIGINAL 3D · ENGINEER-FIRST EXHIBIT ARCHIVE</div>
+  <h1>Original exhibition design.<br><em>Editable CAD sources first.</em></h1>
+  <p>Professionally sourced 3D models, native manufacturer CAD where actually present, and original editable scenes. Curated booth candidates first, modular booth kits next, technical components last. Generated layouts live in their own collection. Drive files require team access.</p>
+  <div class="eng-metrics"><div class="eng-metric"><strong id="engTotal">369</strong><small>Source-model UIDs staged</small></div><div class="eng-metric"><strong id="engEmbedded">—</strong><small>3D GLBs hosted for direct editing</small></div><div class="eng-metric"><strong>CAD + 3D</strong><small>Original DWG / 3DS / X_T where verified</small></div></div>
+ </div>
+ <div class="eng-toolbar" role="group" aria-label="Engineer source filters">
+  <div class="eng-tabs">
+   <button class="eng-tab active" data-eng-filter="all" aria-pressed="true">Originals · All</button>
+   <button class="eng-tab" data-eng-filter="booth" aria-pressed="false">Featured booths</button>
+   <button class="eng-tab" data-eng-filter="modular" aria-pressed="false">Modular kits</button>
+   <button class="eng-tab" data-eng-filter="original" aria-pressed="false">Designer GLBs</button>
+   <button class="eng-tab" data-eng-filter="component" aria-pressed="false">CAD components</button>
+  </div>
+  <input id="engQuery" class="eng-search" type="search" placeholder="Search creator, booth name, source ID, CAD…" aria-label="Search original CAD 3D models">
+ </div>
+ <div id="engCount" class="eng-count">Loading original inventory…</div>
+ <div class="eng-grid" id="engCards" aria-live="polite"><div class="eng-empty">Loading original engineering models…</div></div>
+ <div class="eng-bottom"><p>CAD-file availability is verified by archive integrity checks, not factory sign-off. Original designs with unresolved rights remain in access-controlled Drive staging; copying a model ID helps locate the matching ZIP. Downloaded source ZIPs can be imported directly into the Composer.</p><button id="engMore" class="eng-more" hidden>Explore more original sources ↓</button></div>
+</section>
         <div class="hero">
           <div class="hero-copy"><div class="overline light-overline"><span class="green-dot"></span> EXPOVAULT · DESIGN WORKSPACE</div>
-            <h1>18 real designer booths.<br><em>Plus 4,200 editable layouts.</em></h1>
-            <p>Explore 18 independently authored booth GLBs and 4,200 editable layout variations. Every card has a real, locally hosted 3D file — no external viewer or account.</p>
+            <h1>Self-hosted designer GLBs.<br><em>Generated ideas, clearly separated.</em></h1>
+            <p>18 designer GLBs are hosted on-site. The larger 369-source collection above is in separate Drive staging with native CAD where verified; generated variations are not original designer models.</p>
             <div class="hero-buttons"><a class="button-yellow" href="originals.html">↓ Original designer GLBs <span>↗</span></a><a class="button-yellow" href="composer.html">✳ Build your own 3D booth <span>↗</span></a><a class="button-yellow" href="open-3d.html">◈ Browse 3D items <span>↗</span></a><a class="button-yellow" href="production-files.html">⌁ Original production files <span>↗</span></a><button id="jumpCollection" class="button-yellow">Explore 3D models <span>↗</span></button><button class="button-outline" data-section="concepts">Browse 4,200 editable layouts ↗</button></div>
             <div class="hero-bottom"><span class="hero-line"></span> CURATED FOR DESIGNERS, CREATORS & BUILDERS</div>
           </div>
@@ -198,6 +242,8 @@
 <div class="toast" id="toast" aria-live="polite"></div>
 <script src="vendor/jszip/jszip.min.js"></script>
 <script type="module" src="ui/v3.mjs"></script>
+<script type="module" src="ui/engineering.mjs"></script>
+<script type="module" src="ui/engineering.mjs"></script>
 <script type="module" src="ui/material-lab.mjs"></script>
 <script type="module" src="ui/authorized-download.mjs"></script>
 </body></html>

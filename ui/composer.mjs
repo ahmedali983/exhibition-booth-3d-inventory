@@ -12,7 +12,7 @@ const state={
   bases:[],sourceBases:[],assets:[],base:null,baseObject:null,baseBox:null,baseFloor:0,baseLoad:0,
   placed:[],selectedId:null,nextId:1,filterText:'',filterPack:'all',
   logoUrl:null,brand:'YOUR BRAND',primary:'#0d614e',accent:'#ebc486',panel:'#f3f7f4',
-  exporting:false,dirty:false,ready:false
+  exporting:false,dirty:false,ready:false,brandTouched:false,engineeringModels:[],localSources:[]
 };
 let scene,cam,renderer,controls,exportRoot,lights,grid,raycaster,mouse,observer,animationId;
 let highlight=null,dragging=false,dragOffset=new THREE.Vector3(),dragPlane=new THREE.Plane(new THREE.Vector3(0,1),0),toastTimer;
@@ -24,7 +24,13 @@ function toast(message){const box=$('toast');box.textContent=message;box.classLi
 function setStatus(message){$('sceneStatus').textContent=message;$('viewportState').textContent=message}
 function setDirty(){state.dirty=true;$('saveState').textContent='● Unsaved changes'}
 function clearDirty(){state.dirty=false;$('saveState').textContent='✓ Saved project'}
-function validAsset(asset){return asset?.license==='CC0-1.0'&&/^assets\/open-3d\/CC0-\d+\.glb$/.test(asset.glb)}
+function validAsset(asset){
+ return Boolean(
+   (asset?.license==='CC0-1.0'&&/^assets\/open-3d\/CC0-\d+\.glb$/.test(asset.glb))||
+   (asset?.localUserSource&&/^blob:/.test(asset.glb))||
+   (asset?.license==='CC-BY-4.0'&&asset?.verified_source&&/^assets\/engineering\/SKFB-[a-f0-9]{32}\.glb$/.test(asset.glb))
+ );
+}
 function downloadBlob(filename,value,type='application/octet-stream'){
  const blob=value instanceof Blob?value:new Blob([value],{type});
  const url=URL.createObjectURL(blob),link=document.createElement('a');
@@ -95,17 +101,22 @@ function collectMaterials(root){
 function recolorBase(){
  if(!state.baseObject)return;
  for(let i=0;i<baseOriginalMaterials.length;i++){
-  const m=baseOriginalMaterials[i].material;
-  const meshName=(baseOriginalMaterials[i].node.name+' '+m.name).toLowerCase();
-  if(!m.color)continue;
-  const orig=baseOriginalMaterials[i].original.color;
-  if(state.base?.is_creator_base && m.map)continue;
-  if(/floor|carpet|ground|baseplate/.test(meshName))m.color.copy(orig);
-  else if(/panel|back|wall|wallboard|roof|screen/.test(meshName))m.color.set(state.panel);
-  else if(/trim|metal|pole|column|rail|frame|truss/.test(meshName))m.color.set(state.accent);
-  else if(i%5===0)m.color.set(state.accent);
-  else if(i%4===0)m.color.set(state.panel);
-  else m.color.set(state.primary);
+  const entry=baseOriginalMaterials[i],m=entry.material;
+  if(!m?.color)continue;
+  const name=(entry.node.name+' '+m.name).toLowerCase();
+  if(/floor|carpet|ground|baseplate|earth|grass/.test(name)){
+    m.color.copy(entry.original.color);m.needsUpdate=true;continue;
+  }
+  let hex=state.primary;
+  if(/panel|back|wall|wallboard|roof|screen|cladding/.test(name))hex=state.panel;
+  else if(/trim|metal|pole|column|rail|frame|truss|beam/.test(name))hex=state.accent;
+  else if(i%5===0)hex=state.accent;
+  else if(i%4===0)hex=state.panel;
+  const target=new THREE.Color(hex);
+  // Textured glTF meshes previously skipped recolouring altogether.
+  // A moderate tint preserves authored map details and provides a visible brand change.
+  if(m.map)m.color.copy(entry.original.color).lerp(target,.83);
+  else m.color.copy(target);
   m.needsUpdate=true;
  }
 }
@@ -165,7 +176,7 @@ async function loadBase(b,{preserve=true,quiet=false}={}){
   grid.position.y=state.baseFloor-.025;
   const maxSize=Math.max(b.width_m,b.depth_m);
   grid.scale.setScalar(Math.max(1,maxSize/16));
-  if(!b.is_creator_base)recolorBase();await updateBrandBoard();
+  if(!b.is_creator_base||state.brandTouched)recolorBase();await updateBrandBoard();
   resetCamera();
   if(!preserve)for(const item of [...state.placed])removeItem(item);
   $('loadingScene').hidden=true;
@@ -221,7 +232,7 @@ async function updateBrandBoard(){
 function updateBrand(){
  state.brand=$('brandName').value.trim().slice(0,32)||'YOUR BRAND';
  state.primary=$('primaryColor').value;state.accent=$('accentColor').value;state.panel=$('panelColor').value;
- recolorBase();updateBrandBoard();setDirty();toast('Brand palette applied to the booth');
+ state.brandTouched=true;recolorBase();updateBrandBoard();setDirty();toast('Brand palette applied to the booth');
 }
 function getRay(ev){
  const r=renderer.domElement.getBoundingClientRect();
@@ -303,7 +314,7 @@ function removeItem(item){
 function removeSelected(){const item=getSelected();if(item){removeItem(item);toast('Removed '+item.asset.name)}}
 async function addItem(asset,{record=null}={}){
  if(!state.base){toast('Choose a booth structure first');switchTab('base');return}
- if(!validAsset(asset))return toast('Only verified hosted CC0 geometry may be added');
+ if(!validAsset(asset))return toast('Add a verified hosted item or import an original source file (.glb / .zip)');
  const id=record?.instanceId||'part-'+state.nextId++;
  if(state.placed.some(p=>p.instanceId===id))return;
  setStatus('Loading item '+asset.name+'…');
@@ -366,7 +377,7 @@ function buildProject(){
    r:item.pivot.rotation.y,s:item.pivot.scale.x,
    colors:item.materials.map(m=>m.material.color?'#'+m.material.color.getHexString():null)
   })),
-  notes:'Geometric concept only. Not certified for real manufacturing.'
+  notes:'Concept only. Local imported GLBs are included in the assembled GLB export; source ZIP files must be retained separately to reimport a JSON-only session.'
  };
 }
 function projectFilename(){return 'expovault-'+(state.base?.id||'booth')+'-'+safeName(state.brand)}
@@ -383,6 +394,7 @@ async function restoreProject(payload){
  $('brandName').value=brand.name||'YOUR BRAND';
  for(const [key,k] of [['primaryColor','primary'],['accentColor','accent'],['panelColor','panel']])$(key).value=/^#[0-9a-f]{6}$/i.test(brand[k]||'')?brand[k]:$(key).value;
  state.brand=$('brandName').value;state.primary=$('primaryColor').value;state.accent=$('accentColor').value;state.panel=$('panelColor').value;
+ state.brandTouched=true;
  state.logoUrl=typeof brand.logo_data_url==='string'&&brand.logo_data_url.startsWith('data:image/')&&brand.logo_data_url.length<3e6?brand.logo_data_url:null;
  for(const item of [...state.placed])removeItem(item);
  await loadBase(b,{preserve:false,quiet:true});
@@ -395,6 +407,81 @@ function findItemMatches(){
  const q=state.filterText.toLowerCase();
  return state.assets.filter(a=>(state.filterPack==='all'||a.pack_slug===state.filterPack)&&(!q||(a.name+' '+a.pack+' '+a.description+' '+a.kind).toLowerCase().includes(q)));
 }
+
+async function glbFromSourceFile(file){
+ if(!file||file.size>160*1024*1024)throw Error('Source file must be 160 MB or smaller for browser import');
+ const isZip=/\.zip$/i.test(file.name);
+ let bytes;
+ if(isZip){
+  if(!JSZip)throw Error('ZIP library is not available');
+  const archive=await JSZip.loadAsync(file);
+  const choices=Object.values(archive.files).filter(x=>!x.dir&&/\.glb$/i.test(x.name));
+  choices.sort((a,b)=>Number(/(?:^|\/)booth\.glb$/i.test(b.name))-Number(/(?:^|\/)booth\.glb$/i.test(a.name)));
+  if(!choices.length)throw Error('This source package has no GLB. Open the native CAD in your CAD application, or export a GLB first.');
+  const member=choices[0];
+  if(member._data?.uncompressedSize>180*1024*1024)throw Error('Uncompressed GLB is too large for this browser');
+  bytes=await member.async('uint8array');
+ }else if(/\.glb$/i.test(file.name))bytes=new Uint8Array(await file.arrayBuffer());
+ else throw Error('Choose a .glb or a .zip containing a GLB');
+ if(bytes.byteLength<20||bytes.byteLength>180*1024*1024)throw Error('Invalid or oversized 3D GLB');
+ const head=new DataView(bytes.buffer,bytes.byteOffset,bytes.byteLength);
+ if(head.getUint32(0,true)!==0x46546c67||head.getUint32(4,true)!==2||head.getUint32(8,true)!==bytes.byteLength)
+   throw Error('GLB geometry header/length verification failed');
+ return URL.createObjectURL(new Blob([bytes],{type:'model/gltf-binary'}));
+}
+function addBaseSelectOption(b){
+ const option=document.createElement('option');option.value=b.id;option.textContent=b.name+' · '+b.creator;
+ $('originalDesign').prepend(option);
+}
+async function importOriginalSource(file,asBase){
+ if(!asBase&&!state.base)throw Error('Choose or load a booth base before adding items');
+ const glb=await glbFromSourceFile(file);
+ const label=file.name.replace(/\.(?:glb|zip)$/i,'').replace(/^SKFB-/,'').replace(/-REAL-GLB-AND-CREATOR-SOURCE$/,'');
+ const uid=file.name.match(/[0-9a-f]{32}/i)?.[0]?.toLowerCase();
+ const match=uid?state.engineeringModels.find(x=>x.uid===uid):null;
+ const name=match?.title||label.slice(0,78)||'Imported source model';
+ const id='USER-'+(uid||label.toLowerCase().replace(/[^a-z0-9]/g,'').slice(0,25))+'-'+file.size;
+ const common={id,name,creator:match?.creator||'Your local file',source_url:match?.source_url||'',
+               license:'LOCAL',glb,thumbnail:match?.thumbnail||'',localUserSource:true};
+ if(asBase){
+  const b={...common,is_creator_base:true,booth_type:'Imported source',style:'Native model',
+           fitout:'Original',width_m:6,depth_m:6,area_m2:36};
+  state.sourceBases.unshift(b);state.bases.unshift(b);addBaseSelectOption(b);
+  $('originalDesign').value=id;
+  await loadBase(b,{preserve:false});switchTab('brand');
+ }else{
+  const asset={...common,pack:'Imported 3D source',pack_slug:'local-source',
+               kind:'Original source geometry',description:'Imported locally from GLB or ZIP'};
+  state.assets.unshift(asset);state.filterText='';
+  $('itemSearch').value='';state.filterPack='all';$('itemPack').value='all';
+  await addItem(asset);renderItems();switchTab('items');
+ }
+ state.localSources.push({id,name,glb});
+ toast((asBase?'Original booth loaded':'Original part added')+' · 3D geometry remains in this browser session');
+}
+function renderEngineeringSources(){
+ const list=$('sourceAssetsList');if(!list)return;
+ const query=$('sourceSearch').value.trim().toLowerCase();
+ const hits=state.engineeringModels.filter(x=>!query||[x.title,x.uid,x.group,...x.formats].join(' ').toLowerCase().includes(query));
+ $('sourceAssetsCount').textContent=hits.length+' original 3D source records · team Drive access required for non-hosted ZIPs';
+ list.replaceChildren();
+ for(const item of hits.slice(0,36)){
+  const row=document.createElement('div');row.className='eng-source-tile';
+  const label=document.createElement('div'),title=document.createElement('strong'),tag=document.createElement('small');
+  title.textContent=item.title;
+  tag.textContent=item.uid.slice(0,9)+' · '+item.formats.join(' / ')+(item.web_glb?' · direct 3D':' · import ZIP from Drive');
+  label.append(title,tag);
+  const link=document.createElement('a');link.href=item.drive_url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Source files';
+  const use=document.createElement('button');use.type='button';use.textContent=item.web_glb?'Use as base':'Import ZIP';
+  use.onclick=()=>{
+   if(item.web_glb){const base=state.sourceBases.find(x=>x.id===item.id);if(base)loadBase(base,{preserve:false}).then(()=>switchTab('brand'));}
+   else{toast('Download the source ZIP from Drive, then choose the ZIP below');$('sourceItemFile').click();}
+  };
+  row.append(label,link,use);list.append(row);
+ }
+ if(!hits.length){const empty=document.createElement('div');empty.className='eng-source-tile';empty.textContent='No matching original source IDs';list.append(empty)}
+}
+
 function renderItems(){
  const list=findItemMatches();
  $('itemResults').textContent=list.length+' items';
@@ -503,10 +590,19 @@ function wire(){
   if(!b){toast('Choose an original hosted designer booth first');return}
   await loadBase(b,{preserve:false});switchTab('brand');
  };
+ $('sourceBaseFile').onchange=async e=>{
+  const f=e.target.files?.[0];if(!f)return;
+  try{await importOriginalSource(f,true)}catch(error){toast(error.message);console.error(error)}finally{e.target.value=''}
+ };
+ $('sourceItemFile').onchange=async e=>{
+  const f=e.target.files?.[0];if(!f)return;
+  try{await importOriginalSource(f,false)}catch(error){toast(error.message);console.error(error)}finally{e.target.value=''}
+ };
+ $('sourceSearch').oninput=renderEngineeringSources;
  $('itemSearch').oninput=e=>{state.filterText=e.target.value;renderItems()};
  $('itemPack').onchange=e=>{state.filterPack=e.target.value;renderItems()};
  for(const [picker,hex] of [['primaryColor','primaryHex'],['accentColor','accentHex'],['panelColor','panelHex']]){
-  $(picker).oninput=e=>$(hex).textContent=e.target.value.toUpperCase();
+  $(picker).oninput=e=>{$(hex).textContent=e.target.value.toUpperCase();if(state.ready)updateBrand()};
  }
  $('applyBrand').onclick=updateBrand;
  $('logoFile').onchange=async e=>{
@@ -537,11 +633,12 @@ function wire(){
 async function init(){
  wire();createViewer();
  try{
-  const [manif,open,creatorData,productionData]=await Promise.all([
+  const [manif,open,creatorData,productionData,engineeringData]=await Promise.all([
    fetch('catalog/generated_manifest.json').then(r=>r.json()),
    fetch('catalog/open_3d_cc0.json').then(r=>r.json()),
    fetch('catalog/authorized_booths.json').then(r=>r.json()),
-   fetch('catalog/production_cad_bundles.json').then(r=>r.ok?r.json():{assets:[]}).catch(()=>({assets:[]}))
+   fetch('catalog/production_cad_bundles.json').then(r=>r.ok?r.json():{assets:[]}).catch(()=>({assets:[]})),
+   fetch('catalog/engineering_collection.json').then(r=>r.ok?r.json():{models:[]}).catch(()=>({models:[]}))
   ]);
   state.sourceBases=(creatorData.assets||[]).filter(a=>a.is_full_booth&&a.license==='CC-BY-4.0'&&/^assets\/authorized-booths\/SKFB-[0-9a-f]{32}\.glb$/.test(a.glb)).map(a=>({
    id:a.id,name:a.name,creator:a.creator,source_url:a.source_url,license:a.license,
@@ -554,6 +651,13 @@ async function init(){
    booth_type:'Source CAD original',style:'Artist-made',fitout:'Original',width_m:6,depth_m:6,area_m2:36
   }));
   state.sourceBases.push(...productionBases);
+ state.engineeringModels=engineeringData.models||[];
+ const directBases=state.engineeringModels.filter(x=>x.web_glb&&x.live_cc_by_verified&&/^assets\/engineering\/SKFB-[a-f0-9]{32}\.glb$/.test(x.web_glb)).map(x=>({
+   id:x.id,name:x.title,creator:x.creator,source_url:x.source_url,license:'CC-BY-4.0',
+   is_creator_base:true,glb:x.web_glb,thumbnail:x.thumbnail,native_cad_bundle:x.drive_url,
+   booth_type:'Original CAD exhibit',style:'Designer original',fitout:'Original',width_m:6,depth_m:6,area_m2:36
+ }));
+ state.sourceBases.push(...directBases);
   state.bases=[...(manif.items||[]),...state.sourceBases];
   const select=$('originalDesign');
   for(const b of state.sourceBases){const opt=document.createElement('option');opt.value=b.id;opt.textContent=b.name+' — '+b.creator;select.append(opt)}
@@ -565,7 +669,10 @@ async function init(){
    const opt=document.createElement('option');opt.value=key;opt.textContent=name;
    $('itemPack').append(opt);
   }
-  renderItems();const preset=state.bases.find(x=>x.id===new URLSearchParams(location.search).get('design'));
+  renderItems();renderEngineeringSources();
+ const chosenSource=new URLSearchParams(location.search).get('source');
+ if(chosenSource&&$('sourceSearch')){$('sourceSearch').value=chosenSource;renderEngineeringSources()}
+ const preset=state.bases.find(x=>x.id===new URLSearchParams(location.search).get('design'));
   if(preset&&!preset.is_creator_base){for(const [field,value] of Object.entries({width:preset.width_m,depth:preset.depth_m,exposure:preset.booth_type,style:preset.style,fitout:preset.fitout}))$(UI[field]).value=String(value)}
   if(preset?.is_creator_base)$('originalDesign').value=preset.id;
   updateBasePreview();
