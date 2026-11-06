@@ -1,0 +1,28 @@
+name: ExpoVault Wave11 One Visual-Screened Exhibition Stand
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths:
+      - .github/workflows/expovault-wave11-stand-design.yml
+permissions:
+  contents: read
+jobs:
+  acquire_author_original:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/rescue_large_creator_booth_sources.py
+      - run: python -m pip install -q requests pillow
+      - run: npm install -g @gltf-transform/cli@4
+      - name: Gate license and verify source-authored GLB
+        run: python -u scripts/rescue_large_creator_booth_sources.py 95851647937e4825b5ecbf6daddbb2bf
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: expovault-wave11-95851647937e4825b5ecbf6daddbb2bf
+          path: rescue-booth-95851647937e4825b5ecbf6daddbb2bf/*.zip
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 7
