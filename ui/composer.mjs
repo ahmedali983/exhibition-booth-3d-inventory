@@ -560,11 +560,12 @@ function wire(){
 async function init(){
  wire();createViewer();
  try{
-  const [manif,open,creatorData,productionData]=await Promise.all([
+  const [manif,open,creatorData,productionData,pilotData]=await Promise.all([
    fetch('catalog/generated_manifest.json').then(r=>r.json()),
    fetch('catalog/open_3d_cc0.json').then(r=>r.json()),
    fetch('catalog/authorized_booths.json').then(r=>r.json()),
-   fetch('catalog/production_cad_bundles.json').then(r=>r.ok?r.json():{assets:[]}).catch(()=>({assets:[]}))
+   fetch('catalog/production_cad_bundles.json').then(r=>r.ok?r.json():{assets:[]}).catch(()=>({assets:[]})),
+   fetch('catalog/pilot_source_library.json').then(r=>r.ok?r.json():{assets:[]}).catch(()=>({assets:[]}))
   ]);
   state.sourceBases=(creatorData.assets||[]).filter(a=>a.is_full_booth&&a.license==='CC-BY-4.0'&&/^assets\/authorized-booths\/SKFB-[0-9a-f]{32}\.glb$/.test(a.glb)).map(a=>({
    id:a.id,name:a.name,creator:a.creator,source_url:a.source_url,license:a.license,
@@ -588,6 +589,7 @@ async function init(){
    const opt=document.createElement('option');opt.value=key;opt.textContent=name;
    $('itemPack').append(opt);
   }
+  initializeTeamSources({state,dom:$,JSZip,loadBase,addItem,switchTab,renderItems,toast},pilotData.assets||[]);
   renderItems();const preset=state.bases.find(x=>x.id===new URLSearchParams(location.search).get('design'));
   if(preset&&!preset.is_creator_base){for(const [field,value] of Object.entries({width:preset.width_m,depth:preset.depth_m,exposure:preset.booth_type,style:preset.style,fitout:preset.fitout}))$(UI[field]).value=String(value)}
   if(preset?.is_creator_base)$('originalDesign').value=preset.id;
