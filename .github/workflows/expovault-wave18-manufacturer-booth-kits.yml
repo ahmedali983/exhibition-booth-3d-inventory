@@ -1,0 +1,51 @@
+name: ExpoVault Wave18 manufacturer modular original booth-kit designs
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/expovault-wave18-manufacturer-booth-kits.yml]
+  workflow_dispatch: {}
+permissions: {contents: read}
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        uid:
+          - 09d1dd8febd44a9fa1770d8a1fb434eb
+          - 5af88d2fa13e4de38ee121ab6d85a3ca
+          - c070292f22814055a89aa0adb4feac90
+          - 3dace3d3269d432e89542819e33798c9
+          - b404fd4d9ab34a278c14c913576b52c0
+          - d311e556524248dfbaf623c009396272
+          - 58fbf47b48084032a5e4077dfc7cf489
+          - cfe2d9c37127476bb42bc8a844e3b6b0
+          - ea6093ab95eb4ff4bbda7f589023d740
+          - 4449bf5a37364d8a820752a5bf0ac0a8
+          - ef5440a0b61844c89cf3626b15f58650
+          - 56b33ec8273a4108a7c393504bcce800
+          - 7976cc8bd536418ea08f2423b9d99e69
+          - df9e11c400574cdb8cd3675aaff538f1
+          - 5d9b32365ad94de2a0acdcc9c68e5c28
+          - 68add5e25f1647acbdc2a70af1d2f9d7
+          - eb2c01053c6e42e58bf27482ceba0a49
+          - 254dbafd3a9a40638b15f5afa08ad6fc
+          - 021783d14ad04071bf6155b765912d8b
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/rescue_large_creator_booth_sources.py
+      - run: python -m pip install -q requests pillow
+      - run: npm install -g @gltf-transform/cli@4
+      - name: Check original author archived CC rights and convert true GLTF source
+        run: python -u scripts/rescue_large_creator_booth_sources.py ${{ matrix.uid }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-wave18-${{ matrix.uid }}
+          path: rescue-booth-${{ matrix.uid }}/*.zip
+          if-no-files-found: warn
+          retention-days: 7
+          compression-level: 0
