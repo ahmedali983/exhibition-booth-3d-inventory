@@ -1,0 +1,36 @@
+name: ExpoVault Wave13 five true commercial booth prospects
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/expovault-wave13-strong-booths.yml]
+permissions: {contents: read}
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        uid:
+          - 528a15fa2877428d92df45590f31997c
+          - 25a38668148847a3ac36c3e318545cd5
+          - ec9a702695654b6f8a75cb4abd9f7864
+          - 2c386e9ef36e43bc93b4c6bf8675a645
+          - c161242094724e54b0dfb946304eba32
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/rescue_large_creator_booth_sources.py
+      - run: python -m pip install -q requests pillow
+      - run: npm install -g @gltf-transform/cli@4
+      - name: Preserve author native 3D source and license, safe convert
+        run: python -u scripts/rescue_large_creator_booth_sources.py ${{ matrix.uid }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-wave13-${{ matrix.uid }}
+          path: rescue-booth-${{ matrix.uid }}/*.zip
+          if-no-files-found: warn
+          compression-level: 0
+          retention-days: 7
