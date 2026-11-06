@@ -1,0 +1,57 @@
+name: ExpoVault Wave20 real manufacturer backwall fabric exhibit geometry source files
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/expovault-wave20-cad-system-sources.yml]
+  workflow_dispatch: {}
+permissions: {contents: read}
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        uid:
+          - 191cb1960c4843189bddb4fa56218a6b
+          - b99af749de9a4ac9a4a2c52c6c494856
+          - f85999e9cc0d4257850b0794bedf04fe
+          - 004e6e331c5d4c72ae2271c745a7d504
+          - 51963cb4dd5247b9a473a7192c34716d
+          - 625b54a0e60e41c7a5b9b19b190be824
+          - 6472348a13cc4dd79cdde08cc8546ba8
+          - 6311010290914d51aac7f1e05aa3462b
+          - e0cdac46368a48429e417efee0589086
+          - 0c3eef9a22f64a0db87caac113d6fbe2
+          - 936518ae327c45e286591551050916a6
+          - 7a2e918a7ba94b5898fa57d94696f998
+          - e218f42c656547a298ef47560ba03a0e
+          - 485a5cbcce0948ea86c2ccd7c94c31fa
+          - b859c50cdcf9472eb026ceffc0c65aa9
+          - 445d4917d9f94200ada370dd89674394
+          - 78e31b9a65e54ed69e074782903a65ac
+          - a250fd40f2e54df39b7675679f0ba15b
+          - 88501f2159434fcab3352b71eba531cf
+          - 2bfe96a8884b4e6e81318e19facc9a72
+          - ff6e8a52f8684ab49ecf05a12fb3c7a9
+          - e3784ded8a9f4c9faad90bbee1228ddc
+          - 7e0e975752374090ae91c6411573e06b
+          - b03302c4da6d4946acc187e03051fc38
+          - cbfe9f82299d4d03baae190aeeeb7625
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/rescue_large_creator_booth_sources.py
+      - run: python -m pip install -q requests pillow
+      - run: npm install -g @gltf-transform/cli@4
+      - name: Archived original rights and real 3D native source gate
+        run: python -u scripts/rescue_large_creator_booth_sources.py ${{ matrix.uid }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-wave20-${{ matrix.uid }}
+          path: rescue-booth-${{ matrix.uid }}/*.zip
+          retention-days: 7
+          compression-level: 0
+          if-no-files-found: warn
