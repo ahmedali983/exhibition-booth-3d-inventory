@@ -1,0 +1,45 @@
+name: ExpoVault Wave14 14 authored exhibition booth candidates
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/expovault-wave14-authentic-stands.yml]
+permissions: {contents: read}
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 19
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        uid:
+          - ef43f32b29854d07b6ec7f69a32a7b03
+          - 85fb569c76aa40a39d9b6aba4203cfca
+          - d6ae2a35cc554a89908548b3ff6a529c
+          - 55b8067ea0314b978358bd285b03e4b5
+          - 405e4594d917468ead338fde9eb7b2da
+          - 2f9062dd65b641df816350f7a43ae4f8
+          - b7d99fc6a5474c3f8e09c5f5156835e6
+          - f91e18621d0f4f6ba7248be36a22561b
+          - e7cc75ca9ea1455593886e463a2d742b
+          - 04c8ff635a0a4f23be1fd541259f3ca6
+          - b62293255b7a419a9b257cbfac556c45
+          - 3fd10c25130642818598b9d50cbafec4
+          - 09371f95d6f74c2f913f94b8a967e279
+          - 778d5af7ed3d4f8398a9f931eac5b647
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/rescue_large_creator_booth_sources.py
+      - run: python -m pip install -q requests pillow
+      - run: npm install -g @gltf-transform/cli@4
+      - name: Validate archived creator license and recover original model
+        run: python -u scripts/rescue_large_creator_booth_sources.py ${{ matrix.uid }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-wave14-${{ matrix.uid }}
+          path: rescue-booth-${{ matrix.uid }}/*.zip
+          if-no-files-found: warn
+          compression-level: 0
+          retention-days: 7
