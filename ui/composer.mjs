@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {initializeTeamSources} from './pilot-composer-imports.mjs';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {GLTFExporter} from 'three/addons/exporters/GLTFExporter.js';
@@ -9,7 +10,7 @@ const UI={
   width:'widthSelect',depth:'depthSelect',exposure:'exposureSelect',style:'styleSelect',fitout:'fitoutSelect'
 };
 const state={
-  bases:[],sourceBases:[],assets:[],base:null,baseObject:null,baseBox:null,baseFloor:0,baseLoad:0,
+  bases:[],sourceBases:[],teamAssets:[],assets:[],base:null,baseObject:null,baseBox:null,baseFloor:0,baseLoad:0,
   placed:[],selectedId:null,nextId:1,filterText:'',filterPack:'all',
   logoUrl:null,brand:'YOUR BRAND',primary:'#0d614e',accent:'#ebc486',panel:'#f3f7f4',
   exporting:false,dirty:false,ready:false
@@ -24,7 +25,7 @@ function toast(message){const box=$('toast');box.textContent=message;box.classLi
 function setStatus(message){$('sceneStatus').textContent=message;$('viewportState').textContent=message}
 function setDirty(){state.dirty=true;$('saveState').textContent='● Unsaved changes'}
 function clearDirty(){state.dirty=false;$('saveState').textContent='✓ Saved project'}
-function validAsset(asset){return asset?.license==='CC0-1.0'&&/^assets\/open-3d\/CC0-\d+\.glb$/.test(asset.glb)}
+function validAsset(asset){return (asset?.license==='CC0-1.0'&&/^assets\/open-3d\/CC0-\d+\.glb$/.test(asset.glb))||(asset?.is_local_import&&asset.localBytes instanceof ArrayBuffer)}
 function downloadBlob(filename,value,type='application/octet-stream'){
  const blob=value instanceof Blob?value:new Blob([value],{type});
  const url=URL.createObjectURL(blob),link=document.createElement('a');
@@ -136,9 +137,12 @@ async function loadBase(b,{preserve=true,quiet=false}={}){
  const token=++state.baseLoad;
  if(!quiet){setStatus('Loading '+b.id+' geometry…');$('loadingScene').hidden=false}
  try{
-  const res=await fetch(baseUrl(b),{cache:'force-cache'});
-  if(!res.ok)throw Error('Base GLB unavailable: HTTP '+res.status);
-  const gltf=await loader.parseAsync(await res.arrayBuffer(),'');
+  let bytes;
+  if(b.localBytes instanceof ArrayBuffer)bytes=b.localBytes;
+  else{const res=await fetch(baseUrl(b),{cache:'force-cache'});
+   if(!res.ok)throw Error('Base GLB unavailable: HTTP '+res.status);
+   bytes=await res.arrayBuffer()}
+  const gltf=await loader.parseAsync(bytes,'');
   if(token!==state.baseLoad)return;
   const prev=state.baseObject;
   if(prev)removeObject(prev);
@@ -311,9 +315,12 @@ async function addItem(asset,{record=null}={}){
  if(state.placed.some(p=>p.instanceId===id))return;
  setStatus('Loading item '+asset.name+'…');
  try{
-  const response=await fetch(asset.glb,{cache:'force-cache'});
-  if(!response.ok)throw Error('Item GLB returned '+response.status);
-  const parsed=await loader.parseAsync(await response.arrayBuffer(),'');
+  let bytes;
+  if(asset.localBytes instanceof ArrayBuffer)bytes=asset.localBytes;
+  else{const response=await fetch(asset.glb,{cache:'force-cache'});
+   if(!response.ok)throw Error('Item GLB returned '+response.status);
+   bytes=await response.arrayBuffer()}
+  const parsed=await loader.parseAsync(bytes,'');
   const pivot=new THREE.Group();pivot.userData.instanceId=id;pivot.name='Placed: '+asset.name;
   const source=parsed.scene;
   const bounds=new THREE.Box3().setFromObject(source);
