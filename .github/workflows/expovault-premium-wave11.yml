@@ -1,0 +1,74 @@
+name: ExpoVault Premium Original Booths Wave 11
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/expovault-premium-wave11.yml]
+permissions:
+  contents: read
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        uid:
+          - 778d5af7ed3d4f8398a9f931eac5b647
+          - ef1f4a05c6704cdfb6e472085a52e13f
+          - d21c9a729cdd4cf9bf9f86d3070cd724
+          - 3f887914aaa147b6a754e6a92dcf43b9
+          - 623e2ec5288941caba6476914b782300
+          - de2301205d994f2993c881a480247ba5
+          - ffdbfc63dd214542b0ddbb5f37f26916
+          - 1407d3a81b874f01a6b021f72099d745
+          - 6f8983d0d87843689f246e1acd4a6860
+          - 2403172e6f544c5f80f5ae8d524d7d44
+          - 4e5e818921194bc9b41302d09ffc5d68
+          - 381f4049b7a94261a2af4c3c09800b2b
+          - 9ddd59fed79044028b7e809e225d6eba
+          - 87e92a71b8b145ecbb4066264401d300
+          - 04cc03493f6349829a9a7cdc88010c5f
+          - 632c3aa729d248f2a92cc05ad84b7add
+          - a83dc5d8202b4007ad1dd107fe1b5fa8
+          - 770058b72d754af681b484e766f423f7
+          - ca53285b92eb4b3a92052bf149b8538c
+          - 5a03c274f5d248e9899f46be29ae5557
+          - 4935fe42bf574b3dbbc5b3c4fbb47f22
+          - f3faa982df33402785e07d61ce544e0d
+          - 81adcb2d58074889b79aecfe6299eb1c
+          - 11a7dfd1bc644c17a90b4fdc566197b3
+          - 1f9332a8d7bf40dbb81e0128317e677a
+          - 0ab472db42bd49a988c995d3c67046dc
+          - b4ee2dbbb1dd4b4dbd3ad4f8891301ae
+          - 8e10f0eebf4441d3aa580402dfc3c2d6
+          - 2f0e7c5c1f97474883d270dd59e8d0c1
+          - 64887eaa432f4fe3a50250bfdf74eabc
+          - 8ade987125744b9dbf34b50d5a2e38fd
+          - 318eafd9fb764e5cb3f65786fd40bdab
+          - 171c1721711a4b5ba532172ab0cc8238
+          - 35840a95503840eb9be71f217bd845b3
+          - c856c13708204c72a7fec9518c880b49
+          - ac55ff904dd4476590542186f27bf201
+          - 0a0ee542c6844844953b7c5590e749c5
+          - 098e0fd457624755af1dab9122c7fc6e
+          - a8f44a18bb3842b68df0dfde8b0d7a85
+          - 0f875ac4844f49cabd0192908cc7c136
+          - d283d2e81d574550be84064719a4aa73
+          - ab33bf98da904f0488f0eb659ba75b79
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/rescue_large_creator_booth_sources.py
+      - run: python -m pip install -q requests pillow
+      - run: npm install -g @gltf-transform/cli@4
+      - name: Preserve creator source and validate glTF to original downloadable GLB
+        run: python -u scripts/rescue_large_creator_booth_sources.py ${{ matrix.uid }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-premium11-${{ matrix.uid }}
+          path: rescue-booth-${{ matrix.uid }}/*.zip
+          if-no-files-found: warn
+          compression-level: 0
+          retention-days: 7
