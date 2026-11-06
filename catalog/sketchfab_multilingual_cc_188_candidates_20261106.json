@@ -1,0 +1,1701 @@
+{
+  "source": "Current official public Sketchfab v3 models API verified Nov 6 2026",
+  "baseline_excluded": 142,
+  "candidate_count": 230,
+  "live_cc_downloadable_verified": 188,
+  "rights": "Only CC BY, CC BY-SA or CC0 marked downloadable; must still verify individual source terms for import.",
+  "models": [
+    {
+      "uid": "098e0fd457624755af1dab9122c7fc6e",
+      "title": "MODERNBOOTH",
+      "creator": "DanartriDonuth",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/modernbooth-098e0fd457624755af1dab9122c7fc6e",
+      "archive_matched": true,
+      "description": "Virtual Exhibition booth for event design Virtual Exhibition booth for event design Virtual Exhibition booth for event design"
+    },
+    {
+      "uid": "778d5af7ed3d4f8398a9f931eac5b647",
+      "title": "Exhibition stand",
+      "creator": "tomas.hukal",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-stand-778d5af7ed3d4f8398a9f931eac5b647",
+      "archive_matched": true,
+      "description": "3D model of the exhibition stand"
+    },
+    {
+      "uid": "731deda27bd34bbf96818133f0c32de6",
+      "title": "booth 3d modelling",
+      "creator": "private_studio",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/booth-3d-modelling-731deda27bd34bbf96818133f0c32de6",
+      "archive_matched": true,
+      "description": "3 pieces of exhibition and business promotion booth models"
+    },
+    {
+      "uid": "dd1e97201d4842398bc7ae01fe9e6fcf",
+      "title": "exhibition octanorm stand pipe structure",
+      "creator": "sinnervoncrawsz",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-octanorm-stand-pipe-structure-dd1e97201d4842398bc7ae01fe9e6fcf",
+      "archive_matched": true,
+      "description": "exhibition octanorm stand pipe structure"
+    },
+    {
+      "uid": "1576adf635d54070a9ebb4af5049fd23",
+      "title": "BOOTH SMKN 3 BATU",
+      "creator": "ilhamtr",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/booth-smkn-3-batu-1576adf635d54070a9ebb4af5049fd23",
+      "archive_matched": true,
+      "description": "Desain booth dari siswa **SMkN 3 Batu**."
+    },
+    {
+      "uid": "f962e5da8fed46508daec928dc740301",
+      "title": "WIP - Exhibition room",
+      "creator": "norgeotloic",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/wip-exhibition-room-f962e5da8fed46508daec928dc740301",
+      "archive_matched": true,
+      "description": "**Edit:** [My final challenge entry here!](https://skfb.ly/6ysKL)\n\nA second WIP for the [Sketchfab's texturing challenge](https://blog.sketchfab.com/sketchfab-t"
+    },
+    {
+      "uid": "04cc03493f6349829a9a7cdc88010c5f",
+      "title": "MetaFactory booth",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/metafactory-booth-04cc03493f6349829a9a7cdc88010c5f",
+      "archive_matched": false,
+      "description": "Booth jin and 7oroy made for Neon Buidl expo / conference showing off MetaFactory, a digi-physical factory operated and owned by an online community that makes "
+    },
+    {
+      "uid": "ac55ff904dd4476590542186f27bf201",
+      "title": "tubby cats booth",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/tubby-cats-booth-ac55ff904dd4476590542186f27bf201",
+      "archive_matched": false,
+      "description": "Tubby Cats is a CC0 project about cats that are tubby: [https://tubbycats.xyz](https://tubbycats.xyz/home)\n\nBooth made by Round Dino: https://twitter.com/round4"
+    },
+    {
+      "uid": "a9ffd4628fc6471fa4ba2b8b99673bde",
+      "title": "Anarchy Arcade booth",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/anarchy-arcade-booth-a9ffd4628fc6471fa4ba2b8b99673bde",
+      "archive_matched": false,
+      "description": "Designed and made by @smsithlord, creator of [Anarchy Arcade](https:/anarchyarcade.com), during the Booth-a-palooza street festival we built in March 2023: http"
+    },
+    {
+      "uid": "318eafd9fb764e5cb3f65786fd40bdab",
+      "title": "Croquet Booth",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/croquet-booth-318eafd9fb764e5cb3f65786fd40bdab",
+      "archive_matched": false,
+      "description": "Virtual conference / expo booth about [Croquet](https://croquet.io/), an OS / development platform for the metaverse, originally made by the Croquet team!"
+    },
+    {
+      "uid": "3f887914aaa147b6a754e6a92dcf43b9",
+      "title": "EXHIBITION STAND_221001",
+      "creator": "fasih.lisan",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-stand-221001-3f887914aaa147b6a754e6a92dcf43b9",
+      "archive_matched": false,
+      "description": "Exhibition (Stand, booth, stall) Design\n\n**27 sqm / 9x3m - 3 exposed sides booth layout**\n\nFormat: \n\n**1**. Autodesk 3Ds max 2020 / V ray 5\n\n**2**. Autodesk 3Ds"
+    },
+    {
+      "uid": "5a03c274f5d248e9899f46be29ae5557",
+      "title": "Upstreet.ai Booth",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/upstreetai-booth-5a03c274f5d248e9899f46be29ae5557",
+      "archive_matched": false,
+      "description": "Booth for Upstreet.ai designed by moon / avaer in M3 discord https://m3org.com/"
+    },
+    {
+      "uid": "9d8fd25215674eea9bc6543713cdd9ac",
+      "title": "Untitledxyz booth",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/untitledxyz-booth-9d8fd25215674eea9bc6543713cdd9ac",
+      "archive_matched": false,
+      "description": "Booth made by [Untitled, xyz](https://twitter.com/untitledxyz_) for the virtual conference / expo we're doing with Neon Buidl"
+    },
+    {
+      "uid": "e11621f616b44886be3e72c1476cd5f2",
+      "title": "Anarchy Arcade Booth",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/anarchy-arcade-booth-e11621f616b44886be3e72c1476cd5f2",
+      "archive_matched": false,
+      "description": "Booth about Anarchy Arcade made from a template model provided by Vket and used at several virtual expo events\nCheck out Anarchy Arcade here: https://anarchyarc"
+    },
+    {
+      "uid": "7116f5e3ecf746509290c9c3c8466304",
+      "title": "B-4x3 Expo Stall",
+      "creator": "patelanky",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/b-4x3-expo-stall-7116f5e3ecf746509290c9c3c8466304",
+      "archive_matched": true,
+      "description": "B-4x3 Expo Stall"
+    },
+    {
+      "uid": "4935fe42bf574b3dbbc5b3c4fbb47f22",
+      "title": "OMIgroup Booth - glTF extensions group",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/omigroup-booth-gltf-extensions-group-4935fe42bf574b3dbbc5b3c4fbb47f22",
+      "archive_matched": false,
+      "description": "Open Metaverse Interoperability group is an open source community of industry professionals, independent creators, and passionate enthusiasts building interoper"
+    },
+    {
+      "uid": "5a430ba878a94fc9ad3052b869d9ee9e",
+      "title": "MrMetaverse booth",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/mrmetaverse-booth-5a430ba878a94fc9ad3052b869d9ee9e",
+      "archive_matched": false,
+      "description": "Booth by MrMetaverse about AngellXR, made for the virtual conference / expo we're working on with Neon Buidl"
+    },
+    {
+      "uid": "d524b70d85a2472bbaccb93d7e19facf",
+      "title": "F-12x6 Expo Stall",
+      "creator": "patelanky",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/f-12x6-expo-stall-d524b70d85a2472bbaccb93d7e19facf",
+      "archive_matched": true,
+      "description": "F-12x6 Expo Stall"
+    },
+    {
+      "uid": "d565cb7935744d6190b7d23b260e743b",
+      "title": "Remixable Booth Templates",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/remixable-booth-templates-d565cb7935744d6190b7d23b260e743b",
+      "archive_matched": false,
+      "description": "We're making booths that other people can remix for a virtual street festival in collaboration with the Neon Buidl community, feel free to pick one you like and"
+    },
+    {
+      "uid": "d28f03d9c3fc42a3881ed8c97ffc020b",
+      "title": "Exhibition stand",
+      "creator": "stasik12",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-stand-d28f03d9c3fc42a3881ed8c97ffc020b",
+      "archive_matched": true,
+      "description": "**Mesh is not optimized, all elements are separated and with russian names** (but may be it changed by Sketchfab)\n\nAn advertising stand of electrical equipment "
+    },
+    {
+      "uid": "ca53285b92eb4b3a92052bf149b8538c",
+      "title": "DFW BOOTH",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/dfw-booth-ca53285b92eb4b3a92052bf149b8538c",
+      "archive_matched": false,
+      "description": "Made by [@decentralize](https://sketchfab.com/decentralize) for the Booth-a-palooza virtual street festival held March 2023.\n\n- https://hyperfy.io/neonstreet\n- "
+    },
+    {
+      "uid": "0a0ee542c6844844953b7c5590e749c5",
+      "title": "WRG Booth",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/wrg-booth-0a0ee542c6844844953b7c5590e749c5",
+      "archive_matched": false,
+      "description": "Made by @jvlive_H during Booth-a-palooza with Neon Buidl crew in March 2023\n\n- https://linktr.ee/warragwag\n- https://github.com/neon-buidl/booths"
+    },
+    {
+      "uid": "14a1d0e0d4514721907448f9aa0ba962",
+      "title": "E-6x6 Expo Stall",
+      "creator": "patelanky",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/e-6x6-expo-stall-14a1d0e0d4514721907448f9aa0ba962",
+      "archive_matched": true,
+      "description": "E-6x6 Expo Stall"
+    },
+    {
+      "uid": "b4ee2dbbb1dd4b4dbd3ad4f8891301ae",
+      "title": "Booth 3ov",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/booth-3ov-b4ee2dbbb1dd4b4dbd3ad4f8891301ae",
+      "archive_matched": false,
+      "description": "Booth for [https://3ov.xyz](https://3ov.xyz/) made by [antpb](https://twitter.com/antpb) for the Neon Buidl virtual metaverse expo / conference"
+    },
+    {
+      "uid": "69ef43d6966440f292ac79691e776f19",
+      "title": "Booth_Exhibition Stall",
+      "creator": "praveensharma11198",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/booth-exhibition-stall-69ef43d6966440f292ac79691e776f19",
+      "archive_matched": false,
+      "description": "This is a model of exhibition stall having a square size and all models are proportionately maintained. \nModel are uv mapped with attached all the texture."
+    },
+    {
+      "uid": "1a039563b8c84782ae4d6a14ce874e83",
+      "title": "Memory booth",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/memory-booth-1a039563b8c84782ae4d6a14ce874e83",
+      "archive_matched": false,
+      "description": "Booth made by [memory](memory_888) for the virtual conference / expo we're working on with [Neon Buidl](https://twitter.com/neon_buidl) community!"
+    },
+    {
+      "uid": "8ade987125744b9dbf34b50d5a2e38fd",
+      "title": "HQ Boothfinal Harambe",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/hq-boothfinal-harambe-8ade987125744b9dbf34b50d5a2e38fd",
+      "archive_matched": false,
+      "description": "Booth made by Harambe Adcovate for virtual conference / expo with Neon Buidl community\n\nhttps://twitter.com/neon_buidl"
+    },
+    {
+      "uid": "9aca6ec04d9b41c29781ea3149287943",
+      "title": "SOUND BOOTH 5000",
+      "creator": "eventdesignws",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/sound-booth-5000-9aca6ec04d9b41c29781ea3149287943",
+      "archive_matched": false,
+      "description": "EVENT WS WASIS SOUND LIGHTING STAGE CONCERT GALADINNER VENUE BALLROOM LAYOUT INDONESIA WSEVENTDESIGN DESIGN CONCEPT LIGHT PARLED MOVING HEAD LAMPU LEDPAR LED LE"
+    },
+    {
+      "uid": "9ddd59fed79044028b7e809e225d6eba",
+      "title": "Booth_stall",
+      "creator": "praveensharma11198",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/booth-stall-9ddd59fed79044028b7e809e225d6eba",
+      "archive_matched": false,
+      "description": "This is a model of exhibition stall & models are proportionately maintained. \nModel are uv mapped with attached all the texture."
+    },
+    {
+      "uid": "4e5e818921194bc9b41302d09ffc5d68",
+      "title": "GM Hospitals Stand Design",
+      "creator": "AnuragVerma9211",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/gm-hospitals-stand-design-4e5e818921194bc9b41302d09ffc5d68",
+      "archive_matched": false,
+      "description": "GM Hospitals Stand Design 4x3m"
+    },
+    {
+      "uid": "81adcb2d58074889b79aecfe6299eb1c",
+      "title": "7oroy BOOTH",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/7oroy-booth-81adcb2d58074889b79aecfe6299eb1c",
+      "archive_matched": false,
+      "description": "Booth designed by 7OROY based on one of the vket templates\nhttps://twitter.com/7oroy"
+    },
+    {
+      "uid": "d21c9a729cdd4cf9bf9f86d3070cd724",
+      "title": "产品展台01-Washing Machine Exhibition",
+      "creator": "mrdt.club",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/01-washing-machine-exhibition-d21c9a729cdd4cf9bf9f86d3070cd724",
+      "archive_matched": false,
+      "description": "Washing Machine Exhibition\n\n这是一个洗衣机展台，整齐地陈列着各款洗衣机。这里详细介绍了每一款产品，包括其独特的功能、节能特性、洗涤容量及外观设计等。旨在让消费者全面了解产品，以便他们能根据自身需求，挑选到心仪的洗衣机。\n\nThis is a washing machine exhibitio"
+    },
+    {
+      "uid": "6f8983d0d87843689f246e1acd4a6860",
+      "title": "Expo Showcase Plan 3D",
+      "creator": "spartanbranding",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/expo-showcase-plan-3d-6f8983d0d87843689f246e1acd4a6860",
+      "archive_matched": false,
+      "description": "Step into the future of exhibition space design with our \"Expo Showcase Plan,\" a meticulously crafted 3D blueprint modeled in Blender. This template is tailored"
+    },
+    {
+      "uid": "d2d7f5e2b11543aebef48d49898aa274",
+      "title": "A-3x3 Expo Stall",
+      "creator": "patelanky",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/a-3x3-expo-stall-d2d7f5e2b11543aebef48d49898aa274",
+      "archive_matched": true,
+      "description": "A-3x3 Expo Stall"
+    },
+    {
+      "uid": "d59b0a4e941d4c6fb6115054eece8ddc",
+      "title": "Expo panel corner booth",
+      "creator": "private_studio",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/expo-panel-corner-booth-d59b0a4e941d4c6fb6115054eece8ddc",
+      "archive_matched": true,
+      "description": "a place for product marketing and sales activities"
+    },
+    {
+      "uid": "632c3aa729d248f2a92cc05ad84b7add",
+      "title": "Saudi National Day Booth 85",
+      "creator": "amrrgz",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/saudi-national-day-booth-85-632c3aa729d248f2a92cc05ad84b7add",
+      "archive_matched": false,
+      "description": "تصميم ثلاثي الأبعاد لجناح خاص باليوم الوطني السعودي 85، تم فيه استخدام الألوان المستوحاة من الهوية السعودية، مع إبراز الطابع الوطني والتراثي في تفاصيل التصميم\n\n"
+    },
+    {
+      "uid": "770058b72d754af681b484e766f423f7",
+      "title": "Alpine Booth A",
+      "creator": "exhibitbook",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/alpine-booth-a-770058b72d754af681b484e766f423f7",
+      "archive_matched": false,
+      "description": "Be in charge of your environment and give your space all that it needs with Alpine Booths custom exhibits. Many design configurations allow you the freedom to a"
+    },
+    {
+      "uid": "e270609df6c546e5bc8e448c8d6d73bb",
+      "title": "MetaGame booth",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/metagame-booth-e270609df6c546e5bc8e448c8d6d73bb",
+      "archive_matched": false,
+      "description": "Booth about Metagame (https://metagame.wtf/) made for the virtual expo / conference that we're building with Neon Buidl community\n\n- https://twitter.com/neon_bu"
+    },
+    {
+      "uid": "db8a71911433468c83b1bc8c0797e4e9",
+      "title": "C-6x3 Expo Stall",
+      "creator": "patelanky",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/c-6x3-expo-stall-db8a71911433468c83b1bc8c0797e4e9",
+      "archive_matched": true,
+      "description": "C-6x3 Expo Stall"
+    },
+    {
+      "uid": "2403172e6f544c5f80f5ae8d524d7d44",
+      "title": "Expo Booth by Kiiba",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/expo-booth-by-kiiba-2403172e6f544c5f80f5ae8d524d7d44",
+      "archive_matched": false,
+      "description": "Made for Neon Buidl street festival buildathon in Hyperfy.io\nhttps://twitter.com/neon_buidl"
+    },
+    {
+      "uid": "af1b15e388b94e1f9f96b5faad8117e7",
+      "title": "Exhibition Stands",
+      "creator": "mehran.gharleghi",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-stands-af1b15e388b94e1f9f96b5faad8117e7",
+      "archive_matched": true,
+      "description": ""
+    },
+    {
+      "uid": "453e5b293e674518a895331b389a3d5f",
+      "title": "3D Car Toyota Booth",
+      "creator": "fendy1",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/3d-car-toyota-booth-453e5b293e674518a895331b389a3d5f",
+      "archive_matched": false,
+      "description": "This image depicts a 3D model of a modern Toyota exhibition car booth created with Blender. The booth features a sleek design with a red and black color scheme."
+    },
+    {
+      "uid": "d283d2e81d574550be84064719a4aa73",
+      "title": "AngellXR Booth",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/angellxr-booth-d283d2e81d574550be84064719a4aa73",
+      "archive_matched": false,
+      "description": "Designed by MrMetaverse during the Booth-a-palooza street festival in March 2023\nAngellXR is a collaborative community for building the open Metaverse, together"
+    },
+    {
+      "uid": "411c9a6112a84fb3a488543a63aceea1",
+      "title": "Magick booth",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/magick-booth-411c9a6112a84fb3a488543a63aceea1",
+      "archive_matched": false,
+      "description": "MagickML booth designed by m00n\n\nMagickML lets you design custom AI chatbots\nCheck out MagickML here: https://github.com/Oneirocom/MagickML"
+    },
+    {
+      "uid": "8313c08faeae4549bf405ec1a980252c",
+      "title": "Expo stall",
+      "creator": "patelanky",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/expo-stall-8313c08faeae4549bf405ec1a980252c",
+      "archive_matched": true,
+      "description": "Expo stall"
+    },
+    {
+      "uid": "96537d99704845d49be1eb9a5398f08b",
+      "title": "Global Expo Travels Stand",
+      "creator": "globalexpostand.com",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/global-expo-travels-stand-96537d99704845d49be1eb9a5398f08b",
+      "archive_matched": false,
+      "description": "Wherever in the world your tradeshow, whereever your conference, whereever your matchmaking mission leads you, Global Expo Travels gets you excellent flight, ho"
+    },
+    {
+      "uid": "11a7dfd1bc644c17a90b4fdc566197b3",
+      "title": "Generic booth by SM SithLord",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/generic-booth-by-sm-sithlord-11a7dfd1bc644c17a90b4fdc566197b3",
+      "archive_matched": false,
+      "description": "Made for Neon Buidl virtual street festival buildathon\nhttps://twitter.com/neon_buidl\n\nDesigner: https://twitter.com/anarchyarcade"
+    },
+    {
+      "uid": "35840a95503840eb9be71f217bd845b3",
+      "title": "Uncanny Alley Booth",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/uncanny-alley-booth-35840a95503840eb9be71f217bd845b3",
+      "archive_matched": false,
+      "description": "Designed and made by MetaRick of the Metaverse Crew during the Booth-a-palooza street festival in March 2023: https://github.com/neon-BUIDL/booths\n\n- https://tw"
+    },
+    {
+      "uid": "09371f95d6f74c2f913f94b8a967e279",
+      "title": "NVIDIA 3D Exhibition Stall Design",
+      "creator": "nd-animation",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/nvidia-3d-exhibition-stall-design-09371f95d6f74c2f913f94b8a967e279",
+      "archive_matched": false,
+      "description": "This is a premium NVIDIA-inspired exhibition booth concept designed for technology expos, AI conferences, CES-style events, and trade shows.\n\nThe project was cr"
+    },
+    {
+      "uid": "171c1721711a4b5ba532172ab0cc8238",
+      "title": "HEAT Booth 1",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/heat-booth-1-171c1721711a4b5ba532172ab0cc8238",
+      "archive_matched": false,
+      "description": "Booth originally made by the [HEAT TECH](https://twitter.com/HEAT__TECH/) team who are working on animation interoperability tools / platform, for the virtual e"
+    },
+    {
+      "uid": "1407d3a81b874f01a6b021f72099d745",
+      "title": "Ghana Yam Producers and Exporters Association",
+      "creator": "globalexpostand.com",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/ghana-yam-producers-and-exporters-association-1407d3a81b874f01a6b021f72099d745",
+      "archive_matched": false,
+      "description": "The Ghana Yam Producers and Exporters Association sees to it that the yams you buy are of good quality and (Global G.A.P.) certified with emphasis on food safet"
+    },
+    {
+      "uid": "92931680dc8d41d9add8997326600e03",
+      "title": "EXHIBISION BOOTH RECEPTION COUNTER SIMPLE",
+      "creator": "JAISON35",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibision-booth-reception-counter-simple-92931680dc8d41d9add8997326600e03",
+      "archive_matched": false,
+      "description": "SIMPLE TYEP EDGE CURVED EXHIBITION BOOTH RECEPTION COUNTER"
+    },
+    {
+      "uid": "9c49b58dfcf34f7b98e04d7e7ad10708",
+      "title": "Metagame booth",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/metagame-booth-9c49b58dfcf34f7b98e04d7e7ad10708",
+      "archive_matched": false,
+      "description": "Booth about [MetaGame](https://metagame.wtf/) made for the virtual conference / expo we're working on with [Neon Buidl](https://twitter.com/neon_buidl)"
+    },
+    {
+      "uid": "8e10f0eebf4441d3aa580402dfc3c2d6",
+      "title": "BOOTH WP (WIPSIP)",
+      "creator": "ajengrahma427",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/booth-wp-wipsip-8e10f0eebf4441d3aa580402dfc3c2d6",
+      "archive_matched": false,
+      "description": "DESAIN BOOTH PAMERAN WIPSIP"
+    },
+    {
+      "uid": "8f661c5dba564ef9ad3b83ff4e9a748d",
+      "title": "Engi Expo Stall 3x3",
+      "creator": "patelanky",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/engi-expo-stall-3x3-8f661c5dba564ef9ad3b83ff4e9a748d",
+      "archive_matched": true,
+      "description": "Stall demo for expo"
+    },
+    {
+      "uid": "3fd10c25130642818598b9d50cbafec4",
+      "title": "Farm exhibition",
+      "creator": "freeexhibition3d",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/farm-exhibition-3fd10c25130642818598b9d50cbafec4",
+      "archive_matched": false,
+      "description": "farm exhibition plant exhibition no humans plant farm table stool chair image stand 3d design model from sketchup"
+    },
+    {
+      "uid": "a8f44a18bb3842b68df0dfde8b0d7a85",
+      "title": "Shark booth Template",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/shark-booth-template-a8f44a18bb3842b68df0dfde8b0d7a85",
+      "archive_matched": false,
+      "description": "Designed by lasershark\n\nFor neon buidl booth buildathon\nhttps://twitter.com/neon_buidl"
+    },
+    {
+      "uid": "e0d06a693b474621a9d6155914f72726",
+      "title": "LIGTING DOWNSPOT BOOTH",
+      "creator": "eventdesignws",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/ligting-downspot-booth-e0d06a693b474621a9d6155914f72726",
+      "archive_matched": false,
+      "description": "EVENT WS WASIS SOUND LIGHTING STAGE CONCERT GALADINNER VENUE BALLROOM LAYOUT INDONESIA WSEVENTDESIGN DESIGN CONCEPT LIGHT PARLED MOVING HEAD LAMPU LEDPAR LED LE"
+    },
+    {
+      "uid": "5f9ee43a30d04c558963226817a89266",
+      "title": "F-12x9 Expo Stall",
+      "creator": "patelanky",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/f-12x9-expo-stall-5f9ee43a30d04c558963226817a89266",
+      "archive_matched": true,
+      "description": "F-12x9 Expo Stall"
+    },
+    {
+      "uid": "6865dfe0972f46f2ba133ebc9e993fd8",
+      "title": "Thai water buffalo vessel, c. 1000 BCE",
+      "creator": "artsmia",
+      "license": "cc0",
+      "url": "https://sketchfab.com/3d-models/thai-water-buffalo-vessel-c-1000-bce-6865dfe0972f46f2ba133ebc9e993fd8",
+      "archive_matched": true,
+      "description": "Thai ceremonial vessel, c. 1000 BCE, now in the collection of the Minneapolis Institute of Art.\n\nFrom its description on artsmia.org:\n\n*'This extraordinary cere"
+    },
+    {
+      "uid": "7a07f596b1c441778795cc8133cffbfe",
+      "title": "Exhibition Stand",
+      "creator": "saqib24",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-stand-7a07f596b1c441778795cc8133cffbfe",
+      "archive_matched": false,
+      "description": "exhibition stand\npromotion stand\nexibition design\nexibition stand design"
+    },
+    {
+      "uid": "1f7dd1085f1a4806b259601094ffabc3",
+      "title": "E-9x6 Expo Stall",
+      "creator": "patelanky",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/e-9x6-expo-stall-1f7dd1085f1a4806b259601094ffabc3",
+      "archive_matched": true,
+      "description": "E-9x6 Expo Stall"
+    },
+    {
+      "uid": "e7cc75ca9ea1455593886e463a2d742b",
+      "title": "Booth exhibit",
+      "creator": "Donkeykong287",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/booth-exhibit-e7cc75ca9ea1455593886e463a2d742b",
+      "archive_matched": false,
+      "description": "Booth without walls"
+    },
+    {
+      "uid": "fcb9f8e962544265bb488845b8d1e3b6",
+      "title": "exhibition-booth",
+      "creator": "Sflex",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-booth-fcb9f8e962544265bb488845b8d1e3b6",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "64887eaa432f4fe3a50250bfdf74eabc",
+      "title": "Stand Print Project 2018",
+      "creator": "kriskvm2",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/stand-print-project-2018-64887eaa432f4fe3a50250bfdf74eabc",
+      "archive_matched": true,
+      "description": "Stand for Fair and Expositions on Panamá City."
+    },
+    {
+      "uid": "d7f2abb815054d0b803404570157d727",
+      "title": "Formulate Counter Pillar Tradeshow Display",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/formulate-counter-pillar-tradeshow-display-d7f2abb815054d0b803404570157d727",
+      "archive_matched": false,
+      "description": "[Formulate Counter Pillar Tradeshow Display Hardware and Graphic](https://www.xyzdisplays.com/Formulate-Counter-Pillar-Tradeshow-Display-p/or27700.htm). The For"
+    },
+    {
+      "uid": "09d1dd8febd44a9fa1770d8a1fb434eb",
+      "title": "20ft x 8ft Formulate Designer Booth - Kit 01",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/20ft-x-8ft-formulate-designer-booth-kit-01-09d1dd8febd44a9fa1770d8a1fb434eb",
+      "archive_matched": false,
+      "description": "[20ft x 8ft Formulate Designer Series Trade Show Booth - Kit 01](https://www.xyzdisplays.com/20ft-Formulate-Designer-Series-Kit-01-Display-p/or33200.htm). Formu"
+    },
+    {
+      "uid": "ac0e15c2ea224fb688e9ebd2aaa8db0c",
+      "title": "Black-Figure Neck Amphora, c. 540 BCE",
+      "creator": "artsmia",
+      "license": "cc0",
+      "url": "https://sketchfab.com/3d-models/black-figure-neck-amphora-c-540-bce-ac0e15c2ea224fb688e9ebd2aaa8db0c",
+      "archive_matched": true,
+      "description": "Black-Figure Neck Amphora, c. 540 BCE, attributed to the Painter of Vatican 359, now in the collection of the Minneapolis Institute of Art.\n\n\nFrom the amphora's"
+    },
+    {
+      "uid": "c070292f22814055a89aa0adb4feac90",
+      "title": "20ft x 8ft Formulate Designer Booth - Kit 02",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/20ft-x-8ft-formulate-designer-booth-kit-02-c070292f22814055a89aa0adb4feac90",
+      "archive_matched": false,
+      "description": "[20ft x 8ft Formulate Designer Series Trade Show Booth - Kit 02](https://www.xyzdisplays.com/20ft-Formulate-Designer-Series-Kit-02-Display-p/or33210.htm). The F"
+    },
+    {
+      "uid": "16ac238869f04b26b60ce9d26f865369",
+      "title": "Geo Booth V1",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/geo-booth-v1-16ac238869f04b26b60ce9d26f865369",
+      "archive_matched": false,
+      "description": "Booth made by Arashi for Neon Buidl virtual expo / conference"
+    },
+    {
+      "uid": "22fac038efc948d8bd7fd5436584d431",
+      "title": "TradeShowBooth",
+      "creator": "kylealln",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/tradeshowbooth-22fac038efc948d8bd7fd5436584d431",
+      "archive_matched": false,
+      "description": "10' x 20' Apple Trade Show Booth: On the left, there is a designated seating area for discussions. On the right, two display tables of varying heights showcase "
+    },
+    {
+      "uid": "5af88d2fa13e4de38ee121ab6d85a3ca",
+      "title": "10ft x 8ft Formulate Designer Booth - Kit 08",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/10ft-x-8ft-formulate-designer-booth-kit-08-5af88d2fa13e4de38ee121ab6d85a3ca",
+      "archive_matched": false,
+      "description": "[10ft x 8ft Formulate Designer Series Trade Show Booth - Kit 08](https://www.xyzdisplays.com/10ft-Formulate-Designer-Series-Kit-08-Display-p/or33570.htm). The 1"
+    },
+    {
+      "uid": "0f875ac4844f49cabd0192908cc7c136",
+      "title": "GPP_ Booth-v1",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/gpp--booth-v1-0f875ac4844f49cabd0192908cc7c136",
+      "archive_matched": false,
+      "description": "Made by https://twitter.com/pointspears for Neon Buidl event\n\nSee all booths: https://github.com/NEON-BUIDL/booths"
+    },
+    {
+      "uid": "84028ef0113c4c51925a24d655b8644d",
+      "title": "Stand  Modelo Ferias LosLagosTravel",
+      "creator": "alansoto",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/stand-modelo-ferias-loslagostravel-84028ef0113c4c51925a24d655b8644d",
+      "archive_matched": true,
+      "description": "Stand feria LosLagos.Travel medidas : 3.60 x 270 x 230 alto."
+    },
+    {
+      "uid": "c856c13708204c72a7fec9518c880b49",
+      "title": "BOOTH KANESA KOMPLIT",
+      "creator": "puadsiswahyudi",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/booth-kanesa-komplit-c856c13708204c72a7fec9518c880b49",
+      "archive_matched": false,
+      "description": "Booth pameran SMKN 1 Kepanjen sebagai media promosi dan ekspose sekolah"
+    },
+    {
+      "uid": "7e65d52680874d109df30af789ffd8c2",
+      "title": "Gallery Selingrak - Sharks",
+      "creator": "3dhdscan",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/gallery-selingrak-sharks-7e65d52680874d109df30af789ffd8c2",
+      "archive_matched": true,
+      "description": "Gallery Selingrak - Sharks\n![](https://scontent-prg1-1.xx.fbcdn.net/v/t1.0-9/55810947_1267733116711519_2863345299131203584_o.jpg?_nc_cat=102&_nc_ht=scontent-prg"
+    },
+    {
+      "uid": "e4ae59baad8a4d9c90ac14931565d328",
+      "title": "Cairn Booth",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/cairn-booth-e4ae59baad8a4d9c90ac14931565d328",
+      "archive_matched": false,
+      "description": "Booth made by Knar (who just completed threejs journey!) for the virtual conference / expo we're building with the [Neon Buidl](https://twitter.com/neon_buidl) "
+    },
+    {
+      "uid": "2fac978549d64358ac4b2b7f052530b8",
+      "title": "20ft x 10ft Modco Modular Booth - Kit 8",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/20ft-x-10ft-modco-modular-booth-kit-8-2fac978549d64358ac4b2b7f052530b8",
+      "archive_matched": false,
+      "description": "[20ft x 10ft Modco Modular Trade Show Booth - Kit 8](https://www.xyzdisplays.com/20ft-x-10ft-Modco-Modular-8-Display-p/ws63640.htm). Modco Modular Display 8 is "
+    },
+    {
+      "uid": "96bf759149604846aab14a7733c5b393",
+      "title": "Exhibition",
+      "creator": "freeexhibition3d",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-96bf759149604846aab14a7733c5b393",
+      "archive_matched": false,
+      "description": "An Exhibition stand 3d design downloadable model from sketchup pro app"
+    },
+    {
+      "uid": "ffdbfc63dd214542b0ddbb5f37f26916",
+      "title": "100 sqm exhibition booth trade",
+      "creator": "obaidimporter",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/100-sqm-exhibition-booth-trade-ffdbfc63dd214542b0ddbb5f37f26916",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "1c653b674825452a8cf2b8c13c67a721",
+      "title": "Formulate Monitor Trade Show Kiosk Kit 03",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/formulate-monitor-trade-show-kiosk-kit-03-1c653b674825452a8cf2b8c13c67a721",
+      "archive_matched": false,
+      "description": "[Formulate Monitor Trade Show Kiosk Kit 03 Display](https://www.xyzdisplays.com/Formulate-Monitor-Trade-Show-Kiosk-Kit-03-Display-p/or27190.htm). Formulate Kios"
+    },
+    {
+      "uid": "763aeaa49d054f98937b9a5d391703b0",
+      "title": "Future Paisley Exhibition- Stanely Castle",
+      "creator": "Steve_Colmer",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/future-paisley-exhibition-stanely-castle-763aeaa49d054f98937b9a5d391703b0",
+      "archive_matched": false,
+      "description": "Stanely Castle is located in the waters of Stanely Reservoir, to the south of Paisley, Scotland, at the foot of the Gleniffer Braes. It was probably built in th"
+    },
+    {
+      "uid": "106f0964f35a445882a86bad1143f932",
+      "title": "Formulate Counter Oval Tradeshow Display",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/formulate-counter-oval-tradeshow-display-106f0964f35a445882a86bad1143f932",
+      "archive_matched": false,
+      "description": "[Formulate Counter Oval Tradeshow Display](https://www.xyzdisplays.com/Formulate-Counter-Oval-Tradeshow-Display-p/or27730.htm). The Formulate Oval Counter is a "
+    },
+    {
+      "uid": "25a38668148847a3ac36c3e318545cd5",
+      "title": "20x30 Trade Show Booth",
+      "creator": "mike-h-brown",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/20x30-trade-show-booth-25a38668148847a3ac36c3e318545cd5",
+      "archive_matched": false,
+      "description": "23x30 Trade Show Booth"
+    },
+    {
+      "uid": "3dace3d3269d432e89542819e33798c9",
+      "title": "20ft x 20ft Formulate Fusion Exhibit Kit 05",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/20ft-x-20ft-formulate-fusion-exhibit-kit-05-3dace3d3269d432e89542819e33798c9",
+      "archive_matched": false,
+      "description": "[20ft x 20ft Formulate Fusion Trade Show Exhibit Kit 05](https://www.xyzdisplays.com/Fusion-20ft-x20ft-Tension-Fabric-Exhibit-Kit-05-p/or62340.htm). Dominate th"
+    },
+    {
+      "uid": "fe3be050d1a54a7fb78e22b49c1fa5b1",
+      "title": "Desain Booth",
+      "creator": "barunawardana",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/desain-booth-fe3be050d1a54a7fb78e22b49c1fa5b1",
+      "archive_matched": false,
+      "description": "Desain Booth Pameran SMKN 1 Tanjung Raya"
+    },
+    {
+      "uid": "72a9f247a4f244e18093e18c2e94898f",
+      "title": "Exhibition Stand 3d Model",
+      "creator": "saqib24",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-stand-3d-model-72a9f247a4f244e18093e18c2e94898f",
+      "archive_matched": false,
+      "description": "exhibition stand"
+    },
+    {
+      "uid": "225455f1b2d24d7fa78f73a192b8764f",
+      "title": "booth Exhibition",
+      "creator": "elbadriyah",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/booth-exhibition-225455f1b2d24d7fa78f73a192b8764f",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "d2342e34a59f41c68e04a9b1d643b03a",
+      "title": "exhibition-booth-pantry-front-wall",
+      "creator": "Sflex",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-booth-pantry-front-wall-d2342e34a59f41c68e04a9b1d643b03a",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "cfe2d9c37127476bb42bc8a844e3b6b0",
+      "title": "10ft x 8ft Formulate Designer Booth - Kit 02",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/10ft-x-8ft-formulate-designer-booth-kit-02-cfe2d9c37127476bb42bc8a844e3b6b0",
+      "archive_matched": false,
+      "description": "[10ft x 8ft Formulate Designer Series Trade Show Booth - Kit 02](https://www.xyzdisplays.com/10ft-Formulate-Designer-Series-Kit-02-Display-p/or33510.htm). The 1"
+    },
+    {
+      "uid": "02c8a5d1892e42629317c2e30b5495c0",
+      "title": "BOOTH-A-PALOOZA VHS",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/booth-a-palooza-vhs-02c8a5d1892e42629317c2e30b5495c0",
+      "archive_matched": false,
+      "description": "Designed by 7OROY, a VHS to commemorate the virtual expo we held in the metaverse (March 2023)\n\nhttps://zora.co/collect/eth:0x49ee82df94eb7733e2c673b87cd5c824c7"
+    },
+    {
+      "uid": "b404fd4d9ab34a278c14c913576b52c0",
+      "title": "10ft x 8ft Formulate Designer Booth - Kit 03",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/10ft-x-8ft-formulate-designer-booth-kit-03-b404fd4d9ab34a278c14c913576b52c0",
+      "archive_matched": false,
+      "description": "[10ft x 8ft Formulate Designer Series Trade Show Booth - Kit 03](https://www.xyzdisplays.com/10ft-Formulate-Designer-Series-Kit-03-Display-p/or33520.htm). The 1"
+    },
+    {
+      "uid": "971023453bca4c568e3e3bcf4ef56c1b",
+      "title": "Horse Forefooot",
+      "creator": "uod_museums",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/horse-forefooot-971023453bca4c568e3e3bcf4ef56c1b",
+      "archive_matched": true,
+      "description": "Surface scan of the skeletal forefoot of a horse from the D’Arcy Thompson Zoology Museum at the University of Dundee.\n\nHorse - Equus sp. Articulated Leg and foo"
+    },
+    {
+      "uid": "d311e556524248dfbaf623c009396272",
+      "title": "10ft x 8ft Formulate Designer Booth - Kit 07",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/10ft-x-8ft-formulate-designer-booth-kit-07-d311e556524248dfbaf623c009396272",
+      "archive_matched": false,
+      "description": "[10ft x 8ft Formulate Designer Series Trade Show Booth - Kit 07](https://www.xyzdisplays.com/10ft-Formulate-Designer-Series-Kit-07-Display-p/or33560.htm). The 1"
+    },
+    {
+      "uid": "ea6093ab95eb4ff4bbda7f589023d740",
+      "title": "20ft x 20ft Formulate Fusion Exhibit Kit 08",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/20ft-x-20ft-formulate-fusion-exhibit-kit-08-ea6093ab95eb4ff4bbda7f589023d740",
+      "archive_matched": false,
+      "description": "[20ft x 20ft Formulate Fusion Trade Show Exhibit Kit 08](https://www.xyzdisplays.com/Fusion-20x20-Tension-Fabric-Exhibit-Kit-08-p/or62520.htm). Engage your audi"
+    },
+    {
+      "uid": "01ae35525ac34261ace4f4967e497865",
+      "title": "Frammenti di Città exhibition at Musa",
+      "creator": "fabio-zanino",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/frammenti-di-citta-exhibition-at-musa-01ae35525ac34261ace4f4967e497865",
+      "archive_matched": false,
+      "description": "Tuesday, April 1st at Spazio Musa art gallery in Turin, opened the exhibition Frammenti di Città (City Fragments), a dialogue on fragmentation, impermanence, an"
+    },
+    {
+      "uid": "3e9bab8e773849ab8482b084a606ffd5",
+      "title": "Exhibition-booth-3d-wall-counter-table",
+      "creator": "Sflex",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-booth-3d-wall-counter-table-3e9bab8e773849ab8482b084a606ffd5",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "87e92a71b8b145ecbb4066264401d300",
+      "title": "Booth OTKP",
+      "creator": "fajrin.indriani",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/booth-otkp-87e92a71b8b145ecbb4066264401d300",
+      "archive_matched": false,
+      "description": "Booth Ibu Athirah"
+    },
+    {
+      "uid": "3a4443d29ae34efcbf6a4e97993a216e",
+      "title": "Display Tent",
+      "creator": "Dimension_Dazzle",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/display-tent-3a4443d29ae34efcbf6a4e97993a216e",
+      "archive_matched": false,
+      "description": "Enhance your outdoor event or market stall with our premium 3D display tent model! This meticulously designed tent features a spacious interior, sturdy frame, a"
+    },
+    {
+      "uid": "c5c81efbb586496380c1955cf481c6fc",
+      "title": "Takamura Koun",
+      "creator": "shinya_",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/takamura-koun-c5c81efbb586496380c1955cf481c6fc",
+      "archive_matched": true,
+      "description": "[Takamura Koun](https://skfb.ly/orKRx)(1852~1934)\n\n“Monkey Sanbaso”1922. Wood Carving.41cm.\n\nMeiji-era sculptor Takamura Koun (1852-1934), considered the father"
+    },
+    {
+      "uid": "38c0c36c4f20482eb5f806fa10d41053",
+      "title": "BOOTH TEFA-MM",
+      "creator": "SittiMasni",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/booth-tefa-mm-38c0c36c4f20482eb5f806fa10d41053",
+      "archive_matched": false,
+      "description": "Pembelajaran Booth Sesi 3 pada Kegiatan Workshop Metaverse"
+    },
+    {
+      "uid": "063e73a7503a420a8c1883992432ee75",
+      "title": "Booth Exhibtion 2x3",
+      "creator": "Gurennosilius",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/booth-exhibtion-2x3-063e73a7503a420a8c1883992432ee75",
+      "archive_matched": false,
+      "description": "Booth exhibition design simple 2x3 Blender, render in Cycles"
+    },
+    {
+      "uid": "502dd7470db44d3c812aca536f00cac4",
+      "title": "Exhibition-booth-screen-display~2",
+      "creator": "Sflex",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-booth-screen-display2-502dd7470db44d3c812aca536f00cac4",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "5d245725d46f41a29bdd27f6f8fba265",
+      "title": "Exhibition stand with a globe",
+      "creator": "GokouFG",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-stand-with-a-globe-5d245725d46f41a29bdd27f6f8fba265",
+      "archive_matched": false,
+      "description": "An exhibition stand with a globe supported by a magnetic field and steel cables.\nThis object is supposed to decorate research stations."
+    },
+    {
+      "uid": "ef5440a0b61844c89cf3626b15f58650",
+      "title": "10ft x 8ft Formulate Designer Booth - Kit 06",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/10ft-x-8ft-formulate-designer-booth-kit-06-ef5440a0b61844c89cf3626b15f58650",
+      "archive_matched": false,
+      "description": "[10ft x 8ft Formulate Designer Series Trade Show Booth - Kit 06](https://www.xyzdisplays.com/10ft-Formulate-Designer-Series-Kit-06-Display-p/or33550.htm). The 1"
+    },
+    {
+      "uid": "df9e11c400574cdb8cd3675aaff538f1",
+      "title": "20ft x 8ft Formulate Designer Booth - Kit 04",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/20ft-x-8ft-formulate-designer-booth-kit-04-df9e11c400574cdb8cd3675aaff538f1",
+      "archive_matched": false,
+      "description": "[20ft x 8ft Formulate Designer Series Trade Show Booth - Kit 04](https://www.xyzdisplays.com/20ft-Formulate-Designer-Series-Kit-04-Display-p/or33230.htm). Formu"
+    },
+    {
+      "uid": "50738bfed6b847d48ce833eb85cd6036",
+      "title": "Basic Design Studio Final Model Display Booth",
+      "creator": "serkutyuksel",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/basic-design-studio-final-model-display-booth-50738bfed6b847d48ce833eb85cd6036",
+      "archive_matched": true,
+      "description": ""
+    },
+    {
+      "uid": "9d55456c04504750834b7f1b8e9e5842",
+      "title": "M3TV Stage",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/m3tv-stage-9d55456c04504750834b7f1b8e9e5842",
+      "archive_matched": false,
+      "description": "Virtual stage production set for M3TV studio to be repurposed into a booth for the Neon Buidl metaverse conference / expo: https://twitter.com/neon_buidl\n\nCheck"
+    },
+    {
+      "uid": "56b33ec8273a4108a7c393504bcce800",
+      "title": "10ft x 8ft Formulate Designer Booth - Kit 10",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/10ft-x-8ft-formulate-designer-booth-kit-10-56b33ec8273a4108a7c393504bcce800",
+      "archive_matched": false,
+      "description": "[10ft x 8ft Formulate Designer Series Trade Show Booth - Kit 10](https://www.xyzdisplays.com/10ft-Formulate-Designer-Series-Kit-10-Display-p/or33590.htm). The 1"
+    },
+    {
+      "uid": "7976cc8bd536418ea08f2423b9d99e69",
+      "title": "20ft x 8ft Formulate Designer Booth - Kit 03",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/20ft-x-8ft-formulate-designer-booth-kit-03-7976cc8bd536418ea08f2423b9d99e69",
+      "archive_matched": false,
+      "description": "[20ft x 8ft Formulate Designer Series Trade Show Booth - Kit 03](https://www.xyzdisplays.com/20ft-Formulate-Designer-Series-Kit-03-Display-p/or33220.htm). Formu"
+    },
+    {
+      "uid": "2837220e65d24616b9f8bd5a3c8d7389",
+      "title": "Booth Indoor 3 X 3",
+      "creator": "eksteriordesign",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/booth-indoor-3-x-3-2837220e65d24616b9f8bd5a3c8d7389",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "ddc447b1c0214faa85ceb59f7673ee7d",
+      "title": "Booth TEFA SMK N 3 Klaten",
+      "creator": "chrischarito14",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/booth-tefa-smk-n-3-klaten-ddc447b1c0214faa85ceb59f7673ee7d",
+      "archive_matched": false,
+      "description": "Booth pameran Tefa SMK N 3 Klaten"
+    },
+    {
+      "uid": "f6255000572146928bd61cde5aff76e2",
+      "title": "Sign Stand",
+      "creator": "cmemento",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/sign-stand-f6255000572146928bd61cde5aff76e2",
+      "archive_matched": true,
+      "description": "The stand is used to display and tell a story regarding the photo exhibition"
+    },
+    {
+      "uid": "4449bf5a37364d8a820752a5bf0ac0a8",
+      "title": "10ft x 8ft Formulate Designer Booth - Kit 01",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/10ft-x-8ft-formulate-designer-booth-kit-01-4449bf5a37364d8a820752a5bf0ac0a8",
+      "archive_matched": false,
+      "description": "[10ft x 8ft Formulate Designer Series Trade Show Booth - Kit 01](https://www.xyzdisplays.com/10ft-Formulate-Designer-Series-Kit-01-Display-p/or33500.htm). Formu"
+    },
+    {
+      "uid": "dc1d6b05360a4f3cab348cee7642aea8",
+      "title": "Phone Stand V1.0",
+      "creator": "milanorage",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/phone-stand-v10-dc1d6b05360a4f3cab348cee7642aea8",
+      "archive_matched": true,
+      "description": "This model was designed to be presented as a mobile phone stand at an exhibition. It was polished and painted eventually and did a very good job. I've printed 1"
+    },
+    {
+      "uid": "1f9332a8d7bf40dbb81e0128317e677a",
+      "title": "TOK - Stand - Propuesta 2",
+      "creator": "matisnero",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/tok-stand-propuesta-2-1f9332a8d7bf40dbb81e0128317e677a",
+      "archive_matched": true,
+      "description": "Propuesta de Exhibicion Ribeiro"
+    },
+    {
+      "uid": "ab33bf98da904f0488f0eb659ba75b79",
+      "title": "Smooth Voxels Booth",
+      "creator": "m3org",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/smooth-voxels-booth-ab33bf98da904f0488f0eb659ba75b79",
+      "archive_matched": false,
+      "description": "Booth made by dev of Smooth Voxels for the metaverse conference / expo we're building with Neon Buidl. Check out Smooth Voxels here: https://svox.glitch.me/"
+    },
+    {
+      "uid": "ca17e90f2ddc4f3d84e5d3273fab4021",
+      "title": "Skema Booth",
+      "creator": "notifyparlinsitorus",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/skema-booth-ca17e90f2ddc4f3d84e5d3273fab4021",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "650c02197fad4155a071b9dcfeef5e26",
+      "title": "Mixeu_ Booth",
+      "creator": "bryan.henrilsen",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/mixeu--booth-650c02197fad4155a071b9dcfeef5e26",
+      "archive_matched": false,
+      "description": "This is a 3D model of a Mixue exhibition booth, designed specifically for indoor use, such as in malls, trade shows, or promotional events. The booth features a"
+    },
+    {
+      "uid": "348a94fabe6f42d5b4404eb19b71b35d",
+      "title": "Музейная витрина  |  Museum Showcase",
+      "creator": "dizartoren",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/museum-showcase-348a94fabe6f42d5b4404eb19b71b35d",
+      "archive_matched": false,
+      "description": "3D модель музейной витрины с экспозицией идеально подходит для оформления выставочных пространств, музеев и галерей. Прочная конструкция, безопасное стекло и не"
+    },
+    {
+      "uid": "a83dc5d8202b4007ad1dd107fe1b5fa8",
+      "title": "Booth SMK ' Aisyiyah",
+      "creator": "Hui13",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/booth-smk-aisyiyah-a83dc5d8202b4007ad1dd107fe1b5fa8",
+      "archive_matched": false,
+      "description": "A task for metaverse workshop 3rd day. Feel free to comment and give me your opinion since this is my first time making 3D."
+    },
+    {
+      "uid": "021783d14ad04071bf6155b765912d8b",
+      "title": "10ft x 8ft Formulate Designer Booth - Kit 13",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/10ft-x-8ft-formulate-designer-booth-kit-13-021783d14ad04071bf6155b765912d8b",
+      "archive_matched": false,
+      "description": "[10ft x 8ft Formulate Designer Series Trade Show Booth - Kit 13](https://www.xyzdisplays.com/10ft-Formulate-Designer-Series-Kit-13-Display-p/or33620.htm). Formu"
+    },
+    {
+      "uid": "381f4049b7a94261a2af4c3c09800b2b",
+      "title": "Booth Design",
+      "creator": "the-rmz",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/booth-design-381f4049b7a94261a2af4c3c09800b2b",
+      "archive_matched": false,
+      "description": "Booth Design Exhibition"
+    },
+    {
+      "uid": "40b8bba7dd4b4805b297caff73c6025f",
+      "title": "booth",
+      "creator": "forcalor0",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/booth-40b8bba7dd4b4805b297caff73c6025f",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "d92d21e654b245ac9a8e6c4039b86cf6",
+      "title": "Exhibition-booth-3D-logo-sign",
+      "creator": "Sflex",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-booth-3d-logo-sign-d92d21e654b245ac9a8e6c4039b86cf6",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "68add5e25f1647acbdc2a70af1d2f9d7",
+      "title": "10ft x 8ft Formulate Designer Booth - Kit 09",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/10ft-x-8ft-formulate-designer-booth-kit-09-68add5e25f1647acbdc2a70af1d2f9d7",
+      "archive_matched": false,
+      "description": "[10ft x 8ft Formulate Designer Series Trade Show Booth - Kit 09](https://www.xyzdisplays.com/10ft-Formulate-Designer-Series-Kit-09-Display-p/or33580.htm). The 1"
+    },
+    {
+      "uid": "8d3d48198c1b4aa8a8d6c5de1d167676",
+      "title": "One Choice 8ft Throw",
+      "creator": "exhibitbook",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/one-choice-8ft-throw-8d3d48198c1b4aa8a8d6c5de1d167676",
+      "archive_matched": true,
+      "description": "Table throws are a great addition to your trade show booth. One Choice 8ft. 4-sided Table Throw will fit a standard eight foot table. Custom printed edge-to-edg"
+    },
+    {
+      "uid": "223d15421037458baf1ad533f0569215",
+      "title": "Booth Elind",
+      "creator": "bangsoy",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/booth-elind-223d15421037458baf1ad533f0569215",
+      "archive_matched": false,
+      "description": "Model Booth Pameran Teknik Elektronika Industri SMKN 1 Ampelgading"
+    },
+    {
+      "uid": "23c9d0188852421182cf21b76c9cc0ce",
+      "title": "SM_Booth_Kitbash_Pack_Vol1",
+      "creator": "ro_wan",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/sm-booth-kitbash-pack-vol1-23c9d0188852421182cf21b76c9cc0ce",
+      "archive_matched": false,
+      "description": "I hope my model help other 3d designers and hope to get postive feedback from all of you <3\n\n🌟 Key Features100% Modular Design: Built on a grid system with opt"
+    },
+    {
+      "uid": "bcd88c8f7c484d3b8b56f80009f61333",
+      "title": "Expo Booth",
+      "creator": "barok95",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/expo-booth-bcd88c8f7c484d3b8b56f80009f61333",
+      "archive_matched": false,
+      "description": "FUTURE TECH ADDIS"
+    },
+    {
+      "uid": "390e76d05df847cbae432a25e0497691",
+      "title": "Formulate Monitor Trade Show Kiosk Kit 04",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/formulate-monitor-trade-show-kiosk-kit-04-390e76d05df847cbae432a25e0497691",
+      "archive_matched": false,
+      "description": "[Formulate Monitor Trade Show Kiosk Kit 04 Display](https://www.xyzdisplays.com/Formulate-Monitor-Trade-Show-Kiosk-Kit-04-Display-p/or27200.htm). Formulate Kios"
+    },
+    {
+      "uid": "ac1f05872024457baefb4f5f53832804",
+      "title": "Booth pameran smk sunnatunnur",
+      "creator": "m.lutfimuafa",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/booth-pameran-smk-sunnatunnur-ac1f05872024457baefb4f5f53832804",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "5d9b32365ad94de2a0acdcc9c68e5c28",
+      "title": "10ft x 8ft Formulate Designer Booth - Kit 11",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/10ft-x-8ft-formulate-designer-booth-kit-11-5d9b32365ad94de2a0acdcc9c68e5c28",
+      "archive_matched": false,
+      "description": "[10ft x 8ft Formulate Designer Series Trade Show Booth - Kit 11](https://www.xyzdisplays.com/10ft-Formulate-Designer-Series-Kit-11-Display-p/or33600.htm). The 1"
+    },
+    {
+      "uid": "de2301205d994f2993c881a480247ba5",
+      "title": "MACBERTAN Stall Design | 3D Exhibition Booth",
+      "creator": "sandeepadikkumbura",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/macbertan-stall-design-3d-exhibition-booth-de2301205d994f2993c881a480247ba5",
+      "archive_matched": false,
+      "description": "A bright and colorful exhibition stall for MACBERTAN (Private) Limited, designed and rendered using Blender. Focused on a playful yet professional aesthetic to "
+    },
+    {
+      "uid": "5a7e04dff7d24b2b97edb0a63049a5bc",
+      "title": "exhibition booths",
+      "creator": "Yodelatio",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-booths-5a7e04dff7d24b2b97edb0a63049a5bc",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "e77ce8612e11407ba79585662c1114fb",
+      "title": "KCDF-좌등_문살(Stand lighting_seal03)",
+      "creator": "wipco6080",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/kcdf--stand-lighting-seal03-e77ce8612e11407ba79585662c1114fb",
+      "archive_matched": false,
+      "description": "한국공예·디자인문화진흥원 에서는 한국의 전통 생활문화 요소를 게임이나 전시용 3D 콘텐츠에 반영해 사용할 수 있도록 게임엔진 등에 최적화된 3D 데이터로 제작하여 배포합니다.\n\n이 데이터는 누구나 그대로, 혹은 재가공하여 자신만의 새로운 콘텐츠를 만들어 상업 · 비 상업적 목적에 상관없"
+    },
+    {
+      "uid": "254dbafd3a9a40638b15f5afa08ad6fc",
+      "title": "10ft x 8ft Formulate Designer Booth - Kit 04",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/10ft-x-8ft-formulate-designer-booth-kit-04-254dbafd3a9a40638b15f5afa08ad6fc",
+      "archive_matched": false,
+      "description": "[10ft x 8ft Formulate Designer Series Trade Show Booth - Kit 04](https://www.xyzdisplays.com/10ft-Formulate-Designer-Series-Kit-04-Display-p/or33530.htm). The 1"
+    },
+    {
+      "uid": "a962f74f6078471183026e374f7dbccc",
+      "title": "EXPO BOOTH RECEPTION TABLE",
+      "creator": "palakudiyiljaison.saudi",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/expo-booth-reception-table-a962f74f6078471183026e374f7dbccc",
+      "archive_matched": false,
+      "description": "This is a sleek and contemporary reception counter designed specifically for exhibition booths and trade show stands. It features a clean, professional aestheti"
+    },
+    {
+      "uid": "d6391bc88fb043db92cac9265894f81f",
+      "title": "TMV 6x6",
+      "creator": "Mayess",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/tmv-6x6-d6391bc88fb043db92cac9265894f81f",
+      "archive_matched": false,
+      "description": "The British firm TMV (Total Mobility Vehicles) has created a series of prototypes of armored vehicles with improved mine protection. In the TMV 6x6M version, th"
+    },
+    {
+      "uid": "e8d454e19f694a3b9ab66cd2d08e2445",
+      "title": "Exhibition-booth-top-sign",
+      "creator": "Sflex",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-booth-top-sign-e8d454e19f694a3b9ab66cd2d08e2445",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "ec9a702695654b6f8a75cb4abd9f7864",
+      "title": "Exhibition booth for SMNS",
+      "creator": "nazeeeh",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-booth-for-smns-ec9a702695654b6f8a75cb4abd9f7864",
+      "archive_matched": false,
+      "description": "Exhibition booth for SMNS\nBin Nahar AlQahtani Group"
+    },
+    {
+      "uid": "1fdbaff8813f4b15a2206b0609ae7bcb",
+      "title": "Mr T Chia Box",
+      "creator": "thecablecenter",
+      "license": "cc0",
+      "url": "https://sketchfab.com/3d-models/mr-t-chia-box-1fdbaff8813f4b15a2206b0609ae7bcb",
+      "archive_matched": false,
+      "description": "Mr. T (A-Team) Chia Head (watch his mohawk grow!) was used by TV Land to promote their network. Not available on the general market, a relatively limited number"
+    },
+    {
+      "uid": "2f9062dd65b641df816350f7a43ae4f8",
+      "title": "Gresppo Exhibition Booth 01",
+      "creator": "mamoon47",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/gresppo-exhibition-booth-01-2f9062dd65b641df816350f7a43ae4f8",
+      "archive_matched": false,
+      "description": "Designed a custom exhibition booth based on client requirements. Developed the 3D model, prepared technical drawings, and created realistic visualizations to pr"
+    },
+    {
+      "uid": "3f8625ced2fe4f959033b78acb1bf906",
+      "title": "Exhibition-booth-rotatable-triangle",
+      "creator": "Sflex",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-booth-rotatable-triangle-3f8625ced2fe4f959033b78acb1bf906",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "dd13b4ed65c74333bbe713f2428fe03f",
+      "title": "Exhibition stand prototype",
+      "creator": "EJ.nc",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-stand-prototype-dd13b4ed65c74333bbe713f2428fe03f",
+      "archive_matched": false,
+      "description": "AO.com exhibition stand produced for a Nimlok project"
+    },
+    {
+      "uid": "c2225069791d41bcaf731351fe3f6fae",
+      "title": "3 umkm bazar 3 unit",
+      "creator": "eventdesignws",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/3-umkm-bazar-3-unit-c2225069791d41bcaf731351fe3f6fae",
+      "archive_matched": false,
+      "description": "EVENT WS WASIS SOUND LIGHTING STAGE CONCERT GALADINNER VENUE BALLROOM LAYOUT INDONESIA WSEVENTDESIGN DESIGN CONCEPT LIGHT PARLED MOVING HEAD LAMPU LEDPAR LED LE"
+    },
+    {
+      "uid": "e75e3bad691d4eada6103203c826006a",
+      "title": "SHOWDI",
+      "creator": "eventdesignws",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/showdi-e75e3bad691d4eada6103203c826006a",
+      "archive_matched": false,
+      "description": "EVENT WS WASIS SOUND LIGHTING STAGE CONCERT GALADINNER VENUE BALLROOM LAYOUT INDONESIA WSEVENTDESIGN DESIGN CONCEPT LIGHT PARLED MOVING HEAD LAMPU LEDPAR LED LE"
+    },
+    {
+      "uid": "02f5f0a17fdb4b9c83b26a0070426c25",
+      "title": "KCDF-좌등_일월오봉도(Stand lighting_pic05)",
+      "creator": "wipco6080",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/kcdf--stand-lighting-pic05-02f5f0a17fdb4b9c83b26a0070426c25",
+      "archive_matched": false,
+      "description": "한국공예·디자인문화진흥원 에서는 한국의 전통 생활문화 요소를 게임이나 전시용 3D 콘텐츠에 반영해 사용할 수 있도록 게임엔진 등에 최적화된 3D 데이터로 제작하여 배포합니다.\n\n이 데이터는 누구나 그대로, 혹은 재가공하여 자신만의 새로운 콘텐츠를 만들어 상업 · 비 상업적 목적에 상관없"
+    },
+    {
+      "uid": "b44943e70c584d2499474df1cba14719",
+      "title": "Stand Banner | X Banner",
+      "creator": "Najeebbaloch",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/stand-banner-x-banner-b44943e70c584d2499474df1cba14719",
+      "archive_matched": false,
+      "description": "Free download of a high-quality 3D X-Stand Banner model, designed with a fabric banner supported by an X-frame structure and a central ground pole for stability"
+    },
+    {
+      "uid": "651bfa6137fd4c97bbca3ca699f4bcfe",
+      "title": "exhibition_stand_chair",
+      "creator": "nganha2169",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-stand-chair-651bfa6137fd4c97bbca3ca699f4bcfe",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "662defd0efb9481ebc6c55039e6805a8",
+      "title": "exhibition_stand_stolek_bar",
+      "creator": "nganha2169",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-stand-stolek-bar-662defd0efb9481ebc6c55039e6805a8",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "ca9215cda00d4c33bf2c950485bbecbe",
+      "title": "Ukrainian Architectural Exhibition Stand",
+      "creator": "21irapak12",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/ukrainian-architectural-exhibition-stand-ca9215cda00d4c33bf2c950485bbecbe",
+      "archive_matched": false,
+      "description": "A 3D-modeled exhibition display board showcasing various architectural projects, urban planning schemes, and residential building designs in Ukraine. The stand "
+    },
+    {
+      "uid": "1c98a9b4b13c4fc8a717f01dd8afb958",
+      "title": "Exhibition-booth-pantry-front-wall",
+      "creator": "Sflex",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-booth-pantry-front-wall-1c98a9b4b13c4fc8a717f01dd8afb958",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "623e2ec5288941caba6476914b782300",
+      "title": "Stand de exposición",
+      "creator": "vakktor",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/stand-de-exposicion-623e2ec5288941caba6476914b782300",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "7e9e1516dbfe48d2ab094361071d752a",
+      "title": "Exhibition-booth-pantry-floor",
+      "creator": "Sflex",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-booth-pantry-floor-7e9e1516dbfe48d2ab094361071d752a",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "5057660a4bf148eab2c9ec0194d4816c",
+      "title": "One Choice 6ft Throw",
+      "creator": "exhibitbook",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/one-choice-6ft-throw-5057660a4bf148eab2c9ec0194d4816c",
+      "archive_matched": true,
+      "description": "Table throws are a great addition to your trade show booth. One Choice 6ft. 4-sided Table Throw will fit a standard six foot table. Custom printed edge-to-edge,"
+    },
+    {
+      "uid": "b62293255b7a419a9b257cbfac556c45",
+      "title": "Balinese Booth Art Exhibition",
+      "creator": "kuyan9288",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/balinese-booth-art-exhibition-b62293255b7a419a9b257cbfac556c45",
+      "archive_matched": false,
+      "description": "balinese culture and traditions religion impacts almost every aspect of life on the island and draws people to Bali to see and experience it."
+    },
+    {
+      "uid": "c77844b8f7f94acba6fc9b234f70876e",
+      "title": "KCDF-좌등_문살(Stand lighting_seal02)",
+      "creator": "wipco6080",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/kcdf--stand-lighting-seal02-c77844b8f7f94acba6fc9b234f70876e",
+      "archive_matched": false,
+      "description": "한국공예·디자인문화진흥원 에서는 한국의 전통 생활문화 요소를 게임이나 전시용 3D 콘텐츠에 반영해 사용할 수 있도록 게임엔진 등에 최적화된 3D 데이터로 제작하여 배포합니다.\n\n이 데이터는 누구나 그대로, 혹은 재가공하여 자신만의 새로운 콘텐츠를 만들어 상업 · 비 상업적 목적에 상관없"
+    },
+    {
+      "uid": "a391c763286a4a3b86e884ab227ce354",
+      "title": "Ready Pop 7.5x5 Double Sided Display",
+      "creator": "exhibitbook",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/ready-pop-75x5-double-sided-display-a391c763286a4a3b86e884ab227ce354",
+      "archive_matched": true,
+      "description": "**Product Overview:**\nOur ultra lightweight aluminum alloy fabric pop-up display in a matte satin anodized finish is an ideal eye-catcher for your tradeshow, ex"
+    },
+    {
+      "uid": "73ef160327c347c083ec4926ecf2f4fd",
+      "title": "RPL 8ft X 8ft Curved Display No Endcaps",
+      "creator": "exhibitbook",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/rpl-8ft-x-8ft-curved-display-no-endcaps-73ef160327c347c083ec4926ecf2f4fd",
+      "archive_matched": true,
+      "description": "The RPL Fabric Pop Up is the perfect display on the go. It's ready in minutes. The lightweight aluminum alloy frame locks in place using plastic hooks. Fasten t"
+    },
+    {
+      "uid": "c2ff0c185a514f9cb63357893860a2a9",
+      "title": "Выставочный стенд",
+      "creator": "lozenkow",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/c2ff0c185a514f9cb63357893860a2a9",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "f3faa982df33402785e07d61ce544e0d",
+      "title": "Stand CalienteMX AMT Acapulco",
+      "creator": "Julio.Ortiz",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/stand-calientemx-amt-acapulco-f3faa982df33402785e07d61ce544e0d",
+      "archive_matched": false,
+      "description": "This model represents an exciting stand proposal for the Caliente MX brand at the prestigious Mexican Tennis Open. With a modern and attractive design, the stan"
+    },
+    {
+      "uid": "74a5ee59563d43ada71aca028bb30b20",
+      "title": "Stylized Japanese Ramen Street Food Stal",
+      "creator": "Star3DArt",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/stylized-japanese-ramen-street-food-stal-74a5ee59563d43ada71aca028bb30b20",
+      "archive_matched": false,
+      "description": "Stylish Japanese Street Ramen Stall\nA clean, game-ready 3D diorama inspired by a traditional Japanese street ramen stall.\n\nThis model is designed with a stylish"
+    },
+    {
+      "uid": "b43f07f4360a4bdbaa2234ce5c9f08ba",
+      "title": "TRANSPORT",
+      "creator": "boody055371",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/transport-b43f07f4360a4bdbaa2234ce5c9f08ba",
+      "archive_matched": true,
+      "description": "3D MOODEL FOR BOOTH EXHIBITION FOR AJMAN UNI SHOW HOE TO EXHIBIT THE STUDENTS WOORK"
+    },
+    {
+      "uid": "c161242094724e54b0dfb946304eba32",
+      "title": "Booth Pameran SMK Negeri 2 Palu",
+      "creator": "fajrin.indriani",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/booth-pameran-smk-negeri-2-palu-c161242094724e54b0dfb946304eba32",
+      "archive_matched": false,
+      "description": "Pemaeran SMK Negeri 2 Palu\nGuru Multimedia : Fajrin Indriani Rais"
+    },
+    {
+      "uid": "976f3fe9e519496eaaba1d5d1575d22b",
+      "title": "Exhibition-booth-honeycomb-cardboard-closet",
+      "creator": "Sflex",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-booth-honeycomb-cardboard-closet-976f3fe9e519496eaaba1d5d1575d22b",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "f8e66501d71143eca8a280b9af7718c9",
+      "title": "Выставочный стенд",
+      "creator": "lozenkow",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/f8e66501d71143eca8a280b9af7718c9",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "4812321b0c2a43ab8df117fb383a5319",
+      "title": "Blender 3D for Jobseekers - Pedestal Example",
+      "creator": "laurieannis",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/blender-3d-for-jobseekers-pedestal-example-4812321b0c2a43ab8df117fb383a5319",
+      "archive_matched": false,
+      "description": "Free to download!  Low poly pedestal model created as a step-by-step example project for the book Blender 3D for Jobseekers by Laurie Annis, available here: htt"
+    },
+    {
+      "uid": "ef1f4a05c6704cdfb6e472085a52e13f",
+      "title": "Exhibition Booth",
+      "creator": "wannandy.suwandy",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/exhibition-booth-ef1f4a05c6704cdfb6e472085a52e13f",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "6c9c17bfd8124ac793b55b4297def2d4",
+      "title": "Выставочный стенд",
+      "creator": "lozenkow",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/6c9c17bfd8124ac793b55b4297def2d4",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "7698e4dc1b6b4c41b48017b2f311231e",
+      "title": "mini+garden TEPI KAYU",
+      "creator": "eventdesignws",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/minigarden-tepi-kayu-7698e4dc1b6b4c41b48017b2f311231e",
+      "archive_matched": false,
+      "description": "EVENT WS WASIS SOUND LIGHTING STAGE CONCERT GALADINNER VENUE BALLROOM LAYOUT INDONESIA WSEVENTDESIGN DESIGN CONCEPT LIGHT PARLED MOVING HEAD LAMPU LEDPAR LED LE"
+    },
+    {
+      "uid": "7b0233ccaefc492f8c795ab32c497fa1",
+      "title": "1237 Trade Show Stand",
+      "creator": "nggalampanao",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/1237-trade-show-stand-7b0233ccaefc492f8c795ab32c497fa1",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "0ab472db42bd49a988c995d3c67046dc",
+      "title": "Horizon Health Craft Virtual Stand",
+      "creator": "globalexpostand.com",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/horizon-health-craft-virtual-stand-0ab472db42bd49a988c995d3c67046dc",
+      "archive_matched": false,
+      "description": "‘Horizon Health Craft India Private Limited’ is an Indian manufacturer of insightful UV-C (Ultra Violet) disinfection solutions for home, healthcare industries "
+    },
+    {
+      "uid": "c6944ee38dfc492a81d2126e83901482",
+      "title": "9ft x 3ft Formulate Fabric Bar Counter 03",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/9ft-x-3ft-formulate-fabric-bar-counter-03-c6944ee38dfc492a81d2126e83901482",
+      "archive_matched": false,
+      "description": "[9ft x 3ft Formulate Custom Fabric Bar Counter 03](https://www.xyzdisplays.com/9ft-x-3ft-Formulate-Bar-Counter-03-p/or27760.htm). The Formulate Bar Counter 03 i"
+    },
+    {
+      "uid": "e537652b6c7a4010bcb40c7427a0e4c4",
+      "title": "KCDF-좌등_문살(Stand lighting_seal01)",
+      "creator": "wipco6080",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/kcdf--stand-lighting-seal01-e537652b6c7a4010bcb40c7427a0e4c4",
+      "archive_matched": false,
+      "description": "한국공예·디자인문화진흥원 에서는 한국의 전통 생활문화 요소를 게임이나 전시용 3D 콘텐츠에 반영해 사용할 수 있도록 게임엔진 등에 최적화된 3D 데이터로 제작하여 배포합니다.\n\n이 데이터는 누구나 그대로, 혹은 재가공하여 자신만의 새로운 콘텐츠를 만들어 상업 · 비 상업적 목적에 상관없"
+    },
+    {
+      "uid": "27e6c9ed97b048ac990ac6e69541fb25",
+      "title": "KCDF-경대(Mirror Stand Comb Box)",
+      "creator": "KCDF",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/kcdf-mirror-stand-comb-box-27e6c9ed97b048ac990ac6e69541fb25",
+      "archive_matched": false,
+      "description": "\"한국공예·디자인문화진흥원 에서는 한국의 전통 생활문화 요소를 게임이나 전시용 3D 콘텐츠에 반영해 사용할 수 있도록 게임엔진 등에 최적화된 3D 데이터로 제작하여 배포합니다.\n\n이 데이터는 누구나 그대로, 혹은 재가공하여 자신만의 새로운 콘텐츠를 만들어 상업 · 비 상업적 목적에 상관"
+    },
+    {
+      "uid": "6586758b0db64d3d85d24926ea9e6b85",
+      "title": "002_Gym Equipment_Bicycle with Basket_Animated",
+      "creator": "Average3DmodelEnjoyer",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/002-gym-equipment-bicycle-with-basket-animated-6586758b0db64d3d85d24926ea9e6b85",
+      "archive_matched": false,
+      "description": "I learned how to rig and animate my bicycle i posted on here before. The handlem brakes, brake pads, the seats, the dynamo light, the gears, the chain, the kick"
+    },
+    {
+      "uid": "4b8f1528024d4778b7d78b8c4c8c6c06",
+      "title": "BAZAR UMKM TEN UK 4 X30 METER",
+      "creator": "eventdesignws",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/bazar-umkm-ten-uk-4-x30-meter-4b8f1528024d4778b7d78b8c4c8c6c06",
+      "archive_matched": false,
+      "description": "EVENT WS WASIS SOUND LIGHTING STAGE CONCERT GALADINNER VENUE BALLROOM LAYOUT INDONESIA WSEVENTDESIGN DESIGN CONCEPT LIGHT PARLED MOVING HEAD LAMPU LEDPAR LED LE"
+    },
+    {
+      "uid": "44682dc49d854aff8e75a2d71b7ad774",
+      "title": "KCDF-좌등_일월오봉도(Stand lighting_pic02)",
+      "creator": "wipco6080",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/kcdf--stand-lighting-pic02-44682dc49d854aff8e75a2d71b7ad774",
+      "archive_matched": false,
+      "description": "한국공예·디자인문화진흥원 에서는 한국의 전통 생활문화 요소를 게임이나 전시용 3D 콘텐츠에 반영해 사용할 수 있도록 게임엔진 등에 최적화된 3D 데이터로 제작하여 배포합니다.\n\n이 데이터는 누구나 그대로, 혹은 재가공하여 자신만의 새로운 콘텐츠를 만들어 상업 · 비 상업적 목적에 상관없"
+    },
+    {
+      "uid": "8037a3f59cf54557afafae5aa7f4e52c",
+      "title": "Freestanding 70in Monitor Stand Kiosk",
+      "creator": "xyzdisplayscloud",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/freestanding-70in-monitor-stand-kiosk-8037a3f59cf54557afafae5aa7f4e52c",
+      "archive_matched": false,
+      "description": "[Freestanding 70in Monitor Stand Kiosk](https://www.xyzdisplays.com/Freestanding-70in-Monitor-Stand-Kiosk-p/or27140.htm). The Freestanding Monitor Kiosk is a pe"
+    },
+    {
+      "uid": "e16e3fae178e4bea9387d62974500477",
+      "title": "CREW STAGE",
+      "creator": "eventdesignws",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/crew-stage-e16e3fae178e4bea9387d62974500477",
+      "archive_matched": false,
+      "description": "VENT WS WASIS SOUND LIGHTING STAGE CONCERT GALADINNER VENUE BALLROOM LAYOUT INDONESIA WSEVENTDESIGN DESIGN CONCEPT LIGHT PARLED MOVING HEAD LAMPU LEDPAR LED LED"
+    },
+    {
+      "uid": "c12bdc4aa3c94a1a9a2be7dc2d693b1d",
+      "title": "Stand 1",
+      "creator": "ferneysalgar",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/stand-1-c12bdc4aa3c94a1a9a2be7dc2d693b1d",
+      "archive_matched": true,
+      "description": "modelo de stand de exhibicion"
+    },
+    {
+      "uid": "35ee8110909a496d9f79fcd99f90417d",
+      "title": "Выставочный стенд",
+      "creator": "lozenkow",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/35ee8110909a496d9f79fcd99f90417d",
+      "archive_matched": false,
+      "description": ""
+    },
+    {
+      "uid": "24bf2efa1cd14c5b88fdea11f256d924",
+      "title": "KCDF-좌등_문살(Stand lighting_seal05)",
+      "creator": "wipco6080",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/kcdf--stand-lighting-seal05-24bf2efa1cd14c5b88fdea11f256d924",
+      "archive_matched": false,
+      "description": "한국공예·디자인문화진흥원 에서는 한국의 전통 생활문화 요소를 게임이나 전시용 3D 콘텐츠에 반영해 사용할 수 있도록 게임엔진 등에 최적화된 3D 데이터로 제작하여 배포합니다.\n\n이 데이터는 누구나 그대로, 혹은 재가공하여 자신만의 새로운 콘텐츠를 만들어 상업 · 비 상업적 목적에 상관없"
+    },
+    {
+      "uid": "e83b1896ae684bcf92d478c83722578e",
+      "title": "mockup kabah 244x300t kubus",
+      "creator": "eventdesignws",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/mockup-kabah-244x300t-kubus-e83b1896ae684bcf92d478c83722578e",
+      "archive_matched": false,
+      "description": "EVENT WS WASIS SOUND LIGHTING STAGE CONCERT GALADINNER VENUE BALLROOM LAYOUT INDONESIA WSEVENTDESIGN DESIGN CONCEPT LIGHT PARLED MOVING HEAD LAMPU LEDPAR LED LE"
+    },
+    {
+      "uid": "4e0f0f8409ab43deb60ad08d433136cd",
+      "title": "Barbeque bakaran",
+      "creator": "eventdesignws",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/barbeque-bakaran-4e0f0f8409ab43deb60ad08d433136cd",
+      "archive_matched": false,
+      "description": "EVENT WS WASIS SOUND LIGHTING STAGE CONCERT GALADINNER VENUE BALLROOM LAYOUT INDONESIA WSEVENTDESIGN DESIGN CONCEPT LIGHT PARLED MOVING HEAD LAMPU LEDPAR LED LE"
+    },
+    {
+      "uid": "2f0e7c5c1f97474883d270dd59e8d0c1",
+      "title": "Kahai Oil Virtual Stand",
+      "creator": "globalexpostand.com",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/kahai-oil-virtual-stand-2f0e7c5c1f97474883d270dd59e8d0c1",
+      "archive_matched": false,
+      "description": "KAHAI oil is a natural anti-aging treatment made from the nuts of an Amazon tree called Cacay, visit them at www.smartglobalexpo.com"
+    },
+    {
+      "uid": "b34af2aced3a470295c5c94f3ed12113",
+      "title": "Stylized hand painted horse",
+      "creator": "dovecoteexpress",
+      "license": "by",
+      "url": "https://sketchfab.com/3d-models/stylized-hand-painted-horse-b34af2aced3a470295c5c94f3ed12113",
+      "archive_matched": false,
+      "description": "From its animated stance to its expressive features, every aspect of this stylized horse beckons admiration and curiosity.\n\nAs a showcase of artistic talent, th"
+    }
+  ]
+}
