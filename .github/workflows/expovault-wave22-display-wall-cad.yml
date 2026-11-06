@@ -1,0 +1,55 @@
+name: ExpoVault Wave22 original display wall system CAD source
+on:
+  push:
+    branches: [feature/expovault-bulk-range-prosceneverse]
+    paths: [.github/workflows/expovault-wave22-display-wall-cad.yml]
+permissions: {contents: read}
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    strategy:
+      fail-fast: false
+      max-parallel: 7
+      matrix:
+        uid:
+          - ee3dc485546c4cceb67da9a1a607511c
+          - 7a037b1cc0ce4acbb880da010b4a130a
+          - 07a6c7025e124280957b0fe784589eed
+          - a976076c9bf64ba59f9472e93b26b513
+          - 64c7e45db4cc425bb69aaa6702127442
+          - 825c3f2ce3104dfb93ad9f803c0dba
+          - ca65aed0d97542faae9884d1c701c5ba
+          - 54b7f52aa6e54be6acd70bf82c780794
+          - 1f0f6a4075cf42adbfeb9be145177b67
+          - 61a4ee52edb241438969e3ac853a32b8
+          - 709913875b8a4f2ab13f8a187112aac2
+          - 1a63b25a95d845e9bc92b88516956e91
+          - ad939339fb994f9799242f6e0585072d
+          - 2588288b9fe040c8b698a85f162827f3
+          - df7d46f066334e8cb942c8b034faaa21
+          - c7651facace14e4286a04f76783f59ea
+          - 30a3d6d1821a40658779623783d387dc
+          - ae1f611cf4764e049efcf56916aa3631
+          - 5ead24eee182451faa42f3609e894096
+          - c1c396948e414e2da40857fbc45e1c97
+          - 799776ff76554fcf800331f29aba1245
+          - 131b0e986ef64354b8b7b647e154aeab
+          - ba0704e0558141ea89d6b4de4caaefa1
+          - 3ff163fe51964aa19f25a304bdc0964a
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/rescue_large_creator_booth_sources.py
+      - run: python -m pip install -q requests pillow
+      - run: npm install -g @gltf-transform/cli@4
+      - name: Respect historical author CC license and obtain original geometry with native CAD
+        run: python -u scripts/rescue_large_creator_booth_sources.py ${{ matrix.uid }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expovault-wave22-${{ matrix.uid }}
+          path: rescue-booth-${{ matrix.uid }}/*.zip
+          retention-days: 7
+          compression-level: 0
+          if-no-files-found: warn
