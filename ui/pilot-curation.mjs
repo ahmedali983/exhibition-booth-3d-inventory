@@ -5,7 +5,7 @@
 const el=id=>document.getElementById(id);
 const wrap=el('pilotSection'), grid=el('pilotGrid'), search=el('pilotSearch');
 let items=[],filtered=[],filter='booth';
-const filterMatch=x=>filter==='all'||(filter==='booth'&&x.category==='featured')||
+const filterMatch=x=>filter==='all'||(filter==='booth'&&(x.category==='featured'||x.category==='production'))||
  (filter==='cad'&&(x.cad_cutting_files_verified||x.editable_creator_source_format==='FBX'))||
  (filter==='component'&&x.category==='concept');
 const tags={featured:'Designer original · exhibition booth',concept:'Designer concept · inspiration',production:'Built reference · cutting files'};
@@ -17,6 +17,7 @@ function dialog3D(m){
  const dlg=document.createElement('dialog');dlg.className='pilot-3d-dialog';dlg.setAttribute('aria-label',m.title+' — interactive 3D');
  const top=create('div','pilot-dialog-top');
  const details=create('div','');details.append(create('strong','',m.title),create('small','',m.creator+' · 3D hosted by Sketchfab'));
+ const fallback=link('Open directly on Sketchfab ↗',m.source_model_url);fallback.classList.add('pilot-direct-link');details.append(fallback);
  const close=create('button','pilot-dialog-close','✕ Close');close.type='button';close.setAttribute('aria-label','Close 3D viewer');
  top.append(details,close);
  const viewer=create('div','pilot-dialog-viewer');
@@ -81,7 +82,7 @@ function init(){
  });
  fetch('catalog/studio_quality_shortlist.json',{cache:'no-store'})
  .then(r=>{if(!r.ok)throw Error('Curated 3D source manifest missing');return r.json()})
- .then(data=>{if(!Array.isArray(data.items)||data.full_booth_featured_count<8)throw Error('Invalid shortlist');
+ .then(data=>{if(!Array.isArray(data.items)||data.full_booth_featured_count<5)throw Error('Invalid shortlist');
   items=data.items;
   el('pilotLibraryStats').textContent=String(data.full_booth_featured_count)+' curated booths · '+String(data.documented_physical_reference_count)+' built reference · '+String(data.additional_concepts)+' concepts';
   render();
